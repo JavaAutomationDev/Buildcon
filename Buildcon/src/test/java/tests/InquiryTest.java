@@ -96,6 +96,7 @@ public class InquiryTest extends base {
 		Inquiry.getInquiry().click();
 		Inquiry.getExporttoExcel().click();
 	}
+	
 	//Apply Filter for Dates & Project
 	@Test(dataProvider="getprojectfilterData")
 	public void ApplyFilter_Inquiry(String selectproject) throws InterruptedException {

@@ -208,4 +208,188 @@ public class EmployeePage {
 	public WebElement Createbtn() {
 		return driver.findElement(createbtn);
 	}
+	
+	//Add Employee with All Modules - Only View
+	//Page object for Employee radio btn
+	By empselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]/div/div/input");
+	public WebElement EmpSelectbtn() {
+		return driver.findElement(empselectbtn);
+	}
+	//Page object for Employee Entry
+	By empentry= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[2]/div/div/input");
+	public WebElement EmpEntry() {
+		return driver.findElement(empentry);
+	}
+	//Page object for Employee Modify
+	By empmodify= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[3]/div/div/input");
+	public WebElement Empmodify() {
+		return driver.findElement(empmodify);
+	}
+	//Page object for Employee Remove
+	By empremove= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[4]/div/div/input");
+	public WebElement EmpRemove() {
+		return driver.findElement(empremove);
+	}
+	//Page object for Employee Export
+	By empexport= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[5]/div/div/input");
+	public WebElement EmpExport() {
+		return driver.findElement(empexport);
+    }
+	
+	//Page object for Project radio btn
+	By projectselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]");
+	public WebElement Projectselectbtn() {
+		return driver.findElement(projectselectbtn);
+	}
+	//Page object for Project Entry
+	By projectentry= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[2]/div/div/input");
+	public WebElement ProjectEntry() {
+		return driver.findElement(projectentry);
+	}
+	//Page object for Project Modify
+	By projectmodify= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[3]/div/div/input");
+	public WebElement Projectmodify() {
+		return driver.findElement(projectmodify);
+	}
+	//Page object for Project Remove
+	By projectremove= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[4]/div/div/input");
+	public WebElement ProjectRemove() {
+		return driver.findElement(projectremove);
+	}
+	//Page object for Project Export
+	By projectexport= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[5]/div/div/input");
+	public WebElement ProjectExport() {
+		return driver.findElement(projectexport);
+    }
+	
+	//Page object for Receipt radio btn
+	By receiptselecbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
+	public WebElement Receiptselectbtn() {
+		return driver.findElement(receiptselecbtn);
+    }
+	//Page object for Receipt Entry
+	By receiptentry= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[2]/div/div/input");
+	public WebElement ReceiptEntry() {
+		return driver.findElement(receiptentry);
+    }
+	//Page object for Receipt Modify
+	By receiptmodify= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[3]/div/div/input");
+	public WebElement ReceiptModify() {
+		return driver.findElement(receiptmodify);
+	}
+	//Page object for Receipt Remove
+	By receiptremove= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[4]/div/div/input");
+	public WebElement ReceiptRemove() {
+		return driver.findElement(receiptremove);
+    }
+	//Page object for Receipt Export
+	By receiptexport= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[5]/div/div/input");
+	public WebElement ReceiptExport() {
+		return driver.findElement(receiptexport);
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Page object for Collection radio btn
+	By collectionselectbtn=By.xpath("");
+	public WebElement Collectionselectbtn() {
+	return driver.findElement(collectionradiobtn);
+	}
+	
+	//Page object for Collection Export
+	By collectionexport=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[5]/div[2]/mat-checkbox[2]/div/div/input");
+	public WebElement Collectionexport() {
+	return driver.findElement(collectionexport);
+	}
+	//Page object for Customer radio btn
+	By customerselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[6]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
+	public WebElement Customerselectbtn() {
+		return driver.findElement(customerselectbtn);
+	}
+	//Page object for Customer Export
+	By customerexport=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[6]/div[2]/mat-checkbox[2]/div/div/input");
+	public WebElement CustomerExport() {
+		return driver.findElement(customerexport);
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Page object for Search
+		By Search = By.xpath("//input[@type='search']");
+		public WebElement getSearch() {
+			return driver.findElement(Search);
+		}
+		//Page object for Apply Filter
+		By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+				+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[3]/button");
+		public void Applyfilter(String Filter) {
+			WebElement dropdown = driver.findElement(filter);
+			dropdown.click();
+			String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Filter + "')]";
+			WebElement option = driver.findElement(By.xpath(optionXPath));
+			option.click();
+		}
+		//Page object for Export to Excel
+		By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+				+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[4]/button");
+		public WebElement ExporttoExcel() {
+			return driver.findElement(ExporttoExcel);
+		}
+		//Page object for Delete Employee
+        By deleteemp=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+        		+ "mat-sidenav-content/main/app-employees/div/div[2]/div/div[2]/div[2]/ul/li[3]/a");
+        public void deleteEmployeeByName(String employeeName) {
+            By employeeLocator = By.xpath("//li[contains(text(), '" + employeeName + "')]");
+            WebElement employeeElement = driver.findElement(employeeLocator);
+            employeeElement.findElement(deleteemp).click();
+        }
+      //Page object for click yes
+    	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
+    			+ "/form/mat-dialog-actions/button[1]");
+    	public WebElement getClickYes() {
+    		return driver.findElement(ClickYes);
+    	}
+        
+
+
+
+
+
+
+
 }
