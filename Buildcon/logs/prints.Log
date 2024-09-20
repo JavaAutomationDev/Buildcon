@@ -1,0 +1,6 @@
+2024-09-09 12:12:20.044 [main] INFO  resources.base - Driver is Initialized
+2024-09-09 12:12:20.115 [main] INFO  resources.base - Navigated to Login Page
+2024-09-09 12:12:21.630 [main] INFO  resources.base - Login successful
+2024-09-09 14:51:50.401 [main] INFO  resources.base - Driver is Initialized
+2024-09-09 14:51:51.488 [main] INFO  resources.base - Navigated to Login Page
+2024-09-09 14:51:52.002 [main] INFO  resources.base - Login successful
