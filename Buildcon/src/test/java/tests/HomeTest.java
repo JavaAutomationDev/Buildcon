@@ -46,7 +46,7 @@ public class HomeTest extends base {
 	@DataProvider
 	public Object[][] getdata() {
 		return new Object[][] {
-            {"SA001", "Admin","Sit@1234"},//Valid user
+            {"Sit12", "Chandni","Sit@123#"},//Valid user
         };
 	}
 }

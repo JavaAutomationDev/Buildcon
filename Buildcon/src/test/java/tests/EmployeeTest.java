@@ -98,25 +98,38 @@ public class EmployeeTest extends base {
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
 		employee.Nextbtn().click();
-		employee.EmpSelectbtn().click();
+		
+		employee.EmpSelectbtn().click(); 
 		employee.EmpEntry().click();
-		employee.Empmodify().click();
+		employee.Empmodify().click(); 
 		employee.EmpRemove().click();
-		employee.EmpExport().click();
+		employee.EmpExport().click(); 
 		employee.Projectselectbtn().click();
-		employee.ProjectEntry().click();
+		employee.ProjectEntry().click(); 
 		employee.Projectmodify().click();
-		employee.ProjectRemove().click();
+		employee.ProjectRemove().click(); 
 		employee.ProjectExport().click();
-		employee.Receiptselectbtn().click();
+		employee.Receiptselectbtn().click(); 
 		employee.ReceiptEntry().click();
-		employee.ReceiptModify().click();
+		employee.ReceiptModify().click(); 
 		employee.ReceiptRemove().click();
 		employee.ReceiptExport().click();
-		employee.Collectionselectbtn().click();
-		employee.Collectionexport().click();
+		//employee.Collectionselectbtn().click();
+		//employee.Collectionexport().click();
 		employee.Customerselectbtn().click();
 		employee.CustomerExport().click();
+		//employee.InquirySelectbtn().click();
+		//employee.InquiryEntry().click();
+		employee.ProspectSelectbtn().click();
+		employee.ProspectView().click();
+		//employee.ProspectEntry().click();
+		//employee.ProspectModify().click();
+		//employee.ProspectRemove().click();
+		//employee.ProspectExport().click();
+		employee.BookingSelectBtn().click();
+		employee.BookingEntry().click();
+		employee.BookingModify().click();
+		employee.DocumentSelectbtn().click();
 	}
 	//Delete Employee
 	@Test(dataProvider="EmployeeDeleteData")
