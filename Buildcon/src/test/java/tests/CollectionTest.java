@@ -31,14 +31,11 @@ public class CollectionTest extends base {
         loginPage.getpass().sendKeys(prop.getProperty("PS"));
 		loginPage.getsignIn().click();
 		log.info("Login successful");
-
-		//screenshot capture
-		@SuppressWarnings("unused")
-		String screenshot= getscreenshot("Screenshot", driver);
 	}
+	
 	//Collection total collection Method
 	@Test()
-	public void TotalCollection_Collection() throws InterruptedException {
+	public void Total_Collection_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getTotalCollection().click();
@@ -54,14 +51,14 @@ public class CollectionTest extends base {
 	}
 	//Collection Export to excel Method
 	@Test()
-	public void ExporttoExcel_Collection() throws InterruptedException {
+	public void Export_to_Excel_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getExporttoExcel().click();
 	}
 	//Apply Filter Method for Dates
 	@Test()
-	public void ApplyFilterDates_Collection() throws InterruptedException {
+	public void Apply_Filter_Dates_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getapplyfilter().click();
@@ -73,7 +70,7 @@ public class CollectionTest extends base {
 	//close the driver
 	@AfterMethod
 	public void teaddown() {
-		//driver.close();
+		driver.close();
 	}
 
 	//DataProvider for search data

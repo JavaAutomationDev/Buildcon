@@ -195,7 +195,7 @@ public class InquiryPage {
 	}
 
 	//Page object for Select End Date
-	By selectendDate=By.xpath("//span[@class='mat-calendar-body-cell-content mat-focus-indicator'][normalize-space()='10']");
+	By selectendDate=By.xpath("//span[normalize-space()='30']");
 	public WebElement getSelectEndDate() {
 		return driver.findElement(selectendDate);
 	}

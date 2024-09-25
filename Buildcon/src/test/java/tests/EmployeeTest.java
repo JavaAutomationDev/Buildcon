@@ -162,7 +162,7 @@ public class EmployeeTest extends base {
 	}
 	@AfterMethod()
 	public void teaddown() {
-		//driver.close();
+		driver.close();
 	}
 
 	//DataProvider for Add Employee

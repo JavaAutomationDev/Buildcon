@@ -82,6 +82,7 @@ public class ProspectTest extends base {
 		Prospect.getstatus(newStatus);
 		Prospect.getsave().click();
 	}
+	
 	//Delete Method
 	@Test()
 	public void Delete_Prospect() throws InterruptedException {
@@ -90,16 +91,18 @@ public class ProspectTest extends base {
 		Prospect.getDelete();
 		Prospect.getClickYes().click();
 	}
-	//Export to excel Method
+	
+	//Export to Excel Method
 	@Test()
 	public void ExporttoExcel_Prospect() throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getExporttoExcel().click();
 	}
+	
 	//Apply Filter Method for dates & Project
 	@Test(dataProvider="getprojectfilterData")
-	public void ApplyFilter_Prospect(String selectproject) throws InterruptedException {
+	public void Apply_Filter_Prospect(String selectproject) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
@@ -109,9 +112,10 @@ public class ProspectTest extends base {
 		Prospect.getselectproject(selectproject);
 		Prospect.getresetfilter().click();	
 	}
-	//Apply filter method for Dates
+	
+	//Apply Filter method for Dates
 	@Test()
-	public void ApplyFilterDates_Prospect() throws InterruptedException {
+	public void Apply_Filter_Dates_Prospect() throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
@@ -122,7 +126,7 @@ public class ProspectTest extends base {
 	}
 	//Apply Filter Method for Project & reset
 	@Test(dataProvider="getprojectfilterData")
-	public void ApplyFilterProject_Prospect(String selectproject) throws InterruptedException {
+	public void Apply_Filter_Project_Prospect(String selectproject) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
@@ -139,7 +143,7 @@ public class ProspectTest extends base {
 	} 
 	//Todays Follow up click,Search & Edit method
 	@Test(dataProvider="getSearchData")
-	public void TodayFollow_Prospect(String visitorname) throws InterruptedException {
+	public void Today_Follow_Up_Prospect(String visitorname) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.gettodayfollowup().click();
@@ -149,7 +153,7 @@ public class ProspectTest extends base {
 	}
 	//Missing Follow up for click,Search & Edit method
 	@Test(dataProvider="getSearchData")
-	public void MissingFollow_Prospect(String visitorname) throws InterruptedException {
+	public void Missing_Follow_Up_Prospect(String visitorname) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getmissingfollowup().click();
@@ -157,11 +161,10 @@ public class ProspectTest extends base {
 		Prospect.getEdit();
 		Prospect.getsave().click();
 	}
-	//close the driver
-	@AfterMethod
-	public void teaddown() {
-		//driver.close();
-	}
+	
+	//Close the driver  
+	@AfterMethod public void teardown() { driver.close(); }
+	 
 	//DataProvider for Add Inquiry
 	@DataProvider
 	public Object[][] getAdddata() {
@@ -175,7 +178,7 @@ public class ProspectTest extends base {
 		return new Object[][] {
 			{"9876543210", "akash.new@mail.com", "New Address, Ahmedabad", "Updated Remarks", "5BHK", "Completed" }};
 	}
-	//DataProvider for filter Project Dropdown
+	//DataProvider for Filter Project Dropdown
 	@DataProvider
 	public Object[][] getprojectfilterData() {
 		return new Object[][] {

@@ -23,25 +23,27 @@ public class HomeTest extends base {
 		log.info("Navigated to Login Page");
 		
 		//screenshot capture
-		@SuppressWarnings("unused")
-		String screenshot= getscreenshot("Screenshot", driver);
+		//@SuppressWarnings("unused")
+		//String screenshot= getscreenshot("Screenshot", driver);
 	}
+	
 	//Login
 	@Test(dataProvider="getdata")
-	public void ShaligramHome(String accountname, String username, String pass) throws IOException {
-		LoginPage l = new LoginPage(driver);
-		l.getAccountName().sendKeys(accountname);
-		l.getUserName().sendKeys(username);
-		l.getpass().sendKeys(pass);
-		l.getvisible().click();
-		l.getremember().click();
-		l.getsignIn().click();
+	public void Shaligram_Login(String accountname, String username, String pass) throws IOException {
+		LoginPage login = new LoginPage(driver);
+		login.getAccountName().sendKeys(accountname);
+		login.getUserName().sendKeys(username);
+		login.getpass().sendKeys(pass);
+		login.getvisible().click();
+		login.getremember().click();
+		login.getsignIn().click();
 	}
 	//close the driver
 	@AfterMethod
-	public void teaddown() {
+	public void teardown() {
 		driver.close();
 	}
+	
 	//DataProvidor for the login.
 	@DataProvider
 	public Object[][] getdata() {

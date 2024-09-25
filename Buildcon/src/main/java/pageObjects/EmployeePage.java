@@ -210,7 +210,7 @@ public class EmployeePage {
 	}
 	
 	//Add Employee with All Modules - Only View
-	//Page object for Employee radio btn
+	//Page object for Employee Select btn
 	By empselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement EmpSelectbtn() {
@@ -241,7 +241,7 @@ public class EmployeePage {
 		return driver.findElement(empexport);
     }
 	
-	//Page object for Project radio btn
+	//Page object for Project Select btn
 	By projectselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]");
 	public WebElement Projectselectbtn() {
@@ -272,7 +272,7 @@ public class EmployeePage {
 		return driver.findElement(projectexport);
     }
 	
-	//Page object for Receipt radio btn
+	//Page object for Receipt Select btn
 	By receiptselecbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement Receiptselectbtn() {
@@ -304,11 +304,12 @@ public class EmployeePage {
     }
 	
 	
-	
-	//Page object for Collection radio btn
-	By collectionselectbtn=By.xpath("/html[1]/body[1]/div[2]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/app-employee-roles[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[5]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[2]");
+	//Collection view page object
+	//Page object for Collection select btn
+	By collectionselectbtn=By.xpath("/html[1]/body[1]/div[2]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/app-employee-roles[1]/div[1]/"
+			+ "vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[5]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[2]");
 	public WebElement Collectionselectbtn() {
-	return driver.findElement(collectionradiobtn);
+	return driver.findElement(collectionselectbtn);
 	}
 	
 	//Page object for Collection Export
@@ -317,7 +318,8 @@ public class EmployeePage {
 	public WebElement Collectionexport() {
 	return driver.findElement(collectionexport);
 	}
-	//Page object for Customer radio btn
+	//Customer view page object
+	//Page object for Customer Select btn
 	By customerselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[6]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement Customerselectbtn() {

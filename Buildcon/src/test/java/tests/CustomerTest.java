@@ -37,7 +37,7 @@ public class CustomerTest extends base {
 	}
 	//Customer List grid data
 	@Test()
-	public void Verifycustomerlist_Customer() throws InterruptedException {
+	public void Verify_Customer_List_Customer() throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.webElementList();
@@ -50,9 +50,9 @@ public class CustomerTest extends base {
 		customer.getSearch().sendKeys(siteproject + Keys.ENTER);
 	}
 
-	//Customer Export to excel Method
+	//Customer Export to Excel Method
 	@Test()
-	public void ExporttoExcel_Customer() throws InterruptedException {
+	public void Export_to_Excel_Customer() throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.webElementList();
@@ -60,7 +60,7 @@ public class CustomerTest extends base {
 	}
 	//Apply Filter Method for Project & Reset
 	@Test(dataProvider="getprojectdropdownData")
-	public void ApplyFilterProject_Customer(String selectproject) throws InterruptedException {
+	public void Apply_Filter_Project_Customer(String selectproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.getapplyfilter().click();
@@ -73,9 +73,9 @@ public class CustomerTest extends base {
 		customer.getcross().click();
 	}
 	
-	//close the driver
+	//Close the Driver
 	@AfterMethod
-	public void teaddown() {
+	public void teardown() {
 		driver.close();
 	}
 

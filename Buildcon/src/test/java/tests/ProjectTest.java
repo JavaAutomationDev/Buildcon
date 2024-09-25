@@ -33,6 +33,7 @@ public class ProjectTest extends base {
 		loginPage.getsignIn().click();
 		log.info("Login successful");
 	}
+	
 	//Add Project
 	@Test(dataProvider="getAddData")
 	public void Add_Project(String projectname,String projecttype,String Projectstatus,
@@ -94,7 +95,8 @@ public class ProjectTest extends base {
 		project.getBasements().sendKeys(Basements);
 		project.getCreate().click();
 	}
-	//Edit Existing project
+	
+	//Edit Existing Project
 	@Test(dataProvider="getEditData")
 	public void Edit_Project(String newtotalSaleableArea,String newtotalLandArea) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
@@ -110,6 +112,7 @@ public class ProjectTest extends base {
 		project.getNextbtn3().click();
 		project.getSave().click();
 	}
+	
 	//Delete Project
 	@Test()
 	public void Delete_Project() throws InterruptedException {
@@ -119,13 +122,15 @@ public class ProjectTest extends base {
 		project.getDeleteproject().click();;
 		project.getClickYes().click();
 	}
+	
 	//Export to excel 
 	@Test()
-	public void ExporttoExcel_Project() throws InterruptedException {
+	public void Export_to_Excel_Project() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getExporttoExcel().click();
 	}
+	
 	//Search Project
 	@Test(dataProvider="getSearchData")
 	public void Search_Inquiry(String projectname) throws InterruptedException {
@@ -136,33 +141,37 @@ public class ProjectTest extends base {
 		String resultText = searchResult.getText();
 		Assert.assertFalse(resultText.contains(projectname));
 	}
-	//Active/Deactive Project 
+	
+	//ActiveDeactive Project 
 	@Test()
-	public void ActiveDeactive_Project() throws InterruptedException {
+	public void Active_Deactive_Project() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getActiveproject().click();
 	}
 
-	@AfterMethod()
-	public void teaddown() {
-		//driver.close();
-	}
+	//Close the Driver
+	@AfterMethod() public void teardown() {
+		driver.close(); 
+		}
+		
 	//Add Project Data
 	@DataProvider
 	public Object[][] getAddData() {
 		return new Object[][] {
-			{"Akash Test"," 2BHK MH "," In Progress ","","","","","10000","Bopal","Gujarat","215"," Abhimanyu Sigh ","Description","Address",
+			{"Akash Test"," 2BHK MH ","In Progress","","","","","10000","Bopal","Gujarat","215"," Abhimanyu Sigh ","Description","Address",
 			"East","West","South","North","Plotno","Schemeno","Rera","65475","124","241","Abc","29GGGGG1314R9Z6","supply","safa","380058",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","RecPrefix"," Financial Year "," 3BHK "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","Terms Condition",
 				"A","1000","Basement"}};
 	}
+	
 	//Edit Project Data
 	@DataProvider
 	public Object[][] getEditData() {
 		return new Object[][] {
 			{"20000","1000"}};
 	}
+	
 	//DataProvider for search data
 	@DataProvider
 	public Object[][] getSearchData() {
