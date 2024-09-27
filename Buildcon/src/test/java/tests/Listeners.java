@@ -1,6 +1,5 @@
 package tests;
 
-import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -44,22 +43,18 @@ public class Listeners extends base implements ITestListener {
 		
 		//taking screenshot of Failure Test Case identify failure test method name
 		String testmethodname = result.getMethod().getMethodName();
+		System.out.println("Starting test: " + testmethodname);
 		
 		//identify failure class driver object
 		ITestContext context = result.getTestContext();
 	    driver = (WebDriver) context.getAttribute("WebDriver");
 		
-		try {
-			//pass failure metheod name and driver object to base class getscreenshot method
-			if (driver == null) {
-				System.out.println("Driver is null-Nilesh2");
-			}
-			String dest = getscreenshot(testmethodname, driver);
-			extenttest.get().addScreenCaptureFromPath(dest, testmethodname );
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+		//pass failure metheod name and driver object to base class getscreenshot method
+		if (driver == null) {
+			System.out.println("Driver is null-Nilesh2");
 		}
+		//String dest = getscreenshot(testmethodname, driver);
+		//extenttest.get().addScreenCaptureFromPath(dest, testmethodname );
 	}
 	
 	@Override

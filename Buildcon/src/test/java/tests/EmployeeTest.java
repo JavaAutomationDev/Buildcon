@@ -114,12 +114,16 @@ public class EmployeeTest extends base {
 		employee.ReceiptModify().click(); 
 		employee.ReceiptRemove().click();
 		employee.ReceiptExport().click();
-		//employee.Collectionselectbtn().click();
-		//employee.Collectionexport().click();
+		employee.Collectionselectbtn().click();
+		employee.Collectionexport().click();
 		employee.Customerselectbtn().click();
 		employee.CustomerExport().click();
-		//employee.InquirySelectbtn().click();
-		//employee.InquiryEntry().click();
+		employee.InquirySelectbtn().click();
+		employee.InquiryEntry().click();
+		employee.InquiryModify().click();
+		employee.InquiryRemove().click();
+		employee.InquiryExport().click();
+		
 		employee.ProspectSelectbtn().click();
 		employee.ProspectView().click();
 		//employee.ProspectEntry().click();

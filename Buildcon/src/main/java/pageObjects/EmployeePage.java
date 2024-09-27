@@ -306,8 +306,8 @@ public class EmployeePage {
 	
 	//Collection view page object
 	//Page object for Collection select btn
-	By collectionselectbtn=By.xpath("/html[1]/body[1]/div[2]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/app-employee-roles[1]/div[1]/"
-			+ "vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[5]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[2]");
+	By collectionselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[5]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement Collectionselectbtn() {
 	return driver.findElement(collectionselectbtn);
 	}
@@ -333,7 +333,7 @@ public class EmployeePage {
 	}	
 	
 	//Inquiry view page object
-	//Page object for Inquiry select btn
+	//Page object for Inquiry Select btn
 	By inquiryselectbtn=By.xpath("/html/body/div[3]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement InquirySelectbtn() {
@@ -346,17 +346,20 @@ public class EmployeePage {
 		return driver.findElement(inquiryentry);
 	}
 	//Page object for Inquiry Modify
-	By inquirymodify=By.xpath("");
+	By inquirymodify=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[2]/mat-checkbox[3]/div/div/input");
 	public WebElement InquiryModify() {
 	   return driver.findElement(inquirymodify);
 	}
 	//Page object for Inquiry Remove
-	By inquiryremove=By.xpath("");
+	By inquiryremove=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[2]/mat-checkbox[4]/div/div/input");
 	public WebElement InquiryRemove() {
 		return driver.findElement(inquiryremove);
 	}
 	//Page object for Inquiry export
-	By inquiryexport=By.xpath("");
+	By inquiryexport=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[2]/mat-checkbox[5]/div/div/input");
 	public WebElement InquiryExport() {
 		return driver.findElement(inquiryexport);
 	}		

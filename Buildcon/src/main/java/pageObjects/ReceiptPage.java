@@ -21,7 +21,7 @@ public class ReceiptPage {
 	public WebElement getReceipt() {
 		return driver.findElement(receipt);
 	}
-	// Page object for Add Receipt module
+	//Page object for Add Receipt module
 	By Addreceipt = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-receipts/div/div[1]/div[2]/button");
 	public WebElement getAddReceipt() {

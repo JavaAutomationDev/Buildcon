@@ -41,7 +41,7 @@ public class ProjectTest extends base {
 			String totalSaleableArea,String city,String State,String Spno,String SalesExectuive,
 			String Description,String Address,String East,String west,String South,String north,String Plotno,
 			String Schemeno,String Rera,String totalLandArea,String MaintenanceCharge,String MaintenanceDeposit,
-			String companyname,String gstin,String plcofsupplu,String RecAddress,String pincode,String projectlogo,String RecPrefix,String FinancialYear,
+			String companyname,String gstin,String plcofsupplu,String RecAddress,String pincode,String projectlogo,String receiptlogo,String RecPrefix,String FinancialYear,
 			String Propertytype,String Saccode,String termstext,String Unit,String Floors,String Basements) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -60,10 +60,11 @@ public class ProjectTest extends base {
 		project.getSalesExectuive(SalesExectuive);
 		project.getdescription().sendKeys(Description);
 		project.getAddress().sendKeys(Address);
+		Thread.sleep(2000);
 		project.getNextbtn().click();
 		project.getEast().sendKeys(East);
 		project.getWest().sendKeys(west);
-		project.getsouth().sendKeys(South);
+		project.getSouth().sendKeys(South);
 		project.getNorth().sendKeys(north);
 		project.getPlotNo().sendKeys(Plotno);
 		project.getschemeNo().sendKeys(Schemeno);
@@ -71,6 +72,7 @@ public class ProjectTest extends base {
 		project.gettotalLandArea().sendKeys(totalLandArea);
 		project.getMaintenanceCharge().sendKeys(MaintenanceCharge);
 		project.getMaintenanceDeposit().sendKeys(MaintenanceDeposit);
+		Thread.sleep(2000);
 		project.getNextbtn1().click();
 		project.getCompanyName().sendKeys(companyname);
 		project.GSTIN().sendKeys(gstin);
@@ -78,21 +80,24 @@ public class ProjectTest extends base {
 		project.getRecAddress().sendKeys(RecAddress);
 		project.getPincode().sendKeys(pincode);
 		project.uploadProjectLogoFile().sendKeys(projectlogo);
-		//project.uploadreceiptSealFile();
+		project.uploadReceiptSeal().sendKeys(receiptlogo);
 		project.getRecPrefix().sendKeys(RecPrefix);
 		project.getFinancialYear(FinancialYear);
+		Thread.sleep(2000);
 		project.getNextbtn2().click();
 		project.getPropertyType(Propertytype);
 		project.getSACcode(Saccode);
 		project.getActionbtn().click();
 		project.getNextbtn3().click();
 		project.getTermstext().sendKeys(termstext);
-		project.getPlusbtn().click(); 
+		project.getPlusbtn().click();
+		Thread.sleep(2000);
 		project.getSave().click();
 		project.getAddProjectBlock();
 		project.getUnitBlock().sendKeys(Unit);
 		project.getNumberOfFloors().sendKeys(Floors);
 		project.getBasements().sendKeys(Basements);
+		Thread.sleep(2000);
 		project.getCreate().click();
 	}
 	
@@ -152,16 +157,16 @@ public class ProjectTest extends base {
 
 	//Close the Driver
 	@AfterMethod() public void teardown() {
-		driver.close(); 
+		//driver.close(); 
 		}
 		
 	//Add Project Data
 	@DataProvider
 	public Object[][] getAddData() {
 		return new Object[][] {
-			{"Akash Test"," 2BHK MH ","In Progress","","","","","10000","Bopal","Gujarat","215"," Abhimanyu Sigh ","Description","Address",
-			"East","West","South","North","Plotno","Schemeno","Rera","65475","124","241","Abc","29GGGGG1314R9Z6","supply","safa","380058",
-			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","RecPrefix"," Financial Year "," 3BHK "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","Terms Condition",
+			{"Automation Test 1"," 2BHK MH ","New","","","","","10000","Bopal","Gujarat","215"," Abhimanyu Sigh ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year "," 3BHK "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","Terms Condition",
 				"A","1000","Basement"}};
 	}
 	

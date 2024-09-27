@@ -139,7 +139,7 @@ public class ProjectPage {
 	}
 	//Page object for Next button
 	By Nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
-			+ "/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[2]/button");
+			+ "/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[2]/button[2]");
 	public WebElement getNextbtn() {
 		return driver.findElement(Nextbtn);
 	}
@@ -155,7 +155,7 @@ public class ProjectPage {
 	}
 	//Page object for South
 	By south=By.xpath("//input[@formcontrolname='south']");
-	public WebElement getsouth() {
+	public WebElement getSouth() {
 		return driver.findElement(south);
 	}
 	//Page object for North
@@ -270,13 +270,18 @@ public class ProjectPage {
 		return driver.findElement(pincode);
 	}
 
-	//Page object for projectLogoFile 
-	By projectLogoFile = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div"
-			+ "/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div[1]/div/div[12]/mat-form-field/div[1]/div[2]/div[2]/button");
+	//Page object for Project Logo File 
+	By projectLogoFile = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div[1]/div/div[12]/mat-form-field/div[1]/div[2]/div[2]/input[2]");
 	public WebElement uploadProjectLogoFile() {	
 		return driver.findElement(projectLogoFile);
 	}
-
+	//Page object for Receipt Seal
+	By receiptseal=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div"
+			+ "/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div[1]/div/div[13]/mat-form-field/div[1]/div[2]/div[2]/button");
+	public WebElement uploadReceiptSeal() {
+		return driver.findElement(receiptseal);
+	}
+	
 	//Page object for Receipt Prefix
 	By recPrefix=By.xpath("//input[@formcontrolname='recPrefix']");
 	public WebElement getRecPrefix() {

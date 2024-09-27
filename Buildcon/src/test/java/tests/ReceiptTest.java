@@ -86,7 +86,6 @@ public class ReceiptTest extends base {
 		receipt.getDownload().click();
 	}
 	
-
 	//Search Receipt
 	@Test(dataProvider="getSearchData")
 	public void Search_Receipt(String Project) throws InterruptedException {
@@ -128,6 +127,7 @@ public class ReceiptTest extends base {
 		receipt.getapplyfilter().click();
 		receipt.getAll().click();
 	}
+	
 	//Apply Filter Receipt Reset
 	@Test()
 	public void Apply_Filter_Reset_Receipt() throws InterruptedException {
@@ -136,10 +136,11 @@ public class ReceiptTest extends base {
 		receipt.getapplyfilter().click();
 		receipt.getReset().click();
 	}
+	
 	//Close the driver
 	@AfterMethod
 	public void teardown() {
-		//driver.close();
+		driver.close();
 	}	
 
 	//Add Receipt Data
