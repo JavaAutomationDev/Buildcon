@@ -1,6 +1,7 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -208,7 +209,7 @@ public class EmployeePage {
 	public WebElement Createbtn() {
 		return driver.findElement(createbtn);
 	}
-	
+
 	//Add Employee with All Modules - Only View
 	//Page object for Employee Select btn
 	By empselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
@@ -217,30 +218,26 @@ public class EmployeePage {
 		return driver.findElement(empselectbtn);
 	}
 	//Page object for Employee Entry
-	By empentry= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[2]/div/div/input");
+	By empentry= By.xpath("//mat-checkbox[@formcontrolname='isEmployeeEntry']");
 	public WebElement EmpEntry() {
 		return driver.findElement(empentry);
 	}
 	//Page object for Employee Modify
-	By empmodify= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[3]/div/div/input");
-	public WebElement Empmodify() {
+	By empmodify= By.xpath("//mat-checkbox[@formcontrolname='isEmployeeUpdate']");
+	public WebElement EmpModify() {
 		return driver.findElement(empmodify);
 	}
 	//Page object for Employee Remove
-	By empremove= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[4]/div/div/input");
+	By empremove= By.xpath("//mat-checkbox[@formcontrolname='isEmployeeDelete']");
 	public WebElement EmpRemove() {
 		return driver.findElement(empremove);
 	}
 	//Page object for Employee Export
-	By empexport= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[2]/mat-checkbox[5]/div/div/input");
+	By empexport= By.xpath("//mat-checkbox[@formcontrolname='isEmployeeExport']");
 	public WebElement EmpExport() {
 		return driver.findElement(empexport);
-    }
-	
+	}
+
 	//Page object for Project Select btn
 	By projectselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]");
@@ -248,76 +245,67 @@ public class EmployeePage {
 		return driver.findElement(projectselectbtn);
 	}
 	//Page object for Project Entry
-	By projectentry= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[2]/div/div/input");
+	By projectentry= By.xpath("//mat-checkbox[@formcontrolname='isProjectEntry']");
 	public WebElement ProjectEntry() {
 		return driver.findElement(projectentry);
 	}
 	//Page object for Project Modify
-	By projectmodify= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[3]/div/div/input");
-	public WebElement Projectmodify() {
+	By projectmodify= By.xpath("//mat-checkbox[@formcontrolname='isProjectUpdate']");
+	public WebElement ProjectModify() {
 		return driver.findElement(projectmodify);
 	}
 	//Page object for Project Remove
-	By projectremove= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[4]/div/div/input");
+	By projectremove= By.xpath("//mat-checkbox[@formcontrolname='isProjectDelete']");
 	public WebElement ProjectRemove() {
 		return driver.findElement(projectremove);
 	}
 	//Page object for Project Export
-	By projectexport= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[3]/div[2]/mat-checkbox[5]/div/div/input");
+	By projectexport= By.xpath("//mat-checkbox[@formcontrolname='isProjectExport']");
 	public WebElement ProjectExport() {
 		return driver.findElement(projectexport);
-    }
-	
+	}
+
 	//Page object for Receipt Select btn
 	By receiptselecbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement Receiptselectbtn() {
 		return driver.findElement(receiptselecbtn);
-    }
+	}
 	//Page object for Receipt Entry
-	By receiptentry= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[2]/div/div/input");
+	By receiptentry= By.xpath("//mat-checkbox[@formcontrolname='isReceiptEntry']");
 	public WebElement ReceiptEntry() {
 		return driver.findElement(receiptentry);
-    }
+	}
 	//Page object for Receipt Modify
-	By receiptmodify= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[3]/div/div/input");
+	By receiptmodify= By.xpath("//mat-checkbox[@formcontrolname='isReceiptUpdate']");
 	public WebElement ReceiptModify() {
 		return driver.findElement(receiptmodify);
 	}
 	//Page object for Receipt Remove
-	By receiptremove= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[4]/div/div/input");
+	By receiptremove= By.xpath("//mat-checkbox[@formcontrolname='isReceiptDelete']");
 	public WebElement ReceiptRemove() {
 		return driver.findElement(receiptremove);
-    }
+	}
 	//Page object for Receipt Export
-	By receiptexport= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[4]/div[2]/mat-checkbox[5]/div/div/input");
+	By receiptexport= By.xpath("//mat-checkbox[@formcontrolname='isReceiptExport']");
 	public WebElement ReceiptExport() {
 		return driver.findElement(receiptexport);
-    }
-	
-	
+	}
+
 	//Collection view page object
 	//Page object for Collection select btn
 	By collectionselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[5]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement Collectionselectbtn() {
-	return driver.findElement(collectionselectbtn);
+		return driver.findElement(collectionselectbtn);
 	}
-	
+
 	//Page object for Collection Export
-	By collectionexport=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[5]/div[2]/mat-checkbox[2]/div/div/input");
-	public WebElement Collectionexport() {
-	return driver.findElement(collectionexport);
+	By collectionexport=By.xpath("//mat-checkbox[@formcontrolname='isCollectionExport']");
+	public WebElement CollectionExport() {
+		return driver.findElement(collectionexport);
 	}
+
 	//Customer view page object
 	//Page object for Customer Select btn
 	By customerselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
@@ -326,44 +314,46 @@ public class EmployeePage {
 		return driver.findElement(customerselectbtn);
 	}
 	//Page object for Customer Export
-	By customerexport=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[6]/div[2]/mat-checkbox[2]/div/div/input");
+	By customerexport = By.xpath("//mat-checkbox[@formcontrolname='isMemberExport']");
 	public WebElement CustomerExport() {
-		return driver.findElement(customerexport);
-	}	
-	
+		WebElement element = driver.findElement(customerexport);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		return element;
+	}
+
 	//Inquiry view page object
 	//Page object for Inquiry Select btn
-	By inquiryselectbtn=By.xpath("/html/body/div[3]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
+	By inquiryselectbtn=By.xpath("//*[@id=\"mat-radio-77\"]/div/div/div[3]");
 	public WebElement InquirySelectbtn() {
 		return driver.findElement(inquiryselectbtn);
 	}
+
 	//Page object for Inquiry Entry
-	By inquiryentry=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[2]/mat-checkbox[2]/div/div/input");
+	By inquiryentry=By.xpath("//mat-checkbox[@formcontrolname='isInquiryEntry']");
 	public WebElement InquiryEntry() {
 		return driver.findElement(inquiryentry);
 	}
+
 	//Page object for Inquiry Modify
-	By inquirymodify=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[2]/mat-checkbox[3]/div/div/input");
+	By inquirymodify=By.xpath("//mat-checkbox[@formcontrolname='isInquiryUpdate']");
 	public WebElement InquiryModify() {
-	   return driver.findElement(inquirymodify);
+		return driver.findElement(inquirymodify);
 	}
 	//Page object for Inquiry Remove
-	By inquiryremove=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[2]/mat-checkbox[4]/div/div/input");
+	By inquiryremove=By.xpath("//mat-checkbox[@formcontrolname='isInquiryDelete']");
 	public WebElement InquiryRemove() {
 		return driver.findElement(inquiryremove);
 	}
-	//Page object for Inquiry export
-	By inquiryexport=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[7]/div[2]/mat-checkbox[5]/div/div/input");
+	//Page object for Inquiry Export
+	By inquiryexport=By.xpath("//mat-checkbox[@formcontrolname='isInquiryExport']");
 	public WebElement InquiryExport() {
 		return driver.findElement(inquiryexport);
 	}		
-	
+	//Page object for Inquiry FollowUp
+	By inquiryfollowup=By.xpath("//mat-checkbox[@formcontrolname='isInquiryFollowUpEntry']");
+	public WebElement InquiryFollowUp() {
+		return driver.findElement(inquiryfollowup);
+	}
 	//Page object for Prospect
 	//Page object for Prospect select btn
 	By prospectselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
@@ -371,40 +361,39 @@ public class EmployeePage {
 	public WebElement ProspectSelectbtn() {
 		return driver.findElement(prospectselectbtn);
 	}
-	//Page object for Prospect view
-	By prospectview=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[8]/div[2]/mat-checkbox[1]/div/div/input");
+	//Page object for Prospect View
+	By prospectview=By.xpath("//mat-checkbox[@formcontrolname='isProspectView']");
 	public WebElement ProspectView() {
 		return driver.findElement(prospectview);
 	}
-	
-	//Page object for Prospect entry
-	By prospectentry=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[8]/div[2]/mat-checkbox[2]/div/div/input");
+
+	//Page object for Prospect Entry
+	By prospectentry=By.xpath("//mat-checkbox[@formcontrolname='isProspectEntry']");
 	public WebElement ProspectEntry() {
 		return driver.findElement(prospectentry);
+
 	}
 	//Page object for Prospect Modify
-	By prospectmodify=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[8]/div[2]/mat-checkbox[3]/div/div/input");
+	By prospectmodify=By.xpath("//mat-checkbox[@formcontrolname='isProspectUpdate']");
 	public WebElement ProspectModify() {
 		return driver.findElement(prospectmodify);
 	}
-	//page object for Prospect Remove
-	By prospectremove=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[8]/div[2]/mat-checkbox[4]/div/div/input");
+	//Page object for Prospect Remove
+	By prospectremove=By.xpath("//mat-checkbox[@formcontrolname='isProspectDelete']");
 	public WebElement ProspectRemove() {
 		return driver.findElement(prospectremove);
 	}
-	//page object for Prospect Export
-	By prospectexport=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[8]/div[2]/mat-checkbox[5]/div/div/input");
+	//Page object for Prospect Export
+	By prospectexport=By.xpath("//mat-checkbox[@formcontrolname='isProspectExport']");
 	public WebElement ProspectExport() {
 		return driver.findElement(prospectexport);
 	}
-	
-	
-	
+	//Page object for Prospect FollowUp
+	By prospectfollowup=By.xpath("//mat-checkbox[@formcontrolname='isProspectFollowUpEntry']");
+	public WebElement ProspectFollowUp() {
+		return driver.findElement(prospectfollowup);
+	}
+
 	//Page object for Booking
 	//Page object for Booking select btn
 	By bookingseletbtn=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
@@ -413,46 +402,87 @@ public class EmployeePage {
 		return driver.findElement(bookingseletbtn);
 	}
 	//Page object for Booking Entry
-	By bookingentry=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[9]/div[2]/mat-checkbox[2]/div/div/input");
+	By bookingentry=By.xpath("//mat-checkbox[@formcontrolname='isBookingsEntry']");
 	public WebElement BookingEntry() {
 		return driver.findElement(bookingentry);
 	}
 	//Page object for Booking Modify
-	By bookingmodify=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[9]/div[2]/mat-checkbox[3]/div/div/input");
+	By bookingmodify=By.xpath("//mat-checkbox[@formcontrolname='isBookingsUpdate']");
 	public WebElement BookingModify() {
 		return driver.findElement(bookingmodify);
 	}
-	
+	//Page object for Booking Remove
+	By bookingremove=By.xpath("//mat-checkbox[@formcontrolname='isBookingsDelete']");
+	public WebElement BookingRemove() {
+		return driver.findElement(bookingremove);
+	}
+	//Page object for Booking Export
+	By bookingexport=By.xpath("//mat-checkbox[@formcontrolname='isBookingsExport']");
+	public WebElement BookingExport() {
+		return driver.findElement(bookingexport);
+	}
+	//Page object for Allow Booking	
+	By allowbooking=By.xpath("//mat-checkbox[@formcontrolname='isBookingsAllow']");
+	public WebElement AllowBooking() {
+		return driver.findElement(allowbooking);
+	}
+	//Page object for Approve Reject	
+	By approvereject=By.xpath("//mat-checkbox[@formcontrolname='isBookingsApproveOrReject']");
+	public WebElement ApproveReject() {
+		return driver.findElement(approvereject);
+	}
+	//Page object for Legal Entry	
+	By legalentry=By.xpath("//mat-checkbox[@formcontrolname='isBookingsLegalEntry']");
+	public WebElement LegalEntry() {
+		WebElement element = driver.findElement(legalentry);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		return element;
+	}
+
 	//Page object for Document
 	//Page object for Document select btn
-	By documentselectbtn=By.xpath("/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
-			+ "vex-roles-form/form/mat-dialog-content/div[10]/div[1]/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
+	By documentselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/vex-roles-form/form/mat-dialog-content/div[10]/div/div[2]/div/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement DocumentSelectbtn() {
 		return driver.findElement(documentselectbtn);
 	}
-	
+	//Page object for Document View
+	By documentview = By.xpath("//mat-checkbox[@formcontrolname='isDocumentView']");
+	public WebElement DocumentView() {
+		return driver.findElement(documentview);
+	}
+
 	//Page object for Document Entry
-	By documententry = By.xpath("");
+	By documententry = By.xpath("//mat-checkbox[@formcontrolname='isDocumentEntry']");
 	public WebElement DocumentEntry() {
 		return driver.findElement(documententry);
 	}
 	//Page object for Document Modify
-	By documentmodify=By.xpath("");
+	By documentmodify=By.xpath("//mat-checkbox[@formcontrolname='isDocumentUpdate']");
 	public WebElement DocumentModify() {
 		return driver.findElement(documentmodify);
 	}
 	//Page object for Document Remove
-	By documentremove = By.xpath("");
+	By documentremove = By.xpath("//mat-checkbox[@formcontrolname='isDocumentDelete']");
 	public WebElement DocumentRemove() {
 		return driver.findElement(documentremove);
 	}
-	
-	
-	
-	
-	
+	//Page object for Document Export
+	By documentexport = By.xpath("//mat-checkbox[@formcontrolname='isDocumentExport']");
+	public WebElement DocumentExport() {
+		return driver.findElement(documentexport);
+	}
+	//Page object for Create Button
+	By createbtn1 = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/mat-dialog-actions/button[1]");
+	public WebElement CreateBtn1() {
+		return driver.findElement(createbtn1);
+	}
+
+	//Page object for Update Button
+	By updatebtn = By.xpath("/html/body/div[3]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/mat-dialog-actions/button[1]");
+	public WebElement getUpdate() {
+		return driver.findElement(updatebtn);
+	}
+
 	//Page object for Search
 	By Search = By.xpath("//input[@type='search']");
 	public WebElement getSearch() {
@@ -470,30 +500,23 @@ public class EmployeePage {
 	}
 	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-				+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[4]/button");
+			+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[4]/button");
 	public WebElement ExporttoExcel() {
 		return driver.findElement(ExporttoExcel);
 	}
 	//Page object for Delete Employee
-    By deleteemp=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-        		+ "mat-sidenav-content/main/app-employees/div/div[2]/div/div[2]/div[2]/ul/li[3]/a");
-    public void deleteEmployeeByName(String employeeName) {
-         By employeeLocator = By.xpath("//li[contains(text(), '" + employeeName + "')]");
-         WebElement employeeElement = driver.findElement(employeeLocator);
-         employeeElement.findElement(deleteemp).click();
-    }
-    //Page object for click yes
-    By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
-    			+ "/form/mat-dialog-actions/button[1]");
-    public WebElement getClickYes() {
-    	return driver.findElement(ClickYes);
-    }
-        
-
-
-
-
-
-
+	By deleteemp=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/app-employees/div/div[2]/div/div[2]/div[2]/ul/li[3]/a");
+	public void deleteEmployeeByName(String EmployeeName) {
+		By employeeLocator = By.xpath("//li[contains(text(), '" + EmployeeName + "')]");
+		WebElement employeeElement = driver.findElement(employeeLocator);
+		employeeElement.findElement(deleteemp).click();
+	}
+	//Page object for click yes
+	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
+			+ "/form/mat-dialog-actions/button[1]");
+	public WebElement getClickYes() {
+		return driver.findElement(ClickYes);
+	}
 
 }

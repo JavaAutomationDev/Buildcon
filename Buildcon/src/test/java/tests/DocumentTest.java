@@ -32,7 +32,7 @@ public class DocumentTest extends base {
 
 	//Add Document
 	@Test(dataProvider="getAddData")
-	public void Add_Project(String DTitle) throws InterruptedException {
+	public void Add_Document(String DTitle) throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
 		document.getAddDocument().click();
@@ -42,7 +42,7 @@ public class DocumentTest extends base {
 
 	//Editing an existing Document using Data Provider
 	@Test
-	public void Edit_Receipt() throws InterruptedException {
+	public void Edit_Document() throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
 		document.getAddDocument().click();
@@ -50,21 +50,14 @@ public class DocumentTest extends base {
 	
 	//Search Document
 	@Test(dataProvider="getSearchData")
-	public void Search_Receipt(String Project) throws InterruptedException {
+	public void Search_Document(String Project) throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
 	}
 
-	//Apply Filter Document
+	//Apply Filter Project dropdown
 	@Test()
-	public void Apply_Filter_Receipt() throws InterruptedException {
-		DocumentPage document = new DocumentPage(driver);
-		document.getDocument().click();
-	}
-
-	//Apply Filter Project Dropdown
-	@Test()
-	public void Apply_Filter_Cancelled_Receipt() throws InterruptedException {
+	public void Apply_Filter_Document_Dropdown() throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
 		}
@@ -82,7 +75,7 @@ public class DocumentTest extends base {
 		driver.close();
 	}	
 
-	//Add Document Data
+	//Add Document
 	@DataProvider
 	public Object[][] getAddData() {
 		return new Object[][] {

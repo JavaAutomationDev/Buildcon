@@ -47,6 +47,7 @@ public class CustomerTest extends base {
 	public void Search_Customer(String siteproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
+		Thread.sleep(2000);
 		customer.getSearch().sendKeys(siteproject + Keys.ENTER);
 	}
 
@@ -56,6 +57,7 @@ public class CustomerTest extends base {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.webElementList();
+		Thread.sleep(2000);
 		customer.getExporttoExcel().click();
 	}
 	//Apply Filter Method for Project & Reset
@@ -64,12 +66,14 @@ public class CustomerTest extends base {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.getapplyfilter().click();
+		Thread.sleep(2000);
 		customer.getselectproject(selectproject);
 		customer.getradiobtn().click();
 		customer.getresetfilter().click();
 		customer.getDocumentview().click();
 		customer.getFiles().click();
 		customer.getdocument().click();
+		Thread.sleep(2000);
 		customer.getcross().click();
 	}
 	

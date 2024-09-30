@@ -43,6 +43,7 @@ public class InquiryFormTest extends base {
 		inquiryForm.getContactNo().sendKeys(Number);
 		inquiryForm.getEmail().sendKeys(Email);
 		inquiryForm.getsource().sendKeys(Source);
+		Thread.sleep(2000);
 		inquiryForm.getsave().click();
 	}
 	//close the driver
