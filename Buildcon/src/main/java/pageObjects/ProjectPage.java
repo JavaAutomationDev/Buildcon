@@ -303,7 +303,7 @@ public class ProjectPage {
 		return driver.findElement(nextbtn2);
 	}
 	//SAC Configurations
-	//Page object for propertyType
+	//Page object for Property Type
 	By propertyType=By.xpath("//mat-select[@formcontrolname='propertyType']");
 	public void getPropertyType(String Propertytype) {
 		WebElement dropdown = driver.findElement(propertyType);
@@ -348,23 +348,23 @@ public class ProjectPage {
 	public WebElement getPlusbtn() {
 		return driver.findElement(plusbtn);
 	}
-	//Page object for save & next
+	//Page object for Save & Next
 	By Savebtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[5]/div/div/div/div[2]/button[2]");
 	public WebElement getSave() {
 		return driver.findElement(Savebtn);
 	}
+	
     //Block configuration
 	//Page object for Add Project Block
-	By addprojectblock=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
-			+ "main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[1]/vex-unit-block-list/div/button");	
+	By addprojectblock=By.xpath("//*[@id=\"cdk-step-content-0-5\"]/div/div[1]/vex-unit-block-list/div/button");	
 	public WebElement getAddProjectBlock() {
 		return driver.findElement(addprojectblock);
 	}
-	//Page object for Unit Block
-		By unitblock=By.xpath("//input[@formcontrolname='unitBlockName']");	
-		public WebElement getUnitBlock() {
-			return driver.findElement(unitblock);
+	//Page object for Block Name
+	By unitblock=By.xpath("//input[@formcontrolname='unitBlockName']");	
+	public WebElement getUnitBlock() {
+		return driver.findElement(unitblock);
 	}
 		
 	//Page object for Number of Floors
@@ -382,10 +382,6 @@ public class ProjectPage {
 	public WebElement getCreate() {
 		return driver.findElement(create);
 	}
-	
-	
-	
-	
 	
 	//Page object for Edit button
 	public WebElement getEdit() {

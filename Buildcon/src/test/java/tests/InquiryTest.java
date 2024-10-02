@@ -1,8 +1,11 @@
 package tests;
 
+import static org.testng.Assert.assertEquals;
+
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -10,6 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pageObjects.InquiryPage;
 import pageObjects.LoginPage;
@@ -39,6 +43,9 @@ public class InquiryTest extends base {
 	public void Add_Inquiry(String siteproject, String visitorname, String NextfollowUpDT, String referencedBy,
 			String Attende, String ContactNo, String Email, String Address, String Remarks, String Requirement,
 			String Status) throws InterruptedException {
+		//SoftAssert softAssert = new SoftAssert();
+		//oftAssert.assertTrue("11".equals("11"), "The condition should be false but it is true.");
+		
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
@@ -57,11 +64,12 @@ public class InquiryTest extends base {
 		Inquiry.getRemarks().sendKeys(Remarks);
 		Inquiry.getrequirement().sendKeys(Requirement);
 		Inquiry.getstatus(Status);
-		Inquiry.getIsProspect().click();
+		//Inquiry.getIsProspect().click();
+		Thread.sleep(2000);
 		Inquiry.getsave().click();
 	}
 
-	//Editing an existing inquiry using Data Provider
+	//Editing an existing Inquiry using Data Provider
 	@Test(dataProvider = "getEditData")
 	public void Edit_Inquiry(String newContactNo, String newEmail, String newAddress, String newRemarks,
 			String newRequirement, String newStatus) throws InterruptedException {
@@ -79,6 +87,7 @@ public class InquiryTest extends base {
 		Inquiry.getrequirement().clear();
 		Inquiry.getrequirement().sendKeys(newRequirement);
 		Inquiry.getstatus(newStatus);
+		Thread.sleep(2000);
 		Inquiry.getsave().click();
 	}
 
@@ -88,6 +97,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getDelete();
+		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
 	}
 
@@ -96,6 +106,7 @@ public class InquiryTest extends base {
 	public void Export_to_Excel_Inquiry() throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Thread.sleep(2000);
 		Inquiry.getExporttoExcel().click();
 	}
 
@@ -108,7 +119,9 @@ public class InquiryTest extends base {
 		Inquiry.getdaterange().click();
 		Inquiry.getSelectstartDate().click();
 		Inquiry.getSelectEndDate().click();
+		Thread.sleep(2000);
 		Inquiry.getselectproject(selectproject);
+		Thread.sleep(2000);
 		Inquiry.getresetfilter().click();
 	}
 
@@ -120,7 +133,9 @@ public class InquiryTest extends base {
 		Inquiry.getapplyfilter().click();
 		Inquiry.getdaterange().click();
 		Inquiry.getSelectstartDate().click();
+		Thread.sleep(2000);
 		Inquiry.getSelectEndDate().click();
+		Thread.sleep(2000);
 		Inquiry.getresetfilter().click();
 	}
 
@@ -140,6 +155,7 @@ public class InquiryTest extends base {
 	public void Search_Inquiry(String Attende) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Thread.sleep(2000);
 		Inquiry.getSearch().sendKeys(Attende + Keys.ENTER);
 		WebElement searchResult = Inquiry.getSearch();
 		String resultText = searchResult.getText();
@@ -154,6 +170,7 @@ public class InquiryTest extends base {
 		Inquiry.gettodayfollowup().click();
 		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Inquiry.getEdit();
+		Thread.sleep(2000);
 		Inquiry.getsave().click();
 	}
 
@@ -165,6 +182,7 @@ public class InquiryTest extends base {
 		Inquiry.getmissingfollowup().click();
 		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Inquiry.getEdit();
+		Thread.sleep(2000);
 		Inquiry.getsave().click();
 	}
 
@@ -176,20 +194,39 @@ public class InquiryTest extends base {
 		Inquiry.getAddprospect().click();
 		Inquiry.getunitdropdown(unitD);
 		Inquiry.getSelectFlat(Selectflat);
+		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
+	}
+	@Test
+	public void Testting()
+	{
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getaddInquiry().click();
+		Inquiry.getsave().click();
+		WebElement a = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+		Assert.assertTrue(a.getText().equals("Vasdsadsadsadisit Site/Project is required."),"If both are not equal");
+		
+		WebElement b= driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[2]/mat-form-field/div[2]/div"));
+		Assert.assertTrue(b.getText().equals("Visitor Name is required."),"If both are not equal");
+			
 	}
 
 	//Close the driver
 	@AfterMethod 
-	public void teaddown() {
-		driver.close(); 
+	public void teardown() {
+		//driver.close(); 
 	}
 
 	//DataProvider for Add Inquiry
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "Taj Mahal", "Akash Patel", "", "Vimal Patel", " Nilesh Panchal ", "9746547979",
-			"Akash@mail.com", "Bopal Gam, Ahmedabad", "Remarks", "4BHK", "In Progress" } };
+		return new Object[][] { 
+			{ "Taj Mahal", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal ", "9746547979",
+			"Akash@mail.com", "Bopal Gam, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+			{ "Taj Mahal", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal ", "9746547979",
+				"Akash@mail.com", "Bopal Gam, Ahmedabad", "Remarks", "4BHK", "In Progress" }
+		};
 	}
 
 	//DataProvider for Edit Inquiry
@@ -202,7 +239,7 @@ public class InquiryTest extends base {
 	//DataProvider for Apply Filter for Project
 	@DataProvider
 	public Object[][] getprojectfilterData() {
-		return new Object[][] { { "marin drive lake view" } };
+		return new Object[][] { { "SHALIGRAM PRIDE" } };
 	}
 
 	//DataProvider for Search Data

@@ -284,7 +284,7 @@ public class EmployeeTest extends base {
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();		
 	}
-   //Add Employee with All Modules - Only Delete
+	//Add Employee with All Modules - Only Delete
 	@Test(dataProvider="getAddData")
 	public void Add_Employee_Only_Delete(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
@@ -343,37 +343,66 @@ public class EmployeeTest extends base {
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();		
 	}
-	
-	//Delete Employee
-	@Test(dataProvider="EmployeeDeleteData")
-	public void Delete_Employee(String employeeName) throws InterruptedException {
+
+	//Edit Employee and Active Employee
+	@Test(dataProvider="getEditData")
+	public void Edit_Employee(String Firstname,String Midllename,String designation,String mobileno) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-		employee.deleteEmployeeByName(employeeName);
+		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
+		employee.getEdit().click();
+		employee.getmname().clear();
+		employee.getmname().sendKeys(Midllename);
+		employee.getDesignation().clear();
+		employee.getDesignation().sendKeys(designation);
+		employee.getMobileno().clear();
+		employee.getMobileno().sendKeys(mobileno);
+		Thread.sleep(2000);
+		employee.getActiveEmployee().click();
+		Thread.sleep(2000);
+		employee.Nextbtn().click();
+		Thread.sleep(2000);
+		employee.getUpdate().click();
+	}
+
+	//Delete Employee
+	@Test(dataProvider="EmployeeDeleteData")
+	public void Delete_Employee(String Firstname) throws InterruptedException {
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
+		employee.deleteEmployee().click();
+		Thread.sleep(2000);
 		employee.getClickYes().click();
 	}
+
 	//Search Employee
 	@Test(dataProvider="getSearchData")
 	public void Search_Employee(String Firstname) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		Thread.sleep(2000);
 		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
 	}
+
 	//Designation Apply Filter
 	@Test(dataProvider="EmployeefilterData")
 	public void Apply_Filter(String Filter) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		Thread.sleep(2000);
 		employee.Applyfilter(Filter);
 	}
+
 	//Export to Excel Employee
 	@Test()
 	public void Export_To_Excel_Employee() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		Thread.sleep(2000);
 		employee.ExporttoExcel().click();
 	}
-	
+
 	@AfterMethod()
 	public void teardown() {
 		//driver.close();
@@ -387,10 +416,18 @@ public class EmployeeTest extends base {
 				"","Ahmedabad","","9865321254","Sit@321#","Ambli,Bopal gam"," marin drive lake view ",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png"}};
 	}
+	//DataProvider for Edit Employee
+	@DataProvider
+	public Object[][] getEditData() {
+		return new Object[][] {
+			//Firstname,  Middlename, Designation, Mobile no
+			{"Automation", "QAT",       "SDET",    "9806547854"}};
+	}
 	//DataProvider for Search Employee
 	@DataProvider
 	public Object[][] getSearchData() {
 		return new Object[][] {
+			//Firstname
 			{"Abhimanyu"}};
 	}
 	//DataProvider for Apply Filter for Employee
@@ -403,6 +440,7 @@ public class EmployeeTest extends base {
 	@DataProvider
 	public Object[][] EmployeeDeleteData() {
 		return new Object[][] {
+			//Firstname
 			{"Abhimanyu"}};
 	}
 }

@@ -23,23 +23,21 @@ public class CustomerTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login process
+		// Login Process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));  
         loginPage.getUserName().sendKeys(prop.getProperty("USER"));  
         loginPage.getpass().sendKeys(prop.getProperty("PS"));
 		loginPage.getsignIn().click();
-		log.info("Login successful");
-
-		//screenshot capture
-		@SuppressWarnings("unused")
-		String screenshot= getscreenshot("Screenshot", driver);
+		log.info("Login successful");		
 	}
-	//Customer List grid data
+	
+	//Customer List Grid data
 	@Test()
 	public void Verify_Customer_List_Customer() throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
+		Thread.sleep(2000);
 		customer.webElementList();
 	}
 	//Customer Search Method
@@ -60,6 +58,7 @@ public class CustomerTest extends base {
 		Thread.sleep(2000);
 		customer.getExporttoExcel().click();
 	}
+	
 	//Apply Filter Method for Project & Reset
 	@Test(dataProvider="getprojectdropdownData")
 	public void Apply_Filter_Project_Customer(String selectproject) throws InterruptedException {
@@ -70,8 +69,11 @@ public class CustomerTest extends base {
 		customer.getselectproject(selectproject);
 		customer.getradiobtn().click();
 		customer.getresetfilter().click();
+		Thread.sleep(2000);
 		customer.getDocumentview().click();
+		Thread.sleep(2000);
 		customer.getFiles().click();
+		Thread.sleep(2000);
 		customer.getdocument().click();
 		Thread.sleep(2000);
 		customer.getcross().click();
@@ -83,13 +85,13 @@ public class CustomerTest extends base {
 		driver.close();
 	}
 
-	//DataProvider for search data
+	//DataProvider for Search data
 	@DataProvider
 	public Object[][] getSearchData() {
 		return new Object[][] {
 			{ "project test"}};
 	}
-	//DataProvider for filter Project Dropdown
+	//DataProvider for Filter Project Dropdown
 	@DataProvider
 	public Object[][] getprojectdropdownData() {
 		return new Object[][] {

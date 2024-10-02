@@ -32,7 +32,8 @@ public class ProspectTest extends base {
 		loginPage.getsignIn().click();
 		log.info("Login successful");
 	}
-
+	
+    //Add Prospect
 	@Test(dataProvider="getAdddata")
 	public void Add_Prospect(String siteproject,String visitorname,String visitordate,
 			String NextfollowUpDT,String referencedBy,String Attende,String ContactNo,
@@ -59,10 +60,11 @@ public class ProspectTest extends base {
 		Prospect.getstatus(Status);
 		Prospect.getunitdropdown(unitD);
 		Prospect.getSelectFlat(Selectflat);
+		Thread.sleep(2000);
 		Prospect.getsave().click();
 	}
 
-	// Editing an existing inquiry using Data Provider
+	//Editing an Existing Prospect using Data Provider
 	@Test(dataProvider = "getEditData")
 	public void Edit_Prospect(String newContactNo, String newEmail, String newAddress,
 			String newRemarks, String newRequirement, String newStatus) throws InterruptedException {
@@ -80,40 +82,46 @@ public class ProspectTest extends base {
 		Prospect.getrequirement().clear();
 		Prospect.getrequirement().sendKeys(newRequirement);
 		Prospect.getstatus(newStatus);
+		Thread.sleep(2000);
 		Prospect.getsave().click();
 	}
 	
-	//Delete Method
+	//Delete Prospect
 	@Test()
 	public void Delete_Prospect() throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getDelete();
+		Thread.sleep(2000);
 		Prospect.getClickYes().click();
 	}
 	
-	//Export to Excel Method
+	//Export to Excel Prospect
 	@Test()
-	public void ExporttoExcel_Prospect() throws InterruptedException {
+	public void Export_To_Excel_Prospect() throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
+		Thread.sleep(2000);
 		Prospect.getExporttoExcel().click();
 	}
 	
-	//Apply Filter Method for dates & Project
+	//Apply Filter for Dates & Project
 	@Test(dataProvider="getprojectfilterData")
 	public void Apply_Filter_Prospect(String selectproject) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
 		Prospect.getdaterange().click();
+		Thread.sleep(2000);
 		Prospect.getSelectstartDate().click();
+		Thread.sleep(2000);
 		Prospect.getSelectEndDate().click();
 		Prospect.getselectproject(selectproject);
+		Thread.sleep(2000);
 		Prospect.getresetfilter().click();	
 	}
 	
-	//Apply Filter method for Dates
+	//Apply Filter for Dates
 	@Test()
 	public void Apply_Filter_Dates_Prospect() throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
@@ -121,10 +129,12 @@ public class ProspectTest extends base {
 		Prospect.getapplyfilter().click();
 		Prospect.getdaterange().click();
 		Prospect.getSelectstartDate().click();
+		Thread.sleep(2000);
 		Prospect.getSelectEndDate().click();
+		Thread.sleep(2000);
 		Prospect.getresetfilter().click();	
 	}
-	//Apply Filter Method for Project & reset
+	//Apply Filter Method for Project & Reset
 	@Test(dataProvider="getprojectfilterData")
 	public void Apply_Filter_Project_Prospect(String selectproject) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
@@ -133,14 +143,18 @@ public class ProspectTest extends base {
 		Prospect.getselectproject(selectproject);
 		Prospect.getresetfilter().click();
 	}
+	
 	//Search Method for Prospect
 	@Test(dataProvider="getSearchData")
 	public void Search_Prospect(String Attende) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
+		Thread.sleep(2000);
 		Prospect.getSearch().sendKeys(Attende + Keys.ENTER);
+		Thread.sleep(2000);
 		Prospect.getSearch().clear();
-	} 
+	}
+	
 	//Todays Follow up click,Search & Edit method
 	@Test(dataProvider="getSearchData")
 	public void Today_Follow_Up_Prospect(String visitorname) throws InterruptedException {
@@ -149,8 +163,10 @@ public class ProspectTest extends base {
 		Prospect.gettodayfollowup().click();
 		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Prospect.getEdit();
+		Thread.sleep(2000);
 		Prospect.getsave().click();
 	}
+	
 	//Missing Follow up for click,Search & Edit method
 	@Test(dataProvider="getSearchData")
 	public void Missing_Follow_Up_Prospect(String visitorname) throws InterruptedException {
@@ -159,20 +175,24 @@ public class ProspectTest extends base {
 		Prospect.getmissingfollowup().click();
 		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Prospect.getEdit();
+		Thread.sleep(2000);
 		Prospect.getsave().click();
 	}
 	
 	//Close the driver  
-	@AfterMethod public void teardown() { driver.close(); }
+	@AfterMethod 
+	public void teardown() { 
+		driver.close();
+		}
 	 
-	//DataProvider for Add Inquiry
+	//DataProvider for Add Prospect
 	@DataProvider
 	public Object[][] getAdddata() {
 		return new Object[][] {
 			{"SHALIGRAM PRIDE","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
 				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}};
 	}
-	//DataProvider for Edit Inquiry
+	//DataProvider for Edit Prospect
 	@DataProvider
 	public Object[][] getEditData() {
 		return new Object[][] {
@@ -184,11 +204,11 @@ public class ProspectTest extends base {
 		return new Object[][] {
 			{"marin drive lake view"}};
 	}
-	//DataProvider for search data
+	//DataProvider for Search data
 	@DataProvider
 	public Object[][] getSearchData() {
 		return new Object[][] {
-			{ "Rakesh Patel"}};
+			{"Rakesh Patel"}};
 	}
 
 }

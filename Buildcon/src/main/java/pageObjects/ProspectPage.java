@@ -19,13 +19,13 @@ public class ProspectPage {
 		this.driver = driver;
 	}
 
-	//page object for click Prospect module
+	//Page object for click Prospect module
 	By Prospect = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav"
 			+ "/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[3]/a");
 	public WebElement getprospect() {
 		return driver.findElement(Prospect);
 	}
-	// page object for Add Prospect module
+	//Page object for Add Prospect module
 	By Addprospect = By.xpath("//span[contains(text(),'Add New Prospect')]");
 	public WebElement getAddprospect() {
 		return driver.findElement(Addprospect);
@@ -34,10 +34,8 @@ public class ProspectPage {
 	//Page object for visit site/project
 	By siteProject = By.xpath("//mat-select[@formcontrolname='projectID']");
 	public void getsiteproject(String siteproject) {
-		// Click the mat-select to open the dropdown
 		WebElement dropdown = driver.findElement(siteProject);
 		dropdown.click();
-		// Construct the XPath for the desired option
 		String optionXPath = "//mat-option//span[contains(text(),'" + siteproject + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -74,7 +72,6 @@ public class ProspectPage {
 	//Page object for outTime
 	By outTime = By.xpath("//input[@formcontrolname='visitorOutDT']");
 	public WebElement getouttime() {
-		// Get the current time
 		LocalTime currentTime = LocalTime.now();
 
 		// Add 1 hours and 30 minutes to the current time to get the future time
@@ -126,13 +123,13 @@ public class ProspectPage {
 		option.click();
 	}
 
-	//Page object for contact number
+	//Page object for Contact Number
 	By ContactNo = By.xpath("//input[@formcontrolname='visitorMobile']");
 	public WebElement getContactNo() {
 		return driver.findElement(ContactNo);
 	}
 
-	// Page object for visitor Email
+	//Page object for Visitor Email
 	By Email = By.xpath("//input[@formcontrolname='visitorEmail']");
 	public WebElement getEmail() {
 		return driver.findElement(Email);
@@ -161,12 +158,11 @@ public class ProspectPage {
 	public void getstatus(String status) {
 		WebElement dropdown = driver.findElement(Status);
 		dropdown.click();
-		// Construct the XPath for the desired option
 		String optionXPath = "//mat-option//span[contains(text(),'" + status + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-	//Page object for save button
+	//Page object for Save Button
 	By Save = By.xpath("//button[@type='submit']");
 	public WebElement getsave() {
 		return driver.findElement(Save);
@@ -183,7 +179,7 @@ public class ProspectPage {
 		return Edit;
 	}
 
-	//Page object for search
+	//Page object for Search
 	By Search = By.xpath("//input[@type='search']");
 	public WebElement getSearch() {
 		return driver.findElement(Search);
@@ -201,24 +197,24 @@ public class ProspectPage {
 		return driver.findElement(filter);
 	}
 
-	//Page object for date range
+	//Page object for Date Range
 	By Daterange=By.xpath("//mat-date-range-input[@role='group']");
 	public WebElement getdaterange() {
 		return driver.findElement(Daterange);
 	}
 
-	//Page object for Select start date
+	//Page object for Select Start Date
 	By SelectstartDate=By.xpath("//span[@class='mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today']");
 	public WebElement getSelectstartDate() {
 		return driver.findElement(SelectstartDate);
 	}
 
-	//Page object for Select End date
+	//Page object for Select End Date
 	By SelectendDate=By.xpath("//span[normalize-space()='30']");
 	public WebElement getSelectEndDate() {
 		return driver.findElement(SelectendDate);
 	}
-	//Page object for select project
+	//Page object for Select Project
 	By selectproject=By.xpath("//mat-select[@placeholder='Select Project']");
 	public void getselectproject(String project) {
 		WebElement dropdown = driver.findElement(selectproject);
@@ -227,7 +223,7 @@ public class ProspectPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-	//Page object for Reset button
+	//Page object for Reset Button
 	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
 	public WebElement getresetfilter() {
 		return driver.findElement(resetfilter);
@@ -243,14 +239,14 @@ public class ProspectPage {
 		js.executeScript("arguments[0].click();", deleteButton);
 		return deleteButton;
 	}
-	//Page object for click yes
+	//Page object for Click Yes
 	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
 			+ "/form/mat-dialog-actions/button[1]");
 	public WebElement getClickYes() {
 		return driver.findElement(ClickYes);
 	}
 
-	//Page Object for today's follow up details
+	//Page Object for Today's Follow up details
 	By Todayfollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 			+ "/main/vex-prospect/vex-inquires/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[2]");
 	public WebElement gettodayfollowup() {

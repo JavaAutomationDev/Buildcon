@@ -147,7 +147,8 @@ public class InquiryPage {
 	}
 
 	//Page object for Save button
-	By Save = By.xpath("//button[@type='submit']");
+	By Save = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-add-inquiry/div/div[2]/div/div/form/div[2]/button[2]");
 	public WebElement getsave() {
 		return driver.findElement(Save);
 	}
@@ -215,8 +216,7 @@ public class InquiryPage {
 	}
 	//Page object for Delete
 	public WebElement getDelete() {
-		WebElement deleteButton = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout"
-				+ "/div/mat-sidenav-container"
+		WebElement deleteButton = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 				+ "/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/"
 				+ "mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[13]/div/a[2]/mat-icon"));
 

@@ -11,13 +11,14 @@ public class CustomerPage {
 	public CustomerPage(WebDriver driver) {
 		this.driver = driver;
 	}
-	//page object for click Customer module
+	
+	//Page object for click Customer module
 	By Customer = By.xpath("//vex-sidenav-item[6]//a[1]");
 	public WebElement getCustomer() {
 		return driver.findElement(Customer);
 	}
 
-	//Page object for Export to excel
+	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-members/div/div[1]/div[2]/div[2]/button");
 	public WebElement getExporttoExcel() {
@@ -34,7 +35,7 @@ public class CustomerPage {
 	public WebElement getapplyfilter() {
 		return driver.findElement(filter);
 	}
-	//Page object for select Project Dropdown
+	//Page object for Select Project dropdown
 	By selectproject=By.xpath("//mat-select[@placeholder='Select Project']");
 	public void getselectproject(String project) {
 		WebElement dropdown = driver.findElement(selectproject);
@@ -43,7 +44,7 @@ public class CustomerPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-	//Page object for reset button
+	//Page object for Reset button
 	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
 	public WebElement getresetfilter() {
 		return driver.findElement(resetfilter);
@@ -66,18 +67,18 @@ public class CustomerPage {
 	public WebElement getFiles() {
 		return driver.findElement(Files);
 	}
-	//Page object for Document view		
+	//Page object for Document View		
 	By Document=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/"
 			+ "vex-member-info/div/mat-dialog-content/mat-accordion/mat-expansion-panel[2]/mat-expansion-panel-header/span[2]");	
 	public WebElement getdocument() {
 		return driver.findElement(Document);
 	}
-	//Page object for cross button		
+	//Page object for Cross Button		
 	By Crossbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-member-info/div/div/div/button");	
 	public WebElement getcross() {
 		return driver.findElement(Crossbtn);
 	}
-    //Method for Customer Listing
+	//Method for Customer Listing
 	By CstList = By.xpath("//tr");	
 	public boolean webElementList()
 	{	
@@ -94,8 +95,7 @@ public class CustomerPage {
 				}
 				System.out.println(cell.getText());
 			}
-		}
-		System.out.println();
+	    }
 		return false;
 	}
 }

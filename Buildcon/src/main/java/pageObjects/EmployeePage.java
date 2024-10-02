@@ -478,7 +478,7 @@ public class EmployeePage {
 	}
 
 	//Page object for Update Button
-	By updatebtn = By.xpath("/html/body/div[3]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/mat-dialog-actions/button[1]");
+	By updatebtn = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/mat-dialog-actions/button[1]");
 	public WebElement getUpdate() {
 		return driver.findElement(updatebtn);
 	}
@@ -488,6 +488,21 @@ public class EmployeePage {
 	public WebElement getSearch() {
 		return driver.findElement(Search);
 	}
+	//Page object for Edit Employee
+	By editemployee=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "app-employees/div/div[2]/div/div/div[2]/ul/li[4]/a/mat-icon");
+	public WebElement getEdit() {
+		return driver.findElement(editemployee);
+    }	
+	
+	//Page object for Active Employee
+	By activeemployee=By.xpath("//mat-checkbox[@formcontrolname='isActive']");
+	public WebElement getActiveEmployee() {
+		WebElement element = driver.findElement(activeemployee);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		return element;
+	}
+	
 	//Page object for Apply Filter
 	By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[3]/button");
@@ -504,14 +519,14 @@ public class EmployeePage {
 	public WebElement ExporttoExcel() {
 		return driver.findElement(ExporttoExcel);
 	}
+	
 	//Page object for Delete Employee
 	By deleteemp=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/app-employees/div/div[2]/div/div[2]/div[2]/ul/li[3]/a");
-	public void deleteEmployeeByName(String EmployeeName) {
-		By employeeLocator = By.xpath("//li[contains(text(), '" + EmployeeName + "')]");
-		WebElement employeeElement = driver.findElement(employeeLocator);
-		employeeElement.findElement(deleteemp).click();
+			+ "mat-sidenav-content/main/app-employees/div/div[2]/div/div/div[2]/ul/li[3]/a/mat-icon");
+	public WebElement deleteEmployee() {
+		return driver.findElement(deleteemp);
 	}
+	
 	//Page object for click yes
 	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
 			+ "/form/mat-dialog-actions/button[1]");

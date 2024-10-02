@@ -3,6 +3,7 @@ package pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 public class InquiryForm {
 	public WebDriver driver;
 
@@ -43,7 +44,7 @@ public class InquiryForm {
 		  return driver.findElement(Attendee); }
 	 
 
-	//Page object for Contact number
+	//Page object for Contact Number
 	By ContactNo = By.xpath("//input[@formcontrolname='visitorMobile']");
 	public WebElement getContactNo() {
 		return driver.findElement(ContactNo);
@@ -56,10 +57,12 @@ public class InquiryForm {
 	}
 
 	//Page object for Source
-	By source = By.xpath("//mat-select[@formcontrolname='sourceID']"); public
-	WebElement getsource() { return driver.findElement(source); }
+	By source = By.xpath("//mat-select[@formcontrolname='sourceID']"); 
+	public WebElement getsource() { 
+		return driver.findElement(source); 
+	}
 
-	//Page object for Save button
+	//Page object for Save Button
 	By save = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-inquiry-form/div/div[2]/div/form/div[2]/button");

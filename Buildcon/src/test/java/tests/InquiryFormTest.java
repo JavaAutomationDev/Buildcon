@@ -31,10 +31,10 @@ public class InquiryFormTest extends base {
 		loginPage.getsignIn().click();
 		log.info("Login successful");
 	}
-	//Add Inquiry form data
+	//Add Inquiry Form data
 	@Test(dataProvider="getdata")
 	public void Add_Inquiry_Form(String siteproject,String visitorname,String Attendee,
-			String Number,String Email,String Source) throws InterruptedException {
+			String Number,String Email) throws InterruptedException {
 		InquiryForm inquiryForm = new InquiryForm(driver);
 		inquiryForm.getInquiry().click();
 		inquiryForm.getsiteproject(siteproject);
@@ -42,11 +42,11 @@ public class InquiryFormTest extends base {
 		inquiryForm.getAttendee().sendKeys(Attendee);;
 		inquiryForm.getContactNo().sendKeys(Number);
 		inquiryForm.getEmail().sendKeys(Email);
-		inquiryForm.getsource().sendKeys(Source);
+		//inquiryForm.getsource().sendKeys(Source);
 		Thread.sleep(2000);
 		inquiryForm.getsave().click();
 	}
-	//close the driver
+	//Close the driver
 	@AfterMethod
 	public void teardown() {
 		driver.close(); 
@@ -56,6 +56,8 @@ public class InquiryFormTest extends base {
 	@DataProvider
 	public Object[][] getdata() {
 		return new Object[][] {
-			{"Taj Mahal","Akash Patel", "Nilesh Panchal", "9746547979", "Akash@mail.com", "On Site" }};
+			{"Taj Mahal","Akash Patel", "Nilesh Panchal", "9746547979", "Akash@mail.com",},
+			{"SHALIGRAM PRIDE","Kinjal Patel", "Nilesh Panchal", "9000547979", "Kinjal@mail.com",},
+			};
 	}
 }
