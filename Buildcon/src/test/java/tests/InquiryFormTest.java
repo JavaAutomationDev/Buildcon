@@ -33,7 +33,7 @@ public class InquiryFormTest extends base {
 		log.info("Login successful");
 	}
 	
-	//Add Inquiry Form data
+	//Add Inquiry Form Data
 	@Test(dataProvider = "getdata")
 	public void Add_Inquiry_Form(String siteproject, String visitorname, String Attendee,
 	                             String Number, String Email) throws InterruptedException {
@@ -75,7 +75,7 @@ public class InquiryFormTest extends base {
 		driver.close(); 
 	}
 
-	//Add Inquiry Form data
+	//Add Inquiry Form Data
 	@DataProvider
 	public Object[][] getdata() {
 		return new Object[][] {

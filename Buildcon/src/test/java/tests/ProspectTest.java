@@ -25,7 +25,7 @@ public class ProspectTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login process
+		//Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));  
         loginPage.getUserName().sendKeys(prop.getProperty("USER"));  
@@ -45,7 +45,7 @@ public class ProspectTest extends base {
 	    Prospect.getprospect().click();
 	    Prospect.getAddprospect().click();
 	    
-	    // Fill in required fields
+	    //Fill in required fields
 	    Prospect.getsiteproject(siteproject); // Required Field
 	    Prospect.getvisitorname().sendKeys(visitorname); // Required Field
 	    Prospect.getvisitordate().sendKeys(visitordate);
@@ -65,10 +65,10 @@ public class ProspectTest extends base {
 	    Prospect.getunitdropdown(unitD); // Required Field
 	    Prospect.getSelectFlat(Selectflat); // Required Field
 	    
-	    // Add assertions for required fields to ensure they are not empty or invalid
+	    //Add assertions for required fields to ensure they are not empty or invalid
 	    SoftAssert softAssert = new SoftAssert();
 
-	    // Assert the required fields are filled correctly
+	    //Assert the required fields are filled correctly
 	    softAssert.assertFalse(siteproject.isEmpty(), "Site Project is required.");
 	    softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
 	    softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
@@ -76,17 +76,17 @@ public class ProspectTest extends base {
 	    softAssert.assertFalse(unitD.isEmpty(), "Unit Dropdown selection is required.");
 	    softAssert.assertFalse(Selectflat.isEmpty(), "Flat selection is required.");
 	    
-	    // Optionally, assert for valid inputs (e.g., phone number format, email format)
+	    //Optionally, assert for valid inputs (e.g., phone number format, email format)
 	    softAssert.assertTrue(ContactNo.matches("\\d{10}"), "Contact Number must be 10 digits.");
 	    
-	    // Use regex for email validation if Email is a required field
+	    //Use regex for email validation if Email is a required field
 	    if (!Email.isEmpty()) {
 	        softAssert.assertTrue(Email.matches("^[A-Za-z0-9+_.-]+@(.+)$"), "Email format is invalid.");
 	    }
         Thread.sleep(2000);
 	    Prospect.getsave().click();
 	    
-	    // Collect all soft assertions
+	    //Collect all soft assertions
 	    softAssert.assertAll();
 	}
 
@@ -98,31 +98,31 @@ public class ProspectTest extends base {
 	    ProspectPage Prospect = new ProspectPage(driver);
 	    SoftAssert softAssert = new SoftAssert();
 	    
-	    // Navigate to the prospect and click on the Edit option
+	    //Navigate to the prospect and click on the Edit option
 	    Prospect.getprospect().click();
 	    Prospect.getEdit();
 
-	    // Edit and assert Contact Number
+	    //Edit and assert Contact Number
 	    Prospect.getContactNo().clear();
 	    Prospect.getContactNo().sendKeys(newContactNo);
 	    softAssert.assertEquals(Prospect.getContactNo().getAttribute("value"), newContactNo, "Contact Number was not updated correctly.");
 	    
-	    // Edit and assert Email
+	    //Edit and assert Email
 	    Prospect.getEmail().clear();
 	    Prospect.getEmail().sendKeys(newEmail);
 	    softAssert.assertEquals(Prospect.getEmail().getAttribute("value"), newEmail, "Email was not updated correctly.");
 	    
-	    // Edit and assert Address
+	    //Edit and assert Address
 	    Prospect.getAddress().clear();
 	    Prospect.getAddress().sendKeys(newAddress);
 	    softAssert.assertEquals(Prospect.getAddress().getAttribute("value"), newAddress, "Address was not updated correctly.");
 	    
-	    // Edit and assert Remarks
+	    //Edit and assert Remarks
 	    Prospect.getRemarks().clear();
 	    Prospect.getRemarks().sendKeys(newRemarks);
 	    softAssert.assertEquals(Prospect.getRemarks().getAttribute("value"), newRemarks, "Remarks were not updated correctly.");
 	    
-	    // Edit and assert Requirement
+	    //Edit and assert Requirement
 	    Prospect.getrequirement().clear();
 	    Prospect.getrequirement().sendKeys(newRequirement);
 	    softAssert.assertEquals(Prospect.getrequirement().getAttribute("value"), newRequirement, "Requirement was not updated correctly.");
@@ -182,6 +182,7 @@ public class ProspectTest extends base {
 		Thread.sleep(2000);
 		Prospect.getresetfilter().click();	
 	}
+	
 	//Apply Filter Method for Project & Reset
 	@Test(dataProvider="getprojectfilterData")
 	public void Apply_Filter_Project_Prospect(String selectproject) throws InterruptedException {
@@ -203,7 +204,7 @@ public class ProspectTest extends base {
 		Prospect.getSearch().clear();
 	}
 	
-	//Todays Follow up click,Search & Edit method
+	//Todays Follow up click,Search & Edit Method
 	@Test(dataProvider="getSearchData")
 	public void Today_Follow_Up_Prospect(String visitorname) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
@@ -211,11 +212,12 @@ public class ProspectTest extends base {
 		Prospect.gettodayfollowup().click();
 		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Prospect.getEdit();
+		
 		Thread.sleep(2000);
 		Prospect.getsave().click();
 	}
 	
-	//Missing Follow up for click,Search & Edit method
+	//Missing Follow up for click,Search & Edit Method
 	@Test(dataProvider="getSearchData")
 	public void Missing_Follow_Up_Prospect(String visitorname) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
@@ -255,11 +257,10 @@ public class ProspectTest extends base {
 			{"marin drive lake view"}};
 	}
 	
-	//DataProvider for Search data
+	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] getSearchData() {
 		return new Object[][] {
 			{"Rakesh Patel"}};
 	}
-
 }

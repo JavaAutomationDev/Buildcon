@@ -262,11 +262,10 @@ public class ReceiptTest extends base {
 			{" Parisar homes "}};
 	}
 	
-	//DataProvider for Approve cancel 
+	//DataProvider for Approve Cancel 
 	@DataProvider
 	public Object[][] getapproveData() {
 			return new Object[][] {
 				{"Approve"}};
 	}
-
 }

@@ -16,7 +16,7 @@ public class ProjectPage {
 	public ProjectPage(WebDriver driver) {
 		this.driver=driver;
 	}
-	//Page object for Project
+	//Page object for Project Module
 	By Project=By.xpath("//vex-sidenav-item[4]//a[1]");
 	public WebElement getproject() {
 		return driver.findElement(Project);
@@ -31,7 +31,7 @@ public class ProjectPage {
 	public WebElement getProjectName() {
 		return driver.findElement(ProjectName);
 	}
-	//Page object for Project type
+	//Page object for Project Type
 	By Projecttype=By.xpath("//mat-select[@formcontrolname='projectTypeID']");
 	public void getProjecttype(String projecttype) {
 		WebElement dropdown = driver.findElement(Projecttype);
@@ -49,7 +49,7 @@ public class ProjectPage {
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
 	}
-	//Page object for Expected start date
+	//Page object for Expected Start Date
 	public WebElement getExstartdate() {
 		WebElement nextExpectedUpElement = driver.findElement(By.xpath("//input[@formcontrolname='expectedStartDT']"));
 		Calendar calendar = Calendar.getInstance();
@@ -60,7 +60,7 @@ public class ProjectPage {
 		nextExpectedUpElement.sendKeys(formattedDate);
 		return nextExpectedUpElement;
 	}
-	//Page object for Expected start date
+	//Page object for Expected Start Date
 	public WebElement getExEnddate() {
 		WebElement nextExpectedUpElement = driver.findElement(By.xpath("//input[@formcontrolname='expectedEndDT']"));
 		Calendar calendar = Calendar.getInstance();
@@ -71,7 +71,7 @@ public class ProjectPage {
 		nextExpectedUpElement.sendKeys(formattedDate);
 		return nextExpectedUpElement;
 	}
-	//Page object for Actual start date
+	//Page object for Actual Start Date
 	public WebElement getActualstartdate() {
 		WebElement nextActualUpElement = driver.findElement(By.xpath("//input[@formcontrolname='actualStartDT']"));
 		Calendar calendar = Calendar.getInstance();
@@ -82,7 +82,7 @@ public class ProjectPage {
 		nextActualUpElement.sendKeys(formattedDate);
 		return nextActualUpElement;
 	}
-	//Page object for Actual End date
+	//Page object for Actual End Date
 	public WebElement getActualenddate() {
 		WebElement nextActualUpElement = driver.findElement(By.xpath("//input[@formcontrolname='actualEndDate']"));
 		Calendar calendar = Calendar.getInstance();
@@ -93,7 +93,7 @@ public class ProjectPage {
 		nextActualUpElement.sendKeys(formattedDate);
 		return nextActualUpElement;
 	}
-	//Page object for TotalsaleableArea
+	//Page object for Total Saleable Area
 	By TotalsaleableArea=By.xpath("//input[@formcontrolname='totalSaleableArea']");
 	public WebElement getTotalsaleableArea() {
 		return driver.findElement(TotalsaleableArea);
@@ -108,7 +108,7 @@ public class ProjectPage {
 	public WebElement getcity() {
 		return driver.findElement(City);
 	}
-	//Page object for state
+	//Page object for State
 	By State=By.xpath("//mat-select[@formcontrolname='stateID']");
 	public void getstate(String state) {
 		WebElement dropdown = driver.findElement(State);
@@ -117,7 +117,7 @@ public class ProjectPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-	//Page object for SalesExectuive
+	//Page object for Sales Exectuive
 	By SalesExectuive=By.xpath("//mat-select[@formcontrolname='salesExecutiveID']");
 	public void getSalesExectuive(String salesExectuive) {
 		WebElement dropdown = driver.findElement(SalesExectuive);
@@ -127,7 +127,7 @@ public class ProjectPage {
 		option.click();
 		dropdown.sendKeys(Keys.ESCAPE); 
 	}
-	//Page object for description
+	//Page object for Description
 	By Description=By.xpath("//textarea[@formcontrolname='description']");
 	public WebElement getdescription() {
 		return driver.findElement(Description);
@@ -137,7 +137,7 @@ public class ProjectPage {
 	public WebElement getAddress() {
 		return driver.findElement(Address);
 	}
-	//Page object for Next button
+	//Page object for Next Button
 	By Nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 			+ "/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[2]/button[2]");
 	public WebElement getNextbtn() {
@@ -163,12 +163,12 @@ public class ProjectPage {
 	public WebElement getNorth() {
 		return driver.findElement(North);
 	}
-	//Page object for PlotNo
+	//Page object for Plot No
 	By PlotNo=By.xpath("//input[@formcontrolname='plotNo']");
 	public WebElement getPlotNo() {
 		return driver.findElement(PlotNo);
 	}
-	//Page object for SchemeNo
+	//Page object for Scheme No
 	By schemeNo=By.xpath("//input[@formcontrolname='schemeNo']");
 	public WebElement getschemeNo() {
 		return driver.findElement(schemeNo);
@@ -178,31 +178,31 @@ public class ProjectPage {
 	public WebElement getRera() {
 		return driver.findElement(Rera);
 	}
-	//Page object for TotalLandArea
+	//Page object for Total Land Area
 	By totalLandArea=By.xpath("//input[@formcontrolname='totalLandArea']");
 	public WebElement gettotalLandArea() {
 		return driver.findElement(totalLandArea);
 	}
-	//Page object for MaintenanceCharge
+	//Page object for Maintenance Charge
 	By MaintenanceCharge=By.xpath("//input[@formcontrolname='maintenanceCharge']");
 	public WebElement getMaintenanceCharge() {
 		return driver.findElement(MaintenanceCharge);
 	}
-	//Page object for MaintenanceDeposit
+	//Page object for Maintenance Deposit
 	By MaintenanceDeposit=By.xpath("//input[@formcontrolname='maintenanceDeposit']");
 	public WebElement getMaintenanceDeposit() {
 		return driver.findElement(MaintenanceDeposit);
 	}
 
-	//Page object for Nextbtn1
+	//Page object for NextBtn1
 	By Nextbtn1=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/form/div[2]/button[2]");
 	public WebElement getNextbtn1() {
 		return driver.findElement(Nextbtn1);
 	}
 
-	//Fields Which Will Appear in Receipt
-	//Page object for Company name
+	//Fields which will appear in Receipt
+	//Page object for Company Name
 	By companyname=By.xpath("//input[@formcontrolname='recAppearProjectName']");
 	public WebElement getCompanyName() {
 		return driver.findElement(companyname);
@@ -335,13 +335,13 @@ public class ProjectPage {
 	}
 
 	//Terms & Conditions
-	//Page object for Terms & conditions
+	//Page object for Terms & Conditions
 	By termstext=By.xpath("//input[@formcontrolname='termsText']");
 	public WebElement getTermstext() {
 		return driver.findElement(termstext);
 	}
 
-	//Page object for Plus btn
+	//Page object for Plus Btn
 	By plusbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-project-save/div/div[2]/div/"
 			+ "mat-vertical-stepper/div[5]/div/div/div/div[1]/form/div[2]/div/div[2]/button");
@@ -383,7 +383,7 @@ public class ProjectPage {
 		return driver.findElement(create);
 	}
 	
-	//Page object for Edit button
+	//Page object for Edit Button
 	public WebElement getEdit() {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 				+ "mat-sidenav-container/mat-sidenav-content/main/"
@@ -399,7 +399,7 @@ public class ProjectPage {
 	public WebElement getDeleteproject() {
 		return driver.findElement(DeleteProject);
 	}
-	//Page object for click yes
+	//Page object for click Yes
 	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/"
 			+ "vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getClickYes() {

@@ -38,7 +38,8 @@ public class HomeTest extends base {
 		login.getremember().click();
 		login.getsignIn().click();
 	}
-	//close the driver
+	
+	//Close the driver
 	@AfterMethod
 	public void teardown() {
 		driver.close();
@@ -48,7 +49,7 @@ public class HomeTest extends base {
 	@DataProvider
 	public Object[][] getdata() {
 		return new Object[][] {
-            {"Sit12", "Chandni","Sit@123#"},//Valid user
+            {"Sit12", "Chandni","Sit@123#"}
         };
 	}
 }

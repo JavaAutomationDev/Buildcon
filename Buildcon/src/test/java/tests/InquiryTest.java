@@ -69,7 +69,7 @@ public class InquiryTest extends base {
 		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
 
 		Inquiry.getContactNo().sendKeys(ContactNo);
-		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.");
+		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Inquiry Form");
 
 		Inquiry.getEmail().sendKeys(Email);
 		Inquiry.getAddress().sendKeys(Address);
@@ -198,6 +198,7 @@ public class InquiryTest extends base {
 		Inquiry.gettodayfollowup().click();
 		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Inquiry.getEdit();
+		
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
 	}
@@ -210,6 +211,7 @@ public class InquiryTest extends base {
 		Inquiry.getmissingfollowup().click();
 		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Inquiry.getEdit();
+		
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
 	}
@@ -222,10 +224,10 @@ public class InquiryTest extends base {
 		Inquiry.getAddprospect().click();
 		Inquiry.getunitdropdown(unitD);
 		Inquiry.getSelectFlat(Selectflat);
+		
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
 	}
-
 
 	//Close the driver
 	@AfterMethod 
@@ -237,7 +239,7 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] getAdddata() {
 		return new Object[][] { 
-			{ "Taj Mahal","Akash Patel","","Vimal Patel"," Nilesh Panchal ","9746547979","Akash@mail.com","Bopal Gam, Ahmedabad",
+			{ "Taj Mahal","Akash Patel","","Vimal Patel"," Nilesh Panchal ","9632587401","Akash@mail.com","Bopal Gam, Ahmedabad",
 				"Remarks","4BHK","In Progress" }
 		};
 	}

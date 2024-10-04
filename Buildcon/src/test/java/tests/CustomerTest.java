@@ -32,7 +32,7 @@ public class CustomerTest extends base {
 		log.info("Login successful");		
 	}
 	
-	//Customer List Grid data
+	//Customer List Grid Data
 	@Test()
 	public void Verify_Customer_List_Customer() throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
@@ -40,6 +40,7 @@ public class CustomerTest extends base {
 		Thread.sleep(2000);
 		customer.webElementList();
 	}
+	
 	//Customer Search Method
 	@Test(dataProvider="getSearchData")
 	public void Search_Customer(String siteproject) throws InterruptedException {
@@ -97,5 +98,4 @@ public class CustomerTest extends base {
 		return new Object[][] {
 			{"marin drive lake view"}};
 	}
-
 }

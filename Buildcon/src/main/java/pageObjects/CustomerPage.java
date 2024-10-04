@@ -24,7 +24,7 @@ public class CustomerPage {
 	public WebElement getExporttoExcel() {
 		return driver.findElement(ExporttoExcel);
 	}
-	//Page object for Search
+	//Page object for Search Customer
 	By Search = By.xpath("//input[@type='search']");
 	public WebElement getSearch() {
 		return driver.findElement(Search);
@@ -35,7 +35,7 @@ public class CustomerPage {
 	public WebElement getapplyfilter() {
 		return driver.findElement(filter);
 	}
-	//Page object for Select Project dropdown
+	//Page object for Select Project Dropdown
 	By selectproject=By.xpath("//mat-select[@placeholder='Select Project']");
 	public void getselectproject(String project) {
 		WebElement dropdown = driver.findElement(selectproject);
@@ -44,18 +44,18 @@ public class CustomerPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-	//Page object for Reset button
+	//Page object for Reset Button
 	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
 	public WebElement getresetfilter() {
 		return driver.findElement(resetfilter);
 	}
-	//Page object for Radio button
+	//Page object for Radio Button
 	By Radiobtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-members/div/div[2]/div/div[2]/mat-radio-group/mat-radio-button[2]/div/div/input");
 	public WebElement getradiobtn() {
 		return driver.findElement(Radiobtn);
 	}
-	//Page object for Document click
+	//Page object for Document Click
 	By Documentview=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-members/div/div[3]/div/div/table/tbody/tr[1]/td[12]/div/a");
 	public WebElement getDocumentview() {

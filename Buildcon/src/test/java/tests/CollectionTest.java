@@ -33,7 +33,7 @@ public class CollectionTest extends base {
 		log.info("Login successful");
 	}
 	
-	//Collection total collection Method
+	//Collection total Method
 	@Test()
 	public void Total_Collection_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
@@ -41,6 +41,7 @@ public class CollectionTest extends base {
 		collection.getTotalCollection().click();
 		collection.getcross().click();
 	}
+	
 	//Collection Search Method
 	@Test(dataProvider="getSearchData")
 	public void Search_Collection(String siteproject) throws InterruptedException {
@@ -49,13 +50,15 @@ public class CollectionTest extends base {
 		collection.getSearch().sendKeys(siteproject + Keys.ENTER);
 		collection.getSearch().clear();
 	}
-	//Collection Export to excel Method
+	
+	//Collection Export to Excel Method
 	@Test()
 	public void Export_to_Excel_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getExporttoExcel().click();
 	}
+	
 	//Apply Filter Method for Dates
 	@Test()
 	public void Apply_Filter_Dates_Collection() throws InterruptedException {
@@ -67,7 +70,8 @@ public class CollectionTest extends base {
 		collection.getSelectEndDate().click();
 		collection.getresetfilter().click();	
 	}
-	//close the driver
+	
+	//Close the driver
 	@AfterMethod
 	public void teaddown() {
 		driver.close();

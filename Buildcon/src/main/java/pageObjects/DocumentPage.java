@@ -11,17 +11,18 @@ public class DocumentPage {
 	public DocumentPage(WebDriver driver) {
 		this.driver = driver;
 	}
-	//Page object for Document module
+	//Page object for Document Module
 	By document = By.xpath("//vex-sidenav-item[10]//a[1]");
 	public WebElement getDocument() {
 		return driver.findElement(document);
 	}
-	//Page object for Add Document module
+	//Page object for Add Document
 	By Adddocument = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-documents/div/div[1]/div[2]/button");
 	public WebElement getAddDocument() {
 		return driver.findElement(Adddocument);
 	}
+	
 	//Document Form
 	//Page object for Document Title
 	By documenttitle = By.xpath("//input[@formcontrolname='documentTitle']");
@@ -65,7 +66,7 @@ public class DocumentPage {
 	public WebElement getMarginBottom() {
 		return driver.findElement(marginbottom);
 	}
-	//Page object for search Document
+	//Page object for Search Document
 	By search = By.xpath("");
 	public WebElement getSearch() {
 		return driver.findElement(search);

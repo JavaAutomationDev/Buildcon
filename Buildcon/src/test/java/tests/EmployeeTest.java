@@ -4,10 +4,12 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pageObjects.EmployeePage;
 import pageObjects.LoginPage;
@@ -31,34 +33,77 @@ public class EmployeeTest extends base {
 		loginPage.getsignIn().click();
 		log.info("Login successful");
 	}
+	
 	//Add Employee with All Modules - All Roles
 	@Test(dataProvider="getAddData")
 	public void Add_Employee_All_Roles(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
+		
+		SoftAssert softAssert = new SoftAssert();
+		
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
+		
 		employee.getProfileImg().sendKeys(profileImg);
-		employee.getfname().sendKeys(Firstname);
+		
+		softAssert.assertFalse(Firstname.isEmpty(), "First name is required.");
+		softAssert.assertNotNull(Firstname, "First name cannot be null.");
+		employee.getfname().sendKeys(Firstname);//Required Field
+		
 		employee.getmname().sendKeys(Midllename);
-		employee.getlname().sendKeys(Lastname);
+		
+		softAssert.assertFalse(Lastname.isEmpty(), "Last name is required.");
+	    softAssert.assertNotNull(Lastname, "Last name cannot be null.");
+	    employee.getlname().sendKeys(Lastname);//Required Field
+	    
 		employee.getUserName().sendKeys(Username);
-		employee.getDesignation().sendKeys(designation);
+		
+		softAssert.assertFalse(designation.isEmpty(), "Designation is required.");
+	    softAssert.assertNotNull(designation, "Designation cannot be null.");
+	    employee.getDesignation().sendKeys(designation);//Required Field
+	    
 		employee.getDOB().sendKeys(dob);
-		employee.getEmail().sendKeys(email);
+		
+		softAssert.assertFalse(email.isEmpty(), "Email is required.");
+		softAssert.assertNotNull(email, "Email cannot be null.");    
+		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+		softAssert.assertTrue(email.matches(emailRegex), "Invalid email format.");
+		employee.getEmail().sendKeys(email);//Required Field
+		    
 		employee.getRoles(Role);
 		employee.getcity().sendKeys(City);
-		employee.getstate(State);
-		employee.getMobileno().sendKeys(mobileno);
+
+		softAssert.assertFalse(State.isEmpty(), "State is required.");
+		softAssert.assertNotNull(State, "State cannot be null.");
+		employee.getstate(State);//Required Field
+		
+		softAssert.assertFalse(mobileno.isEmpty(), "Mobile number is required.");
+		softAssert.assertNotNull(mobileno, "Mobile number cannot be null.");
+		employee.getMobileno().sendKeys(mobileno);//Required Field
+		
 		employee.getPassword().sendKeys(password);
 		employee.getAddress().sendKeys(address);
 		employee.getProjectAccess(Project);
-		employee.uploadAdharCard().sendKeys(Adharcard);
-		employee.getPancard().sendKeys(pancard);
-		employee.SelectGender().click();
+		
+		softAssert.assertFalse(Adharcard.isEmpty(), "Aadhar card file path is required.");
+		softAssert.assertNotNull(Adharcard, "Aadhar card file path cannot be null.");
+		employee.uploadAdharCard().sendKeys(Adharcard);//Required Field
+		
+		softAssert.assertFalse(pancard.isEmpty(), "PAN card is required.");
+		softAssert.assertNotNull(pancard, "PAN card cannot be null.");
+		employee.getPancard().sendKeys(pancard);//Required Field
+		
+		
+	    WebElement genderElement = employee.SelectGender();
+	    softAssert.assertTrue(genderElement.isEnabled(), "Gender selection is required but not enabled.");
+		genderElement.click();
+		employee.SelectGender().click();//Required Field
+		
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
+		
 		//employee.Shownumber().click();
 		employee.Empradiobtn().click();
 		employee.Projectradiobtn().click();
@@ -69,8 +114,11 @@ public class EmployeeTest extends base {
 		employee.Prospectradiobtn().click();
 		employee.Bookingsradiobtn().click();
 		employee.Documentsradiobtn().click();
+		
 		Thread.sleep(2000);
 		employee.Createbtn().click();
+		
+		softAssert.assertAll();
 	}
 
 	//Add Employee with All Modules - Only View
@@ -80,6 +128,7 @@ public class EmployeeTest extends base {
 			String Adharcard,String pancard) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		
 		employee.getaddemployee().click();
 		employee.getProfileImg().sendKeys(profileImg);
 		employee.getfname().sendKeys(Firstname);
@@ -99,6 +148,7 @@ public class EmployeeTest extends base {
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
+		
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 		employee.EmpSelectbtn().click(); 
@@ -124,8 +174,8 @@ public class EmployeeTest extends base {
 
 		employee.Customerselectbtn().click();
 		employee.CustomerExport().click();
+		
 		Thread.sleep(2000);
-
 		employee.InquiryEntry().click();
 		employee.InquiryModify().click();
 		employee.InquiryRemove().click();
@@ -146,6 +196,7 @@ public class EmployeeTest extends base {
 		employee.DocumentModify().click();
 		employee.DocumentRemove().click();
 		employee.DocumentExport().click();
+		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();
 	}
@@ -157,6 +208,7 @@ public class EmployeeTest extends base {
 			String Adharcard,String pancard) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		
 		employee.getaddemployee().click();
 		employee.getProfileImg().sendKeys(profileImg);
 		employee.getfname().sendKeys(Firstname);
@@ -176,6 +228,7 @@ public class EmployeeTest extends base {
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
+		
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 
@@ -217,6 +270,7 @@ public class EmployeeTest extends base {
 		employee.DocumentSelectbtn().click();
 		employee.DocumentView().click();
 		employee.DocumentEntry().click();
+		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();		
 	}
@@ -228,6 +282,7 @@ public class EmployeeTest extends base {
 			String Adharcard,String pancard) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		
 		employee.getaddemployee().click();
 		employee.getProfileImg().sendKeys(profileImg);
 		employee.getfname().sendKeys(Firstname);
@@ -247,6 +302,7 @@ public class EmployeeTest extends base {
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
+		
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 
@@ -284,6 +340,7 @@ public class EmployeeTest extends base {
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();		
 	}
+	
 	//Add Employee with All Modules - Only Delete
 	@Test(dataProvider="getAddData")
 	public void Add_Employee_Only_Delete(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
@@ -291,6 +348,7 @@ public class EmployeeTest extends base {
 			String Adharcard,String pancard) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		
 		employee.getaddemployee().click();
 		employee.getProfileImg().sendKeys(profileImg);
 		employee.getfname().sendKeys(Firstname);
@@ -310,6 +368,7 @@ public class EmployeeTest extends base {
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
+		
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 
@@ -340,6 +399,7 @@ public class EmployeeTest extends base {
 		employee.DocumentEntry().click();
 		employee.DocumentModify().click();
 		employee.DocumentExport().click();
+		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();		
 	}
@@ -349,18 +409,26 @@ public class EmployeeTest extends base {
 	public void Edit_Employee(String Firstname,String Midllename,String designation,String mobileno) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
+		
+		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);//Required Field
+		
 		employee.getEdit().click();
+		
 		employee.getmname().clear();
 		employee.getmname().sendKeys(Midllename);
+		
 		employee.getDesignation().clear();
-		employee.getDesignation().sendKeys(designation);
+		employee.getDesignation().sendKeys(designation);//Required Field
+		
 		employee.getMobileno().clear();
-		employee.getMobileno().sendKeys(mobileno);
+		employee.getMobileno().sendKeys(mobileno);//Required Field
+		
 		Thread.sleep(2000);
 		employee.getActiveEmployee().click();
+		
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
+		
 		Thread.sleep(2000);
 		employee.getUpdate().click();
 	}
@@ -369,9 +437,12 @@ public class EmployeeTest extends base {
 	@Test(dataProvider="EmployeeDeleteData")
 	public void Delete_Employee(String Firstname) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
+		
 		employee.getEmployee().click();
+		
 		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
 		employee.deleteEmployee().click();
+		
 		Thread.sleep(2000);
 		employee.getClickYes().click();
 	}
@@ -381,6 +452,7 @@ public class EmployeeTest extends base {
 	public void Search_Employee(String Firstname) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		
 		Thread.sleep(2000);
 		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
 	}
@@ -390,6 +462,7 @@ public class EmployeeTest extends base {
 	public void Apply_Filter(String Filter) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		
 		Thread.sleep(2000);
 		employee.Applyfilter(Filter);
 	}
@@ -399,13 +472,15 @@ public class EmployeeTest extends base {
 	public void Export_To_Excel_Employee() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
+		
 		Thread.sleep(2000);
 		employee.ExporttoExcel().click();
 	}
 
+	//Close the driver
 	@AfterMethod()
 	public void teardown() {
-		//driver.close();
+		driver.close();
 	}
 
 	//DataProvider for Add Employee
@@ -416,6 +491,7 @@ public class EmployeeTest extends base {
 				"","Ahmedabad","","9865321254","Sit@321#","Ambli,Bopal gam"," marin drive lake view ",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png"}};
 	}
+	
 	//DataProvider for Edit Employee
 	@DataProvider
 	public Object[][] getEditData() {
@@ -423,6 +499,7 @@ public class EmployeeTest extends base {
 			//Firstname,  Middlename, Designation, Mobile no
 			{"Automation", "QAT",       "SDET",    "9806547854"}};
 	}
+	
 	//DataProvider for Search Employee
 	@DataProvider
 	public Object[][] getSearchData() {
@@ -430,12 +507,14 @@ public class EmployeeTest extends base {
 			//Firstname
 			{"Abhimanyu"}};
 	}
+	
 	//DataProvider for Apply Filter for Employee
 	@DataProvider
 	public Object[][] EmployeefilterData() {
 		return new Object[][] {
 			{" Developer "}};
 	}
+	
 	//DataProvider for Delete Employee
 	@DataProvider
 	public Object[][] EmployeeDeleteData() {

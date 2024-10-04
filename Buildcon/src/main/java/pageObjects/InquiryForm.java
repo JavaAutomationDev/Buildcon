@@ -11,7 +11,7 @@ public class InquiryForm {
 		this.driver = driver;
 	}
 
-	//Page object for click Inquiry form module
+	//Page object for click Inquiry Form Module
 	By Inquiryform = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/"
@@ -20,7 +20,7 @@ public class InquiryForm {
 		return driver.findElement(Inquiryform);
 	}
 
-	//Page object for Visit site/project
+	//Page object for Visit Site/Project
 	By siteProject = By.xpath("//mat-select[@formcontrolname='projectID']");
 	public void getsiteproject(String siteproject) {
         WebElement dropdown = driver.findElement(siteProject);

@@ -17,12 +17,12 @@ public class ReceiptPage {
 		this.driver = driver;
 	}
 	
-	// Page object for Receipt module
+	// Page object for Receipt Module
 	By receipt = By.xpath("//vex-sidenav-item[7]//a[1]");
 	public WebElement getReceipt() {
 		return driver.findElement(receipt);
 	}
-	//Page object for Add Receipt module
+	//Page object for Add Receipt
 	By Addreceipt = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-receipts/div/div[1]/div[2]/button");
 	public WebElement getAddReceipt() {
@@ -58,7 +58,7 @@ public class ReceiptPage {
 		option.click();
 	}
 
-	//Page object for Next btn
+	//Page object for Next Btn
 	By nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button[2]");
 	public WebElement getNextBtn() {
@@ -124,7 +124,7 @@ public class ReceiptPage {
 		return driver.findElement(gstapplicable);
 	}
 
-	//Page object for Next btn1
+	//Page object for Next Btn1
 	By nextbtn1=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/form/div/form/div[2]/button[2]");
 	public WebElement getNextBtn1() {
@@ -170,7 +170,7 @@ public class ReceiptPage {
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
 	}
-	//Page object for Next btn2
+	//Page object for Next Btn2
 	By nextbtn2=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div/form/div[2]/button[2]");
 	public WebElement getNextBtn2() {
@@ -254,7 +254,7 @@ public class ReceiptPage {
 		return driver.findElement(ExporttoExcel);
 	}
 	//Apply Filter
-	//Page object for Apply filter
+	//Page object for Apply Filter
 	By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-receipts/div/div[1]/div[2]/div/div[4]/button");
 	public WebElement getapplyfilter() {
@@ -334,7 +334,7 @@ public class ReceiptPage {
 		return driver.findElement(download);
 	}
 	
-	//Page object for Edit Next btn
+	//Page object for Edit Next Btn
 	By editnextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button");
 	public WebElement getEditNext() {

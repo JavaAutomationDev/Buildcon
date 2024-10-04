@@ -19,19 +19,19 @@ public class ProspectPage {
 		this.driver = driver;
 	}
 
-	//Page object for click Prospect module
+	//Page object for click Prospect Module
 	By Prospect = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav"
 			+ "/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[3]/a");
 	public WebElement getprospect() {
 		return driver.findElement(Prospect);
 	}
-	//Page object for Add Prospect module
+	//Page object for Add Prospect
 	By Addprospect = By.xpath("//span[contains(text(),'Add New Prospect')]");
 	public WebElement getAddprospect() {
 		return driver.findElement(Addprospect);
 	}
 
-	//Page object for visit site/project
+	//Page object for Visit Site/Project
 	By siteProject = By.xpath("//mat-select[@formcontrolname='projectID']");
 	public void getsiteproject(String siteproject) {
 		WebElement dropdown = driver.findElement(siteProject);
@@ -41,13 +41,13 @@ public class ProspectPage {
 		option.click();
 	}
 
-	//Page object for visitor Name
+	//Page object for Visitor Name
 	By visitorname = By.xpath("//input[@formcontrolname='visitorName']");
 	public WebElement getvisitorname() {
 		return driver.findElement(visitorname);
 	}
 
-	//Page object for visitor date
+	//Page object for Visitor Date
 	By visitordate = By.xpath("//input[@formcontrolname='visitDT']");
 	public WebElement getvisitordate() {
 		@SuppressWarnings("unused")
@@ -55,7 +55,7 @@ public class ProspectPage {
 		return driver.findElement(visitordate);
 	}
 
-	//Page object for InTime
+	//Page object for In Time
 	By InTime = By.xpath("//input[@formcontrolname='visitorInDT']");
 	public WebElement getIntime() {
 		@SuppressWarnings("unused")
@@ -63,25 +63,25 @@ public class ProspectPage {
 		return driver.findElement(InTime);
 	}
 
-	//Page object for current time pop up ok button
+	//Page object for current time pop up ok Button
 	By Ok = By.xpath("//mat-dialog-actions[@class='mat-mdc-dialog-actions mdc-dialog__actions']//button[2]");
 	public WebElement getOk() {
 		return driver.findElement(Ok);
 	}
 
-	//Page object for outTime
+	//Page object for Out Time
 	By outTime = By.xpath("//input[@formcontrolname='visitorOutDT']");
 	public WebElement getouttime() {
 		LocalTime currentTime = LocalTime.now();
 
-		// Add 1 hours and 30 minutes to the current time to get the future time
+		//Add 1 hours and 30 minutes to the current time to get the future time
 		LocalTime futureTime = currentTime.plusHours(1).plusMinutes(30);
 
-		// Format the future time (optional, depending on the input format required)
+		//Format the future time (optional, depending on the input format required)
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		String formattedFutureTime = futureTime.format(formatter);
 
-		// Find the 'Out Time' input field
+		//Find the 'Out Time' input field
 		WebElement outTimeElement = driver.findElement(outTime);
 
 		// Set the future time in the input field
@@ -89,24 +89,24 @@ public class ProspectPage {
 		return outTimeElement;
 	}
 
-	//Page object for Next follow up date
+	//Page object for Next Follow Up Date
 	public WebElement getNextfollowUpDT() {
 		WebElement nextFollowUpElement = driver.findElement(By.xpath("//input[@formcontrolname='followUpDT']"));
 
-		// Get the current date and add 1 day
+		//Get the current date and add 1 day
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DAY_OF_MONTH, 1); // Add 1 day to current date
 		Date tomorrow = calendar.getTime();
 
-		// Format the date to the desired format (e.g., dd/MM/yyyy)
+		//Format the date to the desired format (e.g., dd/MM/yyyy)
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		String formattedDate = formatter.format(tomorrow);
-		// Send the formatted date to the NextfollowUpDT input field
+		//Send the formatted date to the NextfollowUpDT input field
 		nextFollowUpElement.sendKeys(formattedDate);
 		return nextFollowUpElement;
 	}
 
-	//Page object for Referenced by
+	//Page object for Referenced By
 	By referencedBy = By.xpath("//input[@formcontrolname='referencedBy']");
 	public WebElement getreferencedBy() {
 		return driver.findElement(referencedBy);
@@ -117,7 +117,7 @@ public class ProspectPage {
 	public void getAttendee(String Attendee) {
 		WebElement dropdown = driver.findElement(Attende);
 		dropdown.click();
-		// Construct the XPath for the desired option
+		//Construct the XPath for the desired option
 		String optionXPath = "//mat-option//span[contains(text(),'" + Attendee + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -168,7 +168,7 @@ public class ProspectPage {
 		return driver.findElement(Save);
 	}
 
-	//Page object for Edit button
+	//Page object for Edit Button
 	public WebElement getEdit() {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 				+ "mat-sidenav-container/mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/"
@@ -184,7 +184,7 @@ public class ProspectPage {
 	public WebElement getSearch() {
 		return driver.findElement(Search);
 	}
-	//Page object for Export to excel
+	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[1]/div[2]/button[1]");
 	public WebElement getExporttoExcel() {
@@ -246,13 +246,13 @@ public class ProspectPage {
 		return driver.findElement(ClickYes);
 	}
 
-	//Page Object for Today's Follow up details
+	//Page Object for Today's Follow Up Details
 	By Todayfollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 			+ "/main/vex-prospect/vex-inquires/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[2]");
 	public WebElement gettodayfollowup() {
 		return driver.findElement(Todayfollowup);
 	}
-	//Page object for Missing Follow up details
+	//Page object for Missing Follow Up Details
 	By MissingFollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 			+ "/main/vex-prospect/vex-inquires/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[3]");
 	public WebElement getmissingfollowup() {
@@ -276,5 +276,4 @@ public class ProspectPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-
 }

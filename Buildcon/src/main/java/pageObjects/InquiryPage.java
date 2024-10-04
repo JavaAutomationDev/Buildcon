@@ -18,19 +18,19 @@ public class InquiryPage {
 		this.driver = driver;
 	}
 
-	//Page object for click Inquiry module
+	//Page object for click Inquiry Module
 	By Inquiry = By.xpath("//vex-sidenav-item[2]//a[1]");
 	public WebElement getInquiry() {
 		return driver.findElement(Inquiry);
 	}
 
-	//Page object for Add Inquiry module
+	//Page object for Add Inquiry
 	By AddInquiry = By.xpath("//span[contains(text(),'Add New Inquiry')]");
 	public WebElement getaddInquiry() {
 		return driver.findElement(AddInquiry);
 	}
 
-	//Page object for Visit site/project
+	//Page object for Visit Site/Project
 	By siteProject = By.xpath("//mat-select[@formcontrolname='projectID']");
 	public void getsiteproject(String siteproject) {
 		WebElement dropdown = driver.findElement(siteProject);
@@ -54,13 +54,13 @@ public class InquiryPage {
 		return driver.findElement(InTime);
 	}
 
-	//Page object for Current time pop up Ok button
+	//Page object for Current time pop up Ok Button
 	By Ok = By.xpath("//mat-dialog-actions[@class='mat-mdc-dialog-actions mdc-dialog__actions']//button[2]");
 	public WebElement getOk() {
 		return driver.findElement(Ok);
 	}
 
-	//Page object for outTime
+	//Page object for OutTime
 	By outTime = By.xpath("//input[@formcontrolname='visitorOutDT']");
 	public WebElement getouttime() {
 		LocalTime currentTime = LocalTime.now();
@@ -72,7 +72,7 @@ public class InquiryPage {
 		return outTimeElement;
 	}
 
-	//Page object for Next follow up date
+	//Page object for Next Follow Up Date
 	public WebElement getNextfollowUpDT() {
 		WebElement nextFollowUpElement = driver.findElement(By.xpath("//input[@formcontrolname='followUpDT']"));
 		Calendar calendar = Calendar.getInstance();
@@ -84,7 +84,7 @@ public class InquiryPage {
 		return nextFollowUpElement;
 	}
 
-	//Page object for Referenced by
+	//Page object for Referenced By
 	By referencedBy = By.xpath("//input[@formcontrolname='referencedBy']");
 	public WebElement getreferencedBy() {
 		return driver.findElement(referencedBy);
@@ -100,13 +100,13 @@ public class InquiryPage {
 		option.click();
 	}
 
-	//Page object for contact number
+	//Page object for Contact Number
 	By ContactNo = By.xpath("//input[@formcontrolname='visitorMobile']");
 	public WebElement getContactNo() {
 		return driver.findElement(ContactNo);
 	}
 
-	//Page object for visitor Email
+	//Page object for Visitor Email
 	By Email = By.xpath("//input[@formcontrolname='visitorEmail']");
 	public WebElement getEmail() {
 		return driver.findElement(Email);
@@ -146,7 +146,7 @@ public class InquiryPage {
 		return driver.findElement(IsProspect);
 	}
 
-	//Page object for Save button
+	//Page object for Save Button
 	By Save = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-inquiry/div/div[2]/div/div/form/div[2]/button[2]");
 	public WebElement getsave() {
@@ -158,7 +158,7 @@ public class InquiryPage {
 			public WebElement getUpdate() {
 				return driver.findElement(update);
 			}
-	//Page object for Edit button
+	//Page object for Edit Button
 	public WebElement getEdit() {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 				+ "/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]"
@@ -194,7 +194,7 @@ public class InquiryPage {
 		return driver.findElement(Daterange);
 	}
 
-	//Page object for Select start Date
+	//Page object for Select Start Date
 	By SelectstartDate=By.xpath("//span[@class='mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today']");
 	public WebElement getSelectstartDate() {
 		return driver.findElement(SelectstartDate);
@@ -214,7 +214,7 @@ public class InquiryPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-	//Page object for Reset button
+	//Page object for Reset Button
 	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
 	public WebElement getresetfilter() {
 		return driver.findElement(resetfilter);
@@ -230,21 +230,21 @@ public class InquiryPage {
 		js.executeScript("arguments[0].click();", deleteButton);
 		return deleteButton;
 	}
-	//Page object for click yes
+	//Page object for Click Yes
 	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
 			+ "/form/mat-dialog-actions/button[1]");
 	public WebElement getClickYes() {
 		return driver.findElement(ClickYes);
 	}
 
-	//Page Object for today's follow up details
+	//Page Object for Today's Follow Up Details
 	By Todayfollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content"
 			+ "/main/vex-inquires/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[2]");
 	public WebElement gettodayfollowup() {
 		return driver.findElement(Todayfollowup);
 	}
-	//Page object for Missing Follow up details
+	//Page object for Missing Follow Up Details
 	By MissingFollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-inquires/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[3]");

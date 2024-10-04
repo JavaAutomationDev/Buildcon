@@ -25,7 +25,7 @@ public class ProjectTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login process
+		//Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));  
 		loginPage.getUserName().sendKeys(prop.getProperty("USER"));  

@@ -55,12 +55,12 @@ public class DocumentTest extends base {
 		document.getDocument().click();
 	}
 
-	//Apply Filter Project dropdown
+	//Apply Filter Project Dropdown
 	@Test()
 	public void Apply_Filter_Document_Dropdown() throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
-		}
+	}
 	
 	//Apply Filter Reset
 	@Test()
