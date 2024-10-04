@@ -16,6 +16,7 @@ public class ReceiptPage {
 	public ReceiptPage(WebDriver driver) {
 		this.driver = driver;
 	}
+	
 	// Page object for Receipt module
 	By receipt = By.xpath("//vex-sidenav-item[7]//a[1]");
 	public WebElement getReceipt() {
@@ -123,7 +124,7 @@ public class ReceiptPage {
 		return driver.findElement(gstapplicable);
 	}
 
-	//Page object for Next btn
+	//Page object for Next btn1
 	By nextbtn1=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/form/div/form/div[2]/button[2]");
 	public WebElement getNextBtn1() {
@@ -169,11 +170,11 @@ public class ReceiptPage {
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
 	}
-	//Page object for Next btn3
-	By nextbtn3=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+	//Page object for Next btn2
+	By nextbtn2=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div/form/div[2]/button[2]");
-	public WebElement getNextBtn3() {
-		return driver.findElement(nextbtn3);
+	public WebElement getNextBtn2() {
+		return driver.findElement(nextbtn2);
 	}
 
 	//GST Bank Details
@@ -220,23 +221,24 @@ public class ReceiptPage {
 	public WebElement getReceivedGSTAmount() {
 		return driver.findElement(receivedGSTamount);
 	}
-	//Page object for Next Button
-	By nextbtn4=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+	//Page object for Next Btn3
+	By nextbtn3=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[4]/div/div/div/form/div/form/div[2]/button[2]");
-	public WebElement getNextBtn4() {
-		return driver.findElement(nextbtn4);
+	public WebElement getNextBtn3() {
+		return driver.findElement(nextbtn3);
 	}
 
 	//Attachment Cheque
 	//Page object for Cheque Files
-	By chequefiles=By.xpath("");
+	By chequefiles=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[5]/div/div/div/form/div/div[1]/div[1]/mat-form-field/div[1]/div[2]/div[2]/input[2]");
 	public WebElement getChequeFiles() {
 		return driver.findElement(chequefiles);
 	}
 
 	//Page object for Save Button
 	By savebtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[4]/div/div/div/form/div/div[2]/button[2]");
+			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[5]/div/div/div/form/div/div[2]/button[2]");
 	public WebElement getSavebtn() {
 		return driver.findElement(savebtn);
 	} 
@@ -266,10 +268,38 @@ public class ReceiptPage {
 	}
 
 	//Page object for Apply Filter All
-	By all = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+	By applyfilterall = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-receipts/div/div[2]/div/div[3]/mat-radio-group/mat-radio-button[3]/div/div/input");
-	public WebElement getAll() {
-		return driver.findElement(all);
+	public WebElement getApplyFilterAll() {
+		return driver.findElement(applyfilterall);
+	}
+	//Page object for Apply Filter Date Range
+	By daterange=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-receipts/div/div[2]/div/div[1]/mat-form-field/div[1]/div[2]/div[2]/mat-datepicker-toggle/button");
+	public WebElement getDateRange() {	
+		return driver.findElement(daterange);
+	}
+	//Page object for select Start Date
+	By startdate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/"
+			+ "mat-month-view/table/tbody/tr[2]/td[2]/button/span[1]");
+	public WebElement getStartDate() {	
+		return driver.findElement(startdate);
+	}
+	//Page object for select End Date
+	By enddate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/"
+			+ "mat-month-view/table/tbody/tr[6]/td[5]/button/span[1]");
+	public WebElement getEndDate() {	
+		return driver.findElement(enddate);
+	}
+	
+	//Page object for Project Dropdown
+	By projectdropdown=By.xpath("//mat-select[@placeholder='Select Project']");
+	public void getProjectDropdown(String Project) {
+		WebElement dropdown = driver.findElement(projectdropdown);
+		dropdown.click();
+		String optionXPath = "//mat-option//span[contains(text(),'" + Project + "')]";
+		WebElement option = driver.findElement(By.xpath(optionXPath));
+		option.click();
 	}
 	//Page object for Apply Filter Reset
 	By reset=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
@@ -290,6 +320,13 @@ public class ReceiptPage {
 		return Edit;
 	}
 
+	//Page object for Update Btn
+	By updatebtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[5]/div/div/div/form/div/div[2]/button[2]");
+    public WebElement getUpdateBtn() {
+    	return driver.findElement(updatebtn);
+    }	
+	
 	//Page object for Download Receipt
 	By download=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[3]");
@@ -297,4 +334,37 @@ public class ReceiptPage {
 		return driver.findElement(download);
 	}
 	
+	//Page object for Edit Next btn
+	By editnextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button");
+	public WebElement getEditNext() {
+		return driver.findElement(editnextbtn);
+	}
+	
+	//Page object for Print Receipt
+	By printreceipt=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[2]");
+    public WebElement getPrintReceipt() {
+    	return driver.findElement(printreceipt);
+    } 
+    
+    //Approve Cancel
+    //Page object for Approve/Cancel
+    By approvecancel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+    	 		+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[4]");
+    public WebElement getApproveCancel() {
+   	    return driver.findElement(approvecancel);
+    } 
+    //Page object for Reason
+    By reason=By.xpath("//input[@formcontrolname='reason']");
+    public WebElement getReason() {
+	    return driver.findElement(reason);
+    } 
+    
+    //Page object for View Receipt
+    By viewreceipt=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+    		+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[5]");
+    public WebElement getViewReceipt() {
+    	return driver.findElement(viewreceipt);
+    } 
 }

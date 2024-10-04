@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pageObjects.LoginPage;
 import pageObjects.ProspectPage;
@@ -35,55 +36,102 @@ public class ProspectTest extends base {
 	
     //Add Prospect
 	@Test(dataProvider="getAdddata")
-	public void Add_Prospect(String siteproject,String visitorname,String visitordate,
-			String NextfollowUpDT,String referencedBy,String Attende,String ContactNo,
-			String Email,String Address,String Remarks,String Requirement,String Status,String unitD
-			,String Selectflat) throws InterruptedException {
-		ProspectPage Prospect = new ProspectPage(driver);
-		Prospect.getprospect().click();
-		Prospect.getAddprospect().click();
-		Prospect.getsiteproject(siteproject);
-		Prospect.getvisitorname().sendKeys(visitorname);
-		Prospect.getvisitordate().sendKeys(visitordate);
-		Prospect.getIntime().click();//click on InTime
-		Prospect.getOk().click();//click on Ok time
-		Prospect.getouttime().click();//Click on OutTime
-		Prospect.getOk().click();//Click on Ok time
-		Prospect.getNextfollowUpDT().sendKeys(NextfollowUpDT);
-		Prospect.getreferencedBy().sendKeys(referencedBy);
-		Prospect.getAttendee(Attende);
-		Prospect.getContactNo().sendKeys(ContactNo);
-		Prospect.getEmail().sendKeys(Email);
-		Prospect.getAddress().sendKeys(Address);
-		Prospect.getRemarks().sendKeys(Remarks);
-		Prospect.getrequirement().sendKeys(Requirement);
-		Prospect.getstatus(Status);
-		Prospect.getunitdropdown(unitD);
-		Prospect.getSelectFlat(Selectflat);
-		Thread.sleep(2000);
-		Prospect.getsave().click();
+	public void Add_Prospect(String siteproject, String visitorname, String visitordate,
+	                         String NextfollowUpDT, String referencedBy, String Attende, String ContactNo,
+	                         String Email, String Address, String Remarks, String Requirement, String Status, String unitD,
+	                         String Selectflat) throws InterruptedException {
+	    ProspectPage Prospect = new ProspectPage(driver);
+	    
+	    Prospect.getprospect().click();
+	    Prospect.getAddprospect().click();
+	    
+	    // Fill in required fields
+	    Prospect.getsiteproject(siteproject); // Required Field
+	    Prospect.getvisitorname().sendKeys(visitorname); // Required Field
+	    Prospect.getvisitordate().sendKeys(visitordate);
+	    Prospect.getIntime().click(); // Click on InTime
+	    Prospect.getOk().click(); // Click on Ok for time selection
+	    Prospect.getouttime().click(); // Click on OutTime
+	    Prospect.getOk().click(); // Click on Ok for time selection
+	    Prospect.getNextfollowUpDT().sendKeys(NextfollowUpDT);
+	    Prospect.getreferencedBy().sendKeys(referencedBy);
+	    Prospect.getAttendee(Attende); // Required Field
+	    Prospect.getContactNo().sendKeys(ContactNo); // Required Field
+	    Prospect.getEmail().sendKeys(Email);
+	    Prospect.getAddress().sendKeys(Address);
+	    Prospect.getRemarks().sendKeys(Remarks);
+	    Prospect.getrequirement().sendKeys(Requirement);
+	    Prospect.getstatus(Status);
+	    Prospect.getunitdropdown(unitD); // Required Field
+	    Prospect.getSelectFlat(Selectflat); // Required Field
+	    
+	    // Add assertions for required fields to ensure they are not empty or invalid
+	    SoftAssert softAssert = new SoftAssert();
+
+	    // Assert the required fields are filled correctly
+	    softAssert.assertFalse(siteproject.isEmpty(), "Site Project is required.");
+	    softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
+	    softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
+	    softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.");
+	    softAssert.assertFalse(unitD.isEmpty(), "Unit Dropdown selection is required.");
+	    softAssert.assertFalse(Selectflat.isEmpty(), "Flat selection is required.");
+	    
+	    // Optionally, assert for valid inputs (e.g., phone number format, email format)
+	    softAssert.assertTrue(ContactNo.matches("\\d{10}"), "Contact Number must be 10 digits.");
+	    
+	    // Use regex for email validation if Email is a required field
+	    if (!Email.isEmpty()) {
+	        softAssert.assertTrue(Email.matches("^[A-Za-z0-9+_.-]+@(.+)$"), "Email format is invalid.");
+	    }
+        Thread.sleep(2000);
+	    Prospect.getsave().click();
+	    
+	    // Collect all soft assertions
+	    softAssert.assertAll();
 	}
 
 	//Editing an Existing Prospect using Data Provider
 	@Test(dataProvider = "getEditData")
 	public void Edit_Prospect(String newContactNo, String newEmail, String newAddress,
-			String newRemarks, String newRequirement, String newStatus) throws InterruptedException {
-		ProspectPage Prospect = new ProspectPage(driver);
-		Prospect.getprospect().click();
-		Prospect.getEdit();
-		Prospect.getContactNo().clear();
-		Prospect.getContactNo().sendKeys(newContactNo);
-		Prospect.getEmail().clear();
-		Prospect.getEmail().sendKeys(newEmail);
-		Prospect.getAddress().clear();
-		Prospect.getAddress().sendKeys(newAddress);
-		Prospect.getRemarks().clear();
-		Prospect.getRemarks().sendKeys(newRemarks);
-		Prospect.getrequirement().clear();
-		Prospect.getrequirement().sendKeys(newRequirement);
-		Prospect.getstatus(newStatus);
-		Thread.sleep(2000);
+	                          String newRemarks, String newRequirement, String newStatus) throws InterruptedException {
+
+	    ProspectPage Prospect = new ProspectPage(driver);
+	    SoftAssert softAssert = new SoftAssert();
+	    
+	    // Navigate to the prospect and click on the Edit option
+	    Prospect.getprospect().click();
+	    Prospect.getEdit();
+
+	    // Edit and assert Contact Number
+	    Prospect.getContactNo().clear();
+	    Prospect.getContactNo().sendKeys(newContactNo);
+	    softAssert.assertEquals(Prospect.getContactNo().getAttribute("value"), newContactNo, "Contact Number was not updated correctly.");
+	    
+	    // Edit and assert Email
+	    Prospect.getEmail().clear();
+	    Prospect.getEmail().sendKeys(newEmail);
+	    softAssert.assertEquals(Prospect.getEmail().getAttribute("value"), newEmail, "Email was not updated correctly.");
+	    
+	    // Edit and assert Address
+	    Prospect.getAddress().clear();
+	    Prospect.getAddress().sendKeys(newAddress);
+	    softAssert.assertEquals(Prospect.getAddress().getAttribute("value"), newAddress, "Address was not updated correctly.");
+	    
+	    // Edit and assert Remarks
+	    Prospect.getRemarks().clear();
+	    Prospect.getRemarks().sendKeys(newRemarks);
+	    softAssert.assertEquals(Prospect.getRemarks().getAttribute("value"), newRemarks, "Remarks were not updated correctly.");
+	    
+	    // Edit and assert Requirement
+	    Prospect.getrequirement().clear();
+	    Prospect.getrequirement().sendKeys(newRequirement);
+	    softAssert.assertEquals(Prospect.getrequirement().getAttribute("value"), newRequirement, "Requirement was not updated correctly.");
+	   
+	    Prospect.getstatus(newStatus);
+		
+	    Thread.sleep(2000);
 		Prospect.getsave().click();
+		softAssert.assertAll();
 	}
 	
 	//Delete Prospect
@@ -183,27 +231,30 @@ public class ProspectTest extends base {
 	@AfterMethod 
 	public void teardown() { 
 		driver.close();
-		}
+	}
 	 
 	//DataProvider for Add Prospect
 	@DataProvider
 	public Object[][] getAdddata() {
 		return new Object[][] {
-			{"SHALIGRAM PRIDE","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}};
+			{"SHALIGRAM PRIDE","Mahesh Patel","","","Vimal Patel","Chandni Chauhan","9856214565","Akash@mail.com","Bopal Gam ,Ahmedabad",
+				"Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}};
 	}
+	
 	//DataProvider for Edit Prospect
 	@DataProvider
 	public Object[][] getEditData() {
 		return new Object[][] {
-			{"9876543210", "akash.new@mail.com", "New Address, Ahmedabad", "Updated Remarks", "5BHK", "Completed" }};
+			{"9876543210","akash.new@mail.com","New Address, Ahmedabad","Updated Remarks","5BHK","Completed" }};
 	}
+	
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
 	public Object[][] getprojectfilterData() {
 		return new Object[][] {
 			{"marin drive lake view"}};
 	}
+	
 	//DataProvider for Search data
 	@DataProvider
 	public Object[][] getSearchData() {

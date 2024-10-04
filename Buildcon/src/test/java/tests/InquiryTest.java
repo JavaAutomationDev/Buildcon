@@ -1,11 +1,8 @@
 package tests;
 
-import static org.testng.Assert.assertEquals;
-
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -38,46 +35,75 @@ public class InquiryTest extends base {
 		log.info("Login successful");
 	}
 
-	//Add Inquiry
 	@Test(dataProvider = "getAdddata")
 	public void Add_Inquiry(String siteproject, String visitorname, String NextfollowUpDT, String referencedBy,
 			String Attende, String ContactNo, String Email, String Address, String Remarks, String Requirement,
 			String Status) throws InterruptedException {
-		//SoftAssert softAssert = new SoftAssert();
-		//oftAssert.assertTrue("11".equals("11"), "The condition should be false but it is true.");
-		
+
+		//Initialize SoftAssert
+		SoftAssert softAssert = new SoftAssert();
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
+		Inquiry.getsave().click();
+		Thread.sleep(2000);
+		//Fill out required fields and assert if they are filled correctly
 		Inquiry.getsiteproject(siteproject);
+		softAssert.assertFalse(siteproject.isEmpty(), "Site Project is required.");
+
 		Inquiry.getvisitorname().sendKeys(visitorname);
-		Inquiry.getIntime().click();// click on InTime
-		Inquiry.getOk().click();// click on Ok time
-		Inquiry.getouttime().click();// Click on OutTime
-		Inquiry.getOk().click();// Click on Ok time
+		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
+
+		Inquiry.getIntime().click(); //click on InTime Required fields
+		softAssert.assertFalse((false),"InTime is required");
+		Inquiry.getOk().click(); //Click on Ok time
+		
+		Inquiry.getouttime().click(); //Click on OutTime Required fields
+		Inquiry.getOk().click(); // Click on Ok time
+
 		Inquiry.getNextfollowUpDT().sendKeys(NextfollowUpDT);
 		Inquiry.getreferencedBy().sendKeys(referencedBy);
+
 		Inquiry.getAttendee(Attende);
+		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
+
 		Inquiry.getContactNo().sendKeys(ContactNo);
+		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.");
+
 		Inquiry.getEmail().sendKeys(Email);
 		Inquiry.getAddress().sendKeys(Address);
 		Inquiry.getRemarks().sendKeys(Remarks);
 		Inquiry.getrequirement().sendKeys(Requirement);
 		Inquiry.getstatus(Status);
-		//Inquiry.getIsProspect().click();
+
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
+
+		// Assert all soft assertions at the end
+		softAssert.assertAll();
 	}
 
 	//Editing an existing Inquiry using Data Provider
 	@Test(dataProvider = "getEditData")
-	public void Edit_Inquiry(String newContactNo, String newEmail, String newAddress, String newRemarks,
+	public void Edit_Inquiry(String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
 			String newRequirement, String newStatus) throws InterruptedException {
+		
+		SoftAssert softAssert = new SoftAssert();
+		
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getEdit();
+		
+		Thread.sleep(2000);
+		Inquiry.getvisitorname().clear();
+		Inquiry.getvisitorname().sendKeys(newvisitorname);
+		softAssert.assertFalse(newvisitorname.isEmpty(), "Visitor Name is required.");
+		
 		Inquiry.getContactNo().clear();
 		Inquiry.getContactNo().sendKeys(newContactNo);
+		softAssert.assertFalse(newContactNo.isEmpty(), "Contact Number is required.");
+		
 		Inquiry.getEmail().clear();
 		Inquiry.getEmail().sendKeys(newEmail);
 		Inquiry.getAddress().clear();
@@ -87,19 +113,21 @@ public class InquiryTest extends base {
 		Inquiry.getrequirement().clear();
 		Inquiry.getrequirement().sendKeys(newRequirement);
 		Inquiry.getstatus(newStatus);
+		
 		Thread.sleep(2000);
-		Inquiry.getsave().click();
+		Inquiry.getUpdate().click();
 	}
 
 	//Delete Inquiry
-	@Test()
-	public void Delete_Inquiry() throws InterruptedException {
+	@Test(dataProvider="deleteInquiryData")
+	public void Delete_Inquiry(int iteration) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getDelete();
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
 	}
+
 
 	//Export to Excel Inquiry
 	@Test()
@@ -197,60 +225,51 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
 	}
-	@Test
-	public void Testting()
-	{
-		InquiryPage Inquiry = new InquiryPage(driver);
-		Inquiry.getInquiry().click();
-		Inquiry.getaddInquiry().click();
-		Inquiry.getsave().click();
-		WebElement a = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[1]/mat-form-field/div[2]/div/mat-error/span"));
-		Assert.assertTrue(a.getText().equals("Vasdsadsadsadisit Site/Project is required."),"If both are not equal");
-		
-		WebElement b= driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[2]/mat-form-field/div[2]/div"));
-		Assert.assertTrue(b.getText().equals("Visitor Name is required."),"If both are not equal");
-			
-	}
+
 
 	//Close the driver
 	@AfterMethod 
 	public void teardown() {
-		//driver.close(); 
+		driver.close(); 
 	}
 
 	//DataProvider for Add Inquiry
 	@DataProvider
 	public Object[][] getAdddata() {
 		return new Object[][] { 
-			{ "Taj Mahal", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal ", "9746547979",
-			"Akash@mail.com", "Bopal Gam, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			{ "Taj Mahal", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal ", "9746547979",
-				"Akash@mail.com", "Bopal Gam, Ahmedabad", "Remarks", "4BHK", "In Progress" }
+			{ "Taj Mahal","Akash Patel","","Vimal Patel"," Nilesh Panchal ","9746547979","Akash@mail.com","Bopal Gam, Ahmedabad",
+				"Remarks","4BHK","In Progress" }
 		};
 	}
 
 	//DataProvider for Edit Inquiry
 	@DataProvider
 	public Object[][] getEditData() {
-		return new Object[][] { { "9876543210", "akash.new@mail.com", "Thaltej Square, Ahmedabad", "Updated Remarks",
-			"5BHK", "Completed" } };
+		return new Object[][] { {"Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed" } };
+	}
+	
+	//DataProvider Delete Inquiry
+	@DataProvider
+	public Object[][] deleteInquiryData() {
+		return new Object[][] 
+				{ { 1 }, { 2 }, { 3 }, { 4 } };// Just a placeholder for multiple runs	
 	}
 
 	//DataProvider for Apply Filter for Project
 	@DataProvider
 	public Object[][] getprojectfilterData() {
-		return new Object[][] { { "SHALIGRAM PRIDE" } };
+		return new Object[][] { {"SHALIGRAM PRIDE"} };
 	}
 
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] getSearchData() {
-		return new Object[][] { { "Rakesh Patel" } };
+		return new Object[][] { {"Rakesh Patel"} };
 	}
 
-	// DataProvider for Add Prospect Data
+	//DataProvider for Add Prospect Data
 	@DataProvider
 	public Object[][] getaddprospectData() {
-		return new Object[][] { { " A ", " Unit No - 102 (1 Floor) " } };
+		return new Object[][] { {" A "," Unit No - 102 (1 Floor) "} };
 	}
 }

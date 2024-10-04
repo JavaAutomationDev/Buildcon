@@ -36,13 +36,16 @@ public class ReceiptTest extends base {
 	public void Add_Project(String Project,String CustomerName,String FlatShop,String BankName,String Bankbranch,
 			String PaymentType,String IMPSNO,String RegularAmount,String ChallanNumber,String ReceivedTDSAmount,
 			String TDSTYpe,String GSTbankName,String GSTBankBranch,String ChequeNo,String ChequeFiles) throws InterruptedException {
+		
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		receipt.getAddReceipt().click();
+		
 		receipt.getProject(Project);
 		receipt.getCustormer(CustomerName);
 		receipt.getFlatShop(FlatShop);
 		receipt.getNextBtn().click();
+		
 		Thread.sleep(2000);
 		receipt.getBankName(BankName);
 		receipt.getBankBranch().sendKeys(Bankbranch);
@@ -52,29 +55,59 @@ public class ReceiptTest extends base {
 		receipt.getRegularAmount().sendKeys(RegularAmount);
 		receipt.getRegularBankCancelled().click();
 		receipt.getGSTNO().click();
+		Thread.sleep(2000);
 		receipt.getNextBtn1().click();
+		
+		
 		receipt.getTDSChallanNumber().sendKeys(ChallanNumber);
 		//receipt.challandate();
 		receipt.getReceivedTDSAmount().sendKeys(ReceivedTDSAmount);
 		//Thread.sleep(2000);
 		receipt.getTDSType(TDSTYpe);
-		receipt.getNextBtn3().click();
-		Thread.sleep(2000);
+        Thread.sleep(2000);	
+		receipt.getNextBtn2().click();
+		
 		receipt.getGSTBankName(GSTbankName);
 		receipt.getGSTBankBranch().sendKeys(GSTBankBranch);
 		receipt.getChequeNo().sendKeys(ChequeNo);
 		//receipt.chequetransdate();
-		receipt.getNextBtn4().click();
+		
+		Thread.sleep(2000);
+		receipt.getNextBtn3().click();
 		receipt.getChequeFiles().sendKeys(ChequeFiles);
+
+		Thread.sleep(2000);
 		receipt.getSavebtn().click();
 	}
 
 	//Editing an existing Receipt using Data Provider
-	@Test
-	public void Edit_Receipt() throws InterruptedException {
+	@Test(dataProvider="getEditData")
+	public void Edit_Receipt(String newBankbranch,String newIMPSNO,String newChallanNumber,String newGSTBankBranch) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
+		
+		Thread.sleep(2000);
 		receipt.getEdit();
+		receipt.getEditNext().click();
+		
+		receipt.getBankBranch().clear();
+		receipt.getBankBranch().sendKeys(newBankbranch);
+		
+		receipt.getIMPSNO().clear();
+		receipt.getIMPSNO().sendKeys(newIMPSNO);
+		receipt.getNextBtn1().click();
+		
+		receipt.getTDSChallanNumber().clear();
+		receipt.getTDSChallanNumber().sendKeys(newChallanNumber);
+		
+		receipt.getNextBtn2().click();
+		receipt.getGSTBankBranch().clear();
+		receipt.getGSTBankBranch().sendKeys(newGSTBankBranch);
+		
+		receipt.getNextBtn3().click();
+		
+		Thread.sleep(2000);
+		receipt.getUpdateBtn().click();
 	}
 	
 	//Download Receipt
@@ -82,7 +115,8 @@ public class ReceiptTest extends base {
 	public void Download_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
-		Thread.sleep(5000);
+		
+		Thread.sleep(3000);
 		receipt.getDownload().click();
 	}
 	
@@ -91,6 +125,8 @@ public class ReceiptTest extends base {
 	public void Search_Receipt(String Project) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
+		
+		Thread.sleep(2000);
 		receipt.getSearch().sendKeys(Project + Keys.ENTER);;
 	}
 
@@ -99,23 +135,73 @@ public class ReceiptTest extends base {
 	public void Export_to_Excel_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
+		
+		Thread.sleep(2000);
 		receipt.getExporttoExcel().click();
 	}
 
-	//Apply Filter Receipt
+	//Print Receipt
 	@Test()
-	public void Apply_Filter_Receipt() throws InterruptedException {
+	public void Print_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
-		receipt.getapplyfilter().click();
+		
+		Thread.sleep(2000);
+        receipt.getPrintReceipt().click();		
 	}
-
+	
+	//Approve Cancel Receipt
+	@Test(dataProvider="getapproveData")
+	public void ApproveCancel_Receipt(String approve) throws InterruptedException{
+		ReceiptPage receipt = new ReceiptPage(driver);
+		receipt.getReceipt().click();
+		
+		Thread.sleep(2000);
+		receipt.getApproveCancel().click();
+        receipt.getReason().sendKeys(approve);
+	}
+	
+	//View Receipt
+	@Test()
+	public void View_Receipt() throws InterruptedException {
+		ReceiptPage receipt = new ReceiptPage(driver);
+		receipt.getReceipt().click();
+		
+		Thread.sleep(2000);
+        receipt.getViewReceipt();
+    }
+	
+	//Apply Filter Receipt With Date Range
+	@Test()
+	public void Apply_Filter_Date_Range() throws InterruptedException {
+		ReceiptPage receipt = new ReceiptPage(driver);
+		receipt.getReceipt().click();
+		
+		Thread.sleep(2000);
+		receipt.getapplyfilter().click();
+		receipt.getDateRange().click();
+		receipt.getStartDate().click();
+		receipt.getEndDate().click();
+	}
+	//Apply Filter Receipt With Project Dropdown
+		@Test(dataProvider="getprojectdropdown")
+		public void Apply_Filter_Project_Dropdown(String Project) throws InterruptedException {
+			ReceiptPage receipt = new ReceiptPage(driver);
+			receipt.getReceipt().click();
+			
+			Thread.sleep(2000);
+			receipt.getapplyfilter().click();
+			receipt.getProjectDropdown(Project);
+	}
+	
 	//Apply Filter Receipt Cancelled
 	@Test()
 	public void Apply_Filter_Cancelled_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		receipt.getapplyfilter().click();
+		
+		Thread.sleep(2000);
 		receipt.getCancelled().click();
 	}
 	
@@ -125,7 +211,9 @@ public class ReceiptTest extends base {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		receipt.getapplyfilter().click();
-		receipt.getAll().click();
+		
+		Thread.sleep(2000);
+		receipt.getApplyFilterAll().click();
 	}
 	
 	//Apply Filter Receipt Reset
@@ -134,13 +222,15 @@ public class ReceiptTest extends base {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		receipt.getapplyfilter().click();
+		
+		Thread.sleep(2000);
 		receipt.getReset().click();
 	}
 	
 	//Close the driver
 	@AfterMethod
 	public void teardown() {
-		driver.close();
+		//driver.close();
 	}	
 
 	//Add Receipt Data
@@ -155,7 +245,7 @@ public class ReceiptTest extends base {
 	@DataProvider
 	public Object[][] getEditData() {
 		return new Object[][] { 
-			{ } };
+			{"Ahmedabad","796498723548","97464970021","Thaltej"}};
 	}
 
 	//DataProvider for Search Data
@@ -164,6 +254,19 @@ public class ReceiptTest extends base {
 		return new Object[][] {
 			{" Parisar homes "}};
 	}
-
+	
+	//DataProvider for Project Dropdown 
+		@DataProvider
+	public Object[][] getprojectdropdown() {
+		return new Object[][] {
+			{" Parisar homes "}};
+	}
+	
+	//DataProvider for Approve cancel 
+	@DataProvider
+	public Object[][] getapproveData() {
+			return new Object[][] {
+				{"Approve"}};
+	}
 
 }

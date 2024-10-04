@@ -152,7 +152,12 @@ public class InquiryPage {
 	public WebElement getsave() {
 		return driver.findElement(Save);
 	}
-
+	//Page object for Update Button
+	By update = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-add-inquiry/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/form/div[2]/button[2]");
+			public WebElement getUpdate() {
+				return driver.findElement(update);
+			}
 	//Page object for Edit button
 	public WebElement getEdit() {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
