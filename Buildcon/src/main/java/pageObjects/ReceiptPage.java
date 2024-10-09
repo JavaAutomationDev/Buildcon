@@ -9,9 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class ReceiptPage {
 	public WebDriver driver;
+	SoftAssert softAssert = new SoftAssert();
 
 	public ReceiptPage(WebDriver driver) {
 		this.driver = driver;
@@ -35,10 +38,24 @@ public class ReceiptPage {
 	public void getProject(String Project) {
 		WebElement dropdown = driver.findElement(project);
 		dropdown.click();
+		if(Project.trim()=="")
+		{
+			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+			for(int i=0;i<a.size();i++)
+			{
+				String b =a.get(i).getText(); 
+				if(!b.equalsIgnoreCase(Project))
+				{
+					Assert.assertTrue(false, "Project name is required");
+					
+				}
+			}
+		}
 		String optionXPath = "//mat-option//span[contains(text(),'" + Project + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
+	
 	//Page object for Customer
 	By customer= By.xpath("//mat-select[@formcontrolname='memberID']");
 	public void getCustormer(String CustomerName) {

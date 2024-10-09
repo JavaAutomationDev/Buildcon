@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pageObjects.LoginPage;
 import pageObjects.ProjectPage;
@@ -41,25 +42,51 @@ public class ProjectTest extends base {
 			String totalSaleableArea,String city,String State,String Spno,String SalesExectuive,
 			String Description,String Address,String East,String west,String South,String north,String Plotno,
 			String Schemeno,String Rera,String totalLandArea,String MaintenanceCharge,String MaintenanceDeposit,
-			String companyname,String gstin,String plcofsupplu,String RecAddress,String pincode,String projectlogo,String receiptlogo,String RecPrefix,String FinancialYear,
-			String Propertytype,String Saccode,String termstext,String Unit,String Floors,String Basements) throws InterruptedException {
+			String companyname,String gstin,String plcofsupplu,String RecAddress,String pincode,String projectlogo,
+			String receiptlogo,String RecPrefix,String RecPostFix,String Propertytype,String Saccode,
+			String termstext,String Unit,String Floors,String Basements) throws InterruptedException {
 		
 		ProjectPage project = new ProjectPage(driver);
+		SoftAssert softAssert = new SoftAssert();
+		
 		project.getproject().click();
 		project.getaddproject().click();
 		
-		project.getProjectName().sendKeys(projectname);
-		project.getProjecttype(projecttype);
+		project.getProjectName().click();
+		softAssert.assertFalse(projectname.isEmpty(), "Project name is required.");
+		softAssert.assertNotNull(projectname, "Project name cannot be null.");
+		project.getProjectName().sendKeys(projectname);//Required Field
+		
+		
+		softAssert.assertFalse(projecttype.isEmpty(), "Project Type is required.");
+		softAssert.assertNotNull(projecttype, "Project Type cannot be null.");
+		project.getProjecttype(projecttype);//Required Field
+		
 		project.getProjectstatus(Projectstatus);
-		project.getExstartdate().sendKeys(Expectedstartdate);
-		project.getExEnddate().sendKeys(ExpectedEnddate);
-		project.getActualstartdate().sendKeys(ActualStartdate);
+		
+		softAssert.assertFalse(Expectedstartdate.isEmpty(), "Expected start date is required.");
+		softAssert.assertNotNull(Expectedstartdate, "Expected start date cannot be null.");
+		project.getExstartdate().sendKeys(Expectedstartdate);//Required Field
+		
+
+		softAssert.assertFalse(ExpectedEnddate.isEmpty(), "Expected End date is required.");
+		softAssert.assertNotNull(ExpectedEnddate, "Expected End date cannot be null.");
+		project.getExEnddate().sendKeys(ExpectedEnddate);//Required Field
+		
+		softAssert.assertFalse(ActualStartdate.isEmpty(), "Actual date is required.");
+		softAssert.assertNotNull(ActualStartdate, "Actual date cannot be null.");
+		project.getActualstartdate().sendKeys(ActualStartdate);//Required Field
+		
 		project.getActualenddate().sendKeys(ActualEnddate);
 		project.getTotalsaleableArea().sendKeys(totalSaleableArea);
 		project.getcity().sendKeys(city);
 		project.getstate(State);
 		project.getspNo().sendKeys(Spno);
-		project.getSalesExectuive(SalesExectuive);
+		
+		softAssert.assertFalse(SalesExectuive.isEmpty(), "Sales Exectuive is required.");
+		softAssert.assertNotNull(SalesExectuive, "Sales Exectuive cannot be null.");
+		project.getSalesExectuive(SalesExectuive);//Required Field
+		
 		project.getdescription().sendKeys(Description);
 		project.getAddress().sendKeys(Address);
 
@@ -78,21 +105,48 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getNextbtn1().click();
-		project.getCompanyName().sendKeys(companyname);
-		project.GSTIN().sendKeys(gstin);
-		project.PlaceofSupply().sendKeys(plcofsupplu);
-		project.getRecAddress().sendKeys(RecAddress);
-		project.getPincode().sendKeys(pincode);
-		project.uploadProjectLogoFile().sendKeys(projectlogo);
+		
+		softAssert.assertFalse(companyname.isEmpty(), "Company Name is required.");
+		softAssert.assertNotNull(companyname, "Company Name cannot be null.");
+		project.getCompanyName().sendKeys(companyname);//Required Field
+		
+		softAssert.assertFalse(gstin.isEmpty(), "GST number is required.");
+		softAssert.assertNotNull(gstin, "GST number cannot be null.");
+		project.GSTIN().sendKeys(gstin);//Required Field
+		
+		softAssert.assertFalse(plcofsupplu.isEmpty(), "Place of supply is required.");
+		softAssert.assertNotNull(plcofsupplu, "Place of supply cannot be null.");
+		project.PlaceofSupply().sendKeys(plcofsupplu);//Required Field
+		
+		softAssert.assertFalse(RecAddress.isEmpty(), "Receipt Address is required.");
+		softAssert.assertNotNull(RecAddress, " Receipt Address cannot be null.");
+		project.getRecAddress().sendKeys(RecAddress);//Required Field
+		
+		softAssert.assertFalse(pincode.isEmpty(), "Pincode is required.");
+		softAssert.assertNotNull(pincode, "Pincode cannot be null.");
+		project.getPincode().sendKeys(pincode);//Required Field
+		
+		softAssert.assertFalse(projectlogo.isEmpty(), "Project’s Logo is required.");
+		softAssert.assertNotNull(projectlogo, "Project’s Logo cannot be null.");
+		project.uploadProjectLogoFile().sendKeys(projectlogo);//Required Field
+		
 		project.uploadReceiptSeal().sendKeys(receiptlogo);
-		project.getRecPrefix().sendKeys(RecPrefix);
-		project.getFinancialYear(FinancialYear);
+		
+		softAssert.assertFalse(RecPrefix.isEmpty(), "Receipt prefix is required.");
+		softAssert.assertNotNull(RecPrefix, "Receipt prefix cannot be null.");
+		project.getRecPrefix().sendKeys(RecPrefix);//Required Field
+		
+		softAssert.assertFalse(RecPostFix.isEmpty(), "Receipt postfix is required.");
+		softAssert.assertNotNull(RecPostFix, "Receipt postfix cannot be null.");
+		project.getRecPostfix(RecPostFix);//Required Field
 
 		Thread.sleep(2000);
 		project.getNextbtn2().click();
 		project.getPropertyType(Propertytype);
+		
 		project.getSACcode(Saccode);
 		project.getActionbtn().click();
+		
 		project.getNextbtn3().click();
 		project.getTermstext().sendKeys(termstext);
 		project.getPlusbtn().click();
@@ -106,25 +160,41 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getCreate().click();
+		
+		softAssert.assertAll();
 	}
 
 	//Edit Existing Project
 	@Test(dataProvider="getEditData")
-	public void Edit_Project(String newtotalSaleableArea,String newtotalLandArea) throws InterruptedException {
+	public void Edit_Project(String newprojectname,String newtotalSaleableArea,String newtotalLandArea) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
+		SoftAssert softAssert = new SoftAssert();
+		
 		project.getproject().click();
 		project.getEdit();
+		
+		project.getProjectName().clear();		
+		project.getProjectName().click();
+		softAssert.assertFalse(newprojectname.isEmpty(), "Project name is required.");
+		softAssert.assertNotNull(newprojectname, "Project name cannot be null.");
+		project.getProjectName().sendKeys(newprojectname);//Required Field
+		
+		
 		project.getTotalsaleableArea().clear();
 		project.getTotalsaleableArea().sendKeys(newtotalSaleableArea);
-		project.getNextbtn().click();
+		
+		project.getEditNext().click();
+		
 		project.gettotalLandArea().clear();
 		project.gettotalLandArea().sendKeys(newtotalLandArea);
+		
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
 		project.getNextbtn3().click();
 		
 		Thread.sleep(2000);
 		project.getSave().click();
+		softAssert.assertAll();
 	}
 
 	//Delete Project
@@ -182,7 +252,7 @@ public class ProjectTest extends base {
 	@DataProvider
 	public Object[][] getAddData() {
 		return new Object[][] {
-			{"Automation Project1","Commercial","Planning","","","","","10000","Goa","Goa","215"," Abhimanyu Sigh ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			{"Automation Project1","Commercial","Planning","","","","","10000","Goa","Goa","215"," Akash Patel ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year "," FLAT "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline the rights and responsibilities of both parties",
 				"B","15","Basement"}};
@@ -192,7 +262,7 @@ public class ProjectTest extends base {
 	@DataProvider
 	public Object[][] getEditData() {
 		return new Object[][] {
-			{"20000","1000"}};
+			{"Automation Project","20000","1000"}};
 	}
 
 	//Search Data

@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pageObjects.LoginPage;
 import pageObjects.ReceiptPage;
@@ -38,23 +39,51 @@ public class ReceiptTest extends base {
 			String TDSTYpe,String GSTbankName,String GSTBankBranch,String ChequeNo,String ChequeFiles) throws InterruptedException {
 		
 		ReceiptPage receipt = new ReceiptPage(driver);
+		SoftAssert softAssert = new SoftAssert();
+		
 		receipt.getReceipt().click();
 		receipt.getAddReceipt().click();
 		
-		receipt.getProject(Project);
-		receipt.getCustormer(CustomerName);
-		receipt.getFlatShop(FlatShop);
+		softAssert.assertFalse(Project.isEmpty(), "Project name is required.");
+		softAssert.assertNotNull(Project, "Project name cannot be null.");
+		receipt.getProject(Project);//Required Field
+		
+		
+		
+		softAssert.assertFalse(CustomerName.isEmpty(), "Customer name is required.");
+		softAssert.assertNotNull(CustomerName, "Customer name cannot be null.");
+		receipt.getCustormer(CustomerName);//Required Field
+		
+		softAssert.assertFalse(FlatShop.isEmpty(), "FlatShop is required.");
+		softAssert.assertNotNull(FlatShop, "FlatShop cannot be null.");
+		receipt.getFlatShop(FlatShop);//Required Field
+		
 		receipt.getNextBtn().click();
 		
 		Thread.sleep(2000);
-		receipt.getBankName(BankName);
-		receipt.getBankBranch().sendKeys(Bankbranch);
-		receipt.getPaymentType(PaymentType);
+		
+		softAssert.assertFalse(BankName.isEmpty(), "Regular Bank Name is required.");
+		softAssert.assertNotNull(BankName, "Regular Bank Name cannot be null.");
+		receipt.getBankName(BankName);//Required Field
+		
+		softAssert.assertFalse(Bankbranch.isEmpty(), "Regular Bank Branch is required.");
+		softAssert.assertNotNull(Bankbranch, "Regular Bank Branch cannot be null.");
+		receipt.getBankBranch().sendKeys(Bankbranch);//Required Field
+		
+		softAssert.assertFalse(PaymentType.isEmpty(), "Payment Type is required.");
+		softAssert.assertNotNull(PaymentType, "Payment Type cannot be null.");
+		receipt.getPaymentType(PaymentType);//Required Field
+		
 		receipt.getIMPSNO().sendKeys(IMPSNO);
 		//receipt.getRegularChequeTranDate().sendKeys(ChequeDate);
-		receipt.getRegularAmount().sendKeys(RegularAmount);
+		
+		softAssert.assertFalse(RegularAmount.isEmpty(), "Regular Amount is required.");
+		softAssert.assertNotNull(RegularAmount, "Regular Amount cannot be null.");
+		receipt.getRegularAmount().sendKeys(RegularAmount);//Required Field
+		
 		receipt.getRegularBankCancelled().click();
 		receipt.getGSTNO().click();
+		
 		Thread.sleep(2000);
 		receipt.getNextBtn1().click();
 		
@@ -78,12 +107,16 @@ public class ReceiptTest extends base {
 
 		Thread.sleep(2000);
 		receipt.getSavebtn().click();
+		
+		softAssert.assertAll();
 	}
 
 	//Editing an existing Receipt using Data Provider
 	@Test(dataProvider="getEditData")
-	public void Edit_Receipt(String newBankbranch,String newIMPSNO,String newChallanNumber,String newGSTBankBranch) throws InterruptedException {
+	public void Edit_Receipt(String newBankbranch,String newIMPSNO,String newRegularAmount,String newChallanNumber,String newGSTBankBranch) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
+		SoftAssert softAssert = new SoftAssert();
+		
 		receipt.getReceipt().click();
 		
 		Thread.sleep(2000);
@@ -91,11 +124,19 @@ public class ReceiptTest extends base {
 		receipt.getEditNext().click();
 		
 		receipt.getBankBranch().clear();
+		softAssert.assertFalse(newBankbranch.isEmpty(), "Regular Bank Branch is required.");
+		softAssert.assertNotNull(newBankbranch, "Regular Bank Branch cannot be null.");
 		receipt.getBankBranch().sendKeys(newBankbranch);
 		
 		receipt.getIMPSNO().clear();
+		
 		receipt.getIMPSNO().sendKeys(newIMPSNO);
 		receipt.getNextBtn1().click();
+		
+		receipt.getRegularAmount().clear();
+		softAssert.assertFalse(newRegularAmount.isEmpty(), "Regular Amount is required.");
+		softAssert.assertNotNull(newRegularAmount, "Regular Amount cannot be null.");
+		receipt.getRegularAmount().sendKeys(newRegularAmount);//Required Field
 		
 		receipt.getTDSChallanNumber().clear();
 		receipt.getTDSChallanNumber().sendKeys(newChallanNumber);
@@ -108,6 +149,7 @@ public class ReceiptTest extends base {
 		
 		Thread.sleep(2000);
 		receipt.getUpdateBtn().click();
+		softAssert.assertAll();
 	}
 	
 	//Download Receipt
@@ -237,7 +279,7 @@ public class ReceiptTest extends base {
 	@DataProvider
 	public Object[][] getAddData() {
 		return new Object[][] {
-			{" Parisar homes "," Nikanth Tandel "," 3BHK-402 (4th Floor) ","Axis Bank","Bopal"," IMPS ","7890548","10000","78565545",
+			{"       "," Nikanth Tandel "," 3BHK-402 (4th Floor) ","Axis Bank","Bopal"," IMPS ","7890548","10000","78565545",
 				"457"," 0% "," Bank Of India ","Bopal","54682485","D:\\Fileupload\\BB1qVDNW.jpg"}};
 	}
 

@@ -128,7 +128,6 @@ public class InquiryTest extends base {
 		Inquiry.getClickYes().click();
 	}
 
-
 	//Export to Excel Inquiry
 	@Test()
 	public void Export_to_Excel_Inquiry() throws InterruptedException {
@@ -239,9 +238,8 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] getAdddata() {
 		return new Object[][] { 
-			{ "Taj Mahal","Akash Patel","","Vimal Patel"," Nilesh Panchal ","9632587401","Akash@mail.com","Bopal Gam, Ahmedabad",
-				"Remarks","4BHK","In Progress" }
-		};
+			{"Taj Mahal","Akash Patel","","Vimal Patel"," Nilesh Panchal ","9632587401","Akash@mail.com","Bopal Gam, Ahmedabad",
+				"Remarks","4BHK","In Progress" }};
 	}
 
 	//DataProvider for Edit Inquiry

@@ -138,8 +138,8 @@ public class ProjectPage {
 		return driver.findElement(Address);
 	}
 	//Page object for Next Button
-	By Nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
-			+ "/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[2]/button[2]");
+	By Nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[2]/button[2]");
 	public WebElement getNextbtn() {
 		return driver.findElement(Nextbtn);
 	}
@@ -287,12 +287,13 @@ public class ProjectPage {
 	public WebElement getRecPrefix() {
 		return driver.findElement(recPrefix);
 	}
-	//Page object for Financial Year
-	By financialyear=By.xpath("//mat-select[@formcontrolname='recPostfix']");
-	public void getFinancialYear(String FinancialYear) {
-		WebElement dropdown = driver.findElement(financialyear);
+	
+	//Page object for Receipt Postfix
+	By recpostfix=By.xpath("//mat-select[@formcontrolname='recPostfix']");
+	public void getRecPostfix(String recPostfix) {
+		WebElement dropdown = driver.findElement(recpostfix);
 		dropdown.click();
-		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + FinancialYear + "')]";  
+		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + recPostfix + "')]";  
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
@@ -383,6 +384,13 @@ public class ProjectPage {
 		return driver.findElement(create);
 	}
 	
+	//Page object for Toster Message
+	//This project name is already in use. Please choose a different name.
+	By toaster=By.xpath("");	
+	public WebElement getToaster() {
+		return driver.findElement(toaster);
+	}
+	
 	//Page object for Edit Button
 	public WebElement getEdit() {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
@@ -422,4 +430,12 @@ public class ProjectPage {
 	public WebElement getExporttoExcel() {
 		return driver.findElement(ExporttoExcel);
 	}
+	
+	//On edit Next Butoon Xpath object
+	By editnext = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[2]/button");
+	public WebElement getEditNext() {
+		return driver.findElement(editnext);
+	}
+	
 }

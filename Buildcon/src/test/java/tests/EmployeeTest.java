@@ -35,7 +35,7 @@ public class EmployeeTest extends base {
 	}
 	
 	//Add Employee with All Modules - All Roles
-	@Test(dataProvider="getAddData")
+	@Test(dataProvider="EmployeeAddData")
 	public void Add_Employee_All_Roles(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
@@ -95,7 +95,6 @@ public class EmployeeTest extends base {
 		softAssert.assertNotNull(pancard, "PAN card cannot be null.");
 		employee.getPancard().sendKeys(pancard);//Required Field
 		
-		
 	    WebElement genderElement = employee.SelectGender();
 	    softAssert.assertTrue(genderElement.isEnabled(), "Gender selection is required but not enabled.");
 		genderElement.click();
@@ -122,7 +121,7 @@ public class EmployeeTest extends base {
 	}
 
 	//Add Employee with All Modules - Only View
-	@Test(dataProvider="getAddData")
+	@Test(dataProvider="EmployeeAddData")
 	public void Add_Employee_Only_View(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
@@ -202,7 +201,7 @@ public class EmployeeTest extends base {
 	}
 
 	//Add Employee with All Modules - Only Add
-	@Test(dataProvider="getAddData")
+	@Test(dataProvider="EmployeeAddData")
 	public void Add_Employee_Only_Add(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
@@ -276,7 +275,7 @@ public class EmployeeTest extends base {
 	}
 
 	//Add Employee with All Modules - Only Edit
-	@Test(dataProvider="getAddData")
+	@Test(dataProvider="EmployeeAddData")
 	public void Add_Employee_Only_Edit(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
@@ -342,7 +341,7 @@ public class EmployeeTest extends base {
 	}
 	
 	//Add Employee with All Modules - Only Delete
-	@Test(dataProvider="getAddData")
+	@Test(dataProvider="EmployeeAddData")
 	public void Add_Employee_Only_Delete(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
@@ -405,10 +404,14 @@ public class EmployeeTest extends base {
 	}
 
 	//Edit Employee and Active Employee
-	@Test(dataProvider="getEditData")
-	public void Edit_Employee(String Firstname,String Midllename,String designation,String mobileno) throws InterruptedException {
+	@Test(dataProvider="EmployeeEditData")
+	public void Edit_Employee(String Firstname,String Midllename,String designation,String newemail,String newmobileno) throws InterruptedException {
+		
 		EmployeePage employee = new EmployeePage(driver);
+		SoftAssert softAssert = new SoftAssert();
+		
 		employee.getEmployee().click();
+		
 		
 		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);//Required Field
 		
@@ -420,8 +423,17 @@ public class EmployeeTest extends base {
 		employee.getDesignation().clear();
 		employee.getDesignation().sendKeys(designation);//Required Field
 		
+		employee.getEmail().clear();
+		softAssert.assertFalse(newemail.isEmpty(), "Email is required.");
+		softAssert.assertNotNull(newemail, "Email cannot be null.");    
+		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+		softAssert.assertTrue(newemail.matches(emailRegex), "Invalid email format.");
+		employee.getEmail().sendKeys(newemail);//Required Field
+		
 		employee.getMobileno().clear();
-		employee.getMobileno().sendKeys(mobileno);//Required Field
+		softAssert.assertFalse(newmobileno.isEmpty(), "Mobile number is required.");
+		softAssert.assertNotNull(newmobileno, "Mobile number cannot be null.");
+		employee.getMobileno().sendKeys(newmobileno);//Required Field
 		
 		Thread.sleep(2000);
 		employee.getActiveEmployee().click();
@@ -448,7 +460,7 @@ public class EmployeeTest extends base {
 	}
 
 	//Search Employee
-	@Test(dataProvider="getSearchData")
+	@Test(dataProvider="EmployeeSearchData")
 	public void Search_Employee(String Firstname) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -485,24 +497,24 @@ public class EmployeeTest extends base {
 
 	//DataProvider for Add Employee
 	@DataProvider
-	public Object[][] getAddData() {
+	public Object[][] EmployeeAddData() {
 		return new Object[][] {
 			{"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","Automation","QA","Test","Automation","SDET","06/09/2006","akash20@mailinator.com",
-				"","Ahmedabad","","9865321254","Sit@321#","Ambli,Bopal gam"," marin drive lake view ",
+				"","Ahmedabad","Goa","9865321254","Sit@321#","Ambli,Bopal gam"," marin drive lake view ",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png"}};
 	}
 	
 	//DataProvider for Edit Employee
 	@DataProvider
-	public Object[][] getEditData() {
+	public Object[][] EmployeeEditData() {
 		return new Object[][] {
-			//Firstname,  Middlename, Designation, Mobile no
-			{"Automation", "QAT",       "SDET",    "9806547854"}};
+			//Firstname,  Middlename, Designation,    Email,                        Mobile no
+			{"Automation", "QAT",       "SDET",     "akash2024@mail.com",        "9806547854"}};
 	}
 	
 	//DataProvider for Search Employee
 	@DataProvider
-	public Object[][] getSearchData() {
+	public Object[][] EmployeeSearchData() {
 		return new Object[][] {
 			//Firstname
 			{"Abhimanyu"}};
