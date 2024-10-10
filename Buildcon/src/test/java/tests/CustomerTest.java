@@ -42,7 +42,7 @@ public class CustomerTest extends base {
 	}
 	
 	//Customer Search Method
-	@Test(dataProvider="getSearchData")
+	@Test(dataProvider="CustomerSearchData")
 	public void Search_Customer(String siteproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
@@ -61,7 +61,7 @@ public class CustomerTest extends base {
 	}
 	
 	//Apply Filter Method for Project & Reset
-	@Test(dataProvider="getprojectdropdownData")
+	@Test(dataProvider="CustomerprojectdropdownData")
 	public void Apply_Filter_Project_Customer(String selectproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
@@ -88,13 +88,14 @@ public class CustomerTest extends base {
 
 	//DataProvider for Search data
 	@DataProvider
-	public Object[][] getSearchData() {
+	public Object[][] CustomerSearchData() {
 		return new Object[][] {
 			{ "project test"}};
 	}
+	
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
-	public Object[][] getprojectdropdownData() {
+	public Object[][] CustomerprojectdropdownData() {
 		return new Object[][] {
 			{"marin drive lake view"}};
 	}

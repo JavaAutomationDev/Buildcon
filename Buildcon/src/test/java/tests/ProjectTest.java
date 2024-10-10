@@ -36,15 +36,13 @@ public class ProjectTest extends base {
 	}
 
 	//Add Project
-	@Test(dataProvider="getAddData")
-	public void Add_Project(String projectname,String projecttype,String Projectstatus,
-			String Expectedstartdate,String ExpectedEnddate,String ActualStartdate,String ActualEnddate,
-			String totalSaleableArea,String city,String State,String Spno,String SalesExectuive,
-			String Description,String Address,String East,String west,String South,String north,String Plotno,
-			String Schemeno,String Rera,String totalLandArea,String MaintenanceCharge,String MaintenanceDeposit,
-			String companyname,String gstin,String plcofsupplu,String RecAddress,String pincode,String projectlogo,
-			String receiptlogo,String RecPrefix,String RecPostFix,String Propertytype,String Saccode,
-			String termstext,String Unit,String Floors,String Basements) throws InterruptedException {
+	@Test(dataProvider="ProjectAddData")
+	public void Add_Project(String projectname,String projecttype,String Projectstatus,String Expectedstartdate,String ExpectedEnddate,
+			String ActualStartdate,String ActualEnddate,String totalSaleableArea,String city,String State,String Spno,String SalesExectuive,
+			String Description,String Address,String East,String west,String South,String north,String Plotno,String Schemeno,String Rera,
+			String totalLandArea,String MaintenanceCharge,String MaintenanceDeposit,String companyname,String gstin,String plcofsupplu,
+			String RecAddress,String pincode,String projectlogo,String receiptlogo,String RecPrefix,String RecPostFix,String Propertytype,
+			String Saccode,String termstext,String Unit,String Floors,String Basements) throws InterruptedException {
 		
 		ProjectPage project = new ProjectPage(driver);
 		SoftAssert softAssert = new SoftAssert();
@@ -165,7 +163,7 @@ public class ProjectTest extends base {
 	}
 
 	//Edit Existing Project
-	@Test(dataProvider="getEditData")
+	@Test(dataProvider="ProjectEditData")
 	public void Edit_Project(String newprojectname,String newtotalSaleableArea,String newtotalLandArea) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		SoftAssert softAssert = new SoftAssert();
@@ -211,7 +209,7 @@ public class ProjectTest extends base {
 
 	//Export to Excel 
 	@Test()
-	public void Export_to_Excel_Project() throws InterruptedException {
+	public void Export_To_Excel_Project() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		Thread.sleep(2000);
@@ -219,7 +217,7 @@ public class ProjectTest extends base {
 	}
 
 	//Search Project
-	@Test(dataProvider="getSearchData")
+	@Test(dataProvider="ProjectSearchData")
 	public void Search_Inquiry(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -250,7 +248,7 @@ public class ProjectTest extends base {
 
 	//Add Project Data
 	@DataProvider
-	public Object[][] getAddData() {
+	public Object[][] ProjectAddData() {
 		return new Object[][] {
 			{"Automation Project1","Commercial","Planning","","","","","10000","Goa","Goa","215"," Akash Patel ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
@@ -260,14 +258,14 @@ public class ProjectTest extends base {
 
 	//Edit Project Data
 	@DataProvider
-	public Object[][] getEditData() {
+	public Object[][] ProjectEditData() {
 		return new Object[][] {
 			{"Automation Project","20000","1000"}};
 	}
 
-	//Search Data
+	//Project Search Data
 	@DataProvider
-	public Object[][] getSearchData() {
+	public Object[][] ProjectSearchData() {
 		return new Object[][] {
 			{"Taj Mahal"}};
 	}

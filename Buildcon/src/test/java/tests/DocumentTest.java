@@ -31,7 +31,7 @@ public class DocumentTest extends base {
 	}
 
 	//Add Document
-	@Test(dataProvider="getAddData")
+	@Test(dataProvider="DocumentAddData")
 	public void Add_Document(String DTitle) throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
@@ -49,7 +49,7 @@ public class DocumentTest extends base {
 	}
 	
 	//Search Document
-	@Test(dataProvider="getSearchData")
+	@Test(dataProvider="DocumentSearchData")
 	public void Search_Document(String Project) throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
@@ -77,23 +77,22 @@ public class DocumentTest extends base {
 
 	//Add Document
 	@DataProvider
-	public Object[][] getAddData() {
+	public Object[][] DocumentAddData() {
 		return new Object[][] {
 			{"Pan Card"}};
 	}
 
 	//DataProvider for Edit Document
 	@DataProvider
-	public Object[][] getEditData() {
+	public Object[][] DocumentEditData() {
 		return new Object[][] { 
-			{ } };
+			{ }};
 	}
 
 	//DataProvider for Search Document
 	@DataProvider
-	public Object[][] getSearchData() {
+	public Object[][] DocumentSearchData() {
 		return new Object[][] {
 			{}};
 	}
-
 }

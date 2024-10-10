@@ -33,7 +33,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Add Receipt
-	@Test(dataProvider="getAddData")
+	@Test(dataProvider="ReceiptAddData")
 	public void Add_Project(String Project,String CustomerName,String FlatShop,String BankName,String Bankbranch,
 			String PaymentType,String IMPSNO,String RegularAmount,String ChallanNumber,String ReceivedTDSAmount,
 			String TDSTYpe,String GSTbankName,String GSTBankBranch,String ChequeNo,String ChequeFiles) throws InterruptedException {
@@ -47,8 +47,6 @@ public class ReceiptTest extends base {
 		softAssert.assertFalse(Project.isEmpty(), "Project name is required.");
 		softAssert.assertNotNull(Project, "Project name cannot be null.");
 		receipt.getProject(Project);//Required Field
-		
-		
 		
 		softAssert.assertFalse(CustomerName.isEmpty(), "Customer name is required.");
 		softAssert.assertNotNull(CustomerName, "Customer name cannot be null.");
@@ -112,8 +110,9 @@ public class ReceiptTest extends base {
 	}
 
 	//Editing an existing Receipt using Data Provider
-	@Test(dataProvider="getEditData")
-	public void Edit_Receipt(String newBankbranch,String newIMPSNO,String newRegularAmount,String newChallanNumber,String newGSTBankBranch) throws InterruptedException {
+	@Test(dataProvider="ReceiptEditData")
+	public void Edit_Receipt(String newBankbranch,String newIMPSNO,String newRegularAmount,String newChallanNumber,
+			String newGSTBankBranch) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		SoftAssert softAssert = new SoftAssert();
 		
@@ -163,7 +162,7 @@ public class ReceiptTest extends base {
 	}
 	
 	//Search Receipt
-	@Test(dataProvider="getSearchData")
+	@Test(dataProvider="ReceiptSearchData")
 	public void Search_Receipt(String Project) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -174,7 +173,7 @@ public class ReceiptTest extends base {
 
 	//Export to Excel Receipt
 	@Test()
-	public void Export_to_Excel_Receipt() throws InterruptedException {
+	public void Export_To_Excel_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		
@@ -193,8 +192,8 @@ public class ReceiptTest extends base {
 	}
 	
 	//Approve Cancel Receipt
-	@Test(dataProvider="getapproveData")
-	public void ApproveCancel_Receipt(String approve) throws InterruptedException{
+	@Test(dataProvider="ReceiptapproveData")
+	public void Approve_Cancel_Receipt(String approve) throws InterruptedException{
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		
@@ -225,8 +224,9 @@ public class ReceiptTest extends base {
 		receipt.getStartDate().click();
 		receipt.getEndDate().click();
 	}
+	
 	//Apply Filter Receipt With Project Dropdown
-		@Test(dataProvider="getprojectdropdown")
+		@Test(dataProvider="Receiptprojectdropdown")
 		public void Apply_Filter_Project_Dropdown(String Project) throws InterruptedException {
 			ReceiptPage receipt = new ReceiptPage(driver);
 			receipt.getReceipt().click();
@@ -277,7 +277,7 @@ public class ReceiptTest extends base {
 
 	//Add Receipt Data
 	@DataProvider
-	public Object[][] getAddData() {
+	public Object[][] ReceiptAddData() {
 		return new Object[][] {
 			{"       "," Nikanth Tandel "," 3BHK-402 (4th Floor) ","Axis Bank","Bopal"," IMPS ","7890548","10000","78565545",
 				"457"," 0% "," Bank Of India ","Bopal","54682485","D:\\Fileupload\\BB1qVDNW.jpg"}};
@@ -285,28 +285,28 @@ public class ReceiptTest extends base {
 
 	//DataProvider for Edit Receipt
 	@DataProvider
-	public Object[][] getEditData() {
+	public Object[][] ReceiptEditData() {
 		return new Object[][] { 
 			{"Ahmedabad","796498723548","97464970021","Thaltej"}};
 	}
 
 	//DataProvider for Search Data
 	@DataProvider
-	public Object[][] getSearchData() {
+	public Object[][] ReceiptSearchData() {
 		return new Object[][] {
 			{" Parisar homes "}};
 	}
 	
 	//DataProvider for Project Dropdown 
 		@DataProvider
-	public Object[][] getprojectdropdown() {
+	public Object[][] Receiptprojectdropdown() {
 		return new Object[][] {
 			{" Parisar homes "}};
 	}
 	
 	//DataProvider for Approve Cancel 
 	@DataProvider
-	public Object[][] getapproveData() {
+	public Object[][] ReceiptapproveData() {
 			return new Object[][] {
 				{"Approve"}};
 	}

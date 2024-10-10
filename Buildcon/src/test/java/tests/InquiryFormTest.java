@@ -81,5 +81,4 @@ public class InquiryFormTest extends base {
 		return new Object[][] {
 			{"Taj Mahal","Akash Patel","Nilesh Panchal","9746547979","Akash@mail.com",}};
 	}
-	
 }

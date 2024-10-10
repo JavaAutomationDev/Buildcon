@@ -36,6 +36,7 @@ public class EmployeeTest extends base {
 	
 	//Add Employee with All Modules - All Roles
 	@Test(dataProvider="EmployeeAddData")
+	
 	public void Add_Employee_All_Roles(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
@@ -45,6 +46,7 @@ public class EmployeeTest extends base {
 		
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
+		employee.Nextbtn().click();
 		
 		employee.getProfileImg().sendKeys(profileImg);
 		

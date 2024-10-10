@@ -24,7 +24,6 @@ public class CollectionTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));  
         loginPage.getUserName().sendKeys(prop.getProperty("USER"));  
@@ -33,7 +32,7 @@ public class CollectionTest extends base {
 		log.info("Login successful");
 	}
 	
-	//Collection total Method
+	//Collection Total Method
 	@Test()
 	public void Total_Collection_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
@@ -43,7 +42,7 @@ public class CollectionTest extends base {
 	}
 	
 	//Collection Search Method
-	@Test(dataProvider="getSearchData")
+	@Test(dataProvider="CollectionSearchData")
 	public void Search_Collection(String siteproject) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
@@ -51,9 +50,9 @@ public class CollectionTest extends base {
 		collection.getSearch().clear();
 	}
 	
-	//Collection Export to Excel Method
+	//Collection Export To Excel Method
 	@Test()
-	public void Export_to_Excel_Collection() throws InterruptedException {
+	public void Export_To_Excel_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getExporttoExcel().click();
@@ -77,9 +76,9 @@ public class CollectionTest extends base {
 		driver.close();
 	}
 
-	//DataProvider for search data
+	//DataProvider for Search Data
 	@DataProvider
-	public Object[][] getSearchData() {
+	public Object[][] CollectionSearchData() {
 		return new Object[][] {
 			{"Taj Mahal"}};
 	}

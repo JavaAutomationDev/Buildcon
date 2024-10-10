@@ -47,7 +47,6 @@ public class ReceiptPage {
 				if(!b.equalsIgnoreCase(Project))
 				{
 					Assert.assertTrue(false, "Project name is required");
-					
 				}
 			}
 		}
