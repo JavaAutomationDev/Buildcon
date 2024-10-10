@@ -2,6 +2,7 @@ package pageObjects;
 
 import java.util.Calendar;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -57,7 +58,7 @@ public class BookingPage {
 		option.click();
 	}
 
-	//Page object for BookedBy
+	//Page object for Booked By
 	By BookedBy = By.xpath("//mat-select[@formcontrolname='bookedByID']");
 	public void getBookedBy(String bookedby) {
 		WebElement dropdown = driver.findElement(BookedBy);
@@ -275,12 +276,16 @@ public class BookingPage {
 				+ "/div/mat-vertical-stepper/div[4]/div/div/div/form/div[2]/button[2]")).click();
 	}
 	
-	//Page object for Edit button
-	By editbooking = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
-			+ "main/vex-bookings/div/div[1]/div[2]/button");
-	public WebElement EditBooking() {
-		return driver.findElement(editbooking);
-	}	
+	//Page object for Edit Button
+	public WebElement getEditBooking() {
+		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+				+ "mat-sidenav-content/main/vex-bookings/div/div[3]/div/div/table/tbody/tr[1]/td[10]/div/a[1]"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", Edit);
+		js.executeScript("arguments[0].click();", Edit);
+		return Edit;
+	}
+	
 	////Page object for Edit Car Parking
 	//      By CarParking1 = By.xpath("//input[@formcontrolname='carParking']");
 	//     public WebElement getcarparking1() {

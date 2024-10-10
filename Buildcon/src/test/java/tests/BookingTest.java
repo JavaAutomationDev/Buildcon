@@ -1,13 +1,19 @@
 package tests;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import pageObjects.BookingPage;
+import pageObjects.EmployeePage;
 import pageObjects.LoginPage;
 import resources.base;
 
@@ -21,6 +27,7 @@ public class BookingTest extends base {
 		log.info("Driver is Initialized");
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
+
 		// Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));
@@ -29,6 +36,7 @@ public class BookingTest extends base {
 		loginPage.getsignIn().click();
 		log.info("Login successful");
 	}
+
 	//Add Booking
 	@Test(dataProvider ="getAddData")
 	public void Add_Booking(String projectname,String unitblock, String flatshop,String bookedby, 
@@ -37,6 +45,7 @@ public class BookingTest extends base {
 			String Name, String Profession, String PAN, String AadharNo , String MobileNo, String OtherNo, String Email ,
 			String PermanentAddress, String OfficeAddress,String Remarks, String bankname, String Loanamt, String Branch, String Loanaccno,
 			String City) throws InterruptedException {
+
 		BookingPage booking = new BookingPage(driver);
 		booking.getBooking().click();
 		booking.AddBooking().click();
@@ -82,29 +91,28 @@ public class BookingTest extends base {
 		booking.getLoanAcNo().sendKeys(Loanaccno);
 		booking.getCity().sendKeys(City);
 		booking.getBookbtn();
-
 	}
 
-	//Edit Existing Project
+	//Edit Existing Booking
 	@Test(dataProvider="getEditData")
-	public void Edit_booking(String EditCar) throws InterruptedException {
+	public void Edit_Booking(String EditCar) throws InterruptedException {
 		BookingPage booking = new BookingPage(driver);
 		booking.getBooking().click();
-		booking.EditBooking().click();
+		booking.getEditBooking().click();
 		//booking.getcarparking1().clear();
 		//booking.getcarparking1().sendKeys(EditCar);
 		booking.getNextbtn().click();
-
 	}
 
 	//Export to Excel Booking
 	@Test()
-	public void Export_to_Excel_Booking() throws InterruptedException {
+	public void Export_To_Excel_Booking() throws InterruptedException {
 		BookingPage booking = new BookingPage(driver);
 		booking.getBooking().click();
 		booking.getExporttoExcel().click();
 	}
-	////Apply Filter for Dates & Booking
+
+	//Apply Filter for Dates & Booking
 	@Test
 	public void Apply_Filter_Booking() throws InterruptedException {
 		BookingPage booking = new BookingPage(driver);
@@ -118,20 +126,206 @@ public class BookingTest extends base {
 		//			booking.getresetfilter().click();
 	}
 
-	//Search Project
+	//Search Booking
 	@Test(dataProvider="getSearchData")
-	public void Search_Inquiry(String searchName) throws InterruptedException {
+	public void Search_Booking(String searchName) throws InterruptedException {
 		BookingPage booking = new BookingPage(driver);
 		booking.getBooking().click();
 		booking.getBookingSearch().sendKeys(searchName);
 		booking.getBookingSearchclick().click();
 	}
 
+	//Verify Add Inactive by Booking
+	@Test()
+	public void Verify_Add_InActive_Bookedby_Booking() throws InterruptedException {
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+
+		employee.getSearch().sendKeys("Automation");
+		employee.getEdit().click();
+
+		employee.getActiveEmployee().click();
+
+		Thread.sleep(2000);
+		employee.Nextbtn().click();
+
+		Thread.sleep(2000);
+		employee.getUpdate().click();
+
+		BookingPage booking = new BookingPage(driver);
+		booking.getBooking().click();
+		booking.AddBooking().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='bookedByID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase("Automation Test"))
+			{
+				Assert.assertFalse(false, "Attende is inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Add Active by Booking
+	@Test()
+	public void Verify_Add_Active_Bookedby_Booking() throws InterruptedException {
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+
+		employee.getSearch().sendKeys("Automation");
+		employee.getEdit().click();
+
+		employee.getActiveEmployee().click();
+
+		Thread.sleep(2000);
+		employee.Nextbtn().click();
+
+		Thread.sleep(2000);
+		employee.getUpdate().click();
+
+		BookingPage booking = new BookingPage(driver);
+		booking.getBooking().click();
+		booking.AddBooking().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='bookedByID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase("Automation Test"))
+			{
+				Assert.assertFalse(false, "Attende is inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Inactive by Booking
+	@Test()
+	public void Verify_Edit_InActive_Bookedby_Booking() throws InterruptedException {
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+
+		employee.getSearch().sendKeys("Automation");
+		employee.getEdit().click();
+
+		employee.getActiveEmployee().click();
+
+		Thread.sleep(2000);
+		employee.Nextbtn().click();
+
+		Thread.sleep(2000);
+		employee.getUpdate().click();
+
+		BookingPage booking = new BookingPage(driver);
+		booking.getBooking().click();
+		booking.getEditBooking();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='bookedByID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase("Automation Test"))
+			{
+				Assert.assertFalse(false, "Attende is inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Verify Edit Active by Booking
+	@Test()
+	public void Verify_Edit_Active_Bookedby_Booking() throws InterruptedException {
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+
+		employee.getSearch().sendKeys("Automation");
+		employee.getEdit().click();
+
+		employee.getActiveEmployee().click();
+
+		Thread.sleep(2000);
+		employee.Nextbtn().click();
+
+		Thread.sleep(2000);
+		employee.getUpdate().click();
+
+		BookingPage booking = new BookingPage(driver);
+		booking.getBooking().click();
+		booking.getEditBooking();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='bookedByID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase("Automation Test"))
+			{
+				Assert.assertFalse(false, "Attende is inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Close the driver
+	@AfterMethod()
+	public void teardown() {
+		driver.close();
+	}
+
 	//Add Booking Data Provider
 	@DataProvider
 	public Object[][] getAddData() {
 		return new Object[][] {
-			{"Testing Only","A", "Unit No - A - 106 (1st Floor) ","Dhrujal Shah"," ","Kinjal Payment Plan","2","Find over 25+ 4 BHK for Sale in Shilp Shaligram, Ahmedabad. Check 4 BHK Properties available for Sale in Shilp Shaligram ",
+			{"Testing Only","A","Unit No - A - 106 (1st Floor) ","Dhrujal Shah"," ","Kinjal Payment Plan","2","Find over 25+ 4 BHK for Sale in Shilp Shaligram, Ahmedabad. Check 4 BHK Properties available for Sale in Shilp Shaligram ",
 				"Booked","Kinjal Shah","5000000","100000","Mahavir Shah","Business", "AFZPK7190K", "2653 8564 4663", "9898005625", "9999999999", "kinjal.s@shaligraminfotech.com","Marigold Circle, Safal Parisar Rd, South Bopal, Bopal, Ahmedabad, Gujarat 380058",
 				"B/h Dishman Corporate House,C.J Road, Ambli, Ahmedabad, Gujarat 380058","PREMIUM AFFORDABLE 2 & 3 BHK HOMES AND RETAIL SPACES AT SOUTH BOPAL","Testing Only Bank","100","Ahmedabad","123456","Naranpura"}};	
 	}
@@ -141,19 +335,19 @@ public class BookingTest extends base {
 	public Object[][] getEditData() {
 		return new Object[][] {
 			{"3,"}};	
-
 	}
-	
-	//DataProvider for search data
+
+	//DataProvider for Search Booking
 	@DataProvider
 	public Object[][] getSearchData() {
 		return new Object[][] {
 			{"Testing Only"}};
 	}
-	
-	//DataProvider for Apply Filter for Booking
+
+	//Data Provider for Apply Filter for Booking
 	@DataProvider
 	public Object[][] getbookingfilterData() {
-		return new Object[][] { { "Dhrujal Shah" } };
+		return new Object[][] {
+			{"Dhrujal Shah"}};
 	}
 }
