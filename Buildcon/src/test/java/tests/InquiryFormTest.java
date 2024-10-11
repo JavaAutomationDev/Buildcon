@@ -79,6 +79,6 @@ public class InquiryFormTest extends base {
 	@DataProvider
 	public Object[][] getdata() {
 		return new Object[][] {
-			{"Taj Mahal","Akash Patel","Nilesh Panchal","9746547979","Akash@mail.com",}};
+			{"Taj Mahal1","Akash Patel", "Nilesh Panchal", "9746547979", "Akash@mail.com"}};
 	}
 }

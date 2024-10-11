@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -12,12 +13,15 @@ import com.aventstack.extentreports.Status;
 
 import resources.ExtentReportNG;
 import resources.base;
+
 //ITestListener interface which implements Testing Listeners
 public class Listeners extends base implements ITestListener {
 	
 	//here calling the static method for configuring extent report setting
 	ExtentReports extent = ExtentReportNG.getReportObject();
 	ExtentTest test;
+	
+	
 	
 	//local ThreadG
 	ThreadLocal<ExtentTest> extenttest = new ThreadLocal<ExtentTest>();
@@ -42,8 +46,17 @@ public class Listeners extends base implements ITestListener {
 		extenttest.get().fail(result.getThrowable());
 		
 		//taking screenshot of Failure Test Case identify failure test method name
+		
 		String testmethodname = result.getMethod().getMethodName();
-		System.out.println("Starting test: " + testmethodname);
+		System.out.println("NILESH FAILED METHOD NAME: " + testmethodname);
+		if (base.failedElement != null) {
+            // Get details of the failed element (e.g., locator)
+            
+            Reporter.log("Failed Element Name: " + base.failedElementName);
+            Reporter.log("   |   Failed Element Xpath: " + base.failedElement.toString());
+            
+		}
+		//System.out.println(result.getName() + " nilesh failed.\n Throwable: " + result.getThrowable().getMessage());
 		
 		//identify failure class driver object
 		ITestContext context = result.getTestContext();

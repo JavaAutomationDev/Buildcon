@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -18,6 +19,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class base {
 
+	public static WebElement failedElement;
+	public static String failedElementName;
 	public WebDriver driver;
 	public Properties prop;
 

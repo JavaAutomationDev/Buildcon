@@ -67,6 +67,7 @@ public class InquiryTest extends base {
 
 		Inquiry.getNextfollowUpDT().sendKeys(NextfollowUpDT);
 		Inquiry.getreferencedBy().sendKeys(referencedBy);
+		Thread.sleep(2000);		
 
 		Inquiry.getAttendee(Attende);
 		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
@@ -96,6 +97,7 @@ public class InquiryTest extends base {
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+
 		Inquiry.getEdit();
 
 		Thread.sleep(2000);
@@ -103,6 +105,8 @@ public class InquiryTest extends base {
 		Inquiry.getvisitorname().sendKeys(newvisitorname);
 		softAssert.assertFalse(newvisitorname.isEmpty(), "Visitor Name is required.");
 
+
+		Inquiry.getEdit().click();
 		Inquiry.getContactNo().clear();
 		Inquiry.getContactNo().sendKeys(newContactNo);
 		softAssert.assertFalse(newContactNo.isEmpty(), "Contact Number is required.");
@@ -423,8 +427,8 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			{"Taj Mahal","Akash Patel","","Vimal Patel"," Nilesh Panchal ","9632587401","Akash@mail.com","Bopal Gam, Ahmedabad",
-				"Remarks","4BHK","In Progress" }};
+			{"Taj Mahal", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal1", "9746547979",
+			"Akash@mail.com", "Bopal Gam, Ahmedabad", "Remarks", "4BHK", "In Progress" }};
 	}
 
 	//DataProvider for Edit Inquiry

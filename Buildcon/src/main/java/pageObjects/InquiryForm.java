@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class InquiryForm {
 	public WebDriver driver;
 
@@ -27,9 +29,13 @@ public class InquiryForm {
         dropdown.click();
         String optionXPath = "//mat-option//span[contains(text(),'" + siteproject + "')]";
         WebElement option = driver.findElement(By.xpath(optionXPath));
+        
+        base.failedElement = dropdown;
+        base.failedElementName = "InquiryForm-getsiteproject";
+        
         option.click();        
     }
-
+	 
 	//Page object for Visitor Name
 	By visitor = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout"
 			+ "/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-form"
@@ -37,6 +43,8 @@ public class InquiryForm {
 	public WebElement getvisitor() {
 		return driver.findElement(visitor);
 	}
+	
+	
 
 	//Page object for Attendee
 	  By Attendee =By.xpath("//mat-select[@formcontrolname='userID']");

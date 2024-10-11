@@ -11,6 +11,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class ProspectPage {
 
 	public WebDriver driver;
@@ -38,6 +40,10 @@ public class ProspectPage {
 		dropdown.click();
 		String optionXPath = "//mat-option//span[contains(text(),'" + siteproject + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
+		
+		base.failedElement = option;
+        base.failedElementName = "Prospect-getsiteproject";
+        
 		option.click();
 	}
 
@@ -120,6 +126,11 @@ public class ProspectPage {
 		//Construct the XPath for the desired option
 		String optionXPath = "//mat-option//span[contains(text(),'" + Attendee + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Prospect-getAttendee";
+		
+		
 		option.click();
 	}
 
@@ -173,6 +184,10 @@ public class ProspectPage {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 				+ "mat-sidenav-container/mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/"
 				+ "mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[15]/div/a[1]"));
+		
+		base.failedElement = Edit;
+		base.failedElementName = "getEdit Prospect-Follow_Inquiry";
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", Edit);
 		js.executeScript("arguments[0].click();", Edit);
@@ -219,6 +234,10 @@ public class ProspectPage {
 	public void getselectproject(String project) {
 		WebElement dropdown = driver.findElement(selectproject);
 		dropdown.click();
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "getselectproject Prospect-Apply Filter";
+		
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + project + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -234,6 +253,10 @@ public class ProspectPage {
 				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 						+ "mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/"
 						+ "mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[15]/div/a[2]"));
+		
+		base.failedElement = deleteButton;
+		base.failedElementName = "getDelete Prospect";
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", deleteButton);
 		js.executeScript("arguments[0].click();", deleteButton);
@@ -265,6 +288,10 @@ public class ProspectPage {
 		dropdown.click();
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + unitD + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Prospect-getunitdropdown";
+
 		option.click();
 	}
 	//Page Object for Select Flat/Shop
@@ -274,6 +301,10 @@ public class ProspectPage {
 		dropdown.click();
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Selectflat + "')]";  
 		WebElement option = driver.findElement(By.xpath(optionXPath));
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Prospect-getSelectFlat";
+
 		option.click();
 	}
 }

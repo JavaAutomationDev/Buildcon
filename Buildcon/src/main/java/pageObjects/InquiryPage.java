@@ -11,11 +11,19 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class InquiryPage {
 	public WebDriver driver;
+	
+	//public static WebElement failedElement;
+	//public static String failedElementName;
 
+	
+	
 	public InquiryPage(WebDriver driver) {
 		this.driver = driver;
+		
 	}
 
 	//Page object for click Inquiry Module
@@ -34,6 +42,10 @@ public class InquiryPage {
 	By siteProject = By.xpath("//mat-select[@formcontrolname='projectID']");
 	public void getsiteproject(String siteproject) {
 		WebElement dropdown = driver.findElement(siteProject);
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Inquiry-getsiteProject";
+		
 		dropdown.click();
 		String optionXPath = "//mat-option//span[contains(text(),'" + siteproject + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
@@ -94,10 +106,16 @@ public class InquiryPage {
 	By Attende = By.xpath("//mat-select[@formcontrolname='userID']");
 	public void getAttendee(String Attendee) {
 		WebElement dropdown = driver.findElement(Attende);
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Inquiry-getAttendee";
+		
 		dropdown.click();
 		String optionXPath = "//mat-option//span[contains(text(),'" + Attendee + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
+		
+		
 	}
 
 	//Page object for Contact Number
@@ -164,6 +182,9 @@ public class InquiryPage {
 				+ "/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]"
 				+ "/div/div/div/table/tbody/tr[1]/td[13]/div/a[1]/mat-icon"));
 
+		base.failedElement = Edit;
+		base.failedElementName = "getEdit Inquiry-Follow_Inquiry";
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", Edit);
 		js.executeScript("arguments[0].click();", Edit);
@@ -210,6 +231,10 @@ public class InquiryPage {
 	public void getselectproject(String project) {
 		WebElement dropdown = driver.findElement(selectproject);
 		dropdown.click();
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "getselectproject Inquiry-Apply Filter";
+		
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + project + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -251,6 +276,7 @@ public class InquiryPage {
 	public WebElement getmissingfollowup() {
 		return driver.findElement(MissingFollowup);
 	}
+	
 	//Page object for Add To Prospect
 	By Addprospect = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[2]"
@@ -262,6 +288,10 @@ public class InquiryPage {
 	By unitdropdown = By.xpath("//mat-select[@formcontrolname='unitBlockID']");
 	public void getunitdropdown(String unitD) {
 		WebElement dropdown = driver.findElement(unitdropdown);
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Inquiry-getunitdropdown";
+		
 		dropdown.click();
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + unitD + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
@@ -271,6 +301,10 @@ public class InquiryPage {
 	By SelectFlat = By.xpath("//mat-select[@formcontrolname='flatShopID']");
 	public void getSelectFlat(String Selectflat) {
 		WebElement dropdown = driver.findElement(SelectFlat);
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Inquiry-getSelectFlat";
+		
 		dropdown.click();
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Selectflat + "')]";  
 		WebElement option = driver.findElement(By.xpath(optionXPath));
