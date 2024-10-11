@@ -243,46 +243,170 @@ public class ProjectTest extends base {
 		Thread.sleep(2000);
 		project.getActiveproject().click();
 	}
+	
 	//Verify Add Inactive Project Type in Prpject
-		@Test()
-		public void Verify_Add_Inactive_ProjectType_Project() throws InterruptedException {
-			Projecttypespage projecttype = new Projecttypespage(driver);
-			projecttype.getconfiguration().click();
-			projecttype.projecttypesclick().click();
-			projecttype.geteditprojecttypes().click();
-			Thread.sleep(4000);
-			projecttype.getActiveProject();
-			Thread.sleep(2000);
-			projecttype.getsavebuttonprojecttypes().click();
-			
-			
-			ProjectPage project = new ProjectPage(driver);
-			project.getproject().click();
-			project.getaddproject().click();
+	@Test()
+	public void Verify_Add_Inactive_ProjectType_Project() throws InterruptedException {
+		Projecttypespage projecttype = new Projecttypespage(driver);
+		projecttype.getconfiguration().click();
+		projecttype.projecttypesclick().click();
+		projecttype.geteditprojecttypes().click();
+		Thread.sleep(4000);
+		projecttype.getActiveProject();
+		Thread.sleep(2000);
+		projecttype.getsavebuttonprojecttypes().click();
 
-			driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
-			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-			int Counter=0;
-			for(int i=0;i<a.size();i++)
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		project.getaddproject().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Addee"))
 			{
-				String b =a.get(i).getText(); 
-				if(!b.equalsIgnoreCase("Addee"))
+				Assert.assertFalse(false, "Project Type is Inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
 				{
-					Assert.assertFalse(false, "Project is inactive.");
-					System.out.println("Test  failed");
+					System.out.println("Test");	
 					break;
-				}
-				else
-				{
-					Counter = Counter+1;
-					if(Counter>a.size())
-					{
-						System.out.println("Test");	
-						break;
-					}	
-				}
+				}	
 			}
 		}
+	}
+	
+	//Verify Add Active Project Type in Prpject
+	@Test()
+	public void Verify_Add_Active_ProjectType_Project() throws InterruptedException {
+		Projecttypespage projecttype = new Projecttypespage(driver);
+		projecttype.getconfiguration().click();
+		projecttype.projecttypesclick().click();
+		projecttype.geteditprojecttypes().click();
+		Thread.sleep(4000);
+		projecttype.getActiveProject();
+		Thread.sleep(2000);
+		projecttype.getsavebuttonprojecttypes().click();
+
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		project.getaddproject().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Addee"))
+			{
+				Assert.assertFalse(false, "Project Type is active.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Verify Edit Inactive Project Type in Prpject
+	@Test()
+	public void Verify_Edit_Inactive_ProjectType_Project() throws InterruptedException {
+		Projecttypespage projecttype = new Projecttypespage(driver);
+		projecttype.getconfiguration().click();
+		projecttype.projecttypesclick().click();
+		projecttype.geteditprojecttypes().click();
+		Thread.sleep(4000);
+		projecttype.getActiveProject();
+		Thread.sleep(2000);
+		projecttype.getsavebuttonprojecttypes().click();
+
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		project.getEdit().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Addee"))
+			{
+				Assert.assertFalse(false, "Project Type is Inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Verify Edit Active Project Type in Prpject
+	@Test()
+	public void Verify_Edit_Active_ProjectType_Project() throws InterruptedException {
+		Projecttypespage projecttype = new Projecttypespage(driver);
+		projecttype.getconfiguration().click();
+		projecttype.projecttypesclick().click();
+		projecttype.geteditprojecttypes().click();
+		Thread.sleep(4000);
+		projecttype.getActiveProject();
+		Thread.sleep(2000);
+		projecttype.getsavebuttonprojecttypes().click();
+
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		project.getEdit().click();
+		
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Addee"))
+			{
+				Assert.assertFalse(false, "Project Type is active.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
 	
 	//Verify Add Inactive State in Prpject
 	@Test()
@@ -325,7 +449,7 @@ public class ProjectTest extends base {
 			}
 		}
 	}
-	
+
 	//Verify Add Active State in Prpject
 	@Test()
 	public void Verify_Add_Active_State_Project() throws InterruptedException {
@@ -451,7 +575,7 @@ public class ProjectTest extends base {
 			}
 		}
 	}
-	
+
 	//Close the Driver
 	@AfterMethod() 
 	public void teardown() {
