@@ -41,16 +41,13 @@ public class ProspectTest extends base {
 
 	//Add Prospect
 	@Test(dataProvider="ProspectAdddata")
-	public void Add_Prospect(String siteproject, String visitorname, String visitordate,
-			String NextfollowUpDT, String referencedBy, String Attende, String ContactNo,
-			String Email, String Address, String Remarks, String Requirement, String Status, String unitD,
+	public void Add_Prospect(String siteproject, String visitorname, String visitordate,String NextfollowUpDT, String referencedBy,
+			String Attende, String ContactNo,String Email, String Address, String Remarks, String Requirement, String Status, String unitD,
 			String Selectflat) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
-
 		Prospect.getprospect().click();
 		Prospect.getAddprospect().click();
 
-		//Fill in required fields
 		Prospect.getsiteproject(siteproject); // Required Field
 		Prospect.getvisitorname().sendKeys(visitorname); // Required Field
 		Prospect.getvisitordate().sendKeys(visitordate);
@@ -70,29 +67,8 @@ public class ProspectTest extends base {
 		Prospect.getunitdropdown(unitD); // Required Field
 		Prospect.getSelectFlat(Selectflat); // Required Field
 
-		//Add assertions for required fields to ensure they are not empty or invalid
-		SoftAssert softAssert = new SoftAssert();
-
-		//Assert the required fields are filled correctly
-		softAssert.assertFalse(siteproject.isEmpty(), "Site Project is required.");
-		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
-		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
-		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.");
-		softAssert.assertFalse(unitD.isEmpty(), "Unit Dropdown selection is required.");
-		softAssert.assertFalse(Selectflat.isEmpty(), "Flat selection is required.");
-
-		//Optionally, assert for valid inputs (e.g., phone number format, email format)
-		softAssert.assertTrue(ContactNo.matches("\\d{10}"), "Contact Number must be 10 digits.");
-
-		//Use regex for email validation if Email is a required field
-		if (!Email.isEmpty()) {
-			softAssert.assertTrue(Email.matches("^[A-Za-z0-9+_.-]+@(.+)$"), "Email format is invalid.");
-		}
 		Thread.sleep(2000);
 		Prospect.getsave().click();
-
-		//Collect all soft assertions
-		softAssert.assertAll();
 	}
 
 	//Editing an Existing Prospect using Data Provider
@@ -159,7 +135,7 @@ public class ProspectTest extends base {
 	}
 
 	//Apply Filter for Dates & Project
-	@Test(dataProvider="ProspectprojectfilterData")
+	@Test(dataProvider="ProspectProjectFilterData")
 	public void Apply_Filter_Prospect(String selectproject) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
@@ -189,7 +165,7 @@ public class ProspectTest extends base {
 	}
 
 	//Apply Filter Method for Project & Reset
-	@Test(dataProvider="ProspectprojectfilterData")
+	@Test(dataProvider="ProspectProjectFilterData")
 	public void Apply_Filter_Project_Prospect(String selectproject) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
@@ -233,8 +209,36 @@ public class ProspectTest extends base {
 		Thread.sleep(2000);
 		Prospect.getsave().click();
 	}
-	
-	//Verify Add Inactive Attendee Inquiry
+
+	//Add Prospect Test Mandatory Filed Validation
+	@Test
+	public void Add_Prospect_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		ProspectPage Prospect = new ProspectPage(driver);
+		Prospect.getprospect().click();
+		Prospect.getAddprospect().click();
+		Thread.sleep(2000);
+		Prospect.getsave().click();
+
+		WebElement Web =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
+		Assert.assertEquals(Web.getText(), "Visit Site/Project is required.");
+
+		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
+		Assert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
+
+		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
+		Assert.assertEquals(Intime.getText(), "In time is required.");
+
+		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
+		Assert.assertEquals(Outtime.getText(), "Out time is required.");
+
+		WebElement Attedee =driver.findElement(By.xpath("//span[normalize-space()='Attendee is required.']"));
+		Assert.assertEquals(Attedee.getText(), "Attendee is required.");
+
+		WebElement ContactNo =driver.findElement(By.xpath("//span[normalize-space()='Contact Number is required.']"));
+		Assert.assertEquals(ContactNo.getText(), "Contact Number is required.");		
+	}
+
+	//Verify Add Inactive Attendee Prospect
 	@Test()
 	public void Verify_Add_Inactive_Attendee_Inquiry() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
@@ -279,7 +283,7 @@ public class ProspectTest extends base {
 		}
 	}
 
-	//Verify Add Active Attendee Inquiry
+	//Verify Add Active Attendee Prospect
 	@Test()
 	public void Verify_Add_Active_Attendee_Inquiry() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
@@ -325,7 +329,7 @@ public class ProspectTest extends base {
 		}
 	}
 
-	//Verify Edit Inactive Attendee Inquiry
+	//Verify Edit Inactive Attendee Prospect
 	@Test()
 	public void Verify_Edit_Inactive_Attendee_Inquiry() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
@@ -370,7 +374,7 @@ public class ProspectTest extends base {
 		}
 	}
 
-	//Verify Edit Active Attendee Inquiry
+	//Verify Edit Active Attendee Prospect
 	@Test()
 	public void Verify_Edit_Active_Attendee_Inquiry() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
@@ -439,7 +443,7 @@ public class ProspectTest extends base {
 
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
-	public Object[][] ProspectprojectfilterData() {
+	public Object[][] ProspectProjectFilterData() {
 		return new Object[][] {
 			{"marin drive lake view"}};
 	}

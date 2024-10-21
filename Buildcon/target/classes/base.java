@@ -19,10 +19,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class base {
 
-	public static WebElement failedElement;
-	public static String failedElementName;
 	public WebDriver driver;
 	public Properties prop;
+	
+	public  static WebElement failedElement;
+	public  static String failedElementName;
 
 	// create one menthod for driver initialization
 	public WebDriver initializeDriver() throws IOException {
@@ -33,6 +34,7 @@ public class base {
 		prop.load(fis);
 		String browsername = prop.getProperty("browser");
 		if (browsername.equals("chrome")) {
+			
 			
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> prefs = new HashMap<String, Object>();

@@ -10,6 +10,7 @@ public class CollectionPage {
 	public CollectionPage(WebDriver driver) {
 		this.driver = driver;
 	}
+	
 	//Page object for click Collection Module
 	By Collection = By.xpath("//vex-sidenav-item[8]//a[1]");
 	public WebElement getcollection() {
@@ -66,5 +67,15 @@ public class CollectionPage {
 	public WebElement getresetfilter() {
 		return driver.findElement(resetfilter);
 	}
-
+	//Page object for Info Button
+	By infobtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
+				+ "main/vex-collections/div/div[2]/div/div/div/table/tbody/tr[1]/td[4]/span/a");
+	public WebElement getInfoBtn() {
+		return driver.findElement(infobtn);
+	}
+	//Page object for Print Info Button
+	By printinfobtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-view-receipts/form/mat-dialog-content/div/div/div/table/tbody/tr/td[8]/div/button[1]/mat-icon");
+	public WebElement getPrintInfoBtn() {
+		return driver.findElement(infobtn);
+	}
 }

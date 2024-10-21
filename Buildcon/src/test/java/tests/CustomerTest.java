@@ -23,7 +23,7 @@ public class CustomerTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login Process
+		//Login Process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));  
         loginPage.getUserName().sendKeys(prop.getProperty("USER"));  
@@ -52,7 +52,7 @@ public class CustomerTest extends base {
 
 	//Customer Export to Excel Method
 	@Test()
-	public void Export_to_Excel_Customer() throws InterruptedException {
+	public void Export_To_Excel_Customer() throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.webElementList();
@@ -61,7 +61,7 @@ public class CustomerTest extends base {
 	}
 	
 	//Apply Filter Method for Project & Reset
-	@Test(dataProvider="CustomerprojectdropdownData")
+	@Test(dataProvider="CustomerProjectDropdownData")
 	public void Apply_Filter_Project_Customer(String selectproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
@@ -95,7 +95,7 @@ public class CustomerTest extends base {
 	
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
-	public Object[][] CustomerprojectdropdownData() {
+	public Object[][] CustomerProjectDropdownData() {
 		return new Object[][] {
 			{"marin drive lake view"}};
 	}

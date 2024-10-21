@@ -34,7 +34,7 @@ public class CollectionTest extends base {
 	
 	//Collection Total Method
 	@Test()
-	public void Total_Collection_Collection() throws InterruptedException {
+	public void Total_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getTotalCollection().click();
@@ -70,10 +70,20 @@ public class CollectionTest extends base {
 		collection.getresetfilter().click();	
 	}
 	
+	//Collection Information Method
+	@Test()
+	public void Information_Collection() throws InterruptedException {
+		CollectionPage collection = new CollectionPage(driver);
+		collection.getcollection().click();
+		collection.getInfoBtn().click();
+		Thread.sleep(2000);
+        collection.getPrintInfoBtn().click();
+	}
+	
 	//Close the driver
 	@AfterMethod
 	public void teaddown() {
-		driver.close();
+		//driver.close();
 	}
 
 	//DataProvider for Search Data

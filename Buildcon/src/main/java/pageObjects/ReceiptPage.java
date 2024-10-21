@@ -7,14 +7,12 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
 
 public class ReceiptPage {
 	public WebDriver driver;
-	SoftAssert softAssert = new SoftAssert();
 
 	public ReceiptPage(WebDriver driver) {
 		this.driver = driver;
@@ -38,18 +36,6 @@ public class ReceiptPage {
 	public void getProject(String Project) {
 		WebElement dropdown = driver.findElement(project);
 		dropdown.click();
-		if(Project.trim()=="")
-		{
-			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-			for(int i=0;i<a.size();i++)
-			{
-				String b =a.get(i).getText(); 
-				if(!b.equalsIgnoreCase(Project))
-				{
-					Assert.assertTrue(false, "Project name is required");
-				}
-			}
-		}
 		String optionXPath = "//mat-option//span[contains(text(),'" + Project + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -247,7 +233,8 @@ public class ReceiptPage {
 	//Attachment Cheque
 	//Page object for Cheque Files
 	By chequefiles=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[5]/div/div/div/form/div/div[1]/div[1]/mat-form-field/div[1]/div[2]/div[2]/input[2]");
+			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[5]/div/div/div/form/div/div[1]/div[1]/"
+			+ "mat-form-field/div[1]/div[2]/div[2]/input[2]");
 	public WebElement getChequeFiles() {
 		return driver.findElement(chequefiles);
 	}
@@ -318,18 +305,16 @@ public class ReceiptPage {
 		option.click();
 	}
 	//Page object for Apply Filter Reset
-	By reset=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-receipts/div/div[2]/div/div[4]/button");
+	By reset=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-receipts/div/div[2]/div/div[4]/button");
 	public WebElement getReset() {	
 		return driver.findElement(reset);
 	}
-
 	//Page object for Edit
 	public WebElement getEdit() {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 				+ "mat-sidenav-container/mat-sidenav-content/main/vex-receipts/"
 				+ "div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[1]"));
-
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", Edit);
 		js.executeScript("arguments[0].click();", Edit);
@@ -383,4 +368,39 @@ public class ReceiptPage {
     public WebElement getViewReceipt() {
     	return driver.findElement(viewreceipt);
     } 
+    //Page object for Edit Next Button
+  	By editnextbtn1 = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+  			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button");
+  	public WebElement getEditNextBtn1() {
+  		return driver.findElement(editnextbtn1);
+  	}
+  	//Page object for Edit
+  	public void GetEditNext()
+	{
+		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[1]")).click();
+		WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
+		a.click();	
+	}
+  	
+  	//Page object for Add Requierd Field 
+  	public void AddRequierdField()
+	{
+  		WebElement projectname =driver.findElement(By.xpath("//mat-select[@formcontrolname='projectID']"));
+  		projectname.click();
+  		projectname.sendKeys(Keys.ESCAPE);
+  		
+		WebElement customername =driver.findElement(By.xpath("//mat-select[@formcontrolname='memberID']"));
+		customername.click();
+		customername.sendKeys(Keys.ESCAPE);
+		
+		WebElement flatshop =driver.findElement(By.xpath("//mat-select[@formcontrolname='projectUnitBlockDetailsID']"));
+		flatshop.click();
+	}
+    
+  	//Page object for Edit Requierd Field
+  	public void EditNextRequierdBtn()
+	{
+		WebElement EditNextbtn =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
+		EditNextbtn.click();	
+	}
 }

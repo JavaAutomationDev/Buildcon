@@ -12,7 +12,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import pageObjects.EmployeePage;
 import pageObjects.InquiryPage;
@@ -44,22 +43,15 @@ public class InquiryTest extends base {
 			String Attende, String ContactNo, String Email, String Address, String Remarks, String Requirement,
 			String Status) throws InterruptedException {
 
-		SoftAssert softAssert = new SoftAssert();
-
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
-		Inquiry.getsave().click();
-		Thread.sleep(2000);
-		//Fill out required fields and assert if they are filled correctly
-		Inquiry.getsiteproject(siteproject);
-		softAssert.assertFalse(siteproject.isEmpty(), "Site Project is required.");
 
+		Thread.sleep(2000);
+		Inquiry.getsiteproject(siteproject);
 		Inquiry.getvisitorname().sendKeys(visitorname);
-		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
 
 		Inquiry.getIntime().click(); //click on InTime Required fields
-		softAssert.assertFalse((false),"InTime is required");
 		Inquiry.getOk().click(); //Click on Ok time
 
 		Inquiry.getouttime().click(); //Click on OutTime Required fields
@@ -68,13 +60,8 @@ public class InquiryTest extends base {
 		Inquiry.getNextfollowUpDT().sendKeys(NextfollowUpDT);
 		Inquiry.getreferencedBy().sendKeys(referencedBy);
 		Thread.sleep(2000);		
-
 		Inquiry.getAttendee(Attende);
-		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
-
 		Inquiry.getContactNo().sendKeys(ContactNo);
-		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Inquiry Form");
-
 		Inquiry.getEmail().sendKeys(Email);
 		Inquiry.getAddress().sendKeys(Address);
 		Inquiry.getRemarks().sendKeys(Remarks);
@@ -83,33 +70,23 @@ public class InquiryTest extends base {
 
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
-
-		// Assert all soft assertions at the end
-		softAssert.assertAll();
 	}
 
 	//Editing an existing Inquiry using Data Provider
 	@Test(dataProvider = "InquiryEditData")
 	public void Edit_Inquiry(String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
 			String newRequirement, String newStatus) throws InterruptedException {
-
-		SoftAssert softAssert = new SoftAssert();
-
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
-
 		Inquiry.getEdit();
 
 		Thread.sleep(2000);
 		Inquiry.getvisitorname().clear();
 		Inquiry.getvisitorname().sendKeys(newvisitorname);
-		softAssert.assertFalse(newvisitorname.isEmpty(), "Visitor Name is required.");
-
 
 		Inquiry.getEdit().click();
 		Inquiry.getContactNo().clear();
 		Inquiry.getContactNo().sendKeys(newContactNo);
-		softAssert.assertFalse(newContactNo.isEmpty(), "Contact Number is required.");
 
 		Inquiry.getEmail().clear();
 		Inquiry.getEmail().sendKeys(newEmail);
@@ -126,7 +103,7 @@ public class InquiryTest extends base {
 	}
 
 	//Delete Inquiry
-	@Test(dataProvider="InquirydeleteData")
+	@Test(dataProvider="InquiryDeleteData")
 	public void Delete_Inquiry(int iteration) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -234,7 +211,78 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
 	}
-	
+
+	//Add Inquiry Test Mandatory Filed Validation
+	@Test
+	public void Add_Inquiry_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getaddInquiry().click();
+		Inquiry.getsave().click();
+		Thread.sleep(2000);
+
+		WebElement Visitsiteproject =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
+		Assert.assertEquals(Visitsiteproject.getText(), "Visit Site/Project is required.");
+
+		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
+		Assert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
+
+		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
+		Assert.assertEquals(Intime.getText(), "In time is required.");
+
+		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
+		Assert.assertEquals(Outtime.getText(), "Out time is required.");
+
+		WebElement Attedee =driver.findElement(By.xpath("//span[normalize-space()='Attendee is required.']"));
+		Assert.assertEquals(Attedee.getText(), "Attendee is required.");
+
+		WebElement ContactNo =driver.findElement(By.xpath("//span[normalize-space()='Contact Number is required.']"));
+		Assert.assertEquals(ContactNo.getText(), "Contact Number is required.");		
+	}
+
+	//Edit Inquiry Test Mandatory Filed Validation
+	@Test()
+	public void Edit_Inquiry_Test_Mandatory_Field_Validation() throws InterruptedException {
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.Getedit();
+		Thread.sleep(2000);
+
+		Inquiry.getIntime().click();
+		Inquiry.getOk().click();
+		Inquiry.getIntime().sendKeys(Keys.BACK_SPACE);
+		Inquiry.getIntime().sendKeys(Keys.BACK_SPACE);
+		Inquiry.getIntime().sendKeys(Keys.BACK_SPACE);
+		Inquiry.getIntime().sendKeys(Keys.BACK_SPACE);
+		Inquiry.getIntime().sendKeys(Keys.BACK_SPACE);
+		Inquiry.getIntime().sendKeys(Keys.TAB);
+
+		Inquiry.getBlankoutTime().sendKeys(Keys.DELETE);
+		Inquiry.getBlankoutTime().sendKeys(Keys.TAB);
+
+		Inquiry.getContactNo().click();
+
+		for(int i=1;i<=10;i++)
+		{
+			Inquiry.getContactNo().sendKeys(Keys.BACK_SPACE);
+		}
+		
+		Thread.sleep(2000);
+		Inquiry.getContactNo().sendKeys(Keys.TAB);
+
+		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
+		Assert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
+
+		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
+		Assert.assertEquals(Intime.getText(), "In time is required.");
+
+		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
+		Assert.assertEquals(Outtime.getText(), "Out time is required.");
+
+		WebElement ContactNo =driver.findElement(By.xpath("//span[normalize-space()='Contact Number is required.']"));
+		Assert.assertEquals(ContactNo.getText(), "Contact Number is required.");		
+	}
+
 	//Verify Add Inactive Attendee Inquiry
 	@Test()
 	public void Verify_Add_Inactive_Attendee_Inquiry() throws InterruptedException {
@@ -279,7 +327,7 @@ public class InquiryTest extends base {
 			}
 		}
 	}
-	
+
 	//Verify Add Active Attendee Inquiry
 	@Test()
 	public void Verify_Add_Active_Attendee_Inquiry() throws InterruptedException {
@@ -427,8 +475,7 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			{"Taj Mahal", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal1", "9746547979",
-			"Akash@mail.com", "Bopal Gam, Ahmedabad", "Remarks", "4BHK", "In Progress" }};
+			{"Taj Mahal","Mahesh Patel","","Vimal Patel"," Nilesh Panchal1","9746547979","Akash@mail.com","Bopal Gam, Ahmedabad","Remarks","4BHK","In Progress" }};
 	}
 
 	//DataProvider for Edit Inquiry
@@ -439,9 +486,9 @@ public class InquiryTest extends base {
 
 	//DataProvider Delete Inquiry
 	@DataProvider
-	public Object[][] InquirydeleteData() {
+	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{ 1 },{ 2 },{ 3 },{ 4 }};// Just a placeholder for multiple runs	
+				{{ 1 },{ 2 },{ 3 },{ 4 }};	
 	}
 
 	//DataProvider for Apply Filter for Project

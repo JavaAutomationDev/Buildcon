@@ -22,7 +22,8 @@ public class ProjectPage {
 		return driver.findElement(Project);
 	}
 	//Page object for Add Project
-	By AddProject=By.xpath("//span[contains(text(),'add new project')]");
+	By AddProject=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/app-projects/div/div[1]/div[2]/button");
 	public WebElement getaddproject() {
 		return driver.findElement(AddProject);
 	}
@@ -303,6 +304,7 @@ public class ProjectPage {
 	public WebElement getNextbtn2() {
 		return driver.findElement(nextbtn2);
 	}
+	
 	//SAC Configurations
 	//Page object for Property Type
 	By propertyType=By.xpath("//mat-select[@formcontrolname='propertyType']");
@@ -356,7 +358,7 @@ public class ProjectPage {
 		return driver.findElement(Savebtn);
 	}
 	
-    //Block configuration
+    //Block Configuration
 	//Page object for Add Project Block
 	By addprojectblock=By.xpath("//*[@id=\"cdk-step-content-0-5\"]/div/div[1]/vex-unit-block-list/div/button");	
 	public WebElement getAddProjectBlock() {
@@ -382,13 +384,6 @@ public class ProjectPage {
 	By create=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-configure-unit-block/div/mat-dialog-actions/button[1]");	
 	public WebElement getCreate() {
 		return driver.findElement(create);
-	}
-	
-	//Page object for Toster Message
-	//This project name is already in use. Please choose a different name.
-	By toaster=By.xpath("");	
-	public WebElement getToaster() {
-		return driver.findElement(toaster);
 	}
 	
 	//Page object for Edit Button
@@ -438,4 +433,22 @@ public class ProjectPage {
 		return driver.findElement(editnext);
 	}
 	
+	//Page object for Get Edit Next
+	public void GetEditNext()
+	{
+		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-projects/div/div[2]/div/div/table/tbody/tr[1]/td[11]/div/a[2]/span[4]")).click();
+		WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[2]/button"));
+		a.click();	
+	}
+	
+	//Page object for Add new Project click for assert
+	By projectclick = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/mat-step-header");
+	public WebElement getProjectClick() {
+		return driver.findElement(projectclick);
+	}
+	//Page object for Project name for assert
+	By projectnameassert = By.xpath("//input[@formcontrolname='projectName']");
+	public WebElement getProjectNameAssert() {
+		return driver.findElement(projectnameassert);
+	}
 }

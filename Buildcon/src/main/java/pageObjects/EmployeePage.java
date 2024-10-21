@@ -55,6 +55,7 @@ public class EmployeePage {
 	public WebElement getDesignation() {
 		return driver.findElement(Designation);
 	}
+
 	//Page object for DOB
 	By dob= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-save/div/form/"
 			+ "mat-dialog-content/div[2]/div[4]/div/div[3]/mat-form-field/div[1]/div[2]/div[2]/input");
@@ -137,8 +138,7 @@ public class EmployeePage {
 		return driver.findElement(Gender);
 	}
 	//Page object for Next Button
-	By Nextbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/"
-			+ "app-employee-save/div/form/mat-dialog-actions/button[1]");
+	By Nextbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-save/div/form/mat-dialog-actions/button[2]");
 	public WebElement Nextbtn() {
 		return driver.findElement(Nextbtn);
 	}	

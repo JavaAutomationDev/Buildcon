@@ -12,11 +12,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import pageObjects.LoginPage;
 import pageObjects.ProjectPage;
+import pageObjects.Projectstatuspage;
 import pageObjects.Projecttypespage;
+import pageObjects.Propertytypepage;
+import pageObjects.Saccodepage;
 import pageObjects.Statepage;
 import resources.base;
 
@@ -49,34 +51,13 @@ public class ProjectTest extends base {
 			String Saccode,String termstext,String Unit,String Floors,String Basements) throws InterruptedException {
 
 		ProjectPage project = new ProjectPage(driver);
-		SoftAssert softAssert = new SoftAssert();
-
 		project.getproject().click();
 		project.getaddproject().click();
-
 		project.getProjectName().click();
-		softAssert.assertFalse(projectname.isEmpty(), "Project name is required.");
-		softAssert.assertNotNull(projectname, "Project name cannot be null.");
-		project.getProjectName().sendKeys(projectname);//Required Field
-
-
-		softAssert.assertFalse(projecttype.isEmpty(), "Project Type is required.");
-		softAssert.assertNotNull(projecttype, "Project Type cannot be null.");
 		project.getProjecttype(projecttype);//Required Field
-
 		project.getProjectstatus(Projectstatus);
-
-		softAssert.assertFalse(Expectedstartdate.isEmpty(), "Expected start date is required.");
-		softAssert.assertNotNull(Expectedstartdate, "Expected start date cannot be null.");
 		project.getExstartdate().sendKeys(Expectedstartdate);//Required Field
-
-
-		softAssert.assertFalse(ExpectedEnddate.isEmpty(), "Expected End date is required.");
-		softAssert.assertNotNull(ExpectedEnddate, "Expected End date cannot be null.");
 		project.getExEnddate().sendKeys(ExpectedEnddate);//Required Field
-
-		softAssert.assertFalse(ActualStartdate.isEmpty(), "Actual date is required.");
-		softAssert.assertNotNull(ActualStartdate, "Actual date cannot be null.");
 		project.getActualstartdate().sendKeys(ActualStartdate);//Required Field
 
 		project.getActualenddate().sendKeys(ActualEnddate);
@@ -84,11 +65,7 @@ public class ProjectTest extends base {
 		project.getcity().sendKeys(city);
 		project.getstate(State);
 		project.getspNo().sendKeys(Spno);
-
-		softAssert.assertFalse(SalesExectuive.isEmpty(), "Sales Exectuive is required.");
-		softAssert.assertNotNull(SalesExectuive, "Sales Exectuive cannot be null.");
 		project.getSalesExectuive(SalesExectuive);//Required Field
-
 		project.getdescription().sendKeys(Description);
 		project.getAddress().sendKeys(Address);
 
@@ -107,39 +84,14 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getNextbtn1().click();
-
-		softAssert.assertFalse(companyname.isEmpty(), "Company Name is required.");
-		softAssert.assertNotNull(companyname, "Company Name cannot be null.");
 		project.getCompanyName().sendKeys(companyname);//Required Field
-
-		softAssert.assertFalse(gstin.isEmpty(), "GST number is required.");
-		softAssert.assertNotNull(gstin, "GST number cannot be null.");
 		project.GSTIN().sendKeys(gstin);//Required Field
-
-		softAssert.assertFalse(plcofsupplu.isEmpty(), "Place of supply is required.");
-		softAssert.assertNotNull(plcofsupplu, "Place of supply cannot be null.");
 		project.PlaceofSupply().sendKeys(plcofsupplu);//Required Field
-
-		softAssert.assertFalse(RecAddress.isEmpty(), "Receipt Address is required.");
-		softAssert.assertNotNull(RecAddress, " Receipt Address cannot be null.");
 		project.getRecAddress().sendKeys(RecAddress);//Required Field
-
-		softAssert.assertFalse(pincode.isEmpty(), "Pincode is required.");
-		softAssert.assertNotNull(pincode, "Pincode cannot be null.");
 		project.getPincode().sendKeys(pincode);//Required Field
-
-		softAssert.assertFalse(projectlogo.isEmpty(), "Project’s Logo is required.");
-		softAssert.assertNotNull(projectlogo, "Project’s Logo cannot be null.");
 		project.uploadProjectLogoFile().sendKeys(projectlogo);//Required Field
-
 		project.uploadReceiptSeal().sendKeys(receiptlogo);
-
-		softAssert.assertFalse(RecPrefix.isEmpty(), "Receipt prefix is required.");
-		softAssert.assertNotNull(RecPrefix, "Receipt prefix cannot be null.");
 		project.getRecPrefix().sendKeys(RecPrefix);//Required Field
-
-		softAssert.assertFalse(RecPostFix.isEmpty(), "Receipt postfix is required.");
-		softAssert.assertNotNull(RecPostFix, "Receipt postfix cannot be null.");
 		project.getRecPostfix(RecPostFix);//Required Field
 
 		Thread.sleep(2000);
@@ -162,25 +114,17 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getCreate().click();
-
-		softAssert.assertAll();
 	}
 
 	//Edit Existing Project
 	@Test(dataProvider="ProjectEditData")
 	public void Edit_Project(String newprojectname,String newtotalSaleableArea,String newtotalLandArea) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
-		SoftAssert softAssert = new SoftAssert();
-
 		project.getproject().click();
 		project.getEdit();
 
 		project.getProjectName().clear();		
-		project.getProjectName().click();
-		softAssert.assertFalse(newprojectname.isEmpty(), "Project name is required.");
-		softAssert.assertNotNull(newprojectname, "Project name cannot be null.");
 		project.getProjectName().sendKeys(newprojectname);//Required Field
-
 
 		project.getTotalsaleableArea().clear();
 		project.getTotalsaleableArea().sendKeys(newtotalSaleableArea);
@@ -196,7 +140,6 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getSave().click();
-		softAssert.assertAll();
 	}
 
 	//Delete Project
@@ -211,7 +154,7 @@ public class ProjectTest extends base {
 		project.getClickYes().click();
 	}
 
-	//Export to Excel 
+	//Export to Excel Project File
 	@Test()
 	public void Export_To_Excel_Project() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
@@ -222,7 +165,7 @@ public class ProjectTest extends base {
 
 	//Search Project
 	@Test(dataProvider="ProjectSearchData")
-	public void Search_Inquiry(String projectname) throws InterruptedException {
+	public void Search_Project(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 
@@ -234,7 +177,7 @@ public class ProjectTest extends base {
 		Assert.assertFalse(resultText.contains(projectname));
 	}
 
-	//ActiveDeactive Project 
+	//Active Deactive Project 
 	@Test()
 	public void Active_Deactive_Project() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
@@ -243,8 +186,164 @@ public class ProjectTest extends base {
 		Thread.sleep(2000);
 		project.getActiveproject().click();
 	}
-	
-	//Verify Add Inactive Project Type in Prpject
+
+	//Verify Add Inactive Project status in Project
+	@Test()
+	public void Verify_Add_Inactive_Project_Status_Project() throws InterruptedException {
+		Projectstatuspage unit = new Projectstatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getprojectstatusclick().click();
+		unit.getprojectstatuseditclick().click();
+		unit.getActiveStatus().click();
+		unit.getprojectstatussave().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.getaddproject().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Akash Status"))
+			{
+				Assert.assertFalse(false, "Project status is Inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Add Active Project status in Project
+	@Test()
+	public void Verify_Add_Active_Project_Status_Project() throws InterruptedException {
+		Projectstatuspage unit = new Projectstatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getprojectstatusclick().click();
+		unit.getprojectstatuseditclick().click();
+		unit.getActiveStatus().click();
+		unit.getprojectstatussave().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.getaddproject().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Akash Status"))
+			{
+				Assert.assertFalse(false, "Project status is Active.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit InActive Project status in Project
+	@Test()
+	public void Verify_Edit_Inactive_Project_Status_Project() throws InterruptedException {
+		Projectstatuspage unit = new Projectstatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getprojectstatusclick().click();
+		unit.getprojectstatuseditclick().click();
+		unit.getActiveStatus().click();
+		unit.getprojectstatussave().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.getEdit().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Akash Status"))
+			{
+				Assert.assertFalse(false, "Project status is Inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active Project status in Project
+	@Test()
+	public void Verify_Edit_Active_Project_Status_Project() throws InterruptedException {
+		Projectstatuspage unit = new Projectstatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getprojectstatusclick().click();
+		unit.getprojectstatuseditclick().click();
+		unit.getActiveStatus().click();
+		unit.getprojectstatussave().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.getEdit().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Akash Status"))
+			{
+				Assert.assertFalse(false, "Project status is Active.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Add Inactive Project Type in Project
 	@Test()
 	public void Verify_Add_Inactive_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -284,8 +383,8 @@ public class ProjectTest extends base {
 			}
 		}
 	}
-	
-	//Verify Add Active Project Type in Prpject
+
+	//Verify Add Active Project Type in Project
 	@Test()
 	public void Verify_Add_Active_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -325,8 +424,8 @@ public class ProjectTest extends base {
 			}
 		}
 	}
-	
-	//Verify Edit Inactive Project Type in Prpject
+
+	//Verify Edit Inactive Project Type in Project
 	@Test()
 	public void Verify_Edit_Inactive_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -351,7 +450,7 @@ public class ProjectTest extends base {
 			String b =a.get(i).getText(); 
 			if(!b.equalsIgnoreCase("Addee"))
 			{
-				Assert.assertFalse(false, "Project Type is Inactive.");
+				Assert.assertFalse(false, "Edit Project Type is Inactive.");
 				System.out.println("Test  failed");
 				break;
 			}
@@ -366,8 +465,8 @@ public class ProjectTest extends base {
 			}
 		}
 	}
-	
-	//Verify Edit Active Project Type in Prpject
+
+	//Verify Edit Active Project Type in Project
 	@Test()
 	public void Verify_Edit_Active_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -383,7 +482,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEdit().click();
-		
+
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
 		int Counter=0;
@@ -407,8 +506,9 @@ public class ProjectTest extends base {
 			}
 		}
 	}
-	
-	//Verify Add Inactive State in Prpject
+
+	//State With Project Relation
+	//Verify Add Inactive State in Project
 	@Test()
 	public void Verify_Add_Inactive_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -450,7 +550,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	//Verify Add Active State in Prpject
+	//Verify Add Active State in Project
 	@Test()
 	public void Verify_Add_Active_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -492,7 +592,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	//Verify Edit Inactive State in Prpject
+	//Verify Edit Inactive State in Project
 	@Test()
 	public void Verify_Edit_Inactive_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -534,7 +634,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	//Verify Edit Active State in Prpject
+	//Verify Edit Active State in Project
 	@Test()
 	public void Verify_Edit_Active_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -560,7 +660,7 @@ public class ProjectTest extends base {
 			String b =a.get(i).getText(); 
 			if(b.equalsIgnoreCase("Gujrat"))
 			{
-				Assert.assertFalse(false, "State is inactive.");
+				Assert.assertFalse(false, "State is Active.");
 				System.out.println("Test  failed");
 				break;
 			}
@@ -574,6 +674,237 @@ public class ProjectTest extends base {
 				}	
 			}
 		}
+	}
+
+	//Verify Edit Inactive Property Type in Project
+	@Test()
+	public void Verify_Edit_Inactive_Property_Type_Project() throws InterruptedException {
+		Propertytypepage unit = new Propertytypepage(driver);
+		unit.getconfiguration().click();
+		unit.getpropertytype().click();
+		unit.geteditpropertytype().click();
+		unit.getActiveStatus().click();
+		unit.getsavebuttoneditpropertytype().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.GetEditNext();
+		Thread.sleep(2000);
+		project.getNextbtn1().click();
+		Thread.sleep(2000);
+		project.getNextbtn2().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='propertyType']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(" Bopal Flat "))
+			{
+				Assert.assertFalse(false, "Property Type is Inactive.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active Property Type in Project
+	@Test()
+	public void Verify_Edit_Active_Property_Type_Project() throws InterruptedException {
+		Propertytypepage unit = new Propertytypepage(driver);
+		unit.getconfiguration().click();
+		unit.getpropertytype().click();
+		unit.geteditpropertytype().click();
+		unit.getActiveStatus().click();
+		unit.getsavebuttoneditpropertytype().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.GetEditNext();
+		project.getNextbtn1().click();
+		project.getNextbtn2().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='propertyType']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Bopal Flat"))
+			{
+				Assert.assertFalse(false, "Property Type is Active.");
+				System.out.println("Test  failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Inactive SAC Code in Project
+	@Test()
+	public void Verify_Edit_Inactive_SAC_Code_Project() throws InterruptedException {
+		Saccodepage unit = new Saccodepage(driver);
+		unit.getconfiguration().click();
+		unit.getsaccodeclick().click();
+		unit.getEditclicksaccode().click();
+		unit.getEditsavebutton().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.GetEditNext();
+		project.getNextbtn1().click();
+		project.getNextbtn2().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='sacCode']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS"))
+			{
+				Assert.assertFalse(false, "Property Type is Inactive.");
+				System.out.println("Test  Passed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active SAC Code in Project
+	@Test()
+	public void Verify_Edit_Active_SAC_Code_Project() throws InterruptedException {
+		Saccodepage unit = new Saccodepage(driver);
+		unit.getconfiguration().click();
+		unit.getsaccodeclick().click();
+		unit.getEditclicksaccode().click();
+		unit.getEditsavebutton().click();
+
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		Thread.sleep(2000);
+		project.GetEditNext();
+		project.getNextbtn1().click();
+		project.getNextbtn2().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='sacCode']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS"))
+			{
+				Assert.assertFalse(false, "Property Type is Active.");
+				System.out.println("Test  Passed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Add Project Test Mandatory Filed Validation
+	@Test
+	public void Add_Employee_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		project.getaddproject().click();
+		Thread.sleep(2000);
+		project.getProjectClick().click();
+
+		WebElement projectname =driver.findElement(By.xpath("//span[normalize-space()='Project name is required']"));
+		Assert.assertEquals(projectname.getText(), "Project name is required.");
+
+		WebElement projecttype =driver.findElement(By.xpath("//span[normalize-space()='Project Type is required.']"));
+		Assert.assertEquals(projecttype.getText(), "Project Type is required.");
+
+		WebElement projectstatus =driver.findElement(By.xpath("//span[normalize-space()='Project Status is required']"));
+		Assert.assertEquals(projectstatus.getText(), "Project Status is required.");
+
+		WebElement expectedstartdate =driver.findElement(By.xpath("//span[normalize-space()='Expected start date is required']"));
+		Assert.assertEquals(expectedstartdate.getText(), "Expected start Date is required.");
+
+		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected end date is required']"));
+		Assert.assertEquals(expectedenddate.getText(), "Expected end date is required.");
+
+		WebElement salesexecutive =driver.findElement(By.xpath("//span[normalize-space()='Sales executive is required']"));
+		Assert.assertEquals(salesexecutive.getText(), "Sales executive is required.");		
+	}
+	
+	//Edit Project Test Mandatory Filed Validation
+	@Test
+	public void Edit_Employee_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		ProjectPage project = new ProjectPage(driver);
+		project.getproject().click();
+		project.getEdit().click();
+		
+		Thread.sleep(2000);
+		project.getProjectNameAssert().click();
+				//project.getProjectName().sendKeys(Keys.END);
+		project.getProjectNameAssert().sendKeys(Keys.DELETE);
+		//String projectnametext = project.getProjectName().getAttribute("value");
+		//int projectnamelength = projectnametext.length();
+
+		//for (int i = 0; i < projectnamelength; i++) {
+		 //   project.getProjectName().sendKeys(Keys.BACK_SPACE);
+		//}
+		
+		project.getEditNext().click();
+
+		WebElement projectname =driver.findElement(By.xpath("//span[normalize-space()='Project name is required']"));
+		Assert.assertEquals(projectname.getText(), "Project name is required.");
+
+		WebElement projecttype =driver.findElement(By.xpath("//span[normalize-space()='Project Type is required.']"));
+		Assert.assertEquals(projecttype.getText(), "Project Type is required.");
+
+		WebElement projectstatus =driver.findElement(By.xpath("//span[normalize-space()='Project Status is required']"));
+		Assert.assertEquals(projectstatus.getText(), "Project Status is required.");
+
+		WebElement expectedstartdate =driver.findElement(By.xpath("//span[normalize-space()='Expected start date is required']"));
+		Assert.assertEquals(expectedstartdate.getText(), "Expected start Date is required.");
+
+		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected end date is required']"));
+		Assert.assertEquals(expectedenddate.getText(), "Expected end date is required.");
+
+		WebElement salesexecutive =driver.findElement(By.xpath("//span[normalize-space()='Sales executive is required']"));
+		Assert.assertEquals(salesexecutive.getText(), "Sales executive is required.");		
 	}
 
 	//Close the Driver

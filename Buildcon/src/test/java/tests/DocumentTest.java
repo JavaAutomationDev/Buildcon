@@ -75,7 +75,7 @@ public class DocumentTest extends base {
 		driver.close();
 	}	
 
-	//Add Document
+	//DataProvider Add Document
 	@DataProvider
 	public Object[][] DocumentAddData() {
 		return new Object[][] {
@@ -93,6 +93,6 @@ public class DocumentTest extends base {
 	@DataProvider
 	public Object[][] DocumentSearchData() {
 		return new Object[][] {
-			{}};
+			{ }};
 	}
 }
