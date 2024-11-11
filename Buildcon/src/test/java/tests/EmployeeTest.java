@@ -1,6 +1,7 @@
 package tests;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ import org.testng.annotations.Test;
 
 import pageObjects.EmployeePage;
 import pageObjects.LoginPage;
+import pageObjects.Rolepage;
 import resources.base;
 
 public class EmployeeTest extends base {
@@ -37,7 +39,6 @@ public class EmployeeTest extends base {
 
 	//Add Employee with All Modules - All Roles
 	@Test(dataProvider="EmployeeAddData")
-
 	public void Add_Employee_All_Roles(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
@@ -478,7 +479,7 @@ public class EmployeeTest extends base {
 		//WebElement Gender =driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-save/div/form/mat-dialog-content/div[3]/div[1]/mat-error"));
 		//Assert.assertEquals(Gender.getText(), "Gender is required.");		
 	}
-	
+
 	//Edit Employee Test Mandatory Filed Validation
 	@Test(dataProvider="EmployeeSearchData")
 	public void Edit_Employee_Test_Mandatory_Filed_Validation(String Firstname) throws InterruptedException {
@@ -486,7 +487,7 @@ public class EmployeeTest extends base {
 		employee.getEmployee().click();
 		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
 		employee.getEdit().click();
-		
+
 		employee.getfname().sendKeys(Keys.END);
 		for(int i=1;i<=10;i++)
 		{
@@ -496,25 +497,25 @@ public class EmployeeTest extends base {
 		for (int i = 0; i < 4; i++) {
 			employee.getlname().sendKeys(Keys.BACK_SPACE);
 		}
-		
+
 		employee.getEmail().sendKeys(Keys.END);
 		String emailText = employee.getEmail().getAttribute("value");
 		int emailLength = emailText.length();
 
 		for (int i = 0; i < emailLength; i++) {
-		    employee.getEmail().sendKeys(Keys.BACK_SPACE);
+			employee.getEmail().sendKeys(Keys.BACK_SPACE);
 		}
-		
+
 		employee.getMobileno().sendKeys(Keys.END);
 		String mobiletext=employee.getMobileno().getAttribute("value");
 		int mobileLength=mobiletext.length();
 
 		for (int i = 0; i < mobileLength; i++) {
-		    employee.getMobileno().sendKeys(Keys.BACK_SPACE);
+			employee.getMobileno().sendKeys(Keys.BACK_SPACE);
 		}
-		
+
 		employee.getPassword().sendKeys(Keys.TAB);
-		
+
 		WebElement firstname =driver.findElement(By.xpath("//span[normalize-space()='First Name is required.']"));
 		Assert.assertEquals(firstname.getText(), "First Name is required.");
 
@@ -528,19 +529,110 @@ public class EmployeeTest extends base {
 		Assert.assertEquals(Mobile.getText(), "Mobile No is required.");		
 	}
 
+	//Active Inactive Roles
+	//Verify Add Inactive Roles
+	@Test()
+	public void Verify_Add_Inactive_Roles() throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Thread.sleep(2000);
+		Role.getEditRolebuttonclick().click();
+		Thread.sleep(2000);
+		Role.getaddrolename().sendKeys(Keys.TAB);
+		Thread.sleep(2000);
+		Role.getActiveInactiveRoles().click();
+		Role.geteditsavebuttonrole().click();
+
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+		employee.getaddemployee().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Adminnewside"))
+			{
+				Assert.assertFalse(false, "Roles is inactive.");
+				System.out.println("Test Failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Add Active Roles
+	@Test()
+	public void Verify_Add_Active_Inquiry_Status() throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Thread.sleep(2000);
+		Role.getEditRolebuttonclick().click();
+		Thread.sleep(2000);
+		Role.getaddrolename().sendKeys(Keys.TAB);
+		Thread.sleep(2000);
+		Role.getActiveInactiveRoles().click();
+		Role.geteditsavebuttonrole().click();
+
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+		employee.getaddemployee().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase("Adminnewside"))
+			{
+				Assert.assertTrue(true, "Role is Active.");
+				System.out.println("Test Pass");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");
+					break;
+				}	
+			}
+		}
+	}
+	
+	
+
 	//Close the driver
 	@AfterMethod()
 	public void teardown() {
-		driver.close();
+		//driver.close();
 	}
 
 	//DataProvider for Add Employee
 	@DataProvider
 	public Object[][] EmployeeAddData() {
 		return new Object[][] {
-			{"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","Automation","QA","Test","Automation","SDET","06/09/2006","akash20@mailinator.com",
-				"","Ahmedabad","Goa","9865321254","Sit@321#","Ambli,Bopal gam"," marin drive lake view ",
-				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png"}};
+			//{"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","Automation","QA","Test","Automation","SDET","06/09/2006",
+				//"akash20@mailinator.com","","Ahmedabad","Goa","9865321254","Sit@321#","Ambli,Bopal gam"," marin drive lake view ",
+				//"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png"}
+			{"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","Parth","SDET","Patel","Admin","SDETQA","11/10/2006",
+				"pp@yopmail.com","","Ahmedabad","Gujrat","8754210232","Sit@321#","Ghuma,Ahmedabad"," marin drive lake view ",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png"}
+		};
 	}
 
 	//DataProvider for Edit Employee

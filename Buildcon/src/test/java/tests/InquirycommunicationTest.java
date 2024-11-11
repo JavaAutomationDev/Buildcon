@@ -34,61 +34,60 @@ public class InquirycommunicationTest extends base {
 	// Add inquiry communication types
 	@Test(dataProvider = "getAdddata")
 	public void Add_inquirycommunication(String Inquirycommunication1 ) throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getInquirycommunicationmodeadd().click();
-		unit.getAddNewInquiryCommunicationMode().sendKeys(Inquirycommunication1);
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getInquirycommunicationmodeadd().click();
+		Communication.getAddNewInquiryCommunicationMode().sendKeys(Inquirycommunication1);
 		Thread.sleep(1000);
-		unit.getsavebuttoninquirycommunication().click();
+		Communication.getsavebuttoninquirycommunication().click();
 	}
-	// Edit project types
-
+	//Edit project types
 	@Test(dataProvider = "getEditdata")
 	public void Edit_inquirycommunication(String EditInquirycommunication1) throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getEditinquirycommunicationrow().click();
-		unit.getEditInquiryCommunicationMode().clear();
-		unit.getEditInquiryCommunicationMode().sendKeys(EditInquirycommunication1);
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getEditinquirycommunicationrow().click();
+		Communication.getEditInquiryCommunicationMode().clear();
+		Communication.getEditInquiryCommunicationMode().sendKeys(EditInquirycommunication1);
 		Thread.sleep(3000);
-		unit.geteditsavebuttoninquirycommunication().click();
+		Communication.geteditsavebuttoninquirycommunication().click();
 	}
 
 	@Test
 	public void statuschange_inquirycommunication() throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getchangestatusinquirycommunication().click();
-		unit.getchangestatusconfirmationinquirycommunication().click();
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getchangestatusinquirycommunication().click();
+		Communication.getchangestatusconfirmationinquirycommunication().click();
 	}
 
 	@Test
 	public void Delete_inquirycommunication() throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getdeleteclickinquirycommunication().click();
-		unit.getdeleteclickconfirmationinquirycommunication().click();
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getdeleteclickinquirycommunication().click();
+		Communication.getdeleteclickconfirmationinquirycommunication().click();
 	}
 
 	@Test(dataProvider = "getsearcheds")
 	public void searching_inquirycommunication(String searchedentertextinquiry1) throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getsearchinquirycommunication().sendKeys(searchedentertextinquiry1);
-		unit.getclicksearchedbuttoninquirycommunication().click();
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getsearchinquirycommunication().sendKeys(searchedentertextinquiry1);
+		Communication.getclicksearchedbuttoninquirycommunication().click();
 	}
 	
 	@Test
 	public void exportexcel_inquirycommunication() throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getclickexportasexcelinquirycommunication().click();
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getclickexportasexcelinquirycommunication().click();
 	}
 
 	@DataProvider

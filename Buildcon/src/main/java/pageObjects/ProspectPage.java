@@ -123,14 +123,11 @@ public class ProspectPage {
 	public void getAttendee(String Attendee) {
 		WebElement dropdown = driver.findElement(Attende);
 		dropdown.click();
-		//Construct the XPath for the desired option
-		String optionXPath = "//mat-option//span[contains(text(),'" + Attendee + "')]";
-		WebElement option = driver.findElement(By.xpath(optionXPath));
-		
 		base.failedElement = dropdown;
 		base.failedElementName = "Prospect-getAttendee";
 		
-		
+		String optionXPath = "//mat-option//span[contains(text(),'" + Attendee + "')]";
+		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
 
@@ -299,12 +296,10 @@ public class ProspectPage {
 	public void getSelectFlat(String Selectflat) {
 		WebElement dropdown = driver.findElement(SelectFlat);
 		dropdown.click();
-		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Selectflat + "')]";  
-		WebElement option = driver.findElement(By.xpath(optionXPath));
-		
 		base.failedElement = dropdown;
 		base.failedElementName = "Prospect-getSelectFlat";
-
+		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Selectflat + "')]";  
+		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
 }

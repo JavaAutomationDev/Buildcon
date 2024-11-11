@@ -15,6 +15,9 @@ import org.testng.annotations.Test;
 
 import pageObjects.EmployeePage;
 import pageObjects.InquiryPage;
+import pageObjects.InquiryResponsepage;
+import pageObjects.Inquirycommunicationmodepage;
+import pageObjects.Inquirystatuspage;
 import pageObjects.LoginPage;
 import resources.base;
 
@@ -266,7 +269,7 @@ public class InquiryTest extends base {
 		{
 			Inquiry.getContactNo().sendKeys(Keys.BACK_SPACE);
 		}
-		
+
 		Thread.sleep(2000);
 		Inquiry.getContactNo().sendKeys(Keys.TAB);
 
@@ -465,17 +468,411 @@ public class InquiryTest extends base {
 		}
 	}
 
+	//Active Inactive Inquiry Status
+	//Verify Add Inactive Inquiry Status
+	@Test()
+	public void Verify_Add_Inactive_Inquiry_Status() throws InterruptedException {
+		Inquirystatuspage unit = new Inquirystatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getInquirystatusclick().click();
+		unit.getEditInquirystatus().click();
+		Thread.sleep(2000);
+		unit.getInquiryActiveInactive().click();
+		Thread.sleep(2000);
+		unit.getEditInquirystatussave().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getaddInquiry().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='statusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Akash Inquiry"))
+			{
+				Assert.assertFalse(false, "Inquiry Status is inactive.");
+				System.out.println("Test Failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Add Active Inquiry Status
+	@Test()
+	public void Verify_Add_Active_Inquiry_Status() throws InterruptedException {
+		Inquirystatuspage unit = new Inquirystatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getInquirystatusclick().click();
+		unit.getEditInquirystatus().click();
+		Thread.sleep(2000);
+		unit.getInquiryActiveInactive().click();
+		Thread.sleep(2000);
+		unit.getEditInquirystatussave().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click(); 
+		Inquiry.getaddInquiry().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='statusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase("Akash Inquiry"))
+			{
+				Assert.assertTrue(true, "Inquiry Status is Active.");
+				System.out.println("Test Pass");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Inactive Inquiry Status
+	@Test()
+	public void Verify_Edit_Inactive_Inquiry_Status() throws InterruptedException {
+		Inquirystatuspage unit = new Inquirystatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getInquirystatusclick().click();
+		unit.getEditInquirystatus().click();
+		Thread.sleep(2000);
+		unit.getInquiryActiveInactive().click();
+		Thread.sleep(2000);
+		unit.getEditInquirystatussave().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getEdit();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='statusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Automation Test"))
+			{
+				Assert.assertFalse(false, "Inquiry Status is inactive.");
+				System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active Inquiry Status
+	@Test()
+	public void Verify_Edit_Active_Inquiry_Status() throws InterruptedException {
+		Inquirystatuspage unit = new Inquirystatuspage(driver);
+		unit.getconfiguration().click();
+		unit.getInquirystatusclick().click();
+		unit.getEditInquirystatus().click();
+		Thread.sleep(2000);
+		unit.getInquiryActiveInactive().click();
+		Thread.sleep(2000);
+		unit.getEditInquirystatussave().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click(); 
+		Inquiry.getEdit().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='statusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase("Akash Inquiry"))
+			{
+				Assert.assertTrue(true, "Inquiry Status is Active.");
+				System.out.println("Test Pass");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");
+					Assert.assertTrue(false, "Attende is InActive.");
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Verify Edit Inactive Inquiry Response Type
+	@Test()
+	public void Verify_Edit_Inactive_Inquiry_response_Type() throws InterruptedException {
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Thread.sleep(2000);
+		Iresponse.getInquiryResponsepageclick().click();
+		Thread.sleep(2000);
+		Iresponse.getEditinquiryresponsetype().click();
+		Thread.sleep(2000);
+		Iresponse.getInquiryActiveInactive().click();
+		Thread.sleep(2000);
+		Iresponse.getEditinquiryresponsesave().click();
+		Thread.sleep(2000);
+		
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getmissingfollowup().click();
+		Inquiry.getMissingFollowUpEditBtn().click();
+		Inquiry.getFollowUpDetails().click();
+		Inquiry.getAddFollowDetails().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='responseTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Nishant"))
+			{
+				Assert.assertFalse(false, "Inquiry Response Type is inactive.");
+				System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active Inquiry Response Type
+	@Test()
+	public void Verify_Edit_Active_Inquiry_Resposne_Type() throws InterruptedException {
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Thread.sleep(2000);
+		Iresponse.getInquiryResponsepageclick().click();
+		Thread.sleep(2000);
+		Iresponse.getEditinquiryresponsetype().click();
+		Thread.sleep(2000);
+		Iresponse.getInquiryActiveInactive().click();
+		Thread.sleep(2000);
+		Iresponse.getEditinquiryresponsesave().click();
+		Thread.sleep(2000);
+		
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getmissingfollowup().click();
+		Inquiry.getMissingFollowUpEditBtn().click();
+		Inquiry.getFollowUpDetails().click();
+		Inquiry.getAddFollowDetails().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='responseTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Nishant"))
+			{
+				Assert.assertFalse(false, "Inquiry Response Type is Active.");
+				System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Inquiry Communcation mode
+	//Verify Edit Inactive Inquiry Communcation mode
+		@Test()
+		public void Verify_Edit_Inactive_Inquiry_Communcation_mode() throws InterruptedException {
+			Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+			Communication.getconfiguration().click();
+			Communication.getInquirycommunicationmodepageclick().click();
+			Communication.getEditinquirycommunicationrow().click();
+			Thread.sleep(2000);
+			Communication.getActiveInactive().click();
+			Thread.sleep(2000);
+			Communication.geteditsavebuttoninquirycommunication().click();
+			Thread.sleep(2000);
+			
+			InquiryPage Inquiry = new InquiryPage(driver);
+			Inquiry.getInquiry().click();
+			Inquiry.getmissingfollowup().click();
+			Inquiry.getMissingFollowUpEditBtn().click();
+			Inquiry.getFollowUpDetails().click();
+			Inquiry.getAddFollowDetails().click();
+
+			driver.findElement(By.xpath("//mat-select[@formcontrolname='commTypeID']")).click();
+			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+			int Counter=0;
+			for(int i=0;i<a.size();i++)
+			{
+				String b =a.get(i).getText(); 
+				if(!b.equalsIgnoreCase("Akash"))
+				{
+					Assert.assertFalse(false, "Inquiry Communcation mode is inactive.");
+					System.out.println("Test failed");
+					break;
+				}
+				else
+				{
+					Counter = Counter+1;
+					if(Counter>a.size())
+					{
+						System.out.println("Test");	
+						break;
+					}	
+				}
+			}
+		}
+
+		//Verify Edit Active Inquiry Communcation mode
+		@Test()
+		public void Verify_Edit_Active_Inquiry_Communcation_mode() throws InterruptedException {
+			Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+			Communication.getconfiguration().click();
+			Communication.getInquirycommunicationmodepageclick().click();
+			Communication.getEditinquirycommunicationrow().click();
+			Thread.sleep(2000);
+			Communication.getActiveInactive().click();
+			Thread.sleep(2000);
+			Communication.geteditsavebuttoninquirycommunication().click();
+			Thread.sleep(2000);
+			
+			InquiryPage Inquiry = new InquiryPage(driver);
+			Inquiry.getInquiry().click();
+			Inquiry.getmissingfollowup().click();
+			Inquiry.getMissingFollowUpEditBtn().click();
+			Inquiry.getFollowUpDetails().click();
+			Inquiry.getAddFollowDetails().click();
+
+			driver.findElement(By.xpath("//mat-select[@formcontrolname='commTypeID']")).click();
+			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+			int Counter=0;
+			for(int i=0;i<a.size();i++)
+			{
+				String b =a.get(i).getText(); 
+				if(!b.equalsIgnoreCase("Akash"))
+				{
+					Assert.assertFalse(false, "Inquiry Communcation mode is Active.");
+					System.out.println("Test failed");
+					break;
+				}
+				else
+				{
+					Counter = Counter+1;
+					if(Counter>a.size())
+					{
+						System.out.println("Test");	
+						break;
+					}	
+				}
+			}
+		}
+
 	//Close the driver
 	@AfterMethod 
 	public void teardown() {
-		//driver.close(); 
+		driver.close(); 
 	}
 
 	//DataProvider for Add Inquiry
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			{"Taj Mahal","Mahesh Patel","","Vimal Patel"," Nilesh Panchal1","9746547979","Akash@mail.com","Bopal Gam, Ahmedabad","Remarks","4BHK","In Progress" }};
+			//{"Taj Mahal","Mahesh Patel","","Vimal Patel"," Nilesh Panchal1","9746547979","Akash@mail.com","Bopal Gam, Ahmedabad","Remarks","4BHK","In Progress" }
+			{"Project3","Nilesh Modi","","Vimal1"," Akash Patel ","9898100001","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal2"," Akash Patel ","9898100002","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal3"," Akash Patel ","9898100003","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal4"," Akash Patel ","9898100004","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal5"," Akash Patel ","9898100006","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal6"," Akash Patel ","9898100007","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal7"," Akash Patel ","9898100008","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal8"," Akash Patel ","9898100009","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal9"," Akash Patel ","98981000010","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal10"," Akash Patel ","98981000011","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Nilesh Modi","","Vimal11"," Akash Patel ","98981000012","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal12"," Akash Patel ","98981000013","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal13"," Akash Patel ","98981000014","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Nilesh Modi","","Vimal14"," Akash Patel ","98981000015","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal15"," Akash Patel ","98981000016","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal16"," Akash Patel ","98981000017","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal17"," Akash Patel ","98981000018","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal18"," Akash Patel ","98981000019","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal19"," Akash Patel ","98981000020","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal20"," Akash Patel ","98981000021","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal21"," Akash Patel ","98981000022","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal22"," Akash Patel ","98981000023","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal23"," Akash Patel ","98981000024","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal24"," Akash Patel ","98981000025","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal25"," Akash Patel ","98981000026","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Jaypalsinh Sarvaiya","","Vimal26"," Akash Patel ","98981000027","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal27"," Akash Patel ","98981000028","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal28"," Akash Patel ","98981000029","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal29"," Akash Patel ","98981000030","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal30"," Akash Patel ","98981000031","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Harpal Gohil","","Vimal31"," Akash Patel ","98981000032","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal32"," Akash Patel ","98981000033","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal33"," Akash Patel ","98981000034","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal34"," Akash Patel ","98981000035","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal35"," Akash Patel ","98981000036","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Harpal Gohil","","Vimal36"," Akash Patel ","98981000037","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal37"," Akash Patel ","98981000038","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Harpal Gohil","","Vimal38"," Akash Patel ","98981000039","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal39"," Akash Patel ","98981000040","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal40"," Akash Patel ","98981000041","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Ashok Solanki","","Vimal41"," Akash Patel ","98981000042","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal42"," Akash Patel ","98981000043","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal43"," Akash Patel ","98981000044","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal44"," Akash Patel ","98981000045","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal45"," Akash Patel ","98981000046","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
+			{"Project3","Ashok Solanki","","Vimal46"," Akash Patel ","98981000047","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal47"," Akash Patel ","98981000048","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal48"," Akash Patel ","98981000049","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal49"," Akash Patel ","98981000050","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+			{"Project3","Ashok Solanki","","Vimal50"," Akash Patel ","98981000051","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
+		};
 	}
 
 	//DataProvider for Edit Inquiry

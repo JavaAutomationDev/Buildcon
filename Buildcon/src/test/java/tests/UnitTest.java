@@ -87,17 +87,17 @@ public class UnitTest extends base {
 		unit.excelclick().click();
 		Thread.sleep(2000);
 	}
-	
+
 	//Enter the data on searched box:
 	@Test(dataProvider = "getentersearcheddata")
-		public void entersearched(String getsearchediteam) throws InterruptedException {
-			Unitpage unit = new Unitpage(driver);
-			unit.getconfiguration().click();
-			unit.getclickunit().click();
-			unit.getentertext().sendKeys(getsearchediteam);
-			Thread.sleep(2000);
-			unit.getrowsearched().click();
-			Thread.sleep(3000);
+	public void entersearched(String getsearchediteam) throws InterruptedException {
+		Unitpage unit = new Unitpage(driver);
+		unit.getconfiguration().click();
+		unit.getclickunit().click();
+		unit.getentertext().sendKeys(getsearchediteam);
+		Thread.sleep(2000);
+		unit.getrowsearched().click();
+		Thread.sleep(3000);
 	}
 
 	//Close the driver
@@ -117,7 +117,7 @@ public class UnitTest extends base {
 	public Object[][] getEditData() {
 		return new Object[][] { { "SapModule" } };
 	}
-	
+
 	@DataProvider
 	public Object[][] getentersearcheddata() {
 		return new Object[][] { { "Sq.feet" } };

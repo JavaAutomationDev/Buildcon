@@ -53,7 +53,8 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-		project.getProjectName().click();
+		
+		project.getProjectName().sendKeys(projectname);
 		project.getProjecttype(projecttype);//Required Field
 		project.getProjectstatus(Projectstatus);
 		project.getExstartdate().sendKeys(Expectedstartdate);//Required Field
@@ -84,8 +85,8 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getNextbtn1().click();
-		project.getCompanyName().sendKeys(companyname);//Required Field
-		project.GSTIN().sendKeys(gstin);//Required Field
+		project.getCompanyName().sendKeys(companyname);
+		project.GSTIN().sendKeys(gstin);
 		project.PlaceofSupply().sendKeys(plcofsupplu);//Required Field
 		project.getRecAddress().sendKeys(RecAddress);//Required Field
 		project.getPincode().sendKeys(pincode);//Required Field
@@ -107,6 +108,7 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getSave().click();
+		Thread.sleep(2000);
 		project.getAddProjectBlock().click();
 		project.getUnitBlock().sendKeys(Unit);
 		project.getNumberOfFloors().sendKeys(Floors);
@@ -877,14 +879,7 @@ public class ProjectTest extends base {
 		
 		Thread.sleep(2000);
 		project.getProjectNameAssert().click();
-				//project.getProjectName().sendKeys(Keys.END);
 		project.getProjectNameAssert().sendKeys(Keys.DELETE);
-		//String projectnametext = project.getProjectName().getAttribute("value");
-		//int projectnamelength = projectnametext.length();
-
-		//for (int i = 0; i < projectnamelength; i++) {
-		 //   project.getProjectName().sendKeys(Keys.BACK_SPACE);
-		//}
 		
 		project.getEditNext().click();
 
@@ -917,10 +912,16 @@ public class ProjectTest extends base {
 	@DataProvider
 	public Object[][] ProjectAddData() {
 		return new Object[][] {
-			{"Automation Project1","Commercial","Planning","","","","","10000","Goa","Goa","215"," Akash Patel ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
-				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year "," FLAT "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline the rights and responsibilities of both parties",
-				"B","15","Basement"}};
+			//{"Automation Project1","Commercial","Planning","","","","","10000","Goa","Goa","215"," Akash Patel ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+				//"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+				//"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year "," FLAT "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline the rights and responsibilities of both parties",
+				//"B","15","Basement"}
+			{"Project3","Residential","In process","","","","","10000","Ahmedabad","Gujrat","215"," Akash Patel ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","Flats"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+				"A","14","2"}
+				
+		};
 	}
 
 	//Edit Project Data

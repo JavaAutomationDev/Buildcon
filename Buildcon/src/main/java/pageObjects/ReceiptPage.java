@@ -60,6 +60,29 @@ public class ReceiptPage {
 		option.click();
 	}
 
+	//Page object for Payment Date 
+	public WebElement paymentdate() {
+		WebElement paymentdateElement = driver.findElement(By.xpath("//input[@formcontrolname='paymentDate']"));
+		  Calendar calendar = Calendar.getInstance();
+		    calendar.add(Calendar.DAY_OF_MONTH, +4);
+		    Date futureDate = calendar.getTime();
+		    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		    String formattedDate = formatter.format(futureDate);
+		    paymentdateElement.clear();
+		    paymentdateElement.sendKeys(formattedDate);
+		return paymentdateElement;
+	}
+	
+	//Page object for Calendar click
+	By calendarclick=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[1]/div[3]/div/div[2]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
+	public WebElement getCalendarClick() {
+		return driver.findElement(calendarclick);
+	}
+	//Page object for date selection
+	By dateselect=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[5]/button/span[1]");
+	public WebElement getDateSelect() {
+		return driver.findElement(dateselect);
+	}
 	//Page object for Next Btn
 	By nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button[2]");
@@ -79,7 +102,8 @@ public class ReceiptPage {
 			if (text.equalsIgnoreCase(BankName)) {
 				int a = i+1;
 				driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option["+a+"]")).click();
-				break;}
+				break;
+			}
 		}
 	}
 
@@ -89,7 +113,7 @@ public class ReceiptPage {
 		return driver.findElement(bankbranch);
 	}
 	//page object for Payment Type
-	By paymenttype=By.xpath("//mat-select[@formcontrolname='paymentType']");
+	By paymenttype=By.xpath("//mat-select[@formcontrolname='paymentTypeId']");
 	public void getPaymentType(String PaymentType) {
 		WebElement dropdown = driver.findElement(paymenttype);
 		dropdown.click();
@@ -103,9 +127,14 @@ public class ReceiptPage {
 		return driver.findElement(Impsno);
 	}
 	//Page object for Regular Cheque/Tran. Date
-	By regularchequetrandate =By.xpath("//input[@formcontrolname='rChequeTranDate']");
+	By regularchequetrandate =By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/form/div/form/div[1]/div/div[3]/div[1]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
 	public WebElement getRegularChequeTranDate() {
 		return driver.findElement(regularchequetrandate);
+	}
+	//Page object for Cheque Calendar date
+	By checquedate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[5]/button/span[1]");
+	public WebElement getChecqueDate() {
+		return driver.findElement(checquedate);
 	}
 
 	//Page object for Regular Amount
@@ -140,17 +169,31 @@ public class ReceiptPage {
 		return driver.findElement(TDSchallannumber);
 	}
 
-	//Page object for Challan Date
 	public WebElement challandate() {
-		WebElement challandateElement = driver.findElement(By.xpath("//input[@formcontrolname='tChequeTranDate']"));
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_MONTH,0);
-		Date tomorrow = calendar.getTime();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		String formattedDate = formatter.format(tomorrow);
-		challandateElement.sendKeys(formattedDate);
-		return challandateElement;
+		WebElement challandateElement = driver.findElement(By.xpath("//input[@formcontrolname='paymentDate']"));
+		  Calendar calendar = Calendar.getInstance();
+		    calendar.add(Calendar.DAY_OF_MONTH, 0);
+		    Date futureDate = calendar.getTime();
+		    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		    String formattedDate = formatter.format(futureDate);
+		    challandateElement.clear();
+		    challandateElement.sendKeys(formattedDate);
+		    
+		    challandateElement.sendKeys(Keys.ESCAPE);
+		    return challandateElement;
 	}
+	
+	//Page object for Challan Date
+//	By challandate=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div/form/div[1]/div/div[1]/div[2]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
+//	public WebElement challandate() {
+//        return driver.findElement(challandate);		
+//	}
+	//Page object for date selection
+	//By selectdate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/mat-month-view/table/tbody/tr[3]/td[5]/button/span[1]");
+	//public WebElement getSelectDate() {
+		//return driver.findElement(selectdate);
+	//}
+	
 
 	//Page object for Total Applicable TDS
 	By totalapplicableTDS=By.xpath("//input[@formcontrolname='totalApplicableTDS']");
@@ -224,8 +267,8 @@ public class ReceiptPage {
 		return driver.findElement(receivedGSTamount);
 	}
 	//Page object for Next Btn3
-	By nextbtn3=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[4]/div/div/div/form/div/form/div[2]/button[2]");
+	By nextbtn3=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
+			+ "main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div/form/div[2]/button[2]");
 	public WebElement getNextBtn3() {
 		return driver.findElement(nextbtn3);
 	}

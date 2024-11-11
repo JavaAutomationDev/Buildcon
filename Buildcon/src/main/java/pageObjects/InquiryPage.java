@@ -19,7 +19,6 @@ public class InquiryPage {
 
 	public InquiryPage(WebDriver driver) {
 		this.driver = driver;
-
 	}
 
 	//Page object for click Inquiry Module
@@ -53,7 +52,6 @@ public class InquiryPage {
 	public WebElement getvisitorname() {
 		return driver.findElement(visitorname);
 	}
-
 
 	//Page object for InTime
 	By InTime = By.xpath("//input[@formcontrolname='visitorInDT']");
@@ -176,10 +174,10 @@ public class InquiryPage {
 	}
 	//Page object for Edit Button
 	public WebElement getEdit() {
-		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
-				+ "/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]"
-				+ "/div/div/div/table/tbody/tr[1]/td[13]/div/a[1]/mat-icon"));
+		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+				+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[1]"));
 
+		
 		base.failedElement = Edit;
 		base.failedElementName = "getEdit Inquiry-Follow_Inquiry";
 
@@ -322,7 +320,23 @@ public class InquiryPage {
 	//Page object for Blank Out Time
 	By blankoutTime = By.xpath("//input[@id='mat-time-picker-1']");
 	public WebElement getBlankoutTime() {
-
 		return driver.findElement(blankoutTime);
 	}
+	//Page object for Missing follow up details Edit button
+	By missingfollowupeditbtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+				+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[3]/div/div/div/table/tbody/tr[1]/td[13]/div/a");
+	public WebElement getMissingFollowUpEditBtn() {
+		return driver.findElement(missingfollowupeditbtn);
+	}
+	//Page object for Follow up details 
+	By followupdetails = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[2]");
+	public WebElement getFollowUpDetails() {
+		return driver.findElement(followupdetails);
+	}
+	//Page object for Add Follow Details
+	By addfollowdetails = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
+			+ "main/vex-add-inquiry/div/div[1]/div[2]/div/button");
+    public WebElement getAddFollowDetails() {
+    	return driver.findElement(addfollowdetails);
+    }
 }

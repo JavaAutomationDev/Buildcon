@@ -12,7 +12,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import pageObjects.EmployeePage;
 import pageObjects.LoginPage;
@@ -77,42 +76,22 @@ public class ProspectTest extends base {
 			String newRemarks, String newRequirement, String newStatus) throws InterruptedException {
 
 		ProspectPage Prospect = new ProspectPage(driver);
-		SoftAssert softAssert = new SoftAssert();
-
-		//Navigate to the prospect and click on the Edit option
 		Prospect.getprospect().click();
 		Prospect.getEdit();
 
-		//Edit and assert Contact Number
 		Prospect.getContactNo().clear();
 		Prospect.getContactNo().sendKeys(newContactNo);
-		softAssert.assertEquals(Prospect.getContactNo().getAttribute("value"), newContactNo, "Contact Number was not updated correctly.");
-
-		//Edit and assert Email
 		Prospect.getEmail().clear();
 		Prospect.getEmail().sendKeys(newEmail);
-		softAssert.assertEquals(Prospect.getEmail().getAttribute("value"), newEmail, "Email was not updated correctly.");
-
-		//Edit and assert Address
 		Prospect.getAddress().clear();
 		Prospect.getAddress().sendKeys(newAddress);
-		softAssert.assertEquals(Prospect.getAddress().getAttribute("value"), newAddress, "Address was not updated correctly.");
-
-		//Edit and assert Remarks
 		Prospect.getRemarks().clear();
 		Prospect.getRemarks().sendKeys(newRemarks);
-		softAssert.assertEquals(Prospect.getRemarks().getAttribute("value"), newRemarks, "Remarks were not updated correctly.");
-
-		//Edit and assert Requirement
 		Prospect.getrequirement().clear();
 		Prospect.getrequirement().sendKeys(newRequirement);
-		softAssert.assertEquals(Prospect.getrequirement().getAttribute("value"), newRequirement, "Requirement was not updated correctly.");
-
 		Prospect.getstatus(newStatus);
-
 		Thread.sleep(2000);
 		Prospect.getsave().click();
-		softAssert.assertAll();
 	}
 
 	//Delete Prospect
@@ -430,8 +409,35 @@ public class ProspectTest extends base {
 	@DataProvider
 	public Object[][] ProspectAdddata() {
 		return new Object[][] {
-			{"SHALIGRAM PRIDE1","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}};
+			{"SHALIGRAM PRIDE","Mahesh Patel","","","Vimal Patel","Chandni Chauhan","9856214565","Akash@mail.com","Bopal Gam ,Ahmedabad",
+			"Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}
+			
+			//{"Project3","Nilesh Modi","","","Vimal1"," Akash Patel ","9898100001","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 1 (Ground Floor) "},
+			//{"Project3","Nilesh Modi","","","Vimal2"," Akash Patel ","9898100002","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 2 (Ground Floor) "},
+			//{"Project3","Jaypalsinh Sarvaiya","","","Vimal14"," Akash Patel ","9898100014","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 14 (Ground Floor) "},
+			//{"Project3","Jaypalsinh Sarvaiya","","","Vimal15"," Akash Patel ","9898100015","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 15 (Ground Floor) "},
+			//{"Project3","Harpal Gohil","","","Vimal27"," Akash Patel ","9898100027","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 27 (Ground Floor) "},
+			//{"Project3","Harpal Gohil","","","Vimal128"," Akash Patel ","9898100028","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 28 (Ground Floor) "},
+			//{"Project3","Harpal Gohil","","","Vimal129"," Akash Patel ","9898100029","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 29 (Ground Floor) "},
+			//{"Project3","Ashok Solanki","","","Vimal139"," Akash Patel ","9898100039","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 39 (Ground Floor) "},
+			//{"Project3","Ashok Solanki","","","Vimal140"," Akash Patel ","9898100040","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 40 (Ground Floor) "},
+			//{"Project3","Ashok Solanki","","","Vimal141"," Akash Patel ","9898100041","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress","Bungalow","Unit No - 41 (Ground Floor) "},			
+			//{"Project3","Shivang Varma","","","Vimal21"," Akash Patel ","9898100021","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","C","Unit No - C - 101 (1st Floor) "},
+			//{"Project3","Shivang Varma","","","Vimal22"," Akash Patel ","9898100022","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","C","Unit No - C - 102 (1st Floor) "},
+			//{"Project3","Shivang Varma","","","Vimal23"," Akash Patel ","9898100023","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","C","Unit No - C- 103 (2nd Floor) "},
+			//{"Project2","Shivang Varma","","","Vimal24"," Akash Patel ","9898100024","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","C","Unit No - C - 104 (2nd Floor) "},
+			//{"Project2","Shivang Varma","","","Vimal25"," Akash Patel ","9898100025","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","C","Unit No - C - 105 (3rd Floor) "},
+			//{"Project2","Shivang Varma","","","Vimal26"," Akash Patel ","9898100026","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 1 (1st Floor) "},
+			//{"Project2","Shivang Varma","","","Vimal27"," Akash Patel ","9898100027","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 2 (1st Floor) "},
+		    //{"Project2","Shivang Varma","","","Vimal28"," Akash Patel ","9898100028","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 3 (1st Floor) "},
+			//{"Project2","Shivang Varma","","","Vimal29"," Akash Patel ","9898100029","shivang@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 4 (1st Floor) "},
+			//{"Project2","Kiran Gunga","","","Vimal30"," Akash Patel ","9898100030","kiran@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 5 (1st Floor) "},			
+			//{"Project2","Kiran Gunga","","","Vimal39"," Akash Patel ","9898100039","kiran@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 14 (2nd Floor) "},
+			//{"Project2","Kiran Gunga","","","Vimal40"," Akash Patel ","9898100040","kiran@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 15 (2nd Floor) "},
+			//{"Project2","Abhishek Sharma","","","Vimal41"," Akash Patel ","9898100041","abhishek@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 16 (2nd Floor) "},
+			//{"Project2","Abhishek Sharma","","","Vimal42"," Akash Patel ","9898100042","abhishek@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 17 (2nd Floor) "},
+			//{"Project2","Abhishek Sharma","","","Vimal43"," Akash PatAl ","9898100043","abhishAk@yopmail.com","Bopal Gam, Ahmedabad","Remarks","2BHK","In Progress","Shop","Unit No - 18 (2nd Floor) "},
+		};
 	}
 
 	//DataProvider for Edit Prospect

@@ -360,7 +360,7 @@ public class ProjectPage {
 	
     //Block Configuration
 	//Page object for Add Project Block
-	By addprojectblock=By.xpath("//*[@id=\"cdk-step-content-0-5\"]/div/div[1]/vex-unit-block-list/div/button");	
+	By addprojectblock=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[1]/vex-unit-block-list/div/button");	
 	public WebElement getAddProjectBlock() {
 		return driver.findElement(addprojectblock);
 	}

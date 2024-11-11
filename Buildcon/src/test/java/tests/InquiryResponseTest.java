@@ -34,60 +34,60 @@ public class InquiryResponseTest extends base {
 
 	@Test(dataProvider = "getAdddata")
 	public void Add_inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getAddInquiryResponsepageclick().click();
-		unit.getAddInquiryResponsenewdata().sendKeys(InquiryResponsepage1);
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Iresponse.getInquiryResponsepageclick().click();
+		Iresponse.getAddInquiryResponsepageclick().click();
+		Iresponse.getAddInquiryResponsenewdata().sendKeys(InquiryResponsepage1);
 		Thread.sleep(3000);
-		unit.getInquiryresponsesave().click();
+		Iresponse.getInquiryresponsesave().click();
 	}
 
 	@Test(dataProvider = "getEditdata")
 	public void Edit_inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getEditinquiryresponsetype().sendKeys(InquiryResponsepage1);
-		unit.getEditinquiryresponsetype().click();
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Iresponse.getInquiryResponsepageclick().click();
+		Iresponse.getEditinquiryresponsetype().sendKeys(InquiryResponsepage1);
+		Iresponse.getEditinquiryresponsetype().click();
 
-		unit.getEditinquiryresponsesave().click();
+		Iresponse.getEditinquiryresponsesave().click();
 
 	}
 
 	@Test
 	public void Status_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getChangeInquiryrsponsestatus().click();
-		unit.getChangeInquiryresponseconfirm().click();
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Iresponse.getInquiryResponsepageclick().click();
+		Iresponse.getChangeInquiryrsponsestatus().click();
+		Iresponse.getChangeInquiryresponseconfirm().click();
 	}
 
 	@Test
 	public void delete_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getInquiryresponsedeleteclick().click();
-		unit.getInquiryresponsedeleteconfirmationk().click();
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Iresponse.getInquiryResponsepageclick().click();
+		Iresponse.getInquiryresponsedeleteclick().click();
+		Iresponse.getInquiryresponsedeleteconfirmationk().click();
 	}
 
 	@Test(dataProvider = "getsearched")
 	public void searched_inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getInquiryresponsesearched().sendKeys(InquiryResponsepage1);
-		unit.getInquiryresponsesearchedclick().click();
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Iresponse.getInquiryResponsepageclick().click();
+		Iresponse.getInquiryresponsesearched().sendKeys(InquiryResponsepage1);
+		Iresponse.getInquiryresponsesearchedclick().click();
 	}
 
 	@Test
 	public void Excel_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getinquiryresponseExcel().click();
+		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
+		Iresponse.getconfiguration().click();
+		Iresponse.getInquiryResponsepageclick().click();
+		Iresponse.getinquiryresponseExcel().click();
 	}
 
 	// close the driver
