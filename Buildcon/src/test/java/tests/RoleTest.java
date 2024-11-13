@@ -40,10 +40,10 @@ public class RoleTest extends base {
 		Role.getaddnewrole().click();
 		Role.getaddrolename().sendKeys(Rolepage1);
 		Role.getshowphonenumberchecked().click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		Role.getclickcreate().click();
 	}
-	
+
 	//Edit Role
 	@Test(dataProvider = "getEditdata")
 	public void Edit_Rolepage(String EditRolepage1) throws InterruptedException {
@@ -57,6 +57,7 @@ public class RoleTest extends base {
 		Role.geteditsavebuttonrole().click();
 	}
 
+	//Status Role Method
 	@Test
 	public void Status_Rolepage1() throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
@@ -66,7 +67,7 @@ public class RoleTest extends base {
 		Role.getRolestatusclickconfirm().click();
 	}
 
-
+	//Delete Role Method
 	@Test
 	public void Delete_Rolepage() throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
@@ -76,6 +77,7 @@ public class RoleTest extends base {
 		Role.getdeleteclickconfirmationRole().click();
 	}
 
+	//Search Role Method
 	@Test(dataProvider = "getsearch")
 	public void searching_Rolepage(String searchedentertextRolepage1) throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
@@ -84,7 +86,8 @@ public class RoleTest extends base {
 		Role.getsearchRole().sendKeys(searchedentertextRolepage1);
 		Role.getclicksearchrole().click();
 	}
-	
+
+	//Export To Excel Method
 	@Test
 	public void exportexcel_Rolepage() throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
@@ -93,17 +96,195 @@ public class RoleTest extends base {
 		Role.getclickexportasexcelRole().click();
 	}
 
+	//Add Role with - Only View Rights
+	@Test(dataProvider="getAdddata")
+	public void Add_Role_Only_View(String RoleName) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getaddnewrole().click();
+		Role.getaddrolename().sendKeys(RoleName);
+		
+		Role.EmpSelectbtn().click();
+		Role.EmpRoleView().click();
+		Role.Projectselectbtn().click();
+		Role.ProjectRoleView().click();
+		Role.Receiptselectbtn().click();
+		Role.ReceiptRoleView().click();
+		Role.Collectionselectbtn().click();
+		Role.CollectionRoleView().click();
+		Role.Inquiryselectbtn().click();
+		Role.InquiryRoleView().click();
+		Role.Prospectselectbtn().click();
+		Role.ProspectRoleView().click();
+		Role.Bookingselectbtn().click();
+		Role.BookingRoleView().click();
+		Role.Documentselectbtn().click();
+		Role.DocumentsRoleView().click();
+		Thread.sleep(2000);
+		Role.getclickcreate().click();
+	}
+
+	//Add Role with - Add Rights only
+	@Test(dataProvider="getAdddata")
+	public void Add_Role_Only_Add(String RoleName) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getaddnewrole().click();
+		Role.getaddrolename().sendKeys(RoleName);
+			
+		Role.EmpSelectbtn().click();
+		Role.EmpRoleEntry().click();
+		Role.Projectselectbtn().click();
+		Role.ProjectRoleEntry().click();
+		Role.Receiptselectbtn().click();
+		Role.ReceiptRoleEntry().click();
+		Role.Inquiryselectbtn().click();
+		Role.InquiryRoleEntry().click();
+		Role.Prospectselectbtn().click();
+		Role.ProspectRoleEntry().click();
+		Role.Bookingselectbtn().click();
+		Role.BookingRoleEntry().click();
+		Role.Documentselectbtn().click();
+		Role.DocumentsRoleEntry().click();
+		Thread.sleep(2000);
+		Role.getclickcreate().click();
+	}
+
+	//Add Role with - Only Update Rights
+	@Test(dataProvider="getAdddata")
+	public void Add_Role_Only_Update(String RoleName) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getaddnewrole().click();
+		Role.getaddrolename().sendKeys(RoleName);
+				
+		Role.EmpSelectbtn().click();
+		Role.EmpRoleUpdate().click();
+		Role.Projectselectbtn().click();
+		Role.ProjectRoleUpdate().click();
+		Role.Receiptselectbtn().click();
+		Role.ReceiptRoleUpdate().click();
+		Role.Inquiryselectbtn().click();
+		Role.InquiryRoleUpdate().click();
+		Role.Prospectselectbtn().click();
+		Role.ProspectRoleUpdate().click();
+		Role.Bookingselectbtn().click();
+		Role.BookingRoleUpdate().click();
+		Role.Documentselectbtn().click();
+		Role.DocumentsRoleUpdate().click();	
+		Thread.sleep(2000);
+		Role.getclickcreate().click();
+	}
+	
+	//Add Role with - Only Delete Rights
+	@Test(dataProvider="getAdddata")
+	public void Add_Role_Only_Delete(String RoleName) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getaddnewrole().click();
+		Role.getaddrolename().sendKeys(RoleName);
+		Role.EmpSelectbtn().click();
+		Role.EmpRoleDelete().click();
+		Role.Projectselectbtn().click();
+		Role.ProjectRoleDelete().click();
+		Role.Receiptselectbtn().click();
+		Role.ReceiptRoleDelete().click();
+		Role.Inquiryselectbtn().click();
+		Role.InquiryRoleDelete().click();
+		Role.Prospectselectbtn().click();
+		Role.ProspectRoleDelete().click();
+		Role.Bookingselectbtn().click();
+		Role.BookingRoleDelete().click();
+		Role.Documentselectbtn().click();
+		Role.DocumentsRoleDelete().click();		
+		Thread.sleep(2000);
+		Role.getclickcreate().click();
+	}
+	
+	//Add Role with - Only Export Rights
+	@Test(dataProvider="getAdddata")
+	public void Add_Role_Only_Export(String RoleName) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getaddnewrole().click();
+		Role.getaddrolename().sendKeys(RoleName);
+			
+		Role.EmpSelectbtn().click();
+		Role.EmpRoleExport().click();
+		Role.Projectselectbtn().click();
+		Role.ProjectRoleExport().click();
+		Role.Receiptselectbtn().click();
+		Role.ReceiptRoleExport().click();
+		Role.Collectionselectbtn().click();
+		Role.CollectionRoleExport().click();
+        Role.Customerselectbtn().click();
+        Role.CustomerRoleExport().click();
+		Role.Inquiryselectbtn().click();
+		Role.InquiryRoleExport().click();
+		Role.Prospectselectbtn().click();
+		Role.ProspectRoleExport().click();
+		Role.Bookingselectbtn().click();
+		Role.BookingRoleExport().click();
+		Role.Documentselectbtn().click();
+		Role.DocumentsRoleExport().click();
+			
+		Thread.sleep(2000);
+		Role.getclickcreate().click();
+	}
+	
+	//Add Role with - Only Follow Up Rights
+	@Test(dataProvider="getAdddata")
+	public void Add_Role_Only_FollowUp(String RoleName) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getaddnewrole().click();
+		Role.getaddrolename().sendKeys(RoleName);
+				
+		Role.Inquiryselectbtn().click();
+		Role.InquiryRoleFollowUp().click();
+		Role.Prospectselectbtn().click();
+		Role.ProspectRolefollowUp().click();
+				
+		Thread.sleep(2000);
+		Role.getclickcreate().click();
+	}
+	
+	   //Add Role with - Only Allow Booking Rights
+    @Test(dataProvider="getAdddata")
+    public void Add_Role_Only_AllowBooking(String RoleName) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getaddnewrole().click();
+		Role.getaddrolename().sendKeys(RoleName);
+					
+		Role.Bookingselectbtn().click();
+		Role.BookingRoleApproveReject().click();
+		Role.BookingRoleLegalEntry().click();
+			
+		Thread.sleep(2000);
+		Role.getclickcreate().click();
+	}
+	
+	//DataProvider for Add Data
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "Adminoldside" } };
+		return new Object[][] { {"AdminSuper"} };
 	}
 
-	//DataProvider for edit state
+	//DataProvider for Edit State
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "Adminnewside" } };
+		return new Object[][] { {"Adminnewside"} };
 	}
-
+	
+    //DataProvider for Search Data
 	@DataProvider
 	public Object[][] getsearch() {
 		return new Object[][] { {"Admin"} };
