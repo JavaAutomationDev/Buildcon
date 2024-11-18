@@ -3,10 +3,15 @@ package tests;
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pageObjects.LoginPage;
 import pageObjects.Unitpage;
@@ -33,32 +38,47 @@ public class UnitTest extends base {
 
 	//Add unit
 	@Test(dataProvider = "getAdddata")
-	public void Add_unit(String unitname1) throws InterruptedException {
+	public void Add_Unit(String unitname1) throws InterruptedException {
 		Unitpage unit = new Unitpage(driver);
+		SoftAssert softAssert = new SoftAssert();
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
 		unit.getclickaddunit().click();
+		unit.gettextnameunit().clear();
 		unit.gettextnameunit().sendKeys(unitname1);
-		Thread.sleep(3000);
-		unit.getunitsave().click();
+		Thread.sleep(2000);
+		// unit  Name Text Data Validation ---------------------------------
+		String valid_string = valid_alphanum(unitname1,"Unitname",10);
+		String valid_unitname = valid_string;
+		System.out.println(valid_unitname);
+		unit.getaddunitsave().click();
+		Thread.sleep(2000);
+		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
 	}
 
 	//Editing an existing unit using Data Provider
 	@Test(dataProvider = "getEditData")
-	public void Edit_unit(String newunitname1) throws InterruptedException {
+	public void Edit_Unit(String newunitname1) throws InterruptedException {
 		Unitpage unit = new Unitpage(driver);
+		SoftAssert softAssert = new SoftAssert();
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
 		unit.geteditunit().click();
 		unit.geteditunittext().clear();
+		// unit name data validation -----
 		unit.geteditunittext().sendKeys(newunitname1);
+		String valid_string = valid_alphanum(newunitname1,"Unitname",10);
+		String valid_unitname = valid_string;
+		System.out.println(valid_unitname);
 		Thread.sleep(2000);
 		unit.geteditsave().click();
+		Thread.sleep(2000);
+		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
 	}
 
-	//status change of the existing record
+	//Status change of the existing record
 	@Test
-	public void status_unit() throws InterruptedException {
+	public void Status_Unit() throws InterruptedException {
 		Unitpage unit = new Unitpage(driver);
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
@@ -67,9 +87,9 @@ public class UnitTest extends base {
 		Thread.sleep(2000);
 	}
 
-	//delete record of the existing records
+	//Delete record of the existing records
 	@Test
-	public void delete() throws InterruptedException {
+	public void Delete_Unit() throws InterruptedException {
 		Unitpage unit = new Unitpage(driver);
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
@@ -78,9 +98,8 @@ public class UnitTest extends base {
 		Thread.sleep(2000);
 	}
 
-	//Excel record downloading
 	@Test
-	public void excelrecord() throws InterruptedException {
+	public void Excel_Record_Download() throws InterruptedException {
 		Unitpage unit = new Unitpage(driver);
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
@@ -90,7 +109,7 @@ public class UnitTest extends base {
 
 	//Enter the data on searched box:
 	@Test(dataProvider = "getentersearcheddata")
-	public void entersearched(String getsearchediteam) throws InterruptedException {
+	public void Enter_Search(String getsearchediteam) throws InterruptedException {
 		Unitpage unit = new Unitpage(driver);
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
@@ -100,26 +119,78 @@ public class UnitTest extends base {
 		Thread.sleep(3000);
 	}
 
-	//Close the driver
+	@Test
+	public void Add_unit_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		Unitpage units = new Unitpage(driver);
+		units.getconfiguration().click();
+		units.getclickunit().click();
+		Thread.sleep(2000);
+		units.getclickaddunit().click();
+		Thread.sleep(2000);
+		units.getaddunitsave().click();
+
+		WebElement messageElement = driver.findElement(By.xpath(
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div"));
+
+		String actualMessage = messageElement.getText();
+		System.out.println(messageElement.getText());
+
+		// Define the expected message
+		String expectedMessage = "Unit name is required";
+
+		// Assert the actual message matches the expected message
+		Assert.assertEquals("Unit name is required", expectedMessage, actualMessage);
+	}
+
+	@Test
+	public void Edit_unit_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		Unitpage units = new Unitpage(driver);
+		units.getconfiguration().click();
+		units.getclickunit().click();
+		units.geteditunit().click();
+		Thread.sleep(2000);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(2000);
+		units.geteditsave().click();
+
+		WebElement messageElement = driver.findElement(By.xpath(
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div"));
+
+		String actualMessage = messageElement.getText();
+		System.out.println(messageElement.getText());
+
+		// Define the expected message
+		String expectedMessage = "Unit name is required";
+
+		// Assert the actual message matches the expected message
+		Assert.assertEquals("Unit name is required", expectedMessage, actualMessage);
+	}
 	@AfterMethod
-	public void teaddown() {
+	public void teardown() {
 		driver.close();
 	}
 
-	//DataProvider for Add unit
+	//DataProvider for Add Unit
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "UNITSNAME" } };
+		return new Object[][] { {"UNITSNAME"} };
 	}
 
-	//DataProvider for edit unit
+	//DataProvider for Edit Unit
 	@DataProvider
 	public Object[][] getEditData() {
-		return new Object[][] { { "SapModule" } };
+		return new Object[][] { {"SapModule"} };
 	}
 
+	//DataProvider for Search Unit
 	@DataProvider
 	public Object[][] getentersearcheddata() {
-		return new Object[][] { { "Sq.feet" } };
+		return new Object[][] { {"Sq.feet"} };
 	}
 }

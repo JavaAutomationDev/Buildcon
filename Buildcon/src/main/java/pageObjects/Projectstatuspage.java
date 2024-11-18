@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class Projectstatuspage {
 
 	public WebDriver driver;
@@ -17,6 +19,7 @@ public class Projectstatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/"
 					+ "vex-sidenav/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 	public WebElement getconfiguration() {
+		base.failedElementName = "ProjectStatus-Configuration";
 		return driver.findElement(Configurationform);
 	}
 
@@ -25,6 +28,7 @@ public class Projectstatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div"
 					+ "[2]/div/a[4]/div/img");
 	public WebElement getprojectstatusclick() {
+		base.failedElementName = "ProjectStatus-ClickMenu";
 		return driver.findElement(projectStatusclick);
 	}
 
@@ -33,6 +37,7 @@ public class Projectstatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
 					+ "main/vex-project-status/div/div[1]/div[2]/button[2]");
 	public WebElement getaddprojectstatusclick() {
+		base.failedElementName = "ProjectStatus-AddClick";
 		return driver.findElement(addprojectStatusclick);
 	}
 
@@ -41,6 +46,7 @@ public class Projectstatuspage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-status-add/div/form/"
 					+ "mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 	public WebElement getprojectstatusadddata() {
+		base.failedElementName = "ProjectStatus-Addstatus";
 		return driver.findElement(projectStatusdataadd);
 	}
 
@@ -48,6 +54,7 @@ public class Projectstatuspage {
 	By projectStatussave = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-status-add/div/form/mat-dialog-actions/button[1]");
 	public WebElement getprojectstatussave() {
+		base.failedElementName = "ProjectStatus-AddSave";
 		return driver.findElement(projectStatussave);
 	}
 
@@ -56,6 +63,7 @@ public class Projectstatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 					+ "vex-project-status/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
 	public WebElement getprojectstatuseditclick() {
+		base.failedElementName = "ProjectStatus-EditClick";
 		return driver.findElement(projectStatusEditclick);
 	}
 
@@ -64,14 +72,15 @@ public class Projectstatuspage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-status-add/div/form/"
 					+ "mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 	public WebElement getprojectStatuseditnewdataadd() {
+		base.failedElementName = "ProjectStatus-EditStatus";
 		return driver.findElement(projectStatuseditnewdataadd);
 	}
 
 	//Page object for project status click:
 	By projectStatuscheckedclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-					+ "vex-project-status/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
 	public WebElement getprojectStatuschecked() {
+		base.failedElementName = "ProjectStatus-StatusCheckedClick";
 		return driver.findElement(projectStatuscheckedclick);
 	}
 
@@ -79,6 +88,7 @@ public class Projectstatuspage {
 	By projectStatuscheckedconfirmation = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[2]");
 	public WebElement getprojectStatuscheckedconfirmation() {
+		base.failedElementName = "ProjectStatus-StatusCheckedConfirm";
 		return driver.findElement(projectStatuscheckedconfirmation);
 	}
 
@@ -87,6 +97,7 @@ public class Projectstatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 					+ "mat-sidenav-content/main/vex-project-status/div/div[1]/div[2]/button[1]");
 	public WebElement getprojectStatusexcel() {
+		base.failedElementName = "ProjectStatus-ExportExcel";
 		return driver.findElement(projectStatusexcel);
 	}
 
@@ -95,6 +106,7 @@ public class Projectstatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 					+ "mat-sidenav-content/main/vex-project-status/div/div[1]/div[2]/div/input");
 	public WebElement getprojectStatussearchedchecked() {
+		base.failedElementName = "ProjectStatus-SearchedChecked";
 		return driver.findElement(projectStatussearchedchecked);
 	}
 
@@ -102,19 +114,21 @@ public class Projectstatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div"
 					+ "[1]/div[2]/div/mat-icon");
 	public WebElement getprojectstatussearchediteam() {
+		base.failedElementName = "ProjectStatus-Search";
 		return driver.findElement(projectstatussearchediteam);
 	}
 
 	By projectstatusdeleteclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div"
-					+ "[2]/div/table/tbody/tr[2]/td[3]/div/button[3]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
 	public WebElement getprojectstatusdeleteclick() {
+		base.failedElementName = "ProjectStatus-DeleteClick";
 		return driver.findElement(projectstatusdeleteclick);
 	}
 
 	By projectstatusdeleteconfirmation = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getprojectstatusdeleteconfirmation() {
+		base.failedElementName = "ProjectStatus-DeleteConfirm";
 		return driver.findElement(projectstatusdeleteconfirmation);
 	}
 	
@@ -122,6 +136,7 @@ public class Projectstatuspage {
 	By activestatus= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/"
 			+ "vex-project-status-add/div/form/mat-dialog-content/div[2]/div/mat-checkbox/div/div/input");
 	public WebElement getActiveStatus() {
+		base.failedElementName = "ProjectStatus-ActiveStatus";
 		return driver.findElement(activestatus);
 	}
 }

@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class Propertytypepage {
 
 	public WebDriver driver;
@@ -17,6 +19,7 @@ public class Propertytypepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/"
 			+ "vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 	public WebElement getconfiguration() {
+		base.failedElementName = "PropertyType-Configuration";
 		return driver.findElement(Configurationform);
 	}
 
@@ -25,6 +28,7 @@ public class Propertytypepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-configurations/div/div[2]/div/a[5]/div/mat-icon");
 	public WebElement getpropertytype() {
+		base.failedElementName = "PropertyType-ClickMenu";
 		return driver.findElement(propertytype);
 	}
 
@@ -33,6 +37,7 @@ public class Propertytypepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-property-type/div/div[1]/div[2]/button[2]");
 	public WebElement getaddpropertytype() {
+		base.failedElementName = "PropertyType-ClickAdd";
 		return driver.findElement(addpropertytype);
 	}
 
@@ -41,6 +46,7 @@ public class Propertytypepage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-property-type-add/div/form/"
 			+ "mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 	public WebElement getaddpropertytypedata() {
+		base.failedElementName = "PropertyType-addpropertytypedata";
 		return driver.findElement(addpropertytypedata);
 	}
 
@@ -63,6 +69,7 @@ public class Propertytypepage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-property-type-add/div/form/mat-dialog-content/div[1]/"
 			+ "mat-form-field/div[1]/div[2]/div[2]/input");
 	public WebElement geteditpropertytypeenterdata() {
+		base.failedElementName = "PropertyType-editpropertytypeenterdata";
 		return driver.findElement(editpropertytypeenterdata);
 	}
 
@@ -77,6 +84,7 @@ public class Propertytypepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-property-type/div/div[1]/div[2]/div/input");
 	public WebElement getsearchpropertytype() {
+		base.failedElementName = "PropertyType-SerchProperyType";
 		return driver.findElement(searchpropertytype);
 	}
 
@@ -106,6 +114,7 @@ public class Propertytypepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-property-type/div/div"
 					+ "[1]/div[2]/button[1]");
 	public WebElement getpropertytypeexcel() {
+		base.failedElementName = "PropertyType-ExportExcel";
 		return driver.findElement(propertytypeexcel);
 	}
 	
@@ -113,6 +122,7 @@ public class Propertytypepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-property-type/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
 	public WebElement getpropertytypestatuschange() {
+		base.failedElementName = "PropertyType-StatusChange";
 		return driver.findElement(propertytypestatuschange);
 	}
 	
@@ -126,6 +136,7 @@ public class Propertytypepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-property-type/div/div[1]/div[2]/div/input");
 	public WebElement getpropertytypesearch() {
+		base.failedElementName = "PropertyType-Search";
 		return driver.findElement(propertytypesearch);
 	}
 	
@@ -140,6 +151,7 @@ public class Propertytypepage {
 	By activestatus = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-property-type-add/"
 			+ "div/form/mat-dialog-content/div[2]/div/mat-checkbox/div/div/input");
 	public WebElement getActiveStatus() {
+		base.failedElementName = "PropertyType-ActiveStatus";
 		return driver.findElement(activestatus);
 	}
 }

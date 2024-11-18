@@ -21,8 +21,6 @@ public class Listeners extends base implements ITestListener {
 	ExtentReports extent = ExtentReportNG.getReportObject();
 	ExtentTest test;
 	
-	
-	
 	//local ThreadG
 	ThreadLocal<ExtentTest> extenttest = new ThreadLocal<ExtentTest>();
 
@@ -49,13 +47,13 @@ public class Listeners extends base implements ITestListener {
 		
 		String testmethodname = result.getMethod().getMethodName();
 		System.out.println("NILESH FAILED METHOD NAME: " + testmethodname);
-		if (base.failedElement != null) {
+		//if (base.failedElement != null) {
             // Get details of the failed element (e.g., locator)
             
             Reporter.log("Failed Element Name: " + base.failedElementName);
-            Reporter.log("   |   Failed Element Xpath: " + base.failedElement.toString());
+            //Reporter.log("   |   Failed Element Xpath: " + base.failedElement.toString());
             
-		}
+		//}
 		//System.out.println(result.getName() + " nilesh failed.\n Throwable: " + result.getThrowable().getMessage());
 		
 		//identify failure class driver object
@@ -72,7 +70,6 @@ public class Listeners extends base implements ITestListener {
 	
 	@Override
 	public void onStart(ITestContext context) {
-		// TODO Auto-generated method stub
 		ITestListener.super.onStart(context);
 	}
 

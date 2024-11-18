@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class Rolepage {
 
 	public WebDriver driver;
@@ -17,6 +19,7 @@ public class Rolepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]"
 					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 	public WebElement getconfiguration() {
+		base.failedElementName = "Role-ConfigurationClick";
 		return driver.findElement(Configurationform);
 	}
 
@@ -24,6 +27,7 @@ public class Rolepage {
 	By Roleclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[13]/div/mat-icon");
 	public WebElement getRoleclick() {
+		base.failedElementName = "Role-Roleclick";
 		return driver.findElement(Roleclick);
 	}
 
@@ -32,6 +36,7 @@ public class Rolepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 					+ "mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/button");
 	public WebElement getaddnewrole() {
+		base.failedElementName = "Role-addNewRole";
 		return driver.findElement(addnewrole);
 	}
 
@@ -40,6 +45,7 @@ public class Rolepage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/"
 					+ "mat-dialog-content/form/div/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 	public WebElement getaddrolename() {
+		base.failedElementName = "Role-RoleName";
 		return driver.findElement(addrolename);
 	}
 
@@ -47,13 +53,16 @@ public class Rolepage {
 	By showphonenumberchecked = By.xpath(
 			"//mat-checkbox[@formcontrolname='isMobileShow']");
 	public WebElement getshowphonenumberchecked() {
+		base.failedElementName = "Role-ShowPhoneChecked";
 		return driver.findElement(showphonenumberchecked);
 	}
 
 	//Page object for Create Button
 	By clickcreate = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/mat-dialog-actions/button[2]");
+
 	public WebElement getclickcreate() {
+		base.failedElementName = "Role-clickcreate";
 		return driver.findElement(clickcreate);
 	}
 
@@ -62,6 +71,7 @@ public class Rolepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 					+ "vex-roles/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
 	public WebElement getEditRolebuttonclick() {
+		base.failedElementName = "Role-Editclick";
 		return driver.findElement(EditRolebuttonclick);
 	}
 
@@ -70,6 +80,7 @@ public class Rolepage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/"
 					+ "mat-dialog-content/form/div/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 	public WebElement getupdateEditrole() {
+		base.failedElementName = "Role-updateEdit";
 		return driver.findElement(updateEditrole);
 	}
 
@@ -77,7 +88,15 @@ public class Rolepage {
 	By editsavebuttonrole = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/mat-dialog-actions/button[2]");
 	public WebElement geteditsavebuttonrole() {
+		base.failedElementName = "Role-EditSave";
 		return driver.findElement(editsavebuttonrole);
+	}
+	
+	By editsavebuttonroleptionsecond = By.xpath(
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/mat-dialog-actions/button[2]");
+
+	public WebElement geteditsavebuttonroleptionsecond() {
+		return driver.findElement(editsavebuttonroleptionsecond);
 	}
 
 	//Page object model for change status button click :
@@ -85,6 +104,7 @@ public class Rolepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 					+ "vex-roles/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
 	public WebElement getRolestatusclick() {
+		base.failedElementName = "Role-StatuClick";
 		return driver.findElement(Rolestatusclick);
 	}
 
@@ -92,6 +112,7 @@ public class Rolepage {
 	By Rolestatusclickconfirm = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getRolestatusclickconfirm() {
+		base.failedElementName = "Role-StatusConfirm";
 		return driver.findElement(Rolestatusclickconfirm);
 	}
 
@@ -100,6 +121,7 @@ public class Rolepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 					+ "vex-roles/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
 	public WebElement getdeleteclickRole() {
+		base.failedElementName = "Role-DeleteClick";
 		return driver.findElement(deleteclickRole);
 	}
 
@@ -107,6 +129,7 @@ public class Rolepage {
 	By deleteclickconfirmationRole = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getdeleteclickconfirmationRole() {
+		base.failedElementName = "Role-DeleteConfirm";
 		return driver.findElement(deleteclickconfirmationRole);
 	}
 
@@ -114,18 +137,21 @@ public class Rolepage {
 	By searchRole = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[1]/input");
 	public WebElement getsearchRole() {
+		base.failedElementName = "Role-Search";
 		return driver.findElement(searchRole);
 	}
 
 	By clicksearchrole = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[1]/mat-icon");
 	public WebElement getclicksearchrole() {
+		base.failedElementName = "Role-SearchClick";
 		return driver.findElement(clicksearchrole);
 	}
 
 	By clickexportasexcelRole = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[2]/button");
 	public WebElement getclickexportasexcelRole() {
+		base.failedElementName = "Role-ExportExcel";
 		return driver.findElement(clickexportasexcelRole);
 	}
 

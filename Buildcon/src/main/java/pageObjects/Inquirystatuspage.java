@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class Inquirystatuspage {
 
 	public WebDriver driver;
@@ -18,6 +20,7 @@ public class Inquirystatuspage {
 					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 
 	public WebElement getconfiguration() {
+		base.failedElementName = "InquiryStatus-Configuration";
 		return driver.findElement(Configurationform);
 	}
 
@@ -25,24 +28,28 @@ public class Inquirystatuspage {
 	By Inquirystatusclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[9]/div/mat-icon");
 	public WebElement getInquirystatusclick() {
+		base.failedElementName = "InquiryStatus-MenuClick";
 		return driver.findElement(Inquirystatusclick);
 	}
 
 	By AddInquirystatusclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[1]/div[2]/button[2]");
 	public WebElement getAddInquirystatusclick() {
+		base.failedElementName = "InquiryStatus-AddClick";
 		return driver.findElement(AddInquirystatusclick);
 	}
 
 	By AddInquirystatus = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/label");
 	public WebElement getAddInquirystatus() {
+		base.failedElementName = "InquiryStatus-AddInquiryStatus";
 		return driver.findElement(AddInquirystatus);
 	}
 
 	By AddInquirystatussave = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-actions/button[1]");
 	public WebElement getAddInquirystatussave() {
+		base.failedElementName = "InquiryStatus-AddSave";
 		return driver.findElement(AddInquirystatussave);
 	}
 
@@ -50,20 +57,31 @@ public class Inquirystatuspage {
 	By EditInquirystatusclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
 	public WebElement getEditInquirystatus() {
+		base.failedElementName = "InquiryStatus-Editclick";
 		return driver.findElement(EditInquirystatusclick);
 	}
+	
+	By EditInquirystatusnew = By.xpath(
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 
-	//Pom for clickon save button
+	public WebElement getEditInquirystatusnew() {
+		return driver.findElement(EditInquirystatusnew);
+	}
+	// pom for clickon save button
+
 	By EditInquirystatussave = By.xpath(
 	        "/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-actions/button[2]");
 	public WebElement getEditInquirystatussave() {
+		base.failedElementName = "InquiryStatus-EditSave";
 		return driver.findElement(EditInquirystatussave);
 	}
 
 	//Pom for status changed click:
 	By ChangeInquirystatus = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr[5]/td[3]/div/button[1]");
+
 	public WebElement getChangeInquirystatus() {
+		base.failedElementName = "InquiryStatus-ChangeInquiryStatus";
 		return driver.findElement(ChangeInquirystatus);
 	}
 	
@@ -71,6 +89,7 @@ public class Inquirystatuspage {
 	By ChangeInquirystatusconfirm = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getChangeInquirystatusconfirm() {
+		base.failedElementName = "InquiryStatus-ChangeStatusConfirm";
 		return driver.findElement(ChangeInquirystatusconfirm);
 	}
 
@@ -78,6 +97,7 @@ public class Inquirystatuspage {
 	By Inquirystatussearched = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[1]/div[2]/div/input");
 	public WebElement getInquirystatussearched() {
+		base.failedElementName = "InquiryStatus-StatusSearched";
 		return driver.findElement(Inquirystatussearched);
 	}
 	
@@ -85,6 +105,7 @@ public class Inquirystatuspage {
 	By Inquirystatussearchedclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[1]/div[2]/div/mat-icon");
 	public WebElement getInquirystatussearchedclick() {
+		base.failedElementName = "InquiryStatus-SearchClick";
 		return driver.findElement(Inquirystatussearchedclick);
 	}
 	
@@ -92,6 +113,7 @@ public class Inquirystatuspage {
 	By Inquirystatusdeleteclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[1]/div[2]/div/mat-icon");
 	public WebElement getInquirystatusdeleteclick() {
+		base.failedElementName = "InquiryStatus-DeleteClick";
 		return driver.findElement(Inquirystatusdeleteclick);
 	}
 	
@@ -99,12 +121,14 @@ public class Inquirystatuspage {
 	By Inquirystatusdeleteconfirmationk = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getInquirystatusdeleteconfirmationk() {
+		base.failedElementName = "InquiryStatus-DeleteConfirm";
 		return driver.findElement(Inquirystatusdeleteconfirmationk);
 	}
 	
 	By inquiryExcel = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[1]/div[2]/button[1]");
 	public WebElement getinquiryExcel() {
+		base.failedElementName = "InquiryStatus-InquiryExcel";
 		return driver.findElement(inquiryExcel);
 	}
 	

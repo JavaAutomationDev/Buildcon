@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class Projecttypespage {
 
 	public WebDriver driver;
@@ -18,6 +20,7 @@ public class Projecttypespage {
 					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 
 	public WebElement getconfiguration() {
+		base.failedElementName = "ProjectType-Configuration";
 		return driver.findElement(Configurationform);
 	}
 
@@ -27,6 +30,7 @@ public class Projecttypespage {
 					+ "[2]/div/a[3]/div/mat-icon");
 
 	public WebElement projecttypesclick() {
+		base.failedElementName = "ProjectType-MenuClick";
 		return driver.findElement(projecttypes);
 
 	}
@@ -37,14 +41,15 @@ public class Projecttypespage {
 					+ "/div[2]/button");
 
 	public WebElement Clickaddprojecttypes() {
+		base.failedElementName = "ProjectType-AddClick";
 		return driver.findElement(addprojecttypes);
 	}
 
 	// page object model for enter test for add project types
-	By Entertestaddprojecttypes = By.xpath(
-			"//input[@formcontrolname='typeName']");
+	By Entertestaddprojecttypes = By.xpath("//input[@formcontrolname='typeName']");
 
 	public WebElement getaddprojecttypesdata() {
+		base.failedElementName = "ProjectType-Entertestaddprojecttypes";
 		return driver.findElement(Entertestaddprojecttypes);
 	}
 
@@ -53,6 +58,7 @@ public class Projecttypespage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-type-add/div/form/mat-dialog-actions/button[1]");
 
 	public WebElement getsavebuttonprojecttypes() {
+		base.failedElementName = "ProjectType-AddSave";
 		return driver.findElement(savebuttonprojecttypes);
 	}
 
@@ -62,6 +68,7 @@ public class Projecttypespage {
 					+ "[2]/div/table/tbody/tr/td[3]/div/button[2]");
 
 	public WebElement geteditprojecttypes() {
+		base.failedElementName = "ProjectType-EditRow";
 		return driver.findElement(Editprojecttypesrow);
 	}
 
@@ -71,6 +78,7 @@ public class Projecttypespage {
 					+ "div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 
 	public WebElement geteditexistingdata() {
+		base.failedElementName = "ProjectType-Editprojecttypedata";
 		return driver.findElement(Editprojecttypedata);
 	}
 
@@ -79,6 +87,7 @@ public class Projecttypespage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-type-add/div/form/mat-dialog-actions/button[1]");
 
 	public WebElement geteditsave() {
+		base.failedElementName = "ProjectType-EditSave";
 		return driver.findElement(editsavebutton);
 	}
 
@@ -88,6 +97,7 @@ public class Projecttypespage {
 					+ "/div/table/tbody/tr/td[3]/div/button[1]");
 
 	public WebElement getclickchangestatus() {
+		base.failedElementName = "ProjectType-ChangeStatus";
 		return driver.findElement(changestatus);
 	}
 
@@ -96,6 +106,7 @@ public class Projecttypespage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 
 	public WebElement getconfirmationchangestatus() {
+		base.failedElementName = "ProjectType-ChangeStatusConfirm";
 		return driver.findElement(changestatusconfirmation);
 	}
 
@@ -104,6 +115,7 @@ public class Projecttypespage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-type/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
 
 	public WebElement getdeleteclick() {
+		base.failedElementName = "ProjectType-DeleteClick";
 		return driver.findElement(deleteclick);
 	}
 
@@ -112,6 +124,7 @@ public class Projecttypespage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 
 	public WebElement getdeleteclickconfirmation() {
+		base.failedElementName = "ProjectType-DeleteConfirm";
 		return driver.findElement(deleteclickconfirmation);
 	}
 
@@ -121,6 +134,7 @@ public class Projecttypespage {
 					+ "[1]/div[2]/div[1]/input");
 
 	public WebElement getsearchprojecttypes() {
+		base.failedElementName = "ProjectType-searchingprojecttypes";
 		return driver.findElement(searchingprojecttypes);
 	}
 
@@ -129,20 +143,23 @@ public class Projecttypespage {
 					+ "[2]/div[1]/mat-icon");
 
 	public WebElement getclicksearchedbutton() {
+		base.failedElementName = "ProjectType-ClickSearch";
 		return driver.findElement(clicksearchedbutton);
 	}
-	
-	
+
 	By clickexcelbuttonproject = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-type/div/div[1]/div[2]/div[2]/button");
 
 	public WebElement getclickexcelbuttonproject() {
+		base.failedElementName = "ProjectType-clickexcelbuttonproject";
 		return driver.findElement(clickexcelbuttonproject);
 	}
+
 	
 	//Page object for Active/Inactive Project
 	//By activeproject = By.xpath("/html/body/div[3]/div[2]/div/mat-dialog-container/div/div/vex-project-type-add/div/form/mat-dialog-content/div[2]/div/mat-checkbox/div/div/input");	
 	public void getActiveProject() {
+		base.failedElementName = "ProjectType-ActiveProjectype";
 		driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-type-add/div/form/mat-dialog-content/div[2]/div/mat-checkbox/div/div/input")).click();
 	}
 }

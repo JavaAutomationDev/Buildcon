@@ -3,8 +3,12 @@ package pageObjects;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import resources.base;
 
 public class FormStatuspage {
 
@@ -20,6 +24,7 @@ public class FormStatuspage {
 					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 
 	public WebElement getconfiguration() {
+		base.failedElementName = "FormSatus-ConfiguratioForm";
 		return driver.findElement(Configurationform);
 	}
 
@@ -28,6 +33,7 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[14]/div/mat-icon");
 
 	public WebElement getFormStatuscick() {
+		base.failedElementName = "FormSatus-FormStatusClick";
 		return driver.findElement(FormStatuscick);
 
 	}
@@ -37,29 +43,49 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/form/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 
 	public WebElement getNameofformstatus() {
+		base.failedElementName = "FormSatus-NameofFormStatus";
 		return driver.findElement(Nameofformstatus);
 	}
 
 	// page object model for save button for project types
-	By usersclick = By.xpath(
+	By usersclick2 = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/form/div[2]/mat-form-field/div[1]/div[2]/div[2]/mat-select");
 
-	public WebElement getusersclick() {
-		return driver.findElement(usersclick);
+	public WebElement getusersclick2() {
+		base.failedElementName = "FormSatus-Usersclick";
+		return driver.findElement(usersclick2);
 	}
+		
 
-	public void userselected(String userselected1) {
-		driver.findElement(usersclick).click(); // Click to open dropdown
+
+	public void userSelected(String userSelected1) {
+		// Click to open the dropdown
+		//getusersclick2().click();
+
+		// Find all dropdown options
 		List<WebElement> elements = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
 
-		for (int i = 0; i < elements.size(); i++) {
-			String text = elements.get(i).getText();
-			if (text.equalsIgnoreCase(userselected1)) {
-				int a = i + 1;
-				driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option[" + a + "]")).click();
+		// Loop through the options to find the matching one
+		boolean found = false;
+		for (WebElement element : elements) {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+
+			String text = element.getText();
+			if (text.equalsIgnoreCase(userSelected1)) {
+				element.click(); // Click on the matched option
+				getusersclick2().sendKeys(Keys.ESCAPE);
+				found = true;
 				break;
 			}
 		}
+		
+
+		// Optional: Handle case where the desired user was not found
+		if (!found) {
+			System.out.println("User not found: " + userSelected1);
+
+		}
+		base.failedElementName = "FormSatus-UserSelected";
 	}
 
 	// page object model for add new data and clear existing data;
@@ -67,7 +93,22 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/form/div[3]/mat-form-field/div[1]/div[2]/div[2]/input");
 
 	public WebElement getdisplayform() {
+		base.failedElementName = "FormSatus-Displayform";
 		return driver.findElement(displayform);
+	}
+
+	By displayformindividual = By.xpath(
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/table/tbody/tr/td[3]/div/mat-form-field/div[1]/div[2]/div[2]/input");
+
+	public WebElement getdisplayformindividual() {
+		return driver.findElement(displayformindividual);
+	}
+
+	By Clickonsavebuttonindividual = By.xpath(
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/table/tbody/tr/td[4]/div/button[1]");
+
+	public WebElement getClickonsavebuttonindividual() {
+		return driver.findElement(Clickonsavebuttonindividual);
 	}
 
 	// page object model for edit save button :
@@ -75,7 +116,29 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/form/div[4]/button");
 
 	public WebElement getClickonsavebutton() {
+		base.failedElementName = "FormSatus-ClickSave";
 		return driver.findElement(Clickonsavebutton);
+	}
+
+	By editclickformstatus = By.xpath(
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/table/tbody/tr[1]/td[4]/div/button[1]");
+
+	public WebElement geteditclickformstatus() {
+		return driver.findElement(editclickformstatus);
+	}
+
+	By editclickenterdata = By.xpath(
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/table/tbody/tr[1]/td[1]/div/mat-form-field/div[1]/div[2]/div[2]/input");
+
+	public WebElement geteditclickenterdata() {
+		return driver.findElement(editclickenterdata);
+	}
+
+	By editclicksaveformstatus = By.xpath(
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/table/tbody/tr[1]/td[4]/div/button[1]");
+
+	public WebElement geteditclicksaveformstatus() {
+		return driver.findElement(editclicksaveformstatus);
 	}
 
 	// pom for delete click:
@@ -83,14 +146,16 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/table/tbody/tr[1]/td[4]/div/button[2]");
 
 	public WebElement getdeleteclickFormstatus() {
+		base.failedElementName = "FormSatus-ClickDelete";
 		return driver.findElement(deleteclickFormstatus);
 	}
 
 	// pom for delete click confirmation:
 	By deleteclickconfirmationFormstatus = By.xpath(
-			"/html/body/div[3]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[2]");
 
 	public WebElement getdeleteclickconfirmationformstatus() {
+		base.failedElementName = "FormSatus-DeleteConfirm";
 		return driver.findElement(deleteclickconfirmationFormstatus);
 	}
 
@@ -99,6 +164,7 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[1]/div[2]/div/input");
 
 	public WebElement getsearchsearchForm() {
+		base.failedElementName = "FormSatus-Search";
 		return driver.findElement(searchForm);
 	}
 
@@ -106,6 +172,7 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[1]/div[2]/div/mat-icon");
 
 	public WebElement getclicksearchformstatus() {
+		base.failedElementName = "FormSatus-ClickSearchFormStatus";
 		return driver.findElement(clicksearchformstatus);
 	}
 
@@ -113,7 +180,84 @@ public class FormStatuspage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[1]/div[2]/button");
 
 	public WebElement getclickexportasexcelformstatus() {
+		base.failedElementName = "FormSatus-ExportExcel";
 		return driver.findElement(clickexportasexcelformstatus);
+	}
+
+	public void userSelectedoncheked(String userSelected) {
+		// Click to open the dropdown
+		getusersclick2().click();
+
+		// Find all dropdown options
+		List<WebElement> elements1 = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+
+		// Loop through the options to find the matching one
+		boolean found = false;
+		for (WebElement element1 : elements1) {
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element1);
+
+			String text = element1.getText();
+			if (text.equalsIgnoreCase(userSelected)) {
+				element1.click(); // Click on the matched option
+				getusersclick2().sendKeys(Keys.ESCAPE);
+				found = true;
+				break;
+			}
+
+		}
+
+		// Optional: Handle case where the desired user was not found
+		if (!found) {
+			System.out.println("User not found: " + userSelected);
+
+		}
+	}
+
+	public void userSelectedUnchecked(String userSelected2) {
+		// Click to open the dropdown
+		// getusersclick().click();
+
+		// Find all dropdown options
+		List<WebElement> elements1 = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+
+		// Check if the desired user is already selected
+		boolean alreadySelected = false;
+		for (WebElement element1 : elements1) {
+			String text = element1.getText();
+			if (text.equalsIgnoreCase(userSelected2) && element1.isSelected()) {
+				alreadySelected = true;
+				break;
+			}
+		}
+
+		if (alreadySelected) {
+			// Deselect the option if it's already selected
+			for (WebElement element1 : elements1) {
+				String text = element1.getText();
+				if (text.equalsIgnoreCase(userSelected2)) {
+					element1.click(); // Click to uncheck the selected option
+					break;
+				}
+			}
+		} else {
+			// Loop through the options to find the matching one
+			boolean found = false;
+			for (WebElement element1 : elements1) {
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element1);
+				String text = element1.getText();
+				if (text.equalsIgnoreCase(userSelected2)) {
+					element1.click(); // Click on the matched option
+					getusersclick2().sendKeys(Keys.ESCAPE);
+					found = true;
+					break;
+				}
+			}
+
+			// Optional: Handle case where the desired user was not found
+			if (!found) {
+				System.out.println("User not found: " + userSelected2);
+			}
+		}
 	}
 
 }

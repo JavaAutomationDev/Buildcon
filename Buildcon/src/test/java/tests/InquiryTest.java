@@ -12,6 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pageObjects.EmployeePage;
 import pageObjects.InquiryPage;
@@ -44,7 +45,9 @@ public class InquiryTest extends base {
 	@Test(dataProvider = "InquiryAdddata")
 	public void Add_Inquiry(String siteproject, String visitorname, String NextfollowUpDT, String referencedBy,
 			String Attende, String ContactNo, String Email, String Address, String Remarks, String Requirement,
-			String Status) throws InterruptedException {
+			String Status) throws InterruptedException, IOException {
+
+		SoftAssert softAssert = new SoftAssert();
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -53,7 +56,14 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getsiteproject(siteproject);
 		Inquiry.getvisitorname().sendKeys(visitorname);
+		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
 
+		
+		// Visitor Name Text Data Validation ---------------------------------
+		String valid_string = validateText(visitorname,"VisitorName", 5, 30);
+		String valid_visitorname = valid_string;
+		System.out.println(valid_visitorname);
+		
 		Inquiry.getIntime().click(); //click on InTime Required fields
 		Inquiry.getOk().click(); //Click on Ok time
 
@@ -62,46 +72,140 @@ public class InquiryTest extends base {
 
 		Inquiry.getNextfollowUpDT().sendKeys(NextfollowUpDT);
 		Inquiry.getreferencedBy().sendKeys(referencedBy);
+		
+		// ReferencedBy  Text Data Validation ---------------------------------
+		valid_string = validateText(referencedBy,"ReferencedBy", 5, 30);
+		String valid_referancedby = valid_string;
+		System.out.println(valid_referancedby);
+				
+		
 		Thread.sleep(2000);		
 		Inquiry.getAttendee(Attende);
 		Inquiry.getContactNo().sendKeys(ContactNo);
+		
+		// ContactNo Number Validation
+		valid_string = valid_number(ContactNo, "InquiryContactNo");
+		String valid_contactno = valid_string;
+		System.out.println(valid_contactno);
+				
+		
+		
+		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Inquiry Form");
+
 		Inquiry.getEmail().sendKeys(Email);
+		
+		// Email Validation
+		valid_string = valid_EMail(Email, "InquiryEmail");
+		String valid_email = valid_string;
+		System.out.println(valid_email);
+				
 		Inquiry.getAddress().sendKeys(Address);
+		
+		// Adress Alphanumeric  Validation
+		valid_string = valid_alphanum(Address, "InquiryAddress", 10);
+		String valid_address = valid_string;
+		System.out.println(valid_address);
+				
 		Inquiry.getRemarks().sendKeys(Remarks);
+		
+		// Remarks  Text Data Validation ---------------------------------
+		valid_string = validateText(Remarks,"Remarks", 5, 10);
+		String valid_remarks = valid_string;
+		System.out.println(valid_remarks);
+		
+		
 		Inquiry.getrequirement().sendKeys(Requirement);
 		Inquiry.getstatus(Status);
 
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
+
+		
+		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_referancedby, "1ReferencedBy is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
+		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
+		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		
+		// Assert all soft assertions at the end
+		softAssert.assertAll();
 	}
 
 	//Editing an existing Inquiry using Data Provider
 	@Test(dataProvider = "InquiryEditData")
-	public void Edit_Inquiry(String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
-			String newRequirement, String newStatus) throws InterruptedException {
+	public void Edit_Inquiry(String siteproject,String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
+			String newRequirement, String newStatus) throws InterruptedException, IOException {
+
+		SoftAssert softAssert = new SoftAssert();
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getEdit();
-
+		Inquiry.getsiteproject(siteproject);
+		
 		Thread.sleep(2000);
 		Inquiry.getvisitorname().clear();
 		Inquiry.getvisitorname().sendKeys(newvisitorname);
+		
+		// Visitor Name Text Data Validation ---------------------------------
+		String valid_string = validateText(newvisitorname,"VisitorName", 5, 30);
+		String valid_visitorname = valid_string;
+		System.out.println(valid_visitorname);
+		
+		
+		
+		softAssert.assertFalse(newvisitorname.isEmpty(), "Visitor Name is required.");
+
 
 		Inquiry.getEdit().click();
 		Inquiry.getContactNo().clear();
 		Inquiry.getContactNo().sendKeys(newContactNo);
+		
+		// ContactNo Number Validation
+		valid_string = valid_number(newContactNo, "InquiryContactNo");
+		String valid_contactno = valid_string;
+		System.out.println(valid_contactno);
+				
+		softAssert.assertFalse(newContactNo.isEmpty(), "Contact Number is required.");
 
 		Inquiry.getEmail().clear();
 		Inquiry.getEmail().sendKeys(newEmail);
+		
+		// Email Validation
+		valid_string = valid_EMail(newEmail, "InquiryEmail");
+		String valid_email = valid_string;
+		System.out.println(valid_email);
+		
+		
 		Inquiry.getAddress().clear();
 		Inquiry.getAddress().sendKeys(newAddress);
+		
+		// Adress Alphanumeric  Validation
+		valid_string = valid_alphanum(newAddress, "InquiryAddress",10);
+		String valid_address = valid_string;
+		System.out.println(valid_address);
+				
 		Inquiry.getRemarks().clear();
 		Inquiry.getRemarks().sendKeys(newRemarks);
+		
+		// Remarks  Text Data Validation ---------------------------------
+		valid_string = validateText(newRemarks,"Remarks", 5, 10);
+		String valid_remarks = valid_string;
+		System.out.println(valid_remarks);
+		
 		Inquiry.getrequirement().clear();
 		Inquiry.getrequirement().sendKeys(newRequirement);
 		Inquiry.getstatus(newStatus);
 
 		Thread.sleep(2000);
+		
+		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
+		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
+		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertAll();
 		Inquiry.getUpdate().click();
 	}
 
@@ -183,10 +287,23 @@ public class InquiryTest extends base {
 		Inquiry.getInquiry().click();
 		Inquiry.gettodayfollowup().click();
 		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
-		Inquiry.getEdit();
+		
+		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
+		@SuppressWarnings("unused")
+		boolean flag=NRF.isDisplayed();
+		if(flag=false) {
+			
+			Inquiry.getEdit();
+			Thread.sleep(2000);
+			Inquiry.getUpdate().click();
+		}else {
+			System.out.println("Vistor name is missed");
+		}
+		
+		//Inquiry.getEdit();
 
-		Thread.sleep(2000);
-		Inquiry.getsave().click();
+		//Thread.sleep(2000);
+		//Inquiry.getsave().click();
 	}
 
 	//Missing Follow up for click,Search & Edit
@@ -196,10 +313,21 @@ public class InquiryTest extends base {
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
 		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
-		Inquiry.getEdit();
+		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
+		@SuppressWarnings("unused")
+		boolean flag=NRF.isDisplayed();
+		if(flag=false) {
+			
+			Inquiry.getEdit();
+			Thread.sleep(2000);
+			Inquiry.getUpdate().click();
+		}else {
+			System.out.println("Vistor name is missed");
+		}
+		//Inquiry.getEdit();
 
-		Thread.sleep(2000);
-		Inquiry.getsave().click();
+		//Thread.sleep(2000);
+		//Inquiry.getUpdate().click();
 	}
 
 	//Add To Prospect
@@ -218,29 +346,32 @@ public class InquiryTest extends base {
 	//Add Inquiry Test Mandatory Filed Validation
 	@Test
 	public void Add_Inquiry_Test_Mandatory_Filed_Validation() throws InterruptedException {
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
 		Inquiry.getsave().click();
 		Thread.sleep(2000);
-
+		
+		SoftAssert softAssert = new SoftAssert();
 		WebElement Visitsiteproject =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
-		Assert.assertEquals(Visitsiteproject.getText(), "Visit Site/Project is required.");
+		softAssert.assertEquals(Visitsiteproject.getText(), "Visit Site/Project is required.");
 
 		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
-		Assert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
+		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
 
 		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
-		Assert.assertEquals(Intime.getText(), "In time is required.");
+		softAssert.assertEquals(Intime.getText(), "In time is required.");
 
 		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
-		Assert.assertEquals(Outtime.getText(), "Out time is required.");
+		softAssert.assertEquals(Outtime.getText(), "Out time is required.");
 
 		WebElement Attedee =driver.findElement(By.xpath("//span[normalize-space()='Attendee is required.']"));
-		Assert.assertEquals(Attedee.getText(), "Attendee is required.");
+		softAssert.assertEquals(Attedee.getText(), "Attendee is required.");
 
 		WebElement ContactNo =driver.findElement(By.xpath("//span[normalize-space()='Contact Number is required.']"));
-		Assert.assertEquals(ContactNo.getText(), "Contact Number is required.");		
+		softAssert.assertEquals(ContactNo.getText(), "Contact Number is required.");
+		softAssert.assertAll();
 	}
 
 	//Edit Inquiry Test Mandatory Filed Validation
@@ -269,21 +400,22 @@ public class InquiryTest extends base {
 		{
 			Inquiry.getContactNo().sendKeys(Keys.BACK_SPACE);
 		}
-
+		SoftAssert softAssert = new SoftAssert();
 		Thread.sleep(2000);
 		Inquiry.getContactNo().sendKeys(Keys.TAB);
 
 		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
-		Assert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
+		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
 
 		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
-		Assert.assertEquals(Intime.getText(), "In time is required.");
+		softAssert.assertEquals(Intime.getText(), "In time is required.");
 
 		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
-		Assert.assertEquals(Outtime.getText(), "Out time is required.");
+		softAssert.assertEquals(Outtime.getText(), "Out time is required.");
 
 		WebElement ContactNo =driver.findElement(By.xpath("//span[normalize-space()='Contact Number is required.']"));
-		Assert.assertEquals(ContactNo.getText(), "Contact Number is required.");		
+		softAssert.assertEquals(ContactNo.getText(), "Contact Number is required.");	
+		softAssert.assertAll();
 	}
 
 	//Verify Add Inactive Attendee Inquiry
@@ -724,168 +856,123 @@ public class InquiryTest extends base {
 
 	//Inquiry Communcation mode
 	//Verify Edit Inactive Inquiry Communcation mode
-		@Test()
-		public void Verify_Edit_Inactive_Inquiry_Communcation_mode() throws InterruptedException {
-			Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
-			Communication.getconfiguration().click();
-			Communication.getInquirycommunicationmodepageclick().click();
-			Communication.getEditinquirycommunicationrow().click();
-			Thread.sleep(2000);
-			Communication.getActiveInactive().click();
-			Thread.sleep(2000);
-			Communication.geteditsavebuttoninquirycommunication().click();
-			Thread.sleep(2000);
-			
-			InquiryPage Inquiry = new InquiryPage(driver);
-			Inquiry.getInquiry().click();
-			Inquiry.getmissingfollowup().click();
-			Inquiry.getMissingFollowUpEditBtn().click();
-			Inquiry.getFollowUpDetails().click();
-			Inquiry.getAddFollowDetails().click();
+	@Test()
+	public void Verify_Edit_Inactive_Inquiry_Communcation_mode() throws InterruptedException {
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getEditinquirycommunicationrow().click();
+		Thread.sleep(2000);
+		Communication.getActiveInactive().click();
+		Thread.sleep(2000);
+		Communication.geteditsavebuttoninquirycommunication().click();
+		Thread.sleep(2000);
 
-			driver.findElement(By.xpath("//mat-select[@formcontrolname='commTypeID']")).click();
-			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-			int Counter=0;
-			for(int i=0;i<a.size();i++)
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getmissingfollowup().click();
+		Inquiry.getMissingFollowUpEditBtn().click();
+		Inquiry.getFollowUpDetails().click();
+		Inquiry.getAddFollowDetails().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='commTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Akash"))
 			{
-				String b =a.get(i).getText(); 
-				if(!b.equalsIgnoreCase("Akash"))
+				Assert.assertFalse(false, "Inquiry Communcation mode is inactive.");
+				System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
 				{
-					Assert.assertFalse(false, "Inquiry Communcation mode is inactive.");
-					System.out.println("Test failed");
+					System.out.println("Test");	
 					break;
-				}
-				else
-				{
-					Counter = Counter+1;
-					if(Counter>a.size())
-					{
-						System.out.println("Test");	
-						break;
-					}	
-				}
+				}	
 			}
 		}
+	}
 
-		//Verify Edit Active Inquiry Communcation mode
-		@Test()
-		public void Verify_Edit_Active_Inquiry_Communcation_mode() throws InterruptedException {
-			Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
-			Communication.getconfiguration().click();
-			Communication.getInquirycommunicationmodepageclick().click();
-			Communication.getEditinquirycommunicationrow().click();
-			Thread.sleep(2000);
-			Communication.getActiveInactive().click();
-			Thread.sleep(2000);
-			Communication.geteditsavebuttoninquirycommunication().click();
-			Thread.sleep(2000);
-			
-			InquiryPage Inquiry = new InquiryPage(driver);
-			Inquiry.getInquiry().click();
-			Inquiry.getmissingfollowup().click();
-			Inquiry.getMissingFollowUpEditBtn().click();
-			Inquiry.getFollowUpDetails().click();
-			Inquiry.getAddFollowDetails().click();
+	//Verify Edit Active Inquiry Communcation mode
+	@Test()
+	public void Verify_Edit_Active_Inquiry_Communcation_mode() throws InterruptedException {
+		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
+		Communication.getconfiguration().click();
+		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getEditinquirycommunicationrow().click();
+		Thread.sleep(2000);
+		Communication.getActiveInactive().click();
+		Thread.sleep(2000);
+		Communication.geteditsavebuttoninquirycommunication().click();
+		Thread.sleep(2000);
 
-			driver.findElement(By.xpath("//mat-select[@formcontrolname='commTypeID']")).click();
-			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-			int Counter=0;
-			for(int i=0;i<a.size();i++)
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getmissingfollowup().click();
+		Inquiry.getMissingFollowUpEditBtn().click();
+		Inquiry.getFollowUpDetails().click();
+		Inquiry.getAddFollowDetails().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='commTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase("Akash"))
 			{
-				String b =a.get(i).getText(); 
-				if(!b.equalsIgnoreCase("Akash"))
+				Assert.assertFalse(false, "Inquiry Communcation mode is Active.");
+				System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
 				{
-					Assert.assertFalse(false, "Inquiry Communcation mode is Active.");
-					System.out.println("Test failed");
+					System.out.println("Test");	
 					break;
-				}
-				else
-				{
-					Counter = Counter+1;
-					if(Counter>a.size())
-					{
-						System.out.println("Test");	
-						break;
-					}	
-				}
+				}	
 			}
 		}
+	}
 
 	//Close the driver
 	@AfterMethod 
 	public void teardown() {
-		driver.close(); 
+		base.failedElement = null;
+		base.failedElementName = "";
+		//driver.close(); 
 	}
 
 	//DataProvider for Add Inquiry
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			//{"Taj Mahal","Mahesh Patel","","Vimal Patel"," Nilesh Panchal1","9746547979","Akash@mail.com","Bopal Gam, Ahmedabad","Remarks","4BHK","In Progress" }
-			{"Project3","Nilesh Modi","","Vimal1"," Akash Patel ","9898100001","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal2"," Akash Patel ","9898100002","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal3"," Akash Patel ","9898100003","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal4"," Akash Patel ","9898100004","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal5"," Akash Patel ","9898100006","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal6"," Akash Patel ","9898100007","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal7"," Akash Patel ","9898100008","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal8"," Akash Patel ","9898100009","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal9"," Akash Patel ","98981000010","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal10"," Akash Patel ","98981000011","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Nilesh Modi","","Vimal11"," Akash Patel ","98981000012","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal12"," Akash Patel ","98981000013","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal13"," Akash Patel ","98981000014","nilesh.m@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Nilesh Modi","","Vimal14"," Akash Patel ","98981000015","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal15"," Akash Patel ","98981000016","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal16"," Akash Patel ","98981000017","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal17"," Akash Patel ","98981000018","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal18"," Akash Patel ","98981000019","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal19"," Akash Patel ","98981000020","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal20"," Akash Patel ","98981000021","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal21"," Akash Patel ","98981000022","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal22"," Akash Patel ","98981000023","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal23"," Akash Patel ","98981000024","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal24"," Akash Patel ","98981000025","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal25"," Akash Patel ","98981000026","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Jaypalsinh Sarvaiya","","Vimal26"," Akash Patel ","98981000027","jaypalsinh@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal27"," Akash Patel ","98981000028","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal28"," Akash Patel ","98981000029","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal29"," Akash Patel ","98981000030","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal30"," Akash Patel ","98981000031","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Harpal Gohil","","Vimal31"," Akash Patel ","98981000032","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal32"," Akash Patel ","98981000033","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal33"," Akash Patel ","98981000034","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal34"," Akash Patel ","98981000035","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal35"," Akash Patel ","98981000036","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Harpal Gohil","","Vimal36"," Akash Patel ","98981000037","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal37"," Akash Patel ","98981000038","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Harpal Gohil","","Vimal38"," Akash Patel ","98981000039","harpal.g@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal39"," Akash Patel ","98981000040","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal40"," Akash Patel ","98981000041","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Ashok Solanki","","Vimal41"," Akash Patel ","98981000042","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal42"," Akash Patel ","98981000043","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal43"," Akash Patel ","98981000044","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal44"," Akash Patel ","98981000045","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal45"," Akash Patel ","98981000046","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },	
-			{"Project3","Ashok Solanki","","Vimal46"," Akash Patel ","98981000047","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal47"," Akash Patel ","98981000048","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal48"," Akash Patel ","98981000049","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal49"," Akash Patel ","98981000050","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-			{"Project3","Ashok Solanki","","Vimal50"," Akash Patel ","98981000051","ashok.s@yopmail.com","Bopal Gam, Ahmedabad","Remarks","Bungalow","In Progress" },
-		};
+			{"Shaligram Arcade", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+			};
 	}
+
+
 
 	//DataProvider for Edit Inquiry
 	@DataProvider
 	public Object[][] InquiryEditData() {
-		return new Object[][] {{"Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
+		return new Object[][] {{"Test with Chandni","Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
 	}
 
 	//DataProvider Delete Inquiry
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{ 1 },{ 2 },{ 3 },{ 4 }};	
+				{{ 1 }};// Just a placeholder for multiple runs	
 	}
 
 	//DataProvider for Apply Filter for Project

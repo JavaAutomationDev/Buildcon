@@ -25,11 +25,13 @@ public class ProspectPage {
 	By Prospect = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav"
 			+ "/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[3]/a");
 	public WebElement getprospect() {
+		base.failedElementName = "Prospect-ClickMenu";
 		return driver.findElement(Prospect);
 	}
 	//Page object for Add Prospect
 	By Addprospect = By.xpath("//span[contains(text(),'Add New Prospect')]");
 	public WebElement getAddprospect() {
+		base.failedElementName = "Prospect-ClickAdd";
 		return driver.findElement(Addprospect);
 	}
 
@@ -38,11 +40,14 @@ public class ProspectPage {
 	public void getsiteproject(String siteproject) {
 		WebElement dropdown = driver.findElement(siteProject);
 		dropdown.click();
+		
+		base.failedElement = dropdown;
+        base.failedElementName = "Prospect-getsiteproject";
+		
 		String optionXPath = "//mat-option//span[contains(text(),'" + siteproject + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		
-		base.failedElement = option;
-        base.failedElementName = "Prospect-getsiteproject";
+
         
 		option.click();
 	}
@@ -50,6 +55,7 @@ public class ProspectPage {
 	//Page object for Visitor Name
 	By visitorname = By.xpath("//input[@formcontrolname='visitorName']");
 	public WebElement getvisitorname() {
+		base.failedElementName = "Prospect-VisitorName";
 		return driver.findElement(visitorname);
 	}
 
@@ -58,6 +64,7 @@ public class ProspectPage {
 	public WebElement getvisitordate() {
 		@SuppressWarnings("unused")
 		Date a = new Date();
+		base.failedElementName = "Prospect-VisitorDate";
 		return driver.findElement(visitordate);
 	}
 
@@ -66,12 +73,14 @@ public class ProspectPage {
 	public WebElement getIntime() {
 		@SuppressWarnings("unused")
 		LocalTime currentTime = LocalTime.now();
+		base.failedElementName = "Prospect-Intime";
 		return driver.findElement(InTime);
 	}
 
 	//Page object for current time pop up ok Button
 	By Ok = By.xpath("//mat-dialog-actions[@class='mat-mdc-dialog-actions mdc-dialog__actions']//button[2]");
 	public WebElement getOk() {
+		base.failedElementName = "Prospect-IntimeOK";
 		return driver.findElement(Ok);
 	}
 
@@ -92,6 +101,7 @@ public class ProspectPage {
 
 		// Set the future time in the input field
 		outTimeElement.sendKeys(formattedFutureTime);
+		base.failedElementName = "Prospect-outtime";
 		return outTimeElement;
 	}
 
@@ -109,12 +119,14 @@ public class ProspectPage {
 		String formattedDate = formatter.format(tomorrow);
 		//Send the formatted date to the NextfollowUpDT input field
 		nextFollowUpElement.sendKeys(formattedDate);
+		base.failedElementName = "Prospect-NextFollowDate";
 		return nextFollowUpElement;
 	}
 
 	//Page object for Referenced By
 	By referencedBy = By.xpath("//input[@formcontrolname='referencedBy']");
 	public WebElement getreferencedBy() {
+		base.failedElementName = "Prospect-referancedBy";
 		return driver.findElement(referencedBy);
 	}
 
@@ -123,9 +135,11 @@ public class ProspectPage {
 	public void getAttendee(String Attendee) {
 		WebElement dropdown = driver.findElement(Attende);
 		dropdown.click();
+		
 		base.failedElement = dropdown;
 		base.failedElementName = "Prospect-getAttendee";
 		
+		//Construct the XPath for the desired option
 		String optionXPath = "//mat-option//span[contains(text(),'" + Attendee + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -134,38 +148,48 @@ public class ProspectPage {
 	//Page object for Contact Number
 	By ContactNo = By.xpath("//input[@formcontrolname='visitorMobile']");
 	public WebElement getContactNo() {
+		base.failedElementName = "Prospect-contactno";
 		return driver.findElement(ContactNo);
 	}
 
 	//Page object for Visitor Email
 	By Email = By.xpath("//input[@formcontrolname='visitorEmail']");
 	public WebElement getEmail() {
+		base.failedElementName = "Prospect-Email";
 		return driver.findElement(Email);
 	}
 
 	//Page object for Address
 	By Address = By.xpath("//textarea[@formcontrolname='visitorAddress']");
 	public WebElement getAddress() {
+		base.failedElementName = "Prospect-Address";
 		return driver.findElement(Address);
 	}
 
 	//Page object for Remarks
 	By Remarks = By.xpath("//textarea[@formcontrolname='remarks']");
 	public WebElement getRemarks() {
+		base.failedElementName = "Prospect-Remarks";
 		return driver.findElement(Remarks);
 	}
 
 	//Page object for Requirement
 	By Requirement = By.xpath("//input[@formcontrolname='requirement']");
 	public WebElement getrequirement() {
+		base.failedElementName = "Prospect-Requirement";
 		return driver.findElement(Requirement);
 	}
 
 	//Page object for Status
 	By Status = By.xpath("//mat-select[@formcontrolname='statusID']");
 	public void getstatus(String status) {
+		
 		WebElement dropdown = driver.findElement(Status);
 		dropdown.click();
+		
+		base.failedElement = dropdown;
+		base.failedElementName = "Prospect-getStatus";
+		
 		String optionXPath = "//mat-option//span[contains(text(),'" + status + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -173,6 +197,7 @@ public class ProspectPage {
 	//Page object for Save Button
 	By Save = By.xpath("//button[@type='submit']");
 	public WebElement getsave() {
+		base.failedElementName = "Prospect-Save";
 		return driver.findElement(Save);
 	}
 
@@ -194,36 +219,42 @@ public class ProspectPage {
 	//Page object for Search
 	By Search = By.xpath("//input[@type='search']");
 	public WebElement getSearch() {
+		base.failedElementName = "Prospect-Search";
 		return driver.findElement(Search);
 	}
 	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[1]/div[2]/button[1]");
 	public WebElement getExporttoExcel() {
+		base.failedElementName = "Prospect-ExportExcel";
 		return driver.findElement(ExporttoExcel);
 	}
 	//Page object for Apply Filter
 	By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[1]/div[2]/div[3]/button");
 	public WebElement getapplyfilter() {
+		base.failedElementName = "Prospect-filter";
 		return driver.findElement(filter);
 	}
 
 	//Page object for Date Range
 	By Daterange=By.xpath("//mat-date-range-input[@role='group']");
 	public WebElement getdaterange() {
+		base.failedElementName = "Prospect-daterange";
 		return driver.findElement(Daterange);
 	}
 
 	//Page object for Select Start Date
 	By SelectstartDate=By.xpath("//span[@class='mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today']");
 	public WebElement getSelectstartDate() {
+		base.failedElementName = "Prospect-selectstdate";
 		return driver.findElement(SelectstartDate);
 	}
 
 	//Page object for Select End Date
 	By SelectendDate=By.xpath("//span[normalize-space()='30']");
 	public WebElement getSelectEndDate() {
+		base.failedElementName = "Prospect-selectenddt";
 		return driver.findElement(SelectendDate);
 	}
 	//Page object for Select Project
@@ -242,6 +273,7 @@ public class ProspectPage {
 	//Page object for Reset Button
 	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
 	public WebElement getresetfilter() {
+		base.failedElementName = "Prospect-ResetFilter";
 		return driver.findElement(resetfilter);
 	}
 	//Page object for Delete Prospect
@@ -263,6 +295,7 @@ public class ProspectPage {
 	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
 			+ "/form/mat-dialog-actions/button[1]");
 	public WebElement getClickYes() {
+		base.failedElementName = "Prospect-ClickYes";
 		return driver.findElement(ClickYes);
 	}
 
@@ -270,12 +303,14 @@ public class ProspectPage {
 	By Todayfollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 			+ "/main/vex-prospect/vex-inquires/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[2]");
 	public WebElement gettodayfollowup() {
+		base.failedElementName = "Prospect-Todayfollowup";
 		return driver.findElement(Todayfollowup);
 	}
 	//Page object for Missing Follow Up Details
 	By MissingFollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 			+ "/main/vex-prospect/vex-inquires/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[3]");
 	public WebElement getmissingfollowup() {
+		base.failedElementName = "Prospect-MissingFollowup";
 		return driver.findElement(MissingFollowup);
 	}
 	//Page object for Unit Dropdown
@@ -283,21 +318,26 @@ public class ProspectPage {
 	public void getunitdropdown(String unitD) {
 		WebElement dropdown = driver.findElement(unitdropdown);
 		dropdown.click();
-		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + unitD + "')]";
-		WebElement option = driver.findElement(By.xpath(optionXPath));
 		
 		base.failedElement = dropdown;
 		base.failedElementName = "Prospect-getunitdropdown";
 
+		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + unitD + "')]";
+		WebElement option = driver.findElement(By.xpath(optionXPath));
+		
+	
 		option.click();
 	}
 	//Page Object for Select Flat/Shop
 	By SelectFlat = By.xpath("//mat-select[@formcontrolname='flatShopID']");
+	 
 	public void getSelectFlat(String Selectflat) {
 		WebElement dropdown = driver.findElement(SelectFlat);
 		dropdown.click();
+		
 		base.failedElement = dropdown;
 		base.failedElementName = "Prospect-getSelectFlat";
+
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Selectflat + "')]";  
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();

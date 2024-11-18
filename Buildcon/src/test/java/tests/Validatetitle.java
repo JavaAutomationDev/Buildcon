@@ -51,5 +51,4 @@ public class Validatetitle extends base {
 	public void teaddown() {
 		driver.close();
 	}
-
 }

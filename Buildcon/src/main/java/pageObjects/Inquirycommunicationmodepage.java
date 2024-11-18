@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class Inquirycommunicationmodepage {
 
 	public WebDriver driver;
@@ -18,6 +20,7 @@ public class Inquirycommunicationmodepage {
 					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 
 	public WebElement getconfiguration() {
+		base.failedElementName = "InquiryCommunicationMode-Configurationform";
 		return driver.findElement(Configurationform);
 	}
 
@@ -26,6 +29,7 @@ public class Inquirycommunicationmodepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[11]/div/mat-icon");
 
 	public WebElement getInquirycommunicationmodepageclick() {
+		base.failedElementName = "InquiryCommunicationMode-MenuClick";
 		return driver.findElement(Inquirycommunicationmodepageclick);
 
 	}
@@ -35,6 +39,7 @@ public class Inquirycommunicationmodepage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[1]/div[2]/button[2]");
 
 	public WebElement getInquirycommunicationmodeadd() {
+		base.failedElementName = "InquiryCommunicationMode-ClickAdd";
 		return driver.findElement(Inquirycommunicationmodeadd);
 	}
 
@@ -42,6 +47,9 @@ public class Inquirycommunicationmodepage {
 	By AddNewInquiryCommunicationMode = By.xpath(
 			"//input[@formcontrolname='inqCommModeName']");
 	public WebElement getAddNewInquiryCommunicationMode() {
+		
+		base.failedElementName = "InquiryCommunicationMode-Name";
+		
 		return driver.findElement(AddNewInquiryCommunicationMode);
 	}
 
@@ -49,21 +57,25 @@ public class Inquirycommunicationmodepage {
 	By savebuttoninquirycommunication = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-communication-mode-add/div/form/mat-dialog-actions/button[1]");
 	public WebElement getsavebuttoninquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-ClickSave";
 		return driver.findElement(savebuttoninquirycommunication);
 	}
 
 	//Page object model for edit  the inquiry communication mode page
 	By Editinquirycommunicationrow = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
-	
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[2]");
+
 	public WebElement getEditinquirycommunicationrow() {
+		base.failedElementName = "InquiryCommunicationMode-Editrow";
 		return driver.findElement(Editinquirycommunicationrow);
 	}
 
-	//Page object model for add new data and clear existing data;
+	// page object model for add new data and clear existing data;
 	By EditInquiryCommunicationMode = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-communication-mode-add/div/form/mat-dialog-content/div"
 			+ "[1]/mat-form-field/div[1]/div[2]/div[2]/input");
+ 
 	public WebElement getEditInquiryCommunicationMode() {
+		base.failedElementName = "InquiryCommunicationMode-EditMode";
 		return driver.findElement(EditInquiryCommunicationMode);
 	}
 
@@ -71,6 +83,7 @@ public class Inquirycommunicationmodepage {
 	By editsavebuttoninquirycommunication = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-communication-mode-add/div/form/mat-dialog-actions/button[1]");
 	public WebElement geteditsavebuttoninquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-EditSave";
 		return driver.findElement(editsavebuttoninquirycommunication);
 	}
 
@@ -78,6 +91,7 @@ public class Inquirycommunicationmodepage {
 	By changestatusinquirycommunication = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[1]");
 	public WebElement getchangestatusinquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-ChangeStatus";
 		return driver.findElement(changestatusinquirycommunication);
 	}
 
@@ -85,6 +99,7 @@ public class Inquirycommunicationmodepage {
 	By changestatusconfirmationinquirycommunication = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getchangestatusconfirmationinquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-ChangeStatusConfirm";
 		return driver.findElement(changestatusconfirmationinquirycommunication);
 	}
 
@@ -92,6 +107,7 @@ public class Inquirycommunicationmodepage {
 	By deleteclickinquirycommunication = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[3]");
 	public WebElement getdeleteclickinquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-ClickDelete";
 		return driver.findElement(deleteclickinquirycommunication);
 	}
 
@@ -99,6 +115,7 @@ public class Inquirycommunicationmodepage {
 	By deleteclickconfirmationinquirycommunication = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[2]");
 	public WebElement getdeleteclickconfirmationinquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-DeleteConfirm";
 		return driver.findElement(deleteclickconfirmationinquirycommunication);
 	}
 
@@ -106,18 +123,21 @@ public class Inquirycommunicationmodepage {
 	By searchinquirycommunication = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[1]/div[2]/div/input");
 	public WebElement getsearchinquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-SearchInquiry";
 		return driver.findElement(searchinquirycommunication);
 	}
 
 	By clicksearchedbuttoninquirycommunication = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[1]/div[2]/div/mat-icon");
 	public WebElement getclicksearchedbuttoninquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-ClickSearchButtonInquiry";
 		return driver.findElement(clicksearchedbuttoninquirycommunication);
 	}
 	
 	By clickexportasexcelinquirycommunication = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[1]/div[2]/button[1]");
 	public WebElement getclickexportasexcelinquirycommunication() {
+		base.failedElementName = "InquiryCommunicationMode-ClickExportExcel";
 		return driver.findElement(clickexportasexcelinquirycommunication);
 	}
 	

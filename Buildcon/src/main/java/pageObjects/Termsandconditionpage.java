@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import resources.base;
+
 public class Termsandconditionpage {
 
 	public WebDriver driver;
@@ -18,6 +20,7 @@ public class Termsandconditionpage {
 					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
 
 	public WebElement getconfiguration() {
+		base.failedElementName = "TermsCondition-Configuration";
 		return driver.findElement(Configurationform);
 	}
 
@@ -26,6 +29,7 @@ public class Termsandconditionpage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[12]/div/mat-icon");
 
 	public WebElement getTermsandconditionclick() {
+		base.failedElementName = "TermsCondition-ClickMenu";
 		return driver.findElement(Termsandconditionclick);
 
 	}
@@ -35,6 +39,7 @@ public class Termsandconditionpage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[1]/div[2]/button[2]");
 
 	public WebElement getaddnewTermsandcondition() {
+		base.failedElementName = "TermsCondition-Addclick";
 		return driver.findElement(addnewTermsandcondition);
 	}
 
@@ -43,6 +48,7 @@ public class Termsandconditionpage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add/div/form/mat-dialog-content/div/mat-form-field/div[1]/div[2]/div[2]/input");
 
 	public WebElement getAddNewTermsandConditionsdata() {
+		base.failedElementName = "TermsCondition-Data";
 		return driver.findElement(AddNewTermsandConditionsdata);
 	}
 
@@ -51,6 +57,7 @@ public class Termsandconditionpage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add/div/form/mat-dialog-actions/button[1]");
 
 	public WebElement getsavebuttonTermsandConditions() {
+		base.failedElementName = "TermsCondition-AddsaveBtn";
 		return driver.findElement(savebuttonTermsandConditions);
 	}
 
@@ -59,6 +66,7 @@ public class Termsandconditionpage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[2]/div/table/tbody/tr/td[2]/div/button[1]");
 
 	public WebElement getEditTermsandConditions() {
+		base.failedElementName = "TermsCondition-EditBtn";
 		return driver.findElement(EditTermsandConditions);
 	}
 
@@ -67,6 +75,7 @@ public class Termsandconditionpage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add/div/form/mat-dialog-content/div/mat-form-field/div[1]/div[2]/div[2]/input");
 
 	public WebElement getupdateEditTermsandcondition() {
+		base.failedElementName = "TermsCondition-UpdateEdit";
 		return driver.findElement(updateEditTermsandcondition);
 	}
 
@@ -75,6 +84,7 @@ public class Termsandconditionpage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add/div/form/mat-dialog-actions/button[1]");
 
 	public WebElement geteditsavebuttonTermsandcondition() {
+		base.failedElementName = "TermsCondition-EditSaveBtn";
 		return driver.findElement(editsavebuttonTermsandcondition);
 	}
 
@@ -84,6 +94,7 @@ public class Termsandconditionpage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[2]/div/table/tbody/tr/td[2]/div/button[2]");
 
 	public WebElement getdeleteclickinquirycommunication() {
+		base.failedElementName = "TermsCondition-Delete";
 		return driver.findElement(deleteclickTermsandcondition);
 	}
 
@@ -92,6 +103,7 @@ public class Termsandconditionpage {
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[2]");
 
 	public WebElement getdeleteclickconfirmationTermsandcondition() {
+		base.failedElementName = "TermsCondition-DeleteConfirm";
 		return driver.findElement(deleteclickconfirmationTermsandcondition);
 	}
 
@@ -100,6 +112,7 @@ public class Termsandconditionpage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[1]/div[2]/div/input");
 
 	public WebElement getsearchtermsandcondition() {
+		base.failedElementName = "TermsCondition-Search";
 		return driver.findElement(searchtermsandcondition);
 	}
 
@@ -107,6 +120,7 @@ public class Termsandconditionpage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[1]/div[2]/div/mat-icon");
 
 	public WebElement getclicksearchtermsandcondition() {
+		base.failedElementName = "TermsCondition-SearchClick";
 		return driver.findElement(clicksearchtermsandcondition);
 	}
 
@@ -114,6 +128,7 @@ public class Termsandconditionpage {
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[1]/div[2]/button[1]");
 
 	public WebElement getclickexportasexceltermsandcondition() {
+		base.failedElementName = "TermsCondition-ExportExcel";
 		return driver.findElement(clickexportasexceltermsandcondition);
 	}
 
