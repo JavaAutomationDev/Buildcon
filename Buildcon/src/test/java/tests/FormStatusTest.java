@@ -9,6 +9,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -62,8 +63,9 @@ public class FormStatusTest extends base {
 		String valid_Displayform = valid_string1;
 		System.out.println(valid_Displayform);
 		unit.getClickonsavebutton().click();
-		softAssert.assertEquals(valid_formstatus, "Formstatus is a Valid Alpha-Numeric");
-		softAssert.assertEquals(valid_Displayform, "Displayform is a valid Number");
+		softAssert.assertEquals(valid_formstatus, "FORMSTATUS is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertEquals(valid_Displayform, "displayform is a Valid Number");
+		softAssert.assertAll();
 
 	}
 	// Edit terms and condition types
@@ -82,7 +84,8 @@ public class FormStatusTest extends base {
 		System.out.println(valid_formstatus);
 		Thread.sleep(2000);
 		unit.geteditclicksaveformstatus().click();
-		softAssert.assertEquals(valid_formstatus, "Formstatus is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_formstatus, "FORMSTATUS is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertAll();
 	}
 
 	@Test
@@ -91,7 +94,9 @@ public class FormStatusTest extends base {
 		unit.getconfiguration().click();
 		unit.getFormStatuscick().click();
 		unit.getdeleteclickFormstatus().click();
+		Thread.sleep(2000);
 		unit.getdeleteclickconfirmationformstatus().click();
+		Thread.sleep(2000);
 	}
 
 	@Test(dataProvider = "getsearched")
@@ -100,7 +105,9 @@ public class FormStatusTest extends base {
 		form.getconfiguration().click();
 		form.getFormStatuscick().click();
 		form.getsearchsearchForm().sendKeys(searchedentertexttermscondition1);
+		Thread.sleep(2000);
 		form.getclicksearchformstatus().click();
+		Thread.sleep(2000);
 	}
 
 	@Test
@@ -108,7 +115,9 @@ public class FormStatusTest extends base {
 		FormStatuspage unit = new FormStatuspage(driver);
 		unit.getconfiguration().click();
 		unit.getFormStatuscick().click();
+		Thread.sleep(2000);
 		unit.getclickexportasexcelformstatus().click();
+		Thread.sleep(2000);
 
 	}
 
@@ -119,6 +128,7 @@ public class FormStatusTest extends base {
 		unit.getconfiguration().click();
 		unit.getFormStatuscick().click();
 		unit.getClickonsavebutton().click();
+		Thread.sleep(2000);
 
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/form/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -166,12 +176,14 @@ public class FormStatusTest extends base {
 		unit.getconfiguration().click();
 		unit.getFormStatuscick().click();
 		searching_formstatus("akash");
+		Thread.sleep(2000);
 		unit.geteditclickformstatus().click();
 
 		// Clear input field
 		for (int i = 1; i <= 30; i++) {
 			unit.geteditclickenterdata().sendKeys(Keys.BACK_SPACE);
 		}
+		Thread.sleep(2000);
 
 		// Wait for user selection
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -182,7 +194,7 @@ public class FormStatusTest extends base {
 		unit.getdisplayformindividual().click();
 		unit.getdisplayformindividual().sendKeys(Keys.BACK_SPACE);
 		unit.getdisplayformindividual().sendKeys(Keys.BACK_SPACE);
-		// unit.getdisplayform().sendKeys(formstatus3);
+		
 
 		// Save changes
 		unit.getClickonsavebuttonindividual().click();
@@ -198,7 +210,9 @@ public class FormStatusTest extends base {
 
 		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Form status name is required", expectedMessage, actualMessage);
-
+		
+         /////////////  users dropdown checked:
+		
 		WebElement messageElement1 = driver.findElement(By.xpath(
 				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-form-status/div/div[2]/div/table/tbody/tr/td[2]/div/mat-form-field/div[2]/div/mat-error/span"));
 
@@ -207,7 +221,7 @@ public class FormStatusTest extends base {
 
 		// Define the expected message
 		String expectedMessage1 = "Users is required";
-
+   
 		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Users is required", expectedMessage1, actualMessage1);
 
@@ -224,15 +238,16 @@ public class FormStatusTest extends base {
 		softAssert.assertEquals("Display Order is required", expectedMessage2, actualMessage2);
 		softAssert.assertAll();
 	}
-
-//	@AfterMethod
-//	public void teaddown() {
-//		driver.close();
-//	}
+	
+ // close driver.
+	@AfterMethod
+	public void teaddown() {
+		driver.close();
+	}
 
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "anshul", "Automation Test", "20" } };
+		return new Object[][] { { "anshul1", "Automation Test", "20" } };
 	}
 
 	// DataProvider for edit form status

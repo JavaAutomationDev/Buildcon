@@ -38,135 +38,148 @@ public class InquiryResponseTest extends base {
 
 	//Add Method
 	@Test(dataProvider = "getAdddata")
-	public void Add_inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
+	public void Add_Inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getAddInquiryResponsepageclick().click();
-		unit.getAddInquiryResponsenewdata().sendKeys(InquiryResponsepage1);
-		// inquiry response type  Name Text Data Validation ---------------------------------
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getAddInquiryResponsepageclick().click();
+		
+		Inquiryresponse.getAddInquiryResponsenewdata().sendKeys(InquiryResponsepage1);
+		//Inquiry Response type  Name Text Data Validation
 		String valid_string = valid_alphanum(InquiryResponsepage1, "inquiryresponse", 10);
 		String valid_inquiryresponse = valid_string;
 		System.out.println(valid_inquiryresponse);
+		
 		Thread.sleep(3000);
-		unit.getInquiryresponsesave().click();
+		Inquiryresponse.getInquiryresponsesave().click();
+		Thread.sleep(2000);
 		softAssert.assertEquals(valid_inquiryresponse, "inquiryresponse is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
-		
 	}
 
 	//Edit Method
 	@Test(dataProvider = "getEditdata")
-	public void Edit_inquiryresponse(String InquiryResponsepage2) throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
+	public void Edit_Inquiryresponse(String InquiryResponsepage2) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-	    unit.getEditinquiryresponsetype().click();
-	    unit.getEditinquiryresponsetypeenter().clear();
-		unit.getEditinquiryresponsetypeenter().sendKeys(InquiryResponsepage2);
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+	    Inquiryresponse.getEditinquiryresponsetype().click();
+	 
+	    Inquiryresponse.getEditinquiryresponsetypeenter().clear();
+		Inquiryresponse.getEditinquiryresponsetypeenter().sendKeys(InquiryResponsepage2);
 		String valid_string = valid_alphanum(InquiryResponsepage2, "inquiryresponse", 10);
 		String valid_inquiryresponse = valid_string;
 		System.out.println(valid_inquiryresponse);
+		
 		Thread.sleep(3000);
-		unit.getEditinquiryresponsesave().click();
+		Inquiryresponse.getEditinquiryresponsesave().click();
+		Thread.sleep(2000);
 		softAssert.assertEquals(valid_inquiryresponse, "inquiryresponse is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
-
 	}
 
-	//Status Method
+	//Status Inquiry Response
 	@Test
-	public void Status_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getChangeInquiryrsponsestatus().click();
+	public void Status_Inquiryresponse() throws InterruptedException {
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getChangeInquiryrsponsestatus().click();
 		Thread.sleep(2000);
-		unit.getChangeInquiryresponseconfirm().click();
+		Inquiryresponse.getChangeInquiryresponseconfirm().click();
+		Thread.sleep(2000);
 	}
 
 	//Delete Method
 	@Test
-	public void delete_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getInquiryresponsedeleteclick().click();
+	public void Delete_Inquiryresponse() throws InterruptedException {
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryresponsedeleteclick().click();
 		Thread.sleep(2000);
-		unit.getInquiryresponsedeleteconfirmationk().click();
+		Inquiryresponse.getInquiryresponsedeleteconfirmationk().click();
+		Thread.sleep(2000);
 	}
 
 	//Search Method
 	@Test(dataProvider = "getsearched")
 	public void searched_inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getInquiryresponsesearched().sendKeys(InquiryResponsepage1);
-		unit.getInquiryresponsesearchedclick().click();
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryresponsesearched().sendKeys(InquiryResponsepage1);
+		Inquiryresponse.getInquiryresponsesearchedclick().click();
+		Thread.sleep(2000);
 	}
 
+	//Excel Inquiry Response
 	@Test
 	public void Excel_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getinquiryresponseExcel().click();
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getinquiryresponseExcel().click();
+		Thread.sleep(2000);
 	}
 
+	//Add Validation Inquiry Response
 	@Test
-	public void Add_validation_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
+	public void Add_validation_Inquiryresponse() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getAddInquiryResponsepageclick().click();
-
-		unit.getInquiryresponsesave().click();
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getAddInquiryResponsepageclick().click();
+		Thread.sleep(2000);
+		Inquiryresponse.getInquiryresponsesave().click();
+		Thread.sleep(2000);
 
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-response-type-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-response-type-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "Inquiry Response Type name is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Inquiry Response Type name is required", expectedMessage, actualMessage);
+		softAssert.assertAll();
 	}
 
+	//Edit Validation Inquiryresponse
 	@Test
-	public void Edit_validation_inquiryresponse() throws InterruptedException {
-		InquiryResponsepage unit = new InquiryResponsepage(driver);
+	public void Edit_Validation_Inquiryresponse() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquiryResponsepageclick().click();
-		unit.getEditinquiryresponsetype().click();
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Thread.sleep(2000);
+		Inquiryresponse.getEditinquiryresponsetype().click();
 		for (int i = 1; i <= 15; i++) {
-			unit.getEditinquiryresponsetypeenter().sendKeys(Keys.BACK_SPACE);
+			Inquiryresponse.getEditinquiryresponsetypeenter().sendKeys(Keys.BACK_SPACE);
 		}
 		;
-		unit.getEditinquiryresponsesave().click();
+		Inquiryresponse.getEditinquiryresponsesave().click();
+		Thread.sleep(2000);
 
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-response-type-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-response-type-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "Inquiry Response Type name is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Inquiry Response Type name is required", expectedMessage, actualMessage);
-
+		softAssert.assertAll();
 	}
 
-	// close the driver
+	//Close the driver
 	@AfterMethod
 	public void teardown() {
 		 driver.close();
@@ -175,10 +188,10 @@ public class InquiryResponseTest extends base {
 	//DataProvider for Add
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "Nishant123444444" } };
+		return new Object[][] { { "Nishant12" } };
 	}
 
-	// edit
+	//DataProvider for Edit
 	@DataProvider
 	public Object[][] getEditdata() {
 		return new Object[][] { { "Sitops123" } };

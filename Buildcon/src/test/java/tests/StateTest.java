@@ -38,84 +38,90 @@ public class StateTest extends base {
 	//Add State
 	@Test(dataProvider = "getstateAdddata")
 	public void Add_State(String statename1, String statecode1) throws InterruptedException, IOException {
-		Statepage state = new Statepage(driver);
 		SoftAssert softAssert = new SoftAssert();
+		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
 		state.getstatename().click();
+		
 		state.eneterstatename().sendKeys(statename1);
-		state.getstatecode().sendKeys(statecode1);
-		// unit  Name Text Data Validation ---------------------------------
+		//State Name Text Data Validation
 		String valid_string = validateText(statename1,"statename",5,20);
 		String valid_statename = valid_string;
 		System.out.println(valid_statename);
+		
+		state.getstatecode().sendKeys(statecode1);
+		//State Code Text Data Validation
 		String valid_string1 = valid_number(statecode1,"statecode");
 		String valid_statecode = valid_string1;
 		System.out.println(valid_statecode);
+		
 		state.getsavestate().click();
+		Thread.sleep(2000);
 		softAssert.assertEquals(valid_statename, "statename is a Valid text - is a valid Minlenght - is a valid Maxlenght");
 		softAssert.assertEquals(valid_statecode, "statecode is a Valid Number");
 		softAssert.assertAll();
-		
 	}
-
-	
 
 	//Editing an existing unit using Data Provider
 	@Test(dataProvider = "getstateEditData")
 	public void Edit_state(String newstatename1, String newstatecode1) throws InterruptedException, IOException {
-		Statepage state = new Statepage(driver);
 		SoftAssert softAssert = new SoftAssert();
+		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
 		state.editrow().click();
+		
 		state.editadddata().clear();
 		state.editadddata().sendKeys(newstatename1);
-		state.editrowaddstatecode().clear();
-		state.editrowaddstatecode().sendKeys(newstatecode1);
 		String valid_string = validateText(newstatename1,"statename",5,20);
 		String valid_statename = valid_string;
 		System.out.println(valid_statename);
+		
+		state.editrowaddstatecode().clear();
+		state.editrowaddstatecode().sendKeys(newstatecode1);
 		String valid_string1 = valid_number(newstatecode1,"statecode");
 		String valid_statecode = valid_string1;
 		System.out.println(valid_statecode);
+		
 		Thread.sleep(2000);
 		state.editrowsavebutton().click();
+		
 		softAssert.assertEquals(valid_statename, "statename is a Valid text - is a valid Minlenght - is a valid Maxlenght");
 		softAssert.assertEquals(valid_statecode, "statecode is a Valid Number");
-		softAssert.assertAll();
-		
+		softAssert.assertAll();	
 	}
 
 	//Status change of the existing record
 	@Test
 	public void Status_state() throws InterruptedException {
-		Statepage unit = new Statepage(driver);
-		unit.getconfiguration().click();
-		unit.getclickstate().click();
-		unit.getstatusclick().click();
-		unit.getstatusconfirmation().click();
+		Statepage state = new Statepage(driver);
+		state.getconfiguration().click();
+		state.getclickstate().click();
+		state.getstatusclick().click();
+		state.getstatusconfirmation().click();
 		Thread.sleep(2000);
 	}
 
 	//Delete record of the existing records
 	@Test
 	public void Delete_State() throws InterruptedException {
-		Statepage unit = new Statepage(driver);
-		unit.getconfiguration().click();
-		unit.getclickstate().click();
-		unit.getdeletestate().click();
-		unit.getdeletestateconfirm().click();
+		Statepage state = new Statepage(driver);
+		state.getconfiguration().click();
+		state.getclickstate().click();
+		state.getdeletestate().click();
+		state.getdeletestateconfirm().click();
 		Thread.sleep(2000);
 	}
 
+	//Search Method
 	@Test(dataProvider = "getstatesearch")
 	public void search_state(String statesearch1) throws InterruptedException {
-		Statepage unit = new Statepage(driver);
-		unit.getconfiguration().click();
-		unit.getclickstate().click();
-		unit.getstatesearching().sendKeys(statesearch1);
-		unit.getstatesearchingclick().click();
+		Statepage state = new Statepage(driver);
+		state.getconfiguration().click();
+		state.getclickstate().click();
+		state.getstatesearching().sendKeys(statesearch1);
+		state.getstatesearchingclick().click();
 		Thread.sleep(2000);
 	}
 	
@@ -126,12 +132,15 @@ public class StateTest extends base {
 		unit.getconfiguration().click();
 		unit.getclickstate().click();
 		unit.getstateexcel().click();
+		Thread.sleep(2000);
 	}
 
+	//Add State Test Mandatory Filed Validation
 	@Test
-	public void Add_state_Test_Mandatory_Filed_Validation() throws InterruptedException {
-		Statepage state = new Statepage(driver);
+	public void Add_State_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		
 		SoftAssert softAssert = new SoftAssert();
+		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
 		Thread.sleep(2000);
@@ -140,40 +149,35 @@ public class StateTest extends base {
 		state.getsavestate().click();
 
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div"
+				+ "/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "State name is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("State name is required", expectedMessage, actualMessage);
 
-	
-		
 		WebElement messageElement1 = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
 
 		String actualMessage1 = messageElement1.getText();
 		System.out.println(messageElement1.getText());
 
-		// Define the expected message
-
+		//Define the expected message
 		String expectedMessage1 = "State code is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("State code is required", expectedMessage1, actualMessage1);
-
 		softAssert.assertAll();
-
 	}
 
+	//Edit State Test Mandatory Filed Validation
 	@Test
 	public void Edit_state_Test_Mandatory_Filed_Validation() throws InterruptedException {
-		Statepage state = new Statepage(driver);
+
 		SoftAssert softAssert = new SoftAssert();
+		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
 		Thread.sleep(2000);
@@ -182,39 +186,33 @@ public class StateTest extends base {
 			state.editadddata().sendKeys(Keys.BACK_SPACE);
 			state.editrowaddstatecode().sendKeys(Keys.BACK_SPACE);
 		}
-
 		state.getsavestate().click();
-
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div"
+				+ "/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "State name is required";
 
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("State name is required", expectedMessage, actualMessage);
-
-		
 		WebElement messageElement1 = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div"
+				+ "/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
 
 		String actualMessage1 = messageElement1.getText();
 		System.out.println(messageElement1.getText());
 
-		// Define the expected message
-
+		//Define the expected message
 		String expectedMessage1 = "State code is required";
 
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("State code is required", expectedMessage1, actualMessage1);
-
 		softAssert.assertAll();
-
 	}
 
+	//Close the driver
 	@AfterMethod
 	public void teaddown() {
 		driver.close();

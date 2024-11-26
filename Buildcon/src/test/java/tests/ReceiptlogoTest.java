@@ -39,6 +39,16 @@ public class ReceiptlogoTest extends base {
 		ReceiptLogo unit = new ReceiptLogo(driver);
 		unit.getconfiguration().click();
 		unit.getReceiptlogo().click();
+		Thread.sleep(2000);
+		unit.getReceiptlogosave().click();
+		
+	}
+	
+	@Test
+	public void Edit_formstatus() throws InterruptedException {
+		ReceiptLogo unit = new ReceiptLogo(driver);
+		unit.getconfiguration().click();
+		unit.getReceiptlogo().click();
 		unit.getReceiptlogoclickremove().click();
 		Thread.sleep(2000);
 		unit.attachProfilePhoto();
@@ -52,7 +62,7 @@ public class ReceiptlogoTest extends base {
 		//SoftAssert softAssert = new SoftAssert();
 		unit.getconfiguration().click();
 		unit.getReceiptlogo().click();
-		//unit.getReceiptlogoclickremove().click();
+		unit.getReceiptlogoclickremove().click();
 		Thread.sleep(2000);
 		//unit.attachProfilePhoto();
 		unit.getReceiptlogosave().click();
@@ -60,13 +70,6 @@ public class ReceiptlogoTest extends base {
 		for (WebElement message : messages) {
 		    System.out.println(message.getText()); 
 		}
-
-//		// Define the expected message
-//		String expectedMessage = "Form status name is required";
-//
-//		// Assert the actual message matches the expected message
-//		softAssert.assertEquals("Form status name is required", expectedMessage, actualMessage);
-
 	}
 	
 	
@@ -78,6 +81,11 @@ public class ReceiptlogoTest extends base {
 		unit.getReceiptlogoclickremove().click();
 		Thread.sleep(2000);
 		unit.getReceiptlogosave().click();
+		Thread.sleep(2000);
+		List<WebElement> messages = driver.findElements(By.xpath("/html/body/div[1]/div"));
+		for (WebElement message : messages) {
+		    System.out.println(message.getText()); 
+		}
 	}
 	
 }

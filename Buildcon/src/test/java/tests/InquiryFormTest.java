@@ -39,17 +39,41 @@ public class InquiryFormTest extends base {
 	//Add Inquiry Form Data
 	@Test(dataProvider = "InquiryFormAdddata")
 	public void Add_Inquiry_Form(String siteproject,String visitorname,String Attendee,String Number,
-			String Email) throws InterruptedException {
+			String Email) throws InterruptedException, IOException {
+		SoftAssert softAssert = new SoftAssert();
 		InquiryForm inquiryForm = new InquiryForm(driver);
 		inquiryForm.getInquiry().click();
 
 		inquiryForm.getsiteproject(siteproject);
+		
 		inquiryForm.getvisitor().sendKeys(visitorname);
+		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
+		//Visitor Name Text Data Validation -----------------
+		String valid_string = validateText(visitorname,"VisitorName", 5, 30);
+		String valid_visitorname = valid_string;
+		System.out.println(valid_visitorname);
+		
 		inquiryForm.getAttendee().sendKeys(Attendee);
+		
 		inquiryForm.getContactNo().sendKeys(Number);
-		inquiryForm.getEmail().sendKeys(Email);	   
+		//ContactNo Number Validation -----------------
+		valid_string = valid_number(Number, "InquiryContactNo");
+		String valid_contactno = valid_string;
+		System.out.println(valid_contactno);
+		
+		inquiryForm.getEmail().sendKeys(Email);	
+		//Email Validation
+		valid_string = valid_EMail(Email, "InquiryEmail");
+		String valid_email = valid_string;
+		System.out.println(valid_email);	
+		
 		Thread.sleep(2000);
 		inquiryForm.getsave().click();
+		
+		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
+		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
+		softAssert.assertAll();
 	}
 
 	//Add Inquiry Form Test Mandatory Filed Validation
@@ -81,6 +105,6 @@ public class InquiryFormTest extends base {
 	@DataProvider
 	public Object[][] InquiryFormAdddata() {
 		return new Object[][] {
-			{"Taj Mahal1","Akash Patel", "Nilesh Panchal", "9746547979", "Akash@mail.com"}};
+			{"Taj Mahal","Akash Patel", "Nilesh Panchal", "9746547979", "Akash@mail.com"}};
 	}
 }

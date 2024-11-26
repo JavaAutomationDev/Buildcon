@@ -1,9 +1,9 @@
 package pageObjects;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import resources.base;
 
 public class Unitpage {
@@ -15,8 +15,7 @@ public class Unitpage {
 	}
 
 	//Page object for click Configuration  form module
-		By Configurationform = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]"
-				+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
+		By Configurationform = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[12]/a/span");
 				
 		public WebElement getconfiguration() {
 			base.failedElementName = "Unit-Configuration";
@@ -55,7 +54,7 @@ public class Unitpage {
 		}
 		
 	//PAGE object model for editbutton unit	
-		By Editbutton = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[2]/div/table/tbody/tr[3]/td[3]/div/button[2]");
+		By Editbutton = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[2]/div/table/tbody/tr[4]/td[3]/div/button[2]");
 		public WebElement geteditunit() {
 			base.failedElementName = "Unit-Edit";
 			return driver.findElement(Editbutton);
@@ -76,9 +75,7 @@ public class Unitpage {
 		}
 		
 	// page object model for change the unit status:
-		By statuschange =By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
-				+ "/main/vex-units/div/div[2]/div/table/tbody/tr[3]/td[3]/div/button[1]");
-		
+		By statuschange =By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[2]/div/table/tbody/tr[4]/td[3]/div/button[1]");
 		public WebElement getchangestatus() {
 			base.failedElementName = "Unit-Statuschange";
 			return driver.findElement(statuschange);
@@ -91,20 +88,26 @@ public class Unitpage {
 			return driver.findElement(statuschange1);
 		}
 		
-	// page object model for delete the record
-		By deleteunit = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[2]"
-				+ "/div/table/tbody/tr[3]/td[3]/div/button[3]");
-		public WebElement getdelete() {
-			base.failedElementName = "Unit-Delete";
-			return driver.findElement(deleteunit);
-		}
-		
-	// page object model for delete confirmation
-		By deleteconfirmation = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
-		public WebElement confirmationdelete() {
-			base.failedElementName = "Unit-Deleteconfirm";
-			return driver.findElement(deleteconfirmation);
-		}
+	//  page object model for individual delete  which name is provide  in data provider:
+		public void deleteUnitByName(String unitName) {
+	 // Assuming each unit row has a unit name and a delete button next to it
+	 List<WebElement> rows = driver.findElements(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[2]/div/table/tbody/tr")); // Update with the correct table XPath
+	        
+      for (WebElement row : rows) {
+		       // Find the unit name in the row
+     WebElement unitCell = row.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[2]/div/table/tbody/tr[4]/td[1]")); // Assuming unit name is in the first column
+	 if (unitCell.getText().equalsIgnoreCase(unitName)) {
+		       // If this is the row with the unit you want to delete, find and click the delete button
+		    WebElement deleteButton = row.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[2]/div/table/tbody/tr[4]/td[3]/div/button[3]")); // Update with correct XPath for the delete button in the row
+	 deleteButton.click();
+		                
+ // Optionally, handle a confirmation dialog if necessary
+    WebElement confirmationButton = driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]"));  // Update with the actual confirmation button XPath
+     confirmationButton.click();
+		break; // Stop once the correct row is found and clicked
+		   }
+	  }
+ }
 		
 	//page object for export as a excel
 		By Excel = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-units/div/div[1]/div[2]/div[2]/button");

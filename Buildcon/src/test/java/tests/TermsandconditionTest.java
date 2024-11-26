@@ -35,127 +35,138 @@ public class TermsandconditionTest extends base {
 		log.info("Login successful");
 	}
 
-	//Add terms and condition types
+	//Add Terms and Condition
 	@Test(dataProvider = "getAdddata")
-	public void Add_Termsandcondition(String TermsandconditionTest1) throws InterruptedException {
-		Termsandconditionpage unit = new Termsandconditionpage(driver);
+	public void Add_Terms_Condition(String TermsandconditionTest1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getTermsandconditionclick().click();
-		unit.getaddnewTermsandcondition().click();
-		unit.getAddNewTermsandConditionsdata().sendKeys(TermsandconditionTest1);
-		// ----------terms and communication Text Data Validation ------------
-		String valid_string = valid_alphanum(TermsandconditionTest1, "Termsandcommunication", 25);
+		Termsandconditionpage termscondition = new Termsandconditionpage(driver);
+		termscondition.getconfiguration().click();
+		termscondition.getTermsandconditionclick().click();
+		termscondition.getaddnewTermsandcondition().click();
+		
+		termscondition.getAddNewTermsandConditionsdata().sendKeys(TermsandconditionTest1);
+		//Terms and condition Text Data Validation
+		String valid_string = valid_alphanum(TermsandconditionTest1, "Termsandcondition", 25);
 		String valid_Termsandcondition = valid_string;
 		System.out.println(valid_Termsandcondition);
+		
 		Thread.sleep(3000);
-		unit.getsavebuttonTermsandConditions().click();
-		softAssert.assertEquals(valid_Termsandcondition, "termsandcondition is a Valid Alpha-Numeric");
+		termscondition.getsavebuttonTermsandConditions().click();
+		Thread.sleep(3000);
+		softAssert.assertEquals(valid_Termsandcondition, "Termsandcommunication is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertAll();
 	}
 
-	// Edit terms and condition types
+	//Edit Terms and Condition
 	@Test(dataProvider = "getEditdata")
-	public void Edit_Termsandcondition(String EditTermsandconditionTest1) throws InterruptedException {
-		Termsandconditionpage unit = new Termsandconditionpage(driver);
+	public void Edit_Terms_Condition(String EditTermsandconditionTest1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getTermsandconditionclick().click();
-		unit.getEditTermsandConditions().click();
-		unit.getupdateEditTermsandcondition().clear();
-		unit.getupdateEditTermsandcondition().sendKeys(EditTermsandconditionTest1);
-		String valid_string = valid_alphanum(EditTermsandconditionTest1, "Termsandcommunication", 25);
+		Termsandconditionpage termscondition = new Termsandconditionpage(driver);
+		termscondition.getconfiguration().click();
+		termscondition.getTermsandconditionclick().click();
+		termscondition.getEditTermsandConditions().click();
+		
+		termscondition.getupdateEditTermsandcondition().clear();
+		termscondition.getupdateEditTermsandcondition().sendKeys(EditTermsandconditionTest1);
+		//Terms and condition Text Data Validation
+		String valid_string = valid_alphanum(EditTermsandconditionTest1, "Termsandcondition", 25);
 		String valid_Termsandcondition = valid_string;
 		System.out.println(valid_Termsandcondition);
+		
 		Thread.sleep(3000);
-		unit.geteditsavebuttonTermsandcondition().click();
-		softAssert.assertEquals(valid_Termsandcondition, "termsandcondition is a Valid Alpha-Numeric");
+		termscondition.geteditsavebuttonTermsandcondition().click();
+		softAssert.assertEquals(valid_Termsandcondition, "Termsandcommunication is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertAll();
 		
 	}
     
-	//Delete Terms and condition
+	//Delete Terms and Condition
 	@Test
 	public void Delete_Terms_Condition() throws InterruptedException {
-		Termsandconditionpage terms = new Termsandconditionpage(driver);
-		terms.getconfiguration().click();
-		terms.getTermsandconditionclick().click();
-		terms.getdeleteclickinquirycommunication().click();
-		terms.getdeleteclickconfirmationTermsandcondition().click();
+		Termsandconditionpage termscondition = new Termsandconditionpage(driver);
+		termscondition.getconfiguration().click();
+		termscondition.getTermsandconditionclick().click();
+		termscondition.getdeleteclickinquirycommunication().click();
+		termscondition.getdeleteclickconfirmationTermsandcondition().click();
+		Thread.sleep(2000);
 	}
 
 	//Search Terms and Condition 
 	@Test(dataProvider = "getsearched")
 	public void Search_Terms_Condition(String searchedentertexttermscondition1) throws InterruptedException {
-		Termsandconditionpage terms = new Termsandconditionpage(driver);
-		terms.getconfiguration().click();
-		terms.getTermsandconditionclick().click();
-		terms.getsearchtermsandcondition().sendKeys(searchedentertexttermscondition1);
-		terms.getclicksearchtermsandcondition().click();
+		Termsandconditionpage termscondition = new Termsandconditionpage(driver);
+		termscondition.getconfiguration().click();
+		termscondition.getTermsandconditionclick().click();
+		termscondition.getsearchtermsandcondition().sendKeys(searchedentertexttermscondition1);
+		termscondition.getclicksearchtermsandcondition().click();
 	}
 
+	//Export Excel Terms Condition
 	@Test
 	public void exportexcel_Termsandcondition() throws InterruptedException {
-		Termsandconditionpage unit = new Termsandconditionpage(driver);
-		unit.getconfiguration().click();
-		unit.getTermsandconditionclick().click();
-		unit.getclickexportasexceltermsandcondition().click();
-
+		Termsandconditionpage termscondition = new Termsandconditionpage(driver);
+		termscondition.getconfiguration().click();
+		termscondition.getTermsandconditionclick().click();
+		termscondition.getclickexportasexceltermsandcondition().click();
+		Thread.sleep(2000);
 	}
 
+	//Add Validation Terms Condition
 	@Test
-	public void Add_validation_Termsandcondition() throws InterruptedException {
-		Termsandconditionpage unit = new Termsandconditionpage(driver);
+	public void Add_Validation_Terms_Condition() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getTermsandconditionclick().click();
-		unit.getaddnewTermsandcondition().click();
-		unit.getsavebuttonTermsandConditions().click();
+		Termsandconditionpage termscondition = new Termsandconditionpage(driver);
+		termscondition.getconfiguration().click();
+		termscondition.getTermsandconditionclick().click();
+		termscondition.getaddnewTermsandcondition().click();
+		termscondition.getsavebuttonTermsandConditions().click();
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add/div/form/mat-dialog-content/div/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add/"
+				+ "div/form/mat-dialog-content/div/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "Terms & Condition is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Terms & Condition is required", expectedMessage, actualMessage);
 		softAssert.assertAll();
 	}
 
+	//Edit Validation Terms Condition
 	@Test
-	public void Edit_validation_Termsandcondition() throws InterruptedException {
-		Termsandconditionpage unit = new Termsandconditionpage(driver);
+	public void Edit_Validation_Terms_Condition() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getTermsandconditionclick().click();
-		unit.getEditTermsandConditions().click();
+		Termsandconditionpage termscondition = new Termsandconditionpage(driver);
+		termscondition.getconfiguration().click();
+		termscondition.getTermsandconditionclick().click();
+		termscondition.getEditTermsandConditions().click();
 		for (int i = 1; i <= 30; i++) {
-			unit.getupdateEditTermsandcondition().sendKeys(Keys.BACK_SPACE);
+			termscondition.getupdateEditTermsandcondition().sendKeys(Keys.BACK_SPACE);
 		}
 
 		Thread.sleep(3000);
-		unit.geteditsavebuttonTermsandcondition().click();
+		termscondition.geteditsavebuttonTermsandcondition().click();
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add/div/form/mat-dialog-content/div/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-terms-condition-add"
+				+ "/div/form/mat-dialog-content/div/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "Terms & Condition is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Terms & Condition is required", expectedMessage, actualMessage);
 		softAssert.assertAll();
 	}
 
+	//DataProvider for Add Data
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "Terms123" } };
+		return new Object[][] { { "termscon33" } };
 	}
 
-	//DataProvider for Edit
+	//DataProvider for Edit Data
 	@DataProvider
 	public Object[][] getEditdata() {
 		return new Object[][] { { "editterms123" } };

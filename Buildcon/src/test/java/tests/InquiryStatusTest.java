@@ -27,7 +27,7 @@ public class InquiryStatusTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		//Login process
+		// Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));
 		loginPage.getUserName().sendKeys(prop.getProperty("USER"));
@@ -36,150 +36,205 @@ public class InquiryStatusTest extends base {
 		log.info("Login successful");
 	}
 
-	//Add Inquiry Status
+	// Add Inquiry Status
 	@Test(dataProvider = "getAdddata")
-	public void Add_inquirystatus(String Inquirystatuspage1) throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
+	public void Add_Inquiry_Status(String Inquirystatuspage1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getAddInquirystatusclick().click();
-		unit.getAddInquirystatus().sendKeys(Inquirystatuspage1);
-		 //data validation of the inquirystatus
-		 
-		String valid_string = valid_alphanum(Inquirystatuspage1,"inquirystatuspage",10);
-		String valid_inquirystatuspage = valid_string;
-		System.out.println(valid_inquirystatuspage);
-		Thread.sleep(3000);
-		unit.getAddInquirystatussave().click();
-		softAssert.assertEquals(valid_inquirystatuspage, "inquirystatus is a Valid Alpha-Numeric");
-		
-	}
-
-	//Edit Inquiry Status
-	@Test(dataProvider = "getEditdata")
-	public void Edit_inquirystatus(String Inquirystatuspage1) throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
-		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getEditInquirystatus().click();
-		unit.getEditInquirystatusnew().clear();
-		unit.getEditInquirystatusnew().sendKeys(Inquirystatuspage1);
-		String valid_string = valid_alphanum(Inquirystatuspage1,"inquirystatuspage",10);
-		String valid_inquirystatuspage = valid_string;
-		System.out.println(valid_inquirystatuspage);
-		Thread.sleep(3000);
-		unit.getEditInquirystatussave().click();
-		softAssert.assertEquals(valid_inquirystatuspage, "inquirystatus is a Valid Alpha-Numeric");
-
-	}
-
-	//Status Inquiry
-	@Test
-	public void Status_Inquiry_Status() throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
 		Inquirystatus.getInquirystatusclick().click();
+		Thread.sleep(2000);
+		Inquirystatus.getAddnewInquirystatus().click();
+		Thread.sleep(1000);
+		Inquirystatus.getAddInquirystatus().sendKeys(Inquirystatuspage1);
+		String valid_string = valid_alphanum(Inquirystatuspage1, "inquirystatuspage", 20);
+		String valid_inquirystatuspage = valid_string;
+		System.out.println(valid_inquirystatuspage);
+		Thread.sleep(3000);
+		Inquirystatus.getAddInquirystatussave().click();
+		Thread.sleep(2000);
+		softAssert.assertEquals(valid_inquirystatuspage,
+				"inquirystatuspage is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertAll();
+
+	}
+
+	// Edit Inquiry Status
+	@Test(dataProvider = "getEditdata")
+	public void Edit_inquirystatus(String inqsearched, String Inquirystatuspage1) throws InterruptedException {
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		SoftAssert softAssert = new SoftAssert();
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(inqsearched);
+		Thread.sleep(2000);
+		Inquirystatus.getInquirystatussearchedclick().click();
+		Inquirystatus.getEditInquirystatus().click();
+		Inquirystatus.getEditInquirystatusnew().click();
+		Inquirystatus.getEditInquirystatusnew().clear();
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Inquirystatuspage1);
+		String valid_string = valid_alphanum(Inquirystatuspage1, "inquirystatuspage", 10);
+		String valid_inquirystatuspage = valid_string;
+		System.out.println(valid_inquirystatuspage);
+		Thread.sleep(3000);
+		Inquirystatus.getEditInquirystatussave().click();
+		Thread.sleep(3000);
+		softAssert.assertEquals(valid_inquirystatuspage,
+				"inquirystatuspage is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertAll();
+
+	}
+
+	// Status Inquiry
+	@Test(dataProvider = "getstatuschanged")
+
+	public void Status_inquirystatus(String inqsearched) throws InterruptedException {
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(inqsearched);
+		Thread.sleep(2000);
+		Inquirystatus.getInquirystatussearchedclick().click();
 		Inquirystatus.getChangeInquirystatus().click();
 		Inquirystatus.getChangeInquirystatusconfirm().click();
+		Thread.sleep(2000);
 	}
-	
-	@Test
-	public void delete_inquirystatus() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getInquirystatusdeleteclick().click();
-		
-		unit.getInquirystatusdeleteconfirmationk().click();
+
+	@DataProvider
+	public Object[][] getstatuschanged() {
+		return new Object[][] { { "inqsta123", } };
+	}
+
+	@Test(dataProvider = "getdelete")
+	public void delete_inquirystatus(String inqsearched) throws InterruptedException {
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(inqsearched);
+		Thread.sleep(2000);
+		Inquirystatus.getInquirystatussearchedclick().click();
+		Inquirystatus.getInquirystatusdeleteclick().click();
+		Thread.sleep(2000);
+		Inquirystatus.getInquirystatusdeleteconfirmationk().click();
+		Thread.sleep(2000);
 
 	}
 
-	//Search Inquiry Status
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "tips123" } };
+	}
+
+	// Search Inquiry Status
 	@Test(dataProvider = "getsearched")
-	public void Searched_Inquiry_Status(String Inquirystatuspage1) throws InterruptedException {
+	public void searched_inquirystatus(String Inquirystatuspage1) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
 		Inquirystatus.getInquirystatusclick().click();
 		Inquirystatus.getInquirystatussearched().sendKeys(Inquirystatuspage1);
+		Thread.sleep(2000);
 		Inquirystatus.getInquirystatussearchedclick().click();
+		Thread.sleep(2000);
 	}
 
-	//Excel Inquiry
+	// Excel Inquiry
 	@Test
 	public void Excel_inquirystatus() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getinquiryExcel().click();
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getinquiryExcel().click();
+		Thread.sleep(2000);
 	}
-	
+
 	@Test
-	public void Add_validation_inquirystatus() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
+	public void Add_Validation_Inquiry_Status() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getAddInquirystatusclick().click();
-		unit.getAddInquirystatussave().click();
-		
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getAddnewInquirystatus().click();
+		Inquirystatus.getAddInquirystatussave().click();
+		Thread.sleep(2000);
+
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "Inquiry Status name is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Inquiry Status name is required", expectedMessage, actualMessage);
+		softAssert.assertAll();
+		softAssert.assertAll();
 	}
-    
-	
 
-	@Test
-	public void Edit_validation_inquirystatus() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
+	@Test(dataProvider = "geteditmandatory")
+	public void Edit_validation_inquirystatus(String inqsearched) throws InterruptedException {
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getEditInquirystatus().click();
-		for(int i=0;i<15;i++) {
-			unit.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		}
-		unit.getEditInquirystatussave().click();
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(inqsearched);
+		Thread.sleep(2000);
+		Inquirystatus.getInquirystatussearchedclick().click();
+		Inquirystatus.getEditInquirystatus().click();
+		Inquirystatus.getEditInquirystatusnew().click();
+		Thread.sleep(2000);
+		Inquirystatus.getEditInquirystatusnew().clear();
+		Thread.sleep(1000);
+		// Inquirystatus.getEditInquirystatusclick().click();
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+
+		Thread.sleep(2000);
+		Inquirystatus.getEditInquirystatussave().click();
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "Inquiry Status name is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Inquiry Status name is required", expectedMessage, actualMessage);
-      
+		softAssert.assertAll();
+
 	}
-	 //close the driver
+
+	@DataProvider
+	public Object[][] geteditmandatory() {
+		return new Object[][] { { "inqsta123", } };
+	}
+
+	// close the driver
 	@AfterMethod
 	public void teaddown() {
-		 driver.close();
+		driver.close();
 	}
 
-	//DataProvider for Add 
+	// DataProvider for Add
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { {"inquiry123"}};
-	}
-	@DataProvider
-	public Object[][] getEditdata() {
-		return new Object[][] { { "inquiry888" } };
+		return new Object[][] { { "approvedatatus123", } };
 	}
 
-	//DataProvider for Apply Searched
+	@DataProvider
+	public Object[][] getEditdata() {
+		return new Object[][] { { "approvedatatus123", "inqsta123" } };
+	}
+
+	// DataProvider for Apply Searched
 	@DataProvider
 	public Object[][] getsearched() {
 		return new Object[][] { { "Nishant" } };

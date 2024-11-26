@@ -16,12 +16,14 @@ public class InquiryResponsepage {
 
 	//Page object for click Configuration form module
 	By Configurationform = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]"
-					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[12]/a/span");
+
 	public WebElement getconfiguration() {
-		base.failedElementName = "InquiryResponse-Configuration";
+		base.failedElementName = "PropertyType-Configuration";
 		return driver.findElement(Configurationform);
 	}
+
+
 
 	By InquiryResponsepageclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[10]/div/mat-icon");
@@ -67,6 +69,7 @@ public class InquiryResponsepage {
 	}
 
 	
+	
 
 	//Pom for clickon save button
 
@@ -87,7 +90,7 @@ public class InquiryResponsepage {
 	}
 	//Pom for confirmation click:
 	By ChangeInquiryresponseconfirm = By.xpath(
-			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[2]");
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getChangeInquiryresponseconfirm() {
 		base.failedElementName = "InquiryResponse-ChangeInquiryresponseconfirm";
 		return driver.findElement(ChangeInquiryresponseconfirm);

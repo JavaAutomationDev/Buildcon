@@ -14,10 +14,8 @@ public class InquiryForm {
 	}
 
 	//Page object for click Inquiry Form Module
-	By Inquiryform = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
-			+ "/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/"
-			+ "div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[14]/a");
+	By Inquiryform = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[15]/a");
 	public WebElement getInquiry() {
 		base.failedElementName = "InquiryForm-Inquiryform";
 		return driver.findElement(Inquiryform);
@@ -46,15 +44,12 @@ public class InquiryForm {
 		return driver.findElement(visitor);
 	}
 	
-	
-
 	//Page object for Attendee
 	  By Attendee =By.xpath("//mat-select[@formcontrolname='userID']");
 	  public WebElement getAttendee() {
 		  base.failedElementName = "InquiryForm-Attendee";
 		  return driver.findElement(Attendee); }
 	 
-
 	//Page object for Contact Number
 	By ContactNo = By.xpath("//input[@formcontrolname='visitorMobile']");
 	public WebElement getContactNo() {

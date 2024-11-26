@@ -608,25 +608,177 @@ public class ProjectPage {
   		WebElement option = driver.findElement(By.xpath(optionXPath));
   		option.click();
   	}
-    
+    //Page object for Construction Saleable Area
+  	By consaleableArea=By.xpath("//input[@formcontrolname='conSaleableArea']");
+    public WebElement getConSaleableArea() {
+    	return driver.findElement(consaleableArea);
+    }
+    //Page object for Unit Construction Saleable Area
+    By unittypeofconsaleableArea=By.xpath("//mat-select[@formcontrolname='unitTypeOfConSaleableArea']");	
+  	public void getunitTypeOfConSaleableArea(String Unitconstructionarea) {
+  		WebElement dropdown = driver.findElement(unittypeofconsaleableArea);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Unitconstructionarea + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
+  	}
+      
+  	//Page object for Plot Carpet Area
+  	By plotcarpetarea=By.xpath("//input[@formcontrolname='plotCarpetArea']");
+    public WebElement getPlotCarpetArea() {
+    	return driver.findElement(plotcarpetarea);
+    }
+	//Page object for Unit Type Plot Carpet Area
+    By unitTypeOfplotCarpetArea=By.xpath("//mat-select[@formcontrolname='unitTypeOfplotCarpetArea']");	
+  	public void getunitTypeOfplotCarpetArea(String Unitplotcarpetarea) {
+  		WebElement dropdown = driver.findElement(unitTypeOfplotCarpetArea);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Unitplotcarpetarea + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
+  	}
+	
+	//Page object for Extra Plot Carpet Area
+  	By extraPlotCarpetArea=By.xpath("//input[@formcontrolname='extraPlotCarpetArea']");
+    public WebElement getextraPlotCarpetArea() {
+    	return driver.findElement(extraPlotCarpetArea);
+    }
+    //Page object for Unit Type Of Extra Plot Carpet Area
+    By unitTypeOfExtraPlotCarpetArea=By.xpath("//mat-select[@formcontrolname='unitTypeOfExtraPlotCarpetArea']");	
+  	public void getunitTypeOfExtraPlotCarpetArea(String Unitextraplotcarpetarea) {
+  		WebElement dropdown = driver.findElement(unitTypeOfExtraPlotCarpetArea);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Unitextraplotcarpetarea + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
+  	}
+	
+  	//Page object for Undevided Land Area
+  	By undevidedLandArea=By.xpath("//input[@formcontrolname='undevidedLandArea']");
+    public WebElement getundevidedLandArea() {
+    	return driver.findElement(undevidedLandArea);
+    }
+    //Page object for Unit Type Of Extra Plot Carpet Area
+    By unitTypeOfUndevidedLandArea=By.xpath("//mat-select[@formcontrolname='unitTypeOfUndevidedLandArea']");	
+  	public void getunitTypeOfUndevidedLandArea(String unitUndevidedLandArea) {
+  		WebElement dropdown = driver.findElement(unitTypeOfUndevidedLandArea);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + unitUndevidedLandArea + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
+  	}
   
+	//Page object for Floor Number
+  	By floorNumber=By.xpath("//mat-select[@formcontrolname='floorNumber']");
+    public WebElement getFloorNumber() {
+    	return driver.findElement(floorNumber);
+    }
 	
+    //Page object for Unit Block Number
+    By unitBlockNumber=By.xpath("//input[@formcontrolname='unitBlockNumber']");
+    public WebElement getunitBlockNumber() {
+    	return driver.findElement(unitBlockNumber);
+    }
+    
+    //Page object for Unit Type Of Extra Plot Carpet Area
+    By unitBlockType=By.xpath("//mat-select[@formcontrolname='unitBlockType']");	
+  	public void getunitBlockType(String Unitblocktype) {
+  		WebElement dropdown = driver.findElement(unitBlockType);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Unitblocktype + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
+  	}
+  	
+  	//Page object for Unit Price As Per RERA
+  	By unitPriceAsRERA=By.xpath("//input[@formcontrolname='unitPriceAsRERA']");
+    public WebElement getunitPriceAsRERA() {
+    	return driver.findElement(unitPriceAsRERA);
+    }
 	
+	//Page object for East1
+    By east1=By.xpath("/html/body/div[3]/div[4]/div/mat-dialog-container/div/div/vex-unit-block-details/div/"
+    		+ "mat-dialog-content/form/div[3]/div/div/div[5]/mat-form-field/div[1]/div[2]/div/input");
+    public WebElement getEast1() {
+    	return driver.findElement(east1);
+    }
+    
+    //Page object for West1
+    By west1=By.xpath("//input[@id='mat-input-68']");
+    public WebElement getWest1() {
+    	return driver.findElement(west1);
+    }
+    
+    //Page object for North1
+    By north1=By.xpath("//input[@id='mat-input-69']");
+    public WebElement getNorth1() {
+    	return driver.findElement(north1);
+    }
 	
+    //Page object for South1
+    By south1=By.xpath("//input[@id='mat-input-70']");
+    public WebElement getSouth1() {
+    	return driver.findElement(south1);
+    }
 	
+	//Page objet for survey number
+    By surveyNumber=By.xpath("//input[@formcontrolname='surveyNumber1']");
+    public WebElement getsurveyNumber() {
+    	return driver.findElement(surveyNumber);
+    }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    //Page object for Undivided Land Area
+    By surveyNumber2=By.xpath("//input[@formcontrolname='surveyNumber2']");
+    public WebElement getsurveyNumber2() {
+    	return driver.findElement(surveyNumber2);
+    }
+    
+    //Page object for Unit 
+    By surveyNoUnitTypeID=By.xpath("//mat-select[@formcontrolname='surveyNoUnitTypeID']");
+    public void getsurveyNoUnitTypeID(String SurveyNoUnitTypeID) {
+  		WebElement dropdown = driver.findElement(surveyNoUnitTypeID);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + SurveyNoUnitTypeID + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
+    }
+    
+    //Page objcet for Create Button
+    By createbtn=By.xpath("/html/body/div[4]/div[4]/div/mat-dialog-container/div/div/vex-unit-block-details/div/mat-dialog-actions/button[2]");
+    public WebElement getCreateBtn() {
+    	return driver.findElement(createbtn);
+    }
+  
+    //Page object for Upload From Excel
+    By uploadfromexcel=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-block-details-list/div/div[1]/div[2]/button[2]");
+    public WebElement getUploadFromExcel() {
+    	return driver.findElement(uploadfromexcel);
+    }
+    
+    //Page object for Search Unit
+    By searchunit=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-block-details-list/div/div[2]/div");
+    public WebElement getSearchUnit() {
+    	return driver.findElement(searchunit);
+    }
+    
+    //Page object for Export To Excel
+    By excelexport=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-block-details-list/div/div[1]/div[2]/div/button");
+    public WebElement getExcelExport() {
+    	return driver.findElement(excelexport);
+    }
+    
+    //Page object for Edit Unit
+    By editunit=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-block-details-list/div/div[2]/mat-dialog-content/div/div/div/table/tbody/tr/td[35]/div/a[1]");
+    public WebElement getEditUnit() {
+    	return driver.findElement(editunit);
+    }
+    
+    //Page object for Delete Unit
+    By deleteunit=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-block-details-list/div/div[2]/mat-dialog-content/div/div/div/table/tbody/tr/td[35]/div/a[2]");
+    public WebElement getDeleteUnit() {
+    	return driver.findElement(deleteunit);
+    }
+    
 	
 	
 	
@@ -687,14 +839,14 @@ public class ProjectPage {
 	
 	//Page object for Edit Button
 	public WebElement getEdit() {
-		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
-				+ "mat-sidenav-container/mat-sidenav-content/main/"
-				+ "app-projects/div/div[2]/div/div/table/tbody/tr[1]/td[11]/div/a[2]"));
+		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+				+ "mat-sidenav-content/main/app-projects/div/div[2]/div/div/table/tbody/tr[1]/td[11]/div/a[2]"));
 
+		base.failedElementName = "Project-Edit";
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", Edit);
 		js.executeScript("arguments[0].click();", Edit);
-		base.failedElementName = "Project-Edit";
 		return Edit;
 	}	
 	//Page object for Delete Project
@@ -752,9 +904,16 @@ public class ProjectPage {
 	public WebElement getProjectClick() {
 		return driver.findElement(projectclick);
 	}
+	
 	//Page object for Project name for assert
 	By projectnameassert = By.xpath("//input[@formcontrolname='projectName']");
 	public WebElement getProjectNameAssert() {
 		return driver.findElement(projectnameassert);
+	}
+	
+	//Page object for Edit Button 
+	By Editbtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-projects/div/div[2]/div/div/table/tbody/tr[1]/td[11]/div/a[2]");
+	public WebElement getEditbtn() {
+		return driver.findElement(Editbtn);
 	}
 }

@@ -52,8 +52,8 @@ public class ProjectTest extends base {
 			String RecAddress, String pincode, String projectlogo, String receiptlogo, String RecPrefix,
 			String RecPostFix, String Propertytype, String Saccode, String termstext, String Unit, String Floors,
 			String Basements) throws InterruptedException, IOException {
+		
 		SoftAssert softAssert = new SoftAssert();
-
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
@@ -61,62 +61,65 @@ public class ProjectTest extends base {
 		project.getProjectName().click();
 		softAssert.assertFalse(projectname.isEmpty(), "Project name is required.");
 		softAssert.assertNotNull(projectname, "Project name cannot be null.");
-		project.getProjectName().sendKeys(projectname);// Required Field
-		// data validation of project name field:
+		
+		project.getProjectName().sendKeys(projectname);//Required Field
+		//Data validation of project name field:
 		String valid_string = valid_alphanum(projectname, "projectname", 10);
 		String valid_projectname = valid_string;
 		System.out.println(valid_projectname);
 
 		softAssert.assertFalse(projecttype.isEmpty(), "Project Type is required.");
 		softAssert.assertNotNull(projecttype, "Project Type cannot be null.");
-		project.getProjecttype(projecttype);// Required Field
+		project.getProjecttype(projecttype);//Required Field
 
 		project.getProjectstatus(Projectstatus);
 
 		softAssert.assertFalse(Expectedstartdate.isEmpty(), "Expected start date is required.");
 		softAssert.assertNotNull(Expectedstartdate, "Expected start date cannot be null.");
-		project.getExstartdate().sendKeys(Expectedstartdate);// Required Field
+		project.getExstartdate().sendKeys(Expectedstartdate);//Required Field
 
 		softAssert.assertFalse(ExpectedEnddate.isEmpty(), "Expected End date is required.");
 		softAssert.assertNotNull(ExpectedEnddate, "Expected End date cannot be null.");
-		project.getExEnddate().sendKeys(ExpectedEnddate);// Required Field
+		project.getExEnddate().sendKeys(ExpectedEnddate);//Required Field
 
 		softAssert.assertFalse(ActualStartdate.isEmpty(), "Actual date is required.");
 		softAssert.assertNotNull(ActualStartdate, "Actual date cannot be null.");
-		project.getActualstartdate().sendKeys(ActualStartdate);// Required Field
+		project.getActualstartdate().sendKeys(ActualStartdate);//Required Field
 
 		project.getActualenddate().sendKeys(ActualEnddate);
-		project.getTotalsaleableArea().sendKeys(totalSaleableArea); // valid_number
-		// data validation of totalSaleableArea:
+		
+		project.getTotalsaleableArea().sendKeys(totalSaleableArea); //valid_number
+		//Data validation of totalSaleableArea:
 		String valid_string1 = valid_number(totalSaleableArea, "TotalSaleableArea");
 		String valid_totalSaleableArea = valid_string1;
 		System.out.println(valid_totalSaleableArea);
 
 		project.getcity().sendKeys(city);
 		// data validation of city field:
-		String valid_string2 = validateText(totalSaleableArea, "TotalSaleableArea", 10, 20);
+		String valid_string2 = validateText(city, "City", 10, 20);
 		String valid_City = valid_string2;
 		System.out.println(valid_City);
 
 		project.getstate(State);
+		
 		project.getspNo().sendKeys(Spno);
-		// data validation for spno:
+		//Data validation for spno:
 		String valid_string3 = valid_alphanum(Spno, "spno", 10);
 		String valid_spnumber = valid_string3;
 		System.out.println(valid_spnumber);
 
 		softAssert.assertFalse(SalesExectuive.isEmpty(), "Sales Exectuive is required.");
 		softAssert.assertNotNull(SalesExectuive, "Sales Exectuive cannot be null.");
-		project.getSalesExectuive(SalesExectuive);// Required Field
+		project.getSalesExectuive(SalesExectuive);//Required Field
 
 		project.getdescription().sendKeys(Description);
-		// data validation for description:
+		//Data validation for description:
 		String valid_string4 = valid_alphanum(Description, "description", 100);
 		String valid_Description = valid_string4;
 		System.out.println(valid_Description);
 
 		project.getAddress().sendKeys(Address);
-		// data validation for address:
+		//Data validation for address:
 		String valid_string5 = valid_alphanum(Address, "address", 100);
 		String valid_Address = valid_string5;
 		System.out.println(valid_Address);
@@ -130,7 +133,6 @@ public class ProjectTest extends base {
 		System.out.println(valid_east);
 
 		project.getWest().sendKeys(west);
-
 		String valid_string7 = valid_alphanum(west, "west", 10);
 		String valid_west = valid_string7;
 		System.out.println(valid_west);
@@ -151,33 +153,28 @@ public class ProjectTest extends base {
 		System.out.println(valid_plotno);
 
 		project.getschemeNo().sendKeys(Schemeno);
-
 		String valid_string11 = valid_alphanum(Schemeno, "Schemeno", 10);
 		String valid_Schemeno = valid_string11;
 		System.out.println(valid_Schemeno);
 
 		project.getRera().sendKeys(Rera);
-
 		String valid_string12 = valid_alphanum(Rera, "rera", 10);
 		String valid_Rera = valid_string12;
 		System.out.println(valid_Rera);
 
 		project.gettotalLandArea().sendKeys(totalLandArea);
-
 		String valid_string13 = valid_number(totalLandArea, "TotalLandArea");
 		String valid_totalLandArea = valid_string13;
 		System.out.println(valid_totalLandArea);
 
 		project.getMaintenanceCharge().sendKeys(MaintenanceCharge);
-		// data validation of the MaintenanceCharge:
-
+		//Data validation of the MaintenanceCharge:
 		String valid_string14 = valid_number(MaintenanceCharge, "MaintenanceCharge");
 		String valid_MaintenanceCharge = valid_string14;
 		System.out.println(valid_MaintenanceCharge);
 
 		project.getMaintenanceDeposit().sendKeys(MaintenanceDeposit);
-
-		// data validation of maintenance deposite:
+		//Data validation of maintenance deposite:
 		String valid_string15 = valid_number(MaintenanceDeposit, "MaintenanceDeposit");
 		String valid_MaintenanceDeposit = valid_string15;
 		System.out.println(valid_MaintenanceDeposit);
@@ -187,61 +184,61 @@ public class ProjectTest extends base {
 
 		softAssert.assertFalse(companyname.isEmpty(), "Company Name is required.");
 		softAssert.assertNotNull(companyname, "Company Name cannot be null.");
-		project.getCompanyName().sendKeys(companyname);// Required Field
-		// data validation of company name:
+		project.getCompanyName().sendKeys(companyname);//Required Field
+		//Data validation of company name:
 		String valid_string16 = validateText(companyname, "companyname", 10, 20);
 		String valid_companyname = valid_string16;
 		System.out.println(valid_companyname);
 
 		softAssert.assertFalse(gstin.isEmpty(), "GST number is required.");
 		softAssert.assertNotNull(gstin, "GST number cannot be null.");
-		project.GSTIN().sendKeys(gstin);// Required Field
-		// data validation of the gstin:
+		project.GSTIN().sendKeys(gstin);//Required Field
+		//Data validation of the gstin:
 		String valid_string17 = valid_alphanum(gstin, "gstin", 11);
 		String valid_gstin = valid_string17;
 		System.out.println(valid_gstin);
 
 		softAssert.assertFalse(plcofsupplu.isEmpty(), "Place of supply is required.");
 		softAssert.assertNotNull(plcofsupplu, "Place of supply cannot be null.");
-		project.PlaceofSupply().sendKeys(plcofsupplu);// Required Field
-		// data validation of the place of supply:
+		project.PlaceofSupply().sendKeys(plcofsupplu);//Required Field
+		//Data validation of the place of supply:
 		String valid_string18 = validateText(plcofsupplu, "placeofsupply", 10, 20);
 		String valid_placeofsupply = valid_string18;
 		System.out.println(valid_placeofsupply);
 
 		softAssert.assertFalse(RecAddress.isEmpty(), "Receipt Address is required.");
 		softAssert.assertNotNull(RecAddress, " Receipt Address cannot be null.");
-		project.getRecAddress().sendKeys(RecAddress);// Required Field
-		// data validation of the rec address:
+		project.getRecAddress().sendKeys(RecAddress);//Required Field
+		//Data validation of the rec address:
 		String valid_string19 = valid_alphanum(RecAddress, "RecAddress", 11);
 		String valid_RecAddress = valid_string19;
 		System.out.println(valid_RecAddress);
 
 		softAssert.assertFalse(pincode.isEmpty(), "Pincode is required.");
 		softAssert.assertNotNull(pincode, "Pincode cannot be null.");
-		project.getPincode().sendKeys(pincode);// Required Field
-		// data validation of pincode: valid_number
+		project.getPincode().sendKeys(pincode);//Required Field
+		//Data validation of pincode: valid_number
 		String valid_string20 = valid_number(pincode, "pincode");
 		String valid_pincode = valid_string20;
 		System.out.println(valid_pincode);
 
 		softAssert.assertFalse(projectlogo.isEmpty(), "Project’s Logo is required.");
 		softAssert.assertNotNull(projectlogo, "Project’s Logo cannot be null.");
-		project.uploadProjectLogoFile().sendKeys(projectlogo);// Required Field
+		project.uploadProjectLogoFile().sendKeys(projectlogo);//Required Field
 
 		project.uploadReceiptSeal().sendKeys(receiptlogo);
 
 		softAssert.assertFalse(RecPrefix.isEmpty(), "Receipt prefix is required.");
 		softAssert.assertNotNull(RecPrefix, "Receipt prefix cannot be null.");
-		project.getRecPrefix().sendKeys(RecPrefix);// Required Field
-		/// data validation of receipt prefix:
+		project.getRecPrefix().sendKeys(RecPrefix);//Required Field
+		//Data validation of receipt prefix:
 		String valid_string21 = validateText(RecPrefix, "RecPrefix", 10, 20);
 		String valid_RecPrefix = valid_string21;
 		System.out.println(valid_RecPrefix);
 
 		softAssert.assertFalse(RecPostFix.isEmpty(), "Receipt postfix is required.");
 		softAssert.assertNotNull(RecPostFix, "Receipt postfix cannot be null.");
-		project.getRecPostfix(RecPostFix);// Required Field
+		project.getRecPostfix(RecPostFix);//Required Field
 
 		Thread.sleep(2000);
 		project.getNextbtn2().click();
@@ -252,7 +249,7 @@ public class ProjectTest extends base {
 
 		project.getNextbtn3().click();
 		project.getTermstext().sendKeys(termstext);
-		// data validation of terms and condition:
+		//Data validation of terms and condition:
 		String valid_string22 = valid_alphanum(termstext, "Terms & Conditions", 11);
 		String valid_termstext = valid_string22;
 		System.out.println(valid_termstext);
@@ -263,79 +260,123 @@ public class ProjectTest extends base {
 		project.getSave().click();
 		Thread.sleep(2000);
 		project.getAddProjectBlock().click();
+		
 		project.getUnitBlock().sendKeys(Unit);
-		// data validation of the block:
+		//Data validation of the block:
 		String valid_string23 = valid_alphanum(Unit, "Block Name", 10);
 		String valid_BlockName= valid_string23;
 		System.out.println(valid_BlockName);
      
 		project.getNumberOfFloors().sendKeys(Floors);
-		 // data validation of the floor:
+		//Data validation of the floor:
 		String valid_string24 = valid_number(Floors, "floor");
 		String valid_floor= valid_string24;
 		System.out.println(valid_floor);
+		
 		project.getBasements().sendKeys(Basements);
-		 // data validation of the basement:
+		//Data validation of the basement:
 		String valid_string25 = valid_number(Basements, "basement");
 		String valid_basement= valid_string25;
 		System.out.println(valid_basement);
 
 		Thread.sleep(2000);
 		project.getCreate().click();
-//
+
 		softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_totalSaleableArea, "totalSaleableArea is a Valid numeric");
 		softAssert.assertEquals(valid_City, "city is a Valid text");
-//		softAssert.assertEquals(valid_spno, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
-//		softAssert.assertAll();
+		softAssert.assertEquals(valid_spnumber, "spno is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_Description , "description is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_Address, "address is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_east, "east is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_west, "west is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_south, "South is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_North, "north is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_plotno , "Plotno is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_Schemeno, "Schemeno is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_Rera, "rera is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_totalLandArea, "TotalLandArea is a valid Number");
+		softAssert.assertEquals(valid_MaintenanceCharge, "MaintenanceCharge is a valid Number");
+		softAssert.assertEquals(valid_MaintenanceDeposit, "MaintenanceDeposit is a valid Number");
+		softAssert.assertEquals(valid_companyname, "companyname is a Valid text");
+		softAssert.assertEquals(valid_gstin, "gstin is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_placeofsupply, "placeofsupply is a Valid text");
+		softAssert.assertEquals(valid_RecAddress, "RecAddress is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_pincode, "pincode is a valid Number");
+		softAssert.assertEquals(valid_RecPrefix, "RecPrefix is a Valid text");
+		softAssert.assertEquals(valid_termstext, "Terms & Conditions is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_BlockName, "Block Name is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_floor, "floor is a valid Number");
+		softAssert.assertEquals(valid_basement, "basement is a valid Number");
+		softAssert.assertAll();
 	}
 
-	// Edit Existing Project
+	//Edit Existing Project
 	@Test(dataProvider = "ProjectEditData")
-	public void Edit_Project(String newprojectname, String newtotalSaleableArea, String newtotalLandArea)
-			throws InterruptedException {
+	public void Edit_Project(String newprojectname,String newprojecttype,String newProjectstatus, String newtotalSaleableArea, String newtotalLandArea,
+			String newcompanyname,String newgstin,String newplaceofsupply,String newRecPostFix)throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEdit();
 
 		project.getProjectName().clear();
-		project.getProjectName().click();
 		softAssert.assertFalse(newprojectname.isEmpty(), "Project name is required.");
 		softAssert.assertNotNull(newprojectname, "Project name cannot be null.");
-		project.getProjectName().sendKeys(newprojectname);// Required Field
-
+		project.getProjectName().sendKeys(newprojectname);//Required Field
+		//Data validation of project name field:
+		String valid_string = valid_alphanum(newprojectname, "projectname", 10);
+		String valid_projectname = valid_string;
+		System.out.println(valid_projectname);
+		
+		project.getProjecttype(newprojecttype);
+		project.getProjectstatus(newProjectstatus);
+		
 		project.getTotalsaleableArea().clear();
 		project.getTotalsaleableArea().sendKeys(newtotalSaleableArea);
+		//Data validation of totalSaleableArea:
+		String valid_string1 = valid_number(newtotalSaleableArea, "TotalSaleableArea");
+		String valid_totalSaleableArea = valid_string1;
+		System.out.println(valid_totalSaleableArea);
 
 		project.getEditNext().click();
 
 		project.gettotalLandArea().clear();
 		project.gettotalLandArea().sendKeys(newtotalLandArea);
+		//Data validation of totalSaleableArea:
+		String valid_string2 = valid_number(newtotalLandArea, "TotalLandArea");
+		String valid_newtotalLandArea = valid_string2;
+		System.out.println(valid_newtotalLandArea);
 
 		project.getNextbtn1().click();
+		
+		project.getCompanyName().clear();
+		project.getCompanyName().sendKeys(newcompanyname);
+		
+		project.GSTIN().clear();
+		project.GSTIN().sendKeys(newgstin);
+		
+		project.PlaceofSupply().clear();
+		project.PlaceofSupply().sendKeys(newplaceofsupply);
+		project.getRecPostfix(newRecPostFix);
+		
 		project.getNextbtn2().click();
 		project.getNextbtn3().click();
 
 		Thread.sleep(2000);
 		project.getSave().click();
+		
+		softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
+		softAssert.assertAll();
 	}
 
-	// Delete Project
-	@Test()
-	public void Delete_Project() throws InterruptedException {
+	//Delete Project
+	@Test(dataProvider="Deleteprojectdata")
+	public void Delete_Project(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
+		project.getSearch().sendKeys(projectname + Keys.ENTER);
+		Thread.sleep(3000);
 		project.getEdit();
 		project.getDeleteproject().click();
 
@@ -343,7 +384,7 @@ public class ProjectTest extends base {
 		project.getClickYes().click();
 	}
 
-	// Export to Excel
+	//Export to Excel
 	@Test()
 	public void Export_To_Excel_Project() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
@@ -352,9 +393,9 @@ public class ProjectTest extends base {
 		project.getExporttoExcel().click();
 	}
 
-	// Search Project
+	//Search Project
 	@Test(dataProvider = "ProjectSearchData")
-	public void Search_Inquiry(String projectname) throws InterruptedException {
+	public void Search_Project(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 
@@ -366,17 +407,18 @@ public class ProjectTest extends base {
 		Assert.assertFalse(resultText.contains(projectname));
 	}
 
-	// ActiveDeactive Project
-	@Test()
-	public void Active_Deactive_Project() throws InterruptedException {
+	//Active Deactive Project
+	@Test(dataProvider = "ActiveDeactiveProject")
+	public void Active_Deactive_Project(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
-
+		project.getSearch().sendKeys(projectname + Keys.ENTER);
 		Thread.sleep(2000);
 		project.getActiveproject().click();
+		project.getClickYes().click();
 	}
 
-	// Verify Add Inactive Project status in Project
+	//Verify Add Inactive Project status in Project
 	@Test()
 	public void Verify_Add_Inactive_Project_Status_Project() throws InterruptedException {
 		Projectstatuspage unit = new Projectstatuspage(driver);
@@ -410,7 +452,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Add Active Project status in Project
+	//Verify Add Active Project Status in Project
 	@Test()
 	public void Verify_Add_Active_Project_Status_Project() throws InterruptedException {
 		Projectstatuspage unit = new Projectstatuspage(driver);
@@ -444,7 +486,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit InActive Project status in Project
+	//Verify Edit InActive Project Status in Project
 	@Test()
 	public void Verify_Edit_Inactive_Project_Status_Project() throws InterruptedException {
 		Projectstatuspage unit = new Projectstatuspage(driver);
@@ -457,7 +499,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		Thread.sleep(2000);
-		project.getEdit().click();
+		project.getEditbtn().click();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
@@ -478,7 +520,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit Active Project status in Project
+	//Verify Edit Active Project Status in Project
 	@Test()
 	public void Verify_Edit_Active_Project_Status_Project() throws InterruptedException {
 		Projectstatuspage unit = new Projectstatuspage(driver);
@@ -491,7 +533,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		Thread.sleep(2000);
-		project.getEdit().click();
+		project.getEditbtn().click();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
@@ -512,7 +554,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Add Inactive Project Type in Project
+	//Verify Add Inactive Project Type in Project
 	@Test()
 	public void Verify_Add_Inactive_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -547,7 +589,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Add Active Project Type in Project
+	//Verify Add Active Project Type in Project
 	@Test()
 	public void Verify_Add_Active_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -582,7 +624,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit Inactive Project Type in Project
+	//Verify Edit Inactive Project Type in Project
 	@Test()
 	public void Verify_Edit_Inactive_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -596,7 +638,7 @@ public class ProjectTest extends base {
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
-		project.getEdit().click();
+		project.getEditbtn().click();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
@@ -617,7 +659,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit Active Project Type in Project
+	//Verify Edit Active Project Type in Project
 	@Test()
 	public void Verify_Edit_Active_ProjectType_Project() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -631,7 +673,7 @@ public class ProjectTest extends base {
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
-		project.getEdit().click();
+		project.getEditbtn().click();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
@@ -652,8 +694,8 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// State With Project Relation
-	// Verify Add Inactive State in Project
+	//State With Project Relation
+	//Verify Add Inactive State in Project
 	@Test()
 	public void Verify_Add_Inactive_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -690,7 +732,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Add Active State in Project
+	//Verify Add Active State in Project
 	@Test()
 	public void Verify_Add_Active_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -727,7 +769,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit Inactive State in Project
+	//Verify Edit Inactive State in Project
 	@Test()
 	public void Verify_Edit_Inactive_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -743,7 +785,7 @@ public class ProjectTest extends base {
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
-		project.getEdit().click();
+		project.getEditbtn().click();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
@@ -764,7 +806,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit Active State in Project
+	//Verify Edit Active State in Project
 	@Test()
 	public void Verify_Edit_Active_State_Project() throws InterruptedException {
 		Statepage state = new Statepage(driver);
@@ -780,7 +822,7 @@ public class ProjectTest extends base {
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
-		project.getEdit().click();
+		project.getEditbtn().click();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
@@ -801,7 +843,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit Inactive Property Type in Project
+	//Verify Edit Inactive Property Type in Project
 	@Test()
 	public void Verify_Edit_Inactive_Property_Type_Project() throws InterruptedException {
 		Propertytypepage unit = new Propertytypepage(driver);
@@ -839,7 +881,7 @@ public class ProjectTest extends base {
 		}
 	}
 
-	// Verify Edit Active Property Type in Project
+	//Verify Edit Active Property Type in Project
 	@Test()
 	public void Verify_Edit_Active_Property_Type_Project() throws InterruptedException {
 		Propertytypepage unit = new Propertytypepage(driver);
@@ -852,7 +894,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		Thread.sleep(2000);
-		project.getEdit().click();
+		project.getEditbtn().click();
 		Thread.sleep(2000);
 		project.getEditNext().click();
 		project.getNextbtn1().click();
@@ -865,7 +907,7 @@ public class ProjectTest extends base {
 			String b = a.get(i).getText();
 			if (!b.equalsIgnoreCase("Bopal Flat")) {
 				Assert.assertFalse(false, "Property Type is Active.");
-				System.out.println("Test  failed");
+				System.out.println("Test Pass");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -967,23 +1009,23 @@ public class ProjectTest extends base {
 		project.getProjectClick().click();
 
 		SoftAssert softAssert = new SoftAssert();
-		WebElement projectname =driver.findElement(By.xpath("//span[normalize-space()='Project name is required']"));
-		softAssert.assertEquals(projectname.getText(), "Project name is required.");
+		WebElement projectname =driver.findElement(By.xpath("//span[normalize-space()='Project Name is required']"));
+		softAssert.assertEquals(projectname.getText(), "Project Name is required");
 
 		WebElement projecttype =driver.findElement(By.xpath("//span[normalize-space()='Project Type is required.']"));
 		softAssert.assertEquals(projecttype.getText(), "Project Type is required.");
 
 		WebElement projectstatus =driver.findElement(By.xpath("//span[normalize-space()='Project Status is required']"));
-		softAssert.assertEquals(projectstatus.getText(), "Project Status is required.");
+		softAssert.assertEquals(projectstatus.getText(), "Project Status is required");
 
-		WebElement expectedstartdate =driver.findElement(By.xpath("//span[normalize-space()='Expected start date is required']"));
-		softAssert.assertEquals(expectedstartdate.getText(), "Expected start Date is required.");
+		WebElement expectedstartdate =driver.findElement(By.xpath("//span[normalize-space()='Expected Start Date is required']"));
+		softAssert.assertEquals(expectedstartdate.getText(), "Expected Start Date is required");
 
-		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected end date is required']"));
-		softAssert.assertEquals(expectedenddate.getText(), "Expected end date is required.");
+		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected End Date is required']"));
+		softAssert.assertEquals(expectedenddate.getText(), "Expected End Date is required");
 
-		WebElement salesexecutive =driver.findElement(By.xpath("//span[normalize-space()='Sales executive is required']"));
-		softAssert.assertEquals(salesexecutive.getText(), "Sales executive is required.");		
+		WebElement salesexecutive =driver.findElement(By.xpath("//span[normalize-space()='Sales Executive is required']"));
+		softAssert.assertEquals(salesexecutive.getText(), "Sales Executive is required");		
 		softAssert.assertAll();
 	}
 	
@@ -996,38 +1038,39 @@ public class ProjectTest extends base {
 		
 		Thread.sleep(2000);
 		project.getProjectNameAssert().click();
+		Thread.sleep(2000);
 		project.getProjectNameAssert().sendKeys(Keys.DELETE);
-		
+		Thread.sleep(2000);
 		project.getEditNext().click();
 		
 		SoftAssert softAssert = new SoftAssert();
-		WebElement projectname =driver.findElement(By.xpath("//span[normalize-space()='Project name is required']"));
-		softAssert.assertEquals(projectname.getText(), "Project name is required.");
+		WebElement projectname =driver.findElement(By.xpath("//span[normalize-space()='Project Name is required']"));
+		softAssert.assertEquals(projectname.getText(), "Project Name is required");
 
 		WebElement projecttype =driver.findElement(By.xpath("//span[normalize-space()='Project Type is required.']"));
 		softAssert.assertEquals(projecttype.getText(), "Project Type is required.");
 
 		WebElement projectstatus =driver.findElement(By.xpath("//span[normalize-space()='Project Status is required']"));
-		softAssert.assertEquals(projectstatus.getText(), "Project Status is required.");
+		softAssert.assertEquals(projectstatus.getText(), "Project Status is required");
 
-		WebElement expectedstartdate =driver.findElement(By.xpath("//span[normalize-space()='Expected start date is required']"));
-		softAssert.assertEquals(expectedstartdate.getText(), "Expected start Date is required.");
+		WebElement expectedstartdate =driver.findElement(By.xpath("//span[normalize-space()='Expected Start Date is required']"));
+		softAssert.assertEquals(expectedstartdate.getText(), "Expected Start Date is required");
 
-		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected end date is required']"));
-		softAssert.assertEquals(expectedenddate.getText(), "Expected end date is required.");
+		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected End Date is required']"));
+		softAssert.assertEquals(expectedenddate.getText(), "Expected End Date is required");
 
-		WebElement salesexecutive =driver.findElement(By.xpath("//span[normalize-space()='Sales executive is required']"));
-		Assert.assertEquals(salesexecutive.getText(), "Sales executive is required.");	
+		WebElement salesexecutive =driver.findElement(By.xpath("//span[normalize-space()='Sales Executive is required']"));
+		Assert.assertEquals(salesexecutive.getText(), "Sales Executive is required");	
 		softAssert.assertAll();
 	}
 
 	//Close the Driver
 	@AfterMethod() 
 	public void teardown() {
-		// driver.close();
+		//driver.close();
 	}
 
-	// Add Project Data
+	//DataProvider Add Project Data
 	@DataProvider
 	public Object[][] ProjectAddData() {
 		return new Object[][] {
@@ -1042,15 +1085,26 @@ public class ProjectTest extends base {
 		};
 	}
 
-	// Edit Project Data
+	//DataProvider Edit Project Data
 	@DataProvider
 	public Object[][] ProjectEditData() {
-		return new Object[][] { { "Automation Project", "20000", "1000" } };
+		return new Object[][] { { "Automation Project","Office","In process", "20000", "1000","ABC Infotech","09AAACH7409R1ZZ","BopalGam","Financial Year" } };
 	}
 
-	// Project Search Data
+	//DataProvider for Delete Project Data
+	@DataProvider
+	public Object[][] Deleteprojectdata() {
+		return new Object[][] { { "Taj Mahal" } };
+	}
+	
+	//DataProvider for Project Search Data
 	@DataProvider
 	public Object[][] ProjectSearchData() {
+		return new Object[][] { { "Taj Mahal" } };
+	}
+	//DataProvider for Active Deactive Project 
+	@DataProvider
+	public Object[][] ActiveDeactiveProject() {
 		return new Object[][] { { "Taj Mahal" } };
 	}
 }

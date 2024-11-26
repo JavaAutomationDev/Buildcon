@@ -27,7 +27,7 @@ public class UnitTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login process
+		//Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));
 		loginPage.getUserName().sendKeys(prop.getProperty("USER"));
@@ -39,41 +39,45 @@ public class UnitTest extends base {
 	//Add unit
 	@Test(dataProvider = "getAdddata")
 	public void Add_Unit(String unitname1) throws InterruptedException {
-		Unitpage unit = new Unitpage(driver);
 		SoftAssert softAssert = new SoftAssert();
+		Unitpage unit = new Unitpage(driver);
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
 		unit.getclickaddunit().click();
 		unit.gettextnameunit().clear();
 		unit.gettextnameunit().sendKeys(unitname1);
 		Thread.sleep(2000);
-		// unit  Name Text Data Validation ---------------------------------
+		
+		//Unit Name Text Data Validation
 		String valid_string = valid_alphanum(unitname1,"Unitname",10);
 		String valid_unitname = valid_string;
 		System.out.println(valid_unitname);
 		unit.getaddunitsave().click();
-		Thread.sleep(2000);
+
 		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
+		softAssert.assertAll();
 	}
 
 	//Editing an existing unit using Data Provider
 	@Test(dataProvider = "getEditData")
 	public void Edit_Unit(String newunitname1) throws InterruptedException {
-		Unitpage unit = new Unitpage(driver);
 		SoftAssert softAssert = new SoftAssert();
+		Unitpage unit = new Unitpage(driver);
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
 		unit.geteditunit().click();
 		unit.geteditunittext().clear();
-		// unit name data validation -----
+		
+		//Unit Name data validation -----
 		unit.geteditunittext().sendKeys(newunitname1);
 		String valid_string = valid_alphanum(newunitname1,"Unitname",10);
 		String valid_unitname = valid_string;
 		System.out.println(valid_unitname);
 		Thread.sleep(2000);
 		unit.geteditsave().click();
-		Thread.sleep(2000);
+		
 		softAssert.assertEquals(valid_unitname, "Unitname is a Valid Alpha-Numeric");
+		softAssert.assertAll();
 	}
 
 	//Status change of the existing record
@@ -83,18 +87,18 @@ public class UnitTest extends base {
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
 		unit.getchangestatus().click();
+		Thread.sleep(2000);
 		unit.getstatuschange1().click();
 		Thread.sleep(2000);
 	}
 
 	//Delete record of the existing records
-	@Test
-	public void Delete_Unit() throws InterruptedException {
+	@Test(dataProvider = "getunitData")
+	public void Delete_Unit(String unitName) throws InterruptedException {
 		Unitpage unit = new Unitpage(driver);
 		unit.getconfiguration().click();
 		unit.getclickunit().click();
-		unit.getdelete().click();
-		unit.confirmationdelete().click();
+		unit.deleteUnitByName(unitName);
 		Thread.sleep(2000);
 	}
 
@@ -119,8 +123,10 @@ public class UnitTest extends base {
 		Thread.sleep(3000);
 	}
 
+	//Add Unit Test Mandatory Filed Validation
 	@Test
-	public void Add_unit_Test_Mandatory_Filed_Validation() throws InterruptedException {
+	public void Add_Unit_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		SoftAssert softAssert=new SoftAssert();
 		Unitpage units = new Unitpage(driver);
 		units.getconfiguration().click();
 		units.getclickunit().click();
@@ -130,20 +136,22 @@ public class UnitTest extends base {
 		units.getaddunitsave().click();
 
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-"
+				+ "add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		// Define the expected message
+		//Define the expected message
 		String expectedMessage = "Unit name is required";
-
-		// Assert the actual message matches the expected message
 		Assert.assertEquals("Unit name is required", expectedMessage, actualMessage);
+		softAssert.assertAll();
 	}
 
+	//Edit Unit Test Mandatory Filed Validation
 	@Test
-	public void Edit_unit_Test_Mandatory_Filed_Validation() throws InterruptedException {
+	public void Edit_Unit_Test_Mandatory_Filed_Validation() throws InterruptedException {
+		SoftAssert softAssert=new SoftAssert();
 		Unitpage units = new Unitpage(driver);
 		units.getconfiguration().click();
 		units.getclickunit().click();
@@ -156,36 +164,53 @@ public class UnitTest extends base {
 		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
 		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
 		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
+		units.geteditunittext().sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(2000);
 		units.geteditsave().click();
-
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-"
+				+ "add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
-
-		// Define the expected message
 		String expectedMessage = "Unit name is required";
 
-		// Assert the actual message matches the expected message
 		Assert.assertEquals("Unit name is required", expectedMessage, actualMessage);
+		softAssert.assertAll();
 	}
+	
+	//Close the driver
 	@AfterMethod
 	public void teardown() {
 		driver.close();
+	}
+	
+	// data provider of delete the row:
+	@DataProvider(name = "getunitData")
+	public Object[][] getUnitData() {
+	    return new Object[][] {
+	        {"pranav123"} //Replace with actual unit identifiers you want to delete
+	       
+	    };
 	}
 
 	//DataProvider for Add Unit
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { {"UNITSNAME"} };
+		return new Object[][] { {"shivammavi64363464646"} };
 	}
 
 	//DataProvider for Edit Unit
 	@DataProvider
 	public Object[][] getEditData() {
-		return new Object[][] { {"SapModule"} };
+		return new Object[][] { {"editdata"} };
 	}
 
 	//DataProvider for Search Unit

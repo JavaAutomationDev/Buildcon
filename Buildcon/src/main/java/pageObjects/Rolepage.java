@@ -16,16 +16,17 @@ public class Rolepage {
 
 	//Page object for click Configuration form module
 	By Configurationform = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]"
-					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[12]/a/span");
+
 	public WebElement getconfiguration() {
-		base.failedElementName = "Role-ConfigurationClick";
+		base.failedElementName = "PropertyType-Configuration";
 		return driver.findElement(Configurationform);
 	}
 
 	//Page object model for Click on the role
 	By Roleclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[13]/div/mat-icon");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[13]/div/mat-icon");
 	public WebElement getRoleclick() {
 		base.failedElementName = "Role-Roleclick";
 		return driver.findElement(Roleclick);
@@ -60,7 +61,6 @@ public class Rolepage {
 	//Page object for Create Button
 	By clickcreate = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/mat-dialog-actions/button[2]");
-
 	public WebElement getclickcreate() {
 		base.failedElementName = "Role-clickcreate";
 		return driver.findElement(clickcreate);
@@ -94,7 +94,6 @@ public class Rolepage {
 	
 	By editsavebuttonroleptionsecond = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/mat-dialog-actions/button[2]");
-
 	public WebElement geteditsavebuttonroleptionsecond() {
 		return driver.findElement(editsavebuttonroleptionsecond);
 	}
@@ -135,21 +134,26 @@ public class Rolepage {
 
 	//Page object model for searching of project types:
 	By searchRole = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[1]/input");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[1]/input");
 	public WebElement getsearchRole() {
 		base.failedElementName = "Role-Search";
 		return driver.findElement(searchRole);
 	}
 
+	//POM for Click search role
 	By clicksearchrole = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[1]/mat-icon");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[1]/mat-icon");
 	public WebElement getclicksearchrole() {
 		base.failedElementName = "Role-SearchClick";
 		return driver.findElement(clicksearchrole);
 	}
 
+	//POM for click export role
 	By clickexportasexcelRole = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[2]/button");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/div[2]/button");
 	public WebElement getclickexportasexcelRole() {
 		base.failedElementName = "Role-ExportExcel";
 		return driver.findElement(clickexportasexcelRole);
@@ -157,7 +161,8 @@ public class Rolepage {
 
 	//Page object for Active Inactive Role status
 	By activeinactiveroles = By.xpath(
-			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/mat-dialog-content/form/div/div[2]/mat-checkbox/div/div");
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-"
+			+ "add/div/mat-dialog-content/form/div/div[2]/mat-checkbox/div/div");
 	public WebElement getActiveInactiveRoles() {
 		return driver.findElement(activeinactiveroles);
 	}

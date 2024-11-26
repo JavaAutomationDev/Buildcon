@@ -27,7 +27,7 @@ public class HomeTest extends base {
 		//String screenshot= getscreenshot("Screenshot", driver);
 	}
 	
-	//Login Method
+	//Login Method for Buildcon
 	@Test(dataProvider="Logindata")
 	public void Shaligram_Login(String accountname,String username,String pass) throws IOException {
 		LoginPage login = new LoginPage(driver);
@@ -45,7 +45,7 @@ public class HomeTest extends base {
 		driver.close();
 	}
 	
-	//DataProvidor for the login.
+	//DataProvidor for login
 	@DataProvider
 	public Object[][] Logindata() {
 		return new Object[][] {

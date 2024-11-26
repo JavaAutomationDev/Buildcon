@@ -42,11 +42,13 @@ public class ReceiptTest extends base {
 	public void Add_Project(String Project,String CustomerName,String FlatShop,String BankName,String Bankbranch,
 			String PaymentType,String IMPSNO,String RegularAmount,String ChallanNumber,String ReceivedTDSAmount,
 			String TDSTYpe,String GSTbankName,String GSTBankBranch,String ChequeNo,
-			String ReceivedGSTAmount,String ChequeFiles) throws InterruptedException {
-
+			String ReceivedGSTAmount,String ChequeFiles) throws InterruptedException, IOException {
+        
+		SoftAssert softAssert=new SoftAssert();
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		receipt.getAddReceipt().click();
+		
 		receipt.getProject(Project);//Required Field
 		receipt.getCustormer(CustomerName);//Required Field
 		receipt.getFlatShop(FlatShop);//Required Field
@@ -58,51 +60,111 @@ public class ReceiptTest extends base {
 		receipt.getNextBtn().click();
 		Thread.sleep(2000);
 		receipt.getBankName(BankName);//Required Field
+		
 		receipt.getBankBranch().sendKeys(Bankbranch);//Required Field
+		softAssert.assertFalse(Bankbranch.isEmpty(), "Regular Bank Branch is Required.");
+		//Bank Branch Name Text Data Validation ---------------------------------
+		String valid_string = validateText(Bankbranch,"Bankbranch", 5, 30);
+		String valid_Bankbranch = valid_string;
+		System.out.println(valid_Bankbranch);
+		
 
 		receipt.getPaymentType(PaymentType);//Required Field
+			
 		receipt.getIMPSNO().sendKeys(IMPSNO);
+		softAssert.assertFalse(IMPSNO.isEmpty(), "IMPS No is Required.");
+		//IMPS No Data Validation ---------------------------------
+		String valid_string1 = validateText(IMPSNO,"IMPSNO", 5, 30);
+		String valid_IMPSNO = valid_string1;
+		System.out.println(valid_IMPSNO);
 		
 		//receipt.getRegularChequeTranDate().click();
 		//receipt.getChecqueDate().click();
 		//receipt.getChecqueDate().click();
 		
 		receipt.getRegularAmount().sendKeys(RegularAmount);//Required Field
+		softAssert.assertFalse(RegularAmount.isEmpty(), "Regular Amount is Required.");
+		//Regular Amount Text Data Validation ---------------------------------
+		String valid_string2 = validateText(RegularAmount,"RegularAmount", 5, 30);
+		String valid_RegularAmount = valid_string2;
+		System.out.println(valid_RegularAmount);
+		
 		receipt.getRegularBankCancelled().click();
 		receipt.getGSTNO().click();
 		Thread.sleep(2000);
 		receipt.getNextBtn1().click();
 
 		receipt.getTDSChallanNumber().sendKeys(ChallanNumber);
+		softAssert.assertFalse(ChallanNumber.isEmpty(), "Challan Number is Required.");
+		//Challan Number Data Validation ---------------------------------
+		String valid_string3 = validateText(ChallanNumber,"ChallanNumber", 5, 30);
+		String valid_ChallanNumber = valid_string3;
+		System.out.println(valid_ChallanNumber);
 		
 		//receipt.challandate();
 		//receipt.getSelectDate().click();
 		//receipt.getSelectDate().click();
 		
 		receipt.getReceivedTDSAmount().sendKeys(ReceivedTDSAmount);
-		//Thread.sleep(2000);
+		softAssert.assertFalse(ReceivedTDSAmount.isEmpty(), "Received TDS Amount is Required.");
+		//Received TDS Amount Data Validation ---------------------------------
+		String valid_string4 = validateText(ReceivedTDSAmount,"ReceivedTDSAmount", 5, 30);
+		String valid_ReceivedTDSAmount = valid_string4;
+		System.out.println(valid_ReceivedTDSAmount);
+		
 		receipt.getTDSType(TDSTYpe);
+		
 		Thread.sleep(2000);	
 		receipt.getNextBtn2().click();
 
 		receipt.getGSTBankName(GSTbankName);
+		
 		receipt.getGSTBankBranch().sendKeys(GSTBankBranch);
+		softAssert.assertFalse(GSTBankBranch.isEmpty(), "GSTBankBranch is Required.");
+		//GST Bank Branch Data Validation ---------------------------------
+		String valid_string5 = validateText(GSTBankBranch,"GSTBankBranch", 5, 30);
+		String valid_GSTBankBranch = valid_string5;
+		System.out.println(valid_GSTBankBranch);
+		
 		receipt.getChequeNo().sendKeys(ChequeNo);
+		softAssert.assertFalse(ChequeNo.isEmpty(), "ChequeNo is Required.");
+		//Cheque No Data Validation ---------------------------------
+		String valid_string6 = validateText(ChequeNo,"ChequeNo", 5, 30);
+		String valid_ChequeNo = valid_string6;
+		System.out.println(valid_ChequeNo);
+		
 		//receipt.chequetransdate();
-        receipt.getReceivedGSTAmount().sendKeys(ReceivedGSTAmount);
-
+        
+		receipt.getReceivedGSTAmount().sendKeys(ReceivedGSTAmount);
+		softAssert.assertFalse(ReceivedGSTAmount.isEmpty(), "ReceivedGSTAmount is Required.");
+		//Received GST Amount Data Validation ---------------------------------
+		String valid_string7 = validateText(ReceivedGSTAmount,"ReceivedGSTAmount", 5, 30);
+		String valid_ReceivedGSTAmount = valid_string7;
+		System.out.println(valid_ReceivedGSTAmount);
+		
 		Thread.sleep(2000);
 		receipt.getNextBtn3().click();
 		receipt.getChequeFiles().sendKeys(ChequeFiles);
 
 		Thread.sleep(2000);
 		receipt.getSavebtn().click();
+		
+		softAssert.assertEquals(valid_Bankbranch, "Bankbranch is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_IMPSNO, "IMPSNO is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_RegularAmount, "RegularAmount is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_ChallanNumber, "ChallanNumber is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_ReceivedTDSAmount, "ReceivedTDSAmount is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_GSTBankBranch, "GSTBankBranch is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_ChequeNo, "ChequeNo is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_ReceivedGSTAmount, "ReceivedGSTAmount is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertAll();
 	}
 
 	//Editing an existing Receipt using Data Provider
 	@Test(dataProvider="ReceiptEditData")
 	public void Edit_Receipt(String newBankbranch,String newIMPSNO,String newRegularAmount,String newChallanNumber,
-			String newGSTBankBranch) throws InterruptedException {
+			String newGSTBankBranch) throws InterruptedException, IOException {
+		SoftAssert softAssert=new SoftAssert();
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 
@@ -112,21 +174,59 @@ public class ReceiptTest extends base {
 
 		receipt.getBankBranch().clear();
 		receipt.getBankBranch().sendKeys(newBankbranch);
+		softAssert.assertFalse(newBankbranch.isEmpty(), "Bank branch is Required.");
+		//Bank branch Data Validation ---------------------------------
+		String valid_string4 = validateText(newBankbranch,"Bankbranch", 5, 30);
+		String valid_newBankbranch = valid_string4;
+		System.out.println(valid_newBankbranch);
 
 		receipt.getIMPSNO().clear();
 		receipt.getIMPSNO().sendKeys(newIMPSNO);
+		softAssert.assertFalse(newIMPSNO.isEmpty(), "IMPS NO is Required.");
+		//IMPS NO Data Validation ---------------------------------
+		String valid_string = validateText(newIMPSNO,"IMPSNO", 5, 30);
+		String valid_newIMPSNO = valid_string;
+		System.out.println(valid_newIMPSNO);
+		
 		receipt.getNextBtn1().click();
+		
 		receipt.getRegularAmount().clear();
 		receipt.getRegularAmount().sendKeys(newRegularAmount);
+		softAssert.assertFalse(newRegularAmount.isEmpty(), "Regular Amount is Required.");
+		//Regular Amount Data Validation ---------------------------------
+		String valid_string1 = validateText(newRegularAmount,"RegularAmount", 5, 30);
+		String valid_newRegularAmount = valid_string1;
+		System.out.println(valid_newRegularAmount);
+		
 		receipt.getTDSChallanNumber().clear();
 		receipt.getTDSChallanNumber().sendKeys(newChallanNumber);
+		softAssert.assertFalse(newChallanNumber.isEmpty(), "Challan Number is Required.");
+		//Challan Number Data Validation ---------------------------------
+		String valid_string2 = validateText(newChallanNumber,"ChallanNumber", 5, 30);
+		String valid_newChallanNumber = valid_string2;
+		System.out.println(valid_newChallanNumber);
+		
 		receipt.getNextBtn2().click();
+		
 		receipt.getGSTBankBranch().clear();
 		receipt.getGSTBankBranch().sendKeys(newGSTBankBranch);
+		softAssert.assertFalse(newGSTBankBranch.isEmpty(), "GST Bank Branch is Required.");
+		//GST Bank Branch Data Validation ---------------------------------
+		String valid_string3 = validateText(newGSTBankBranch,"GST Bank Branch", 5, 30);
+		String valid_newGSTBankBranch = valid_string3;
+		System.out.println(valid_newGSTBankBranch);
+		
 		receipt.getNextBtn3().click();
 
 		Thread.sleep(2000);
 		receipt.getUpdateBtn().click();
+		
+		softAssert.assertEquals(valid_newBankbranch, "newBankbranch is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_newIMPSNO, "newIMPSNO is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_newRegularAmount, "newRegularAmount is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_newChallanNumber, "newChallanNumber is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_newGSTBankBranch, "newGSTBankBranch is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertAll();
 	}
 
 	//Download Receipt
@@ -380,7 +480,7 @@ public class ReceiptTest extends base {
 	public Object[][] ReceiptAddData() {
 		return new Object[][] {
 			{"SHALIGRAM PRIDE"," Nikanth Tandel "," 3BHK-402 (4th Floor) ","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
-				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","D:\\Fileupload\\BB1qVDNW.jpg"},
+				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","D:\\Fileupload\\BB1qVDNW.jpg"}
 			//{" Project 4 "," Vimal Vankani "," Flats-A - 101 (1st Floor) "," Axis Bank ","South Bopal"," Cash ","","1000000",
 				//"194","10075.57"," 0.75% "," Axis Bank ","PrahladNagar",""},		
 		

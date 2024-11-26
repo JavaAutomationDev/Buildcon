@@ -16,15 +16,14 @@ public class Inquirystatuspage {
 
 	//Page object for click Configuration form module
 	By Configurationform = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]"
-					+ "/div[2]/div/div/div/div[1]/vex-sidenav-item[11]/a/span");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav[1]/div/vex-sidenav/div/vex-scrollbar/div[1]/div[2]/div/div/div/div[1]/vex-sidenav-item[12]/a/span");
 
 	public WebElement getconfiguration() {
-		base.failedElementName = "InquiryStatus-Configuration";
+		base.failedElementName = "PropertyType-Configuration";
 		return driver.findElement(Configurationform);
 	}
 
-	//Pom for Inquirystatuspage:
+	// pom for Inquirystatuspage:
 	By Inquirystatusclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[9]/div/mat-icon");
 	public WebElement getInquirystatusclick() {
@@ -34,13 +33,13 @@ public class Inquirystatuspage {
 
 	By AddInquirystatusclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[1]/div[2]/button[2]");
-	public WebElement getAddInquirystatusclick() {
+	public WebElement getAddnewInquirystatus() {
 		base.failedElementName = "InquiryStatus-AddClick";
 		return driver.findElement(AddInquirystatusclick);
 	}
 
 	By AddInquirystatus = By.xpath(
-			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/label");
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
 	public WebElement getAddInquirystatus() {
 		base.failedElementName = "InquiryStatus-AddInquiryStatus";
 		return driver.findElement(AddInquirystatus);
@@ -53,24 +52,26 @@ public class Inquirystatuspage {
 		return driver.findElement(AddInquirystatussave);
 	}
 
-	//Pom for edit inquirystatus:
+
+	// pom for edit inquirystatus:
+
 	By EditInquirystatusclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr/td[3]/div/button[2]");
+
 	public WebElement getEditInquirystatus() {
-		base.failedElementName = "InquiryStatus-Editclick";
 		return driver.findElement(EditInquirystatusclick);
 	}
 	
 	By EditInquirystatusnew = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input");
-
 	public WebElement getEditInquirystatusnew() {
 		return driver.findElement(EditInquirystatusnew);
 	}
+	
 	// pom for clickon save button
 
 	By EditInquirystatussave = By.xpath(
-	        "/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-actions/button[2]");
+	        "/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/div/form/mat-dialog-actions/button[1]");
 	public WebElement getEditInquirystatussave() {
 		base.failedElementName = "InquiryStatus-EditSave";
 		return driver.findElement(EditInquirystatussave);
@@ -78,7 +79,7 @@ public class Inquirystatuspage {
 
 	//Pom for status changed click:
 	By ChangeInquirystatus = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr[5]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
 
 	public WebElement getChangeInquirystatus() {
 		base.failedElementName = "InquiryStatus-ChangeInquiryStatus";
@@ -111,7 +112,7 @@ public class Inquirystatuspage {
 	
 	//Pom for delete click:
 	By Inquirystatusdeleteclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[1]/div[2]/div/mat-icon");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-status/div/div[2]/div/table/tbody/tr[3]/td[3]/div/button[3]");
 	public WebElement getInquirystatusdeleteclick() {
 		base.failedElementName = "InquiryStatus-DeleteClick";
 		return driver.findElement(Inquirystatusdeleteclick);

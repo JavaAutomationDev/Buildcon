@@ -48,18 +48,16 @@ public class InquiryTest extends base {
 			String Status) throws InterruptedException, IOException {
 
 		SoftAssert softAssert = new SoftAssert();
-
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
 
 		Thread.sleep(2000);
 		Inquiry.getsiteproject(siteproject);
+		
 		Inquiry.getvisitorname().sendKeys(visitorname);
 		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
-
-		
-		// Visitor Name Text Data Validation ---------------------------------
+		//Visitor Name Text Data Validation ---------------------------------
 		String valid_string = validateText(visitorname,"VisitorName", 5, 30);
 		String valid_visitorname = valid_string;
 		System.out.println(valid_visitorname);
@@ -71,48 +69,39 @@ public class InquiryTest extends base {
 		Inquiry.getOk().click(); // Click on Ok time
 
 		Inquiry.getNextfollowUpDT().sendKeys(NextfollowUpDT);
-		Inquiry.getreferencedBy().sendKeys(referencedBy);
 		
-		// ReferencedBy  Text Data Validation ---------------------------------
+		Inquiry.getreferencedBy().sendKeys(referencedBy);
+		//ReferencedBy  Text Data Validation ---------------------------------
 		valid_string = validateText(referencedBy,"ReferencedBy", 5, 30);
 		String valid_referancedby = valid_string;
 		System.out.println(valid_referancedby);
 				
-		
 		Thread.sleep(2000);		
 		Inquiry.getAttendee(Attende);
 		Inquiry.getContactNo().sendKeys(ContactNo);
-		
-		// ContactNo Number Validation
+		//ContactNo Number Validation ---------------------------------
 		valid_string = valid_number(ContactNo, "InquiryContactNo");
 		String valid_contactno = valid_string;
 		System.out.println(valid_contactno);
-				
-		
-		
-		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Inquiry Form");
+		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Inquiry");
 
 		Inquiry.getEmail().sendKeys(Email);
-		
-		// Email Validation
+		//Email Validation ---------------------------------
 		valid_string = valid_EMail(Email, "InquiryEmail");
 		String valid_email = valid_string;
 		System.out.println(valid_email);
 				
 		Inquiry.getAddress().sendKeys(Address);
-		
-		// Adress Alphanumeric  Validation
+		//Adress Alphanumeric  Validation ---------------------------------
 		valid_string = valid_alphanum(Address, "InquiryAddress", 10);
 		String valid_address = valid_string;
 		System.out.println(valid_address);
 				
 		Inquiry.getRemarks().sendKeys(Remarks);
-		
-		// Remarks  Text Data Validation ---------------------------------
+		//Remarks  Text Data Validation ---------------------------------
 		valid_string = validateText(Remarks,"Remarks", 5, 10);
 		String valid_remarks = valid_string;
 		System.out.println(valid_remarks);
-		
 		
 		Inquiry.getrequirement().sendKeys(Requirement);
 		Inquiry.getstatus(Status);
@@ -120,15 +109,12 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
 
-		
-		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
-		softAssert.assertEquals(valid_referancedby, "1ReferencedBy is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_referancedby, "1ReferencedBy is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
 		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
-		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
-		
-		// Assert all soft assertions at the end
+		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertAll();
 	}
 
@@ -138,7 +124,6 @@ public class InquiryTest extends base {
 			String newRequirement, String newStatus) throws InterruptedException, IOException {
 
 		SoftAssert softAssert = new SoftAssert();
-
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getEdit();
@@ -147,32 +132,23 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getvisitorname().clear();
 		Inquiry.getvisitorname().sendKeys(newvisitorname);
-		
-		// Visitor Name Text Data Validation ---------------------------------
+		//Visitor Name Text Data Validation ---------------------------------
 		String valid_string = validateText(newvisitorname,"VisitorName", 5, 30);
 		String valid_visitorname = valid_string;
 		System.out.println(valid_visitorname);
-		
-		
-		
 		softAssert.assertFalse(newvisitorname.isEmpty(), "Visitor Name is required.");
-
-
-		Inquiry.getEdit().click();
+		
 		Inquiry.getContactNo().clear();
 		Inquiry.getContactNo().sendKeys(newContactNo);
-		
-		// ContactNo Number Validation
+		//ContactNo Number Validation ---------------------------------
 		valid_string = valid_number(newContactNo, "InquiryContactNo");
 		String valid_contactno = valid_string;
 		System.out.println(valid_contactno);
-				
 		softAssert.assertFalse(newContactNo.isEmpty(), "Contact Number is required.");
 
 		Inquiry.getEmail().clear();
 		Inquiry.getEmail().sendKeys(newEmail);
-		
-		// Email Validation
+		//Email Validation ---------------------------------
 		valid_string = valid_EMail(newEmail, "InquiryEmail");
 		String valid_email = valid_string;
 		System.out.println(valid_email);
@@ -180,16 +156,14 @@ public class InquiryTest extends base {
 		
 		Inquiry.getAddress().clear();
 		Inquiry.getAddress().sendKeys(newAddress);
-		
-		// Adress Alphanumeric  Validation
+		//Adress Alphanumeric  Validation ---------------------------------
 		valid_string = valid_alphanum(newAddress, "InquiryAddress",10);
 		String valid_address = valid_string;
 		System.out.println(valid_address);
 				
 		Inquiry.getRemarks().clear();
 		Inquiry.getRemarks().sendKeys(newRemarks);
-		
-		// Remarks  Text Data Validation ---------------------------------
+		//Remarks  Text Data Validation ---------------------------------
 		valid_string = validateText(newRemarks,"Remarks", 5, 10);
 		String valid_remarks = valid_string;
 		System.out.println(valid_remarks);
@@ -197,29 +171,29 @@ public class InquiryTest extends base {
 		Inquiry.getrequirement().clear();
 		Inquiry.getrequirement().sendKeys(newRequirement);
 		Inquiry.getstatus(newStatus);
-
-		Thread.sleep(2000);
+		Inquiry.getUpdate().click();
 		
-		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		Thread.sleep(2000);
+		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
 		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
 		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
-		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertAll();
-		Inquiry.getUpdate().click();
 	}
 
 	//Delete Inquiry
 	@Test(dataProvider="InquiryDeleteData")
-	public void Delete_Inquiry(int iteration) throws InterruptedException {
+	public void Delete_Inquiry(String contactNo) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Inquiry.getSearch().sendKeys(contactNo + Keys.ENTER);
 		Inquiry.getDelete();
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
 	}
 
-	//Export to Excel Inquiry
+	//Export To Excel Inquiry
 	@Test()
 	public void Export_To_Excel_Inquiry() throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
@@ -343,28 +317,31 @@ public class InquiryTest extends base {
 		Inquiry.getClickYes().click();
 	}
 
-	//Add Inquiry Test Mandatory Filed Validation
+	//Add Inquiry Test Mandatory Field Validation
 	@Test
-	public void Add_Inquiry_Test_Mandatory_Filed_Validation() throws InterruptedException {
-
+	public void Add_Inquiry_Test_Mandatory_Field_Validation() throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
 		Inquiry.getsave().click();
 		Thread.sleep(2000);
 		
-		SoftAssert softAssert = new SoftAssert();
 		WebElement Visitsiteproject =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
 		softAssert.assertEquals(Visitsiteproject.getText(), "Visit Site/Project is required.");
 
 		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
 		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
 
-		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
-		softAssert.assertEquals(Intime.getText(), "In time is required.");
+		WebElement Intime =driver.findElement(By.xpath(
+				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+				+ "vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[4]/mat-form-field/div[2]/div/mat-error"));
+		softAssert.assertEquals(Intime.getText(), "In Time is required.");
 
-		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
-		softAssert.assertEquals(Outtime.getText(), "Out time is required.");
+		WebElement Outtime =driver.findElement(By.xpath(
+				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+				+ "vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[5]/mat-form-field/div[2]/div/mat-error"));
+		softAssert.assertEquals(Outtime.getText(), "Out Time is required.");
 
 		WebElement Attedee =driver.findElement(By.xpath("//span[normalize-space()='Attendee is required.']"));
 		softAssert.assertEquals(Attedee.getText(), "Attendee is required.");
@@ -374,14 +351,14 @@ public class InquiryTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Edit Inquiry Test Mandatory Filed Validation
+	//Edit Inquiry Test Mandatory Field Validation
 	@Test()
 	public void Edit_Inquiry_Test_Mandatory_Field_Validation() throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.Getedit();
 		Thread.sleep(2000);
-
+		
 		Inquiry.getIntime().click();
 		Inquiry.getOk().click();
 		Inquiry.getIntime().sendKeys(Keys.BACK_SPACE);
@@ -400,6 +377,7 @@ public class InquiryTest extends base {
 		{
 			Inquiry.getContactNo().sendKeys(Keys.BACK_SPACE);
 		}
+		
 		SoftAssert softAssert = new SoftAssert();
 		Thread.sleep(2000);
 		Inquiry.getContactNo().sendKeys(Keys.TAB);
@@ -407,11 +385,13 @@ public class InquiryTest extends base {
 		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
 		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
 
-		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
-		softAssert.assertEquals(Intime.getText(), "In time is required.");
+		WebElement Intime =driver.findElement(By.xpath(
+				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/form/div[1]/div[4]/mat-form-field/div[2]/div/mat-error"));
+		softAssert.assertEquals(Intime.getText(), "In Time is required.");
 
-		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
-		softAssert.assertEquals(Outtime.getText(), "Out time is required.");
+		WebElement Outtime =driver.findElement(By.xpath(
+				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/form/div[1]/div[5]/mat-form-field/div[2]/div/mat-error"));
+		softAssert.assertEquals(Outtime.getText(), "Out Time is required.");
 
 		WebElement ContactNo =driver.findElement(By.xpath("//span[normalize-space()='Contact Number is required.']"));
 		softAssert.assertEquals(ContactNo.getText(), "Contact Number is required.");	
@@ -604,14 +584,14 @@ public class InquiryTest extends base {
 	//Verify Add Inactive Inquiry Status
 	@Test()
 	public void Verify_Add_Inactive_Inquiry_Status() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getEditInquirystatus().click();
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
-		unit.getInquiryActiveInactive().click();
+		Inquirystatus.getInquiryActiveInactive().click();
 		Thread.sleep(2000);
-		unit.getEditInquirystatussave().click();
+		Inquirystatus.getEditInquirystatussave().click();
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -644,14 +624,14 @@ public class InquiryTest extends base {
 	//Verify Add Active Inquiry Status
 	@Test()
 	public void Verify_Add_Active_Inquiry_Status() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getEditInquirystatus().click();
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
-		unit.getInquiryActiveInactive().click();
+		Inquirystatus.getInquiryActiveInactive().click();
 		Thread.sleep(2000);
-		unit.getEditInquirystatussave().click();
+		Inquirystatus.getEditInquirystatussave().click();
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click(); 
@@ -684,14 +664,14 @@ public class InquiryTest extends base {
 	//Verify Edit Inactive Inquiry Status
 	@Test()
 	public void Verify_Edit_Inactive_Inquiry_Status() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getEditInquirystatus().click();
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
-		unit.getInquiryActiveInactive().click();
+		Inquirystatus.getInquiryActiveInactive().click();
 		Thread.sleep(2000);
-		unit.getEditInquirystatussave().click();
+		Inquirystatus.getEditInquirystatussave().click();
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -724,14 +704,14 @@ public class InquiryTest extends base {
 	//Verify Edit Active Inquiry Status
 	@Test()
 	public void Verify_Edit_Active_Inquiry_Status() throws InterruptedException {
-		Inquirystatuspage unit = new Inquirystatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirystatusclick().click();
-		unit.getEditInquirystatus().click();
+		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
+		Inquirystatus.getconfiguration().click();
+		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
-		unit.getInquiryActiveInactive().click();
+		Inquirystatus.getInquiryActiveInactive().click();
 		Thread.sleep(2000);
-		unit.getEditInquirystatussave().click();
+		Inquirystatus.getEditInquirystatussave().click();
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click(); 
@@ -960,8 +940,6 @@ public class InquiryTest extends base {
 			};
 	}
 
-
-
 	//DataProvider for Edit Inquiry
 	@DataProvider
 	public Object[][] InquiryEditData() {
@@ -972,7 +950,7 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{ 1 }};// Just a placeholder for multiple runs	
+				{{"9765456789"}};// Just a placeholder for multiple runs	
 	}
 
 	//DataProvider for Apply Filter for Project

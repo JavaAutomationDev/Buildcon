@@ -26,18 +26,21 @@ public class CollectionPage {
 		base.failedElementName = "Collection-TotalCollection";
 		return driver.findElement(totalcollection);
 	}
+	
 	//Page object for Cross Button		
 	By Crossbtn=By.xpath("//button[@class='popclose']");	
 	public WebElement getcross() {
 		base.failedElementName = "Collection-Crossbtn";
 		return driver.findElement(Crossbtn);
 	}
+	
 	//Page object for Search 
 	By Search = By.xpath("//input[@type='search']");
 	public WebElement getSearch() {
 		base.failedElementName = "Collection-Search";
 		return driver.findElement(Search);
 	}
+	
 	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content/main/vex-collections/div/div[1]/div[2]/div[2]/div[4]/button");
@@ -45,6 +48,7 @@ public class CollectionPage {
 		base.failedElementName = "Collection-ExportExcel";
 		return driver.findElement(ExporttoExcel);
 	}
+	
 	//Page object for Apply Filter
 	By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-collections/div/div[1]/div[2]/div[2]/div[5]/button");
@@ -73,21 +77,31 @@ public class CollectionPage {
 		base.failedElementName = "Collection-SelectEndDt";
 		return driver.findElement(SelectendDate);
 	}
+	
 	//Page object for Reset Button
 	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
 	public WebElement getresetfilter() {
 		base.failedElementName = "Collection-ResetFilter";
 		return driver.findElement(resetfilter);
 	}
+	
 	//Page object for Info Button
 	By infobtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
 				+ "main/vex-collections/div/div[2]/div/div/div/table/tbody/tr[1]/td[4]/span/a");
 	public WebElement getInfoBtn() {
 		return driver.findElement(infobtn);
 	}
+	
 	//Page object for Print Info Button
-	By printinfobtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-view-receipts/form/mat-dialog-content/div/div/div/table/tbody/tr/td[8]/div/button[1]/mat-icon");
+	By printinfobtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-view-receipts/form/mat-dialog-content/div/div/div/table/tbody/tr/td[8]/div/button[1]");
 	public WebElement getPrintInfoBtn() {
-		return driver.findElement(infobtn);
+		return driver.findElement(printinfobtn);
 	}
+	
+	//Page object for Download Receipt Button
+	By downloadreceiptbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-view-receipts/form/mat-dialog-content/div/div/div/table/tbody/tr/td[8]/div/button[2]");
+	public WebElement getDownloadReceiptBtn() {
+		return driver.findElement(downloadreceiptbtn);
+	}
+
 }

@@ -37,7 +37,6 @@ public class AgenciesTest extends base {
 			String allowunits,String email,String address1,String address2,String city,String state,String pincode,String mobileno,String logo,
 			String adminfirstname,String adminmiddlename,String adminlastname,String adminmobile,String adminemail,String admindesignation,
 			String modules) throws InterruptedException {
-		
 		AgenciesPage agencies = new AgenciesPage(driver);
 		agencies.getAddAgencies().click();
 		agencies.getCompanyName().sendKeys(companyname);

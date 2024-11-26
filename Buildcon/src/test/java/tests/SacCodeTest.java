@@ -35,63 +35,83 @@ public class SacCodeTest extends base {
 		log.info("Login successful");
 	}
 
-	//Add Project types
+	//Add Sac Code
 	@Test(dataProvider = "getAdddata")
 	public void Add_Saccode(String Saccode1, String DESCRIPTION1, String gst1) throws InterruptedException {
-		Saccodepage unit = new Saccodepage(driver);
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getsaccodeclick().click();
-		unit.getaddsaccode().click();
-		unit.getsaccodeenter().sendKeys(Saccode1);
-		unit.getdescription().sendKeys(DESCRIPTION1);
-		unit.getgst().sendKeys(gst1);
+		Saccodepage saccode = new Saccodepage(driver);
+		saccode.getconfiguration().click();
+		saccode.getsaccodeclick().click();
+		saccode.getaddsaccode().click();
+		
+		saccode.getsaccodeenter().sendKeys(Saccode1);
+		//Saccode Data Validation
 		String valid_string = valid_number(Saccode1,"saccode");
 		String valid_saccode = valid_string;
 		System.out.println(valid_saccode);
+		
+		saccode.getdescription().sendKeys(DESCRIPTION1);
+		//Description Data Validation
 		String valid_string1 = valid_alphanum(DESCRIPTION1,"sacdescription",20);
 		String valid_sacdescription = valid_string1;
 		System.out.println(valid_sacdescription);
+		
+		saccode.getgst().sendKeys(gst1);
+		//GST Data Validation
 		String valid_string3 = valid_number(gst1,"gst");
 		String valid_gst = valid_string3;
 		System.out.println(valid_gst);
-		unit.getsavebuttonsaccode().click();
+		saccode.getsavebuttonsaccode().click();
+		Thread.sleep(2000);
 		softAssert.assertEquals(valid_saccode, "saccode is a valid Number");
 		softAssert.assertEquals(valid_sacdescription, "DESCRIPTION is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_gst, "gst is a valid Number");
+		softAssert.assertAll();
 	}
 	
-	//Edit Project types
+	//Edit Sac Code
 	@Test(dataProvider = "getEditdata")
-	public void Edit_saccode(String Saccode1,String description1,String editgst1) throws InterruptedException {
-		Saccodepage unit = new Saccodepage(driver);
+	public void Edit_Saccode(String Saccode1,String description1,String editgst1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getsaccodeclick().click();
-		unit.getEditclicksaccode().click();
-		unit.getEditsacs().clear();
-		unit.getEditsacs().sendKeys(Saccode1);
-		unit.getEditsacdescription().clear();
-		unit.getEditsacdescription().sendKeys(description1);
-		unit.getEditgst().clear();
-		unit.getEditgst().sendKeys(editgst1);
+		Saccodepage saccode = new Saccodepage(driver);
+		saccode.getconfiguration().click();
+		saccode.getsaccodeclick().click();
+		saccode.getEditclicksaccode().click();
+		
+		saccode.getEditsacs().clear();
+		saccode.getEditsacs().sendKeys(Saccode1);
+		//Sac code Data Validation
 		String valid_string = valid_number(Saccode1,"saccode");
 		String valid_saccode = valid_string;
 		System.out.println(valid_saccode);
+		
+		
+		saccode.getEditsacdescription().clear();
+		saccode.getEditsacdescription().sendKeys(description1);
+		//Description Data Validation
 		String valid_string1 = valid_alphanum(description1,"sacdescription",20);
 		String valid_sacdescription = valid_string1;
 		System.out.println(valid_sacdescription);
+		
+		
+		saccode.getEditgst().clear();
+		saccode.getEditgst().sendKeys(editgst1);
+		//GST Data Validation
 		String valid_string3 = valid_number(editgst1,"gst");
 		String valid_gst = valid_string3;
 		System.out.println(valid_gst);
-		unit.getEditsavebutton().click();
+		
+		saccode.getEditsavebutton().click();
+		
 		softAssert.assertEquals(valid_saccode, "saccode is a valid Number");
 		softAssert.assertEquals(valid_sacdescription, "DESCRIPTION is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_gst, "gst is a valid Number");
+		softAssert.assertAll();
 	}
 
+	//Status Change Saccode
 	@Test
-	public void statuschange_saccode() throws InterruptedException {
+	public void Status_Change_Saccode() throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
@@ -99,8 +119,9 @@ public class SacCodeTest extends base {
 		saccode.getchangestatusconfirm().click();
 	}
 
+	//Delete Saccode
 	@Test
-	public void Delete_saccode() throws InterruptedException {
+	public void Delete_Saccode() throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
@@ -108,8 +129,9 @@ public class SacCodeTest extends base {
 		saccode.getdeletesaccodeconfirm().click();
 	}
 
+	//Search Saccode
 	@Test(dataProvider = "getsearch")
-	public void searching_projecttypes(String searchedentertext) throws InterruptedException {
+	public void Searching_Project_Types(String searchedentertext) throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
@@ -117,48 +139,49 @@ public class SacCodeTest extends base {
 		saccode.getsearchsaccodeconfirmclick().click();
 	}
 
+	//Export Excel Saccode
 	@Test
-	public void Exportasaexcel_saccode() throws InterruptedException {
+	public void Export_Excel_Saccode() throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
 		saccode.getexcelclicksaccode().click();
 	}
 
+	//Add Validation Saccode
 	@Test
-	public void Add_validation_Saccode() throws InterruptedException {
-		Saccodepage saccode = new Saccodepage(driver);
+	public void Add_Validation_Saccode() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
+		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
 		saccode.getaddsaccode().click();
 		saccode.getsavebuttonsaccode().click();
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/div/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
 		//Define the expected message
 		String expectedMessage = "SAC code is required";
-
-		//Assert the actual message matches the expected message
 		softAssert.assertEquals("SAC code is required", expectedMessage, actualMessage);
 
 		WebElement messageElement1 = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/div/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
 
 		String actualMessage1 = messageElement1.getText();
 		System.out.println(messageElement1.getText());
 
 		//Define the expected message
 		String expectedMessage1 = "Description is required";
-
-		//Assert the actual message matches the expected message
 		softAssert.assertEquals("Description is required", expectedMessage1, actualMessage1);
 
 		WebElement messageElement2 = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/div/form/mat-dialog-content/div[1]/mat-form-field[3]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field[3]/div[2]/div/mat-error/span"));
 
 		String actualMessage2 = messageElement2.getText();
 		System.out.println(messageElement2.getText());
@@ -166,15 +189,15 @@ public class SacCodeTest extends base {
 		//Define the expected message
 		String expectedMessage2 = "GST is required";
 
-		//Assert the actual message matches the expected message
 		softAssert.assertEquals("GST is required", expectedMessage2, actualMessage2);
 		softAssert.assertAll();
 	}
 
+	//Edit Validation Saccode
 	@Test
-	public void Edit_validation_saccode() throws InterruptedException {
-		Saccodepage saccode = new Saccodepage(driver);
+	public void Edit_Validation_Saccode() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
+		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
 		saccode.getEditclicksaccode().click();
@@ -190,39 +213,36 @@ public class SacCodeTest extends base {
 		saccode.getEditsavebutton().click();
 
 		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/div/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
 		//Define the expected message
 		String expectedMessage = "SAC code is required";
-
-		//Assert the actual message matches the expected message
 		softAssert.assertEquals("SAC code is required", expectedMessage, actualMessage);
 
 		WebElement messageElement1 = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/div/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field[2]/div[2]/div/mat-error/span"));
 
 		String actualMessage1 = messageElement1.getText();
 		System.out.println(messageElement1.getText());
 
 		//Define the expected message
 		String expectedMessage1 = "Description is required";
-
-		//Assert the actual message matches the expected message
 		softAssert.assertEquals("Description is required", expectedMessage1, actualMessage1);
 
 		WebElement messageElement2 = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/div/form/mat-dialog-content/div[1]/mat-form-field[3]/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
+				+ "div/form/mat-dialog-content/div[1]/mat-form-field[3]/div[2]/div/mat-error/span"));
 
 		String actualMessage2 = messageElement2.getText();
 		System.out.println(messageElement2.getText());
 
 		//Define the expected message
 		String expectedMessage2 = "GST is required";
-
-		//Assert the actual message matches the expected message
 		softAssert.assertEquals("GST is required", expectedMessage2, actualMessage2);
 		softAssert.assertAll();
 	}
@@ -230,7 +250,7 @@ public class SacCodeTest extends base {
 	//DataProvider for Add
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "747266", "Nishant", "42" } };
+		return new Object[][] { { "999777", "Anshul", "50" } };
 	}
 
 	//DataProvider for Edit

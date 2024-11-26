@@ -68,7 +68,7 @@ public class CustomerTest extends base {
 		customer.getapplyfilter().click();
 		Thread.sleep(2000);
 		customer.getselectproject(selectproject);
-		customer.getradiobtn().click();
+		Thread.sleep(2000);
 		customer.getresetfilter().click();
 		Thread.sleep(2000);
 		customer.getDocumentview().click();
@@ -78,6 +78,18 @@ public class CustomerTest extends base {
 		customer.getdocument().click();
 		Thread.sleep(2000);
 		customer.getcross().click();
+	}
+	
+	//Apply Filter Method for Project Cancel
+	@Test(dataProvider="CustomerProjectDropdownData")
+	public void Apply_Filter_Project_Customer_Cancel(String selectproject) throws InterruptedException {
+		CustomerPage customer = new CustomerPage(driver);
+		customer.getCustomer().click();
+		customer.getapplyfilter().click();
+		Thread.sleep(2000);
+		customer.getselectproject(selectproject);
+		Thread.sleep(2000);
+		customer.getCancelRadioBtn().click();
 	}
 	
 	//Close the Driver

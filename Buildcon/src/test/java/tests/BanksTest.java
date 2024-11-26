@@ -27,7 +27,7 @@ public class BanksTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login process
+		//Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));
 		loginPage.getUserName().sendKeys(prop.getProperty("USER"));
@@ -36,162 +36,166 @@ public class BanksTest extends base {
 		log.info("Login successful");
 	}
 
-	// Add project types
+	//Add Banks
 	@Test(dataProvider = "getAdddata")
-	public void Add_banks(String Banks1) throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
+	public void Add_Banks(String Banks1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getBanksadd().click();
-		// banks name data validation--
-		unit.getBanksadddata().sendKeys(Banks1);
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBanksadd().click();
+		
+		//Banks name data validation
+		Bank.getBanksadddata().sendKeys(Banks1);
 		String valid_string = valid_alphanum(Banks1,"banks",30);
 		String valid_Banks = valid_string;
 		System.out.println(valid_Banks);
-		Thread.sleep(3000);
-		unit.getbankssave().click();
-		Thread.sleep(3000);
-		softAssert.assertEquals(valid_Banks, "Banks is a Valid Alpha-Numeric");
 		
+		Thread.sleep(3000);
+		Bank.getbankssave().click();
+		softAssert.assertEquals(valid_Banks, "Banks is a Valid Alpha-Numeric");
+	    softAssert.assertAll(); 	
 	}
-	// Edit project types
-
+	
+	//Edit Bank
 	@Test(dataProvider = "getEditdata")
-	public void Edit_banks(String Banks1) throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
+	public void Edit_Banks(String Banks1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getbankseditclick().click();
-		unit.getbankseditadddata().clear();
-		// banks name data validation--------------
-		unit.getbankseditadddata().sendKeys(Banks1);
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getbankseditclick().click();
+		Bank.getbankseditadddata().clear();
+		
+		//Banks name data validation
+		Bank.getbankseditadddata().sendKeys(Banks1);
 		String valid_string = valid_alphanum(Banks1,"banks",30);
 		String valid_Banks = valid_string;
 		System.out.println(valid_Banks);
+		
 		Thread.sleep(3000);
-		unit.getbankseditsave().click();
+		Bank.getbankseditsave().click();
+		
 		Thread.sleep(3000);
 		softAssert.assertEquals(valid_Banks, "Banks is a Valid Alpha-Numeric");
-		
+		softAssert.assertAll();
 	}
 
+	//Delete Bank
 	@Test
 	public void Delete_banks() throws InterruptedException {
 		Bankspage unit = new Bankspage(driver);
 		unit.getconfiguration().click();
 		unit.getBanksclick().click();
 		unit.getbanksdeleteclick().click();
+		Thread.sleep(3000);
 		unit.getBanksdeleteconfirmation().click();
+		Thread.sleep(3000);
 	}
 
+	//Status Bank
 	@Test
 	public void status_banks() throws InterruptedException {
 		Bankspage unit = new Bankspage(driver);
 		unit.getconfiguration().click();
 		unit.getBanksclick().click();
 		unit.getbanksstatus().click();
+		Thread.sleep(2000);
 		unit.getbanksstatusconfirmation().click();
+		Thread.sleep(2000);
 	}
 
+	//Searched Bank
 	@Test(dataProvider = "getsearched")
-	public void searched_banks(String bankssearched1) throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getBankssearched().sendKeys(bankssearched1);
-		unit.getbankssearchedclick().click();
+	public void Searched_Banks(String bankssearched1) throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(bankssearched1);
+		Bank.getbankssearchedclick().click();
 	}
 
+	//Excel Export Bank
 	@Test
-	public void Excelexport_banks() throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getbanksExcelclick().click();
-		unit.getbankssearchedclick().click();
+	public void Excel_Export_Banks() throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getbanksExcelclick().click();
+		Bank.getbankssearchedclick().click();
 	}
 
+	//Add Validation Banks
 	@Test
-	public void Add_validation_banks() throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
+	public void Add_Validation_Banks() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getBanksadd().click();
-
-		unit.getbankssave().click();
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBanksadd().click();
+		Bank.getbankssave().click();
 
 		WebElement messagelement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-bank-master-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-bank-master-add/div/form/"
+				+ "mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 		String actualMessage = messagelement.getText();
 
 		System.out.println(messagelement.getText());
 
-		// Define the expected message
-
+		//Define the expected message
 		String expectedMessage = "Bank name is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Bank name is required", expectedMessage, actualMessage);
-
 		softAssert.assertAll();
 	}
 
+	//Edit Validation Banks
 	@Test
-	public void Edit_validation_banks() throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
+	public void Edit_Validation_Banks() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getbankseditclick().click();
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getbankseditclick().click();
 		//unit.getbankseditadddata().click();
 		for (int i = 1; i <= 13; i++) {
-			unit.getbankseditadddata().sendKeys(Keys.BACK_SPACE);
+			Bank.getbankseditadddata().sendKeys(Keys.BACK_SPACE);
 		}
 
 		Thread.sleep(3000);
-		unit.getbankseditsave().click();
+		Bank.getbankseditsave().click();
 		WebElement messagelement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-bank-master-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-bank-master-add/div/form/"
+				+ "mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 		String actualMessage = messagelement.getText();
-
 		System.out.println(messagelement.getText());
 
-		// Define the expected message
-
+		//Define the expected message
 		String expectedMessage = "Bank name is required";
-
-		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Bank name is required", expectedMessage, actualMessage);
-
 		softAssert.assertAll();
-
 	}
 
-	 //close the driver
+	 //Close the driver
 	@AfterMethod
 	public void teaddown() {
 		driver.close();
 	}
 
-	// DataProvider for Add banks
+	//DataProvider for Add Bank
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "banks88" } };
+		return new Object[][] { { "centralbank" } };
 	}
 
-	// DataProvider for Edit Inquiry
+	//DataProvider for Edit Bank
 	@DataProvider
 	public Object[][] getEditdata() {
 		return new Object[][] { { "BOI123" } };
 	}
 
-	// DataProvider for Apply searched for Project
+	//DataProvider for Searched Bank
 	@DataProvider
 	public Object[][] getsearched() {
-		return new Object[][] { { "HDFC " } };
+		return new Object[][] { { "HDFC" } };
 	}
-
 }

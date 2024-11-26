@@ -71,15 +71,38 @@ public class CollectionTest extends base {
 	}
 	
 	//Collection Information Method
-	@Test()
-	public void Information_Collection() throws InterruptedException {
+	@Test(dataProvider="InformationCollection")
+	public void Information_Collection(String unitno) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
+		collection.getSearch().sendKeys(unitno + Keys.ENTER);
 		collection.getInfoBtn().click();
 		Thread.sleep(2000);
         collection.getPrintInfoBtn().click();
 	}
 	
+	//Print Collection Receipt Method
+	@Test(dataProvider="PrintCollectionReceipt")
+	public void Print_Collection_Receipt(String unitno) throws InterruptedException {
+		CollectionPage collection = new CollectionPage(driver);
+		collection.getcollection().click();
+		collection.getSearch().sendKeys(unitno + Keys.ENTER);
+		collection.getInfoBtn().click();
+		Thread.sleep(2000);
+        collection.getPrintInfoBtn().click();
+	}
+	
+	//Download Collection Receipt Method
+	@Test(dataProvider="DownloadCollectionReceipt")
+	public void Download_Collection_Receipt(String unitno) throws InterruptedException {
+		CollectionPage collection = new CollectionPage(driver);
+		collection.getcollection().click();
+		collection.getSearch().sendKeys(unitno + Keys.ENTER);
+		collection.getInfoBtn().click();
+		Thread.sleep(2000);
+		collection.getDownloadReceiptBtn().click();
+	}
+		
 	//Close the driver
 	@AfterMethod
 	public void teaddown() {
@@ -91,5 +114,26 @@ public class CollectionTest extends base {
 	public Object[][] CollectionSearchData() {
 		return new Object[][] {
 			{"Taj Mahal"}};
+	}
+	
+	//DataProvider for Information Collection
+	@DataProvider
+	public Object[][] InformationCollection() {
+		return new Object[][] {
+			{" 3BHKsss NO - 103 "}};
+	}
+	
+	//DataProvider for Print Collection Receipt
+	@DataProvider
+	public Object[][] PrintCollectionReceipt() {
+		return new Object[][] {
+			{" 3BHKsss NO - 103 "}};
+	}
+	
+	//DataProvider for Download Collection Receipt
+	@DataProvider
+	public Object[][] DownloadCollectionReceipt() {
+		return new Object[][] {
+			{" 3BHKsss NO - 103 "}};
 	}
 }

@@ -13,12 +13,14 @@ public class DocumentPage {
 	public DocumentPage(WebDriver driver) {
 		this.driver = driver;
 	}
+	
 	//Page object for Document Module
 	By document = By.xpath("//vex-sidenav-item[10]//a[1]");
 	public WebElement getDocument() {
 		base.failedElementName = "Document-DocumentModule";
 		return driver.findElement(document);
 	}
+	
 	//Page object for Add Document
 	By Adddocument = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-documents/div/div[1]/div[2]/button");
@@ -47,12 +49,14 @@ public class DocumentPage {
 		base.failedElementName = "Document-PageLayout";
 		return driver.findElement(pagelayout);
 	}
+	
 	//Page object for Page Size
 	By pagesize = By.xpath("//mat-select[@formcontrolname='pageSize']");
 	public WebElement getPageSize() {
 		base.failedElementName = "Document-PageSize";
 		return driver.findElement(pagesize);
 	}
+	
 	//Page object for Margin Left
 	By marginleft = By.xpath("//input[@formcontrolname='marginLeft']");
 	public WebElement getMarginLeft() {
@@ -66,24 +70,28 @@ public class DocumentPage {
 		base.failedElementName = "Document-MarginRight";
 		return driver.findElement(marginright);
 	}
+	
 	//Page object for Margin Top
 	By margintop = By.xpath("//input[@formcontrolname='marginTop']");
 	public WebElement getMarginTop() {
 		base.failedElementName = "Document-MarginTop";
 		return driver.findElement(margintop);
 	}
+	
 	//Page object for Margin Bottom
 	By marginbottom = By.xpath("//input[@formcontrolname='marginBottom']");
 	public WebElement getMarginBottom() {
 		base.failedElementName = "Document-MarginBottom";
 		return driver.findElement(marginbottom);
 	}
+	
 	//Page object for Search Document
 	By search = By.xpath("");
 	public WebElement getSearch() {
 		base.failedElementName = "Document-Search";
 		return driver.findElement(search);
 	}
+	
 	//Page object for Apply Filter
 	By applyfilter = By.xpath("");
 	public WebElement getApplyFilter() {
@@ -97,6 +105,7 @@ public class DocumentPage {
 		base.failedElementName = "Document-ApplyFilterProject";
 		return driver.findElement(applyfilterproject);
 	}
+	
 	//Page object for Apply Filter Reset
 	By applyfilterreset = By.xpath("");
 	public WebElement getApplyFilterReset() {
@@ -110,12 +119,14 @@ public class DocumentPage {
 		base.failedElementName = "Document-Edit";
 		return driver.findElement(edit);
 	}	
+	
 	//Page object for Delete Document
 	By delete = By.xpath("");
 	public WebElement getdelete() {
 		base.failedElementName = "Document-Delete";
 		return driver.findElement(delete);
 	}
+	
 	//Page object for View Document
 	By view = By.xpath("");
 	public WebElement getView() {

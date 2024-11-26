@@ -103,12 +103,15 @@ public class ReceiptPage {
 	}
 	
 	//Page object for Calendar click
-	By calendarclick=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[1]/div[3]/div/div[2]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
+	By calendarclick=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/"
+			+ "div/form/div/div[1]/div[3]/div/div[2]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
 	public WebElement getCalendarClick() {
 		return driver.findElement(calendarclick);
 	}
 	//Page object for date selection
-	By dateselect=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[5]/button/span[1]");
+	By dateselect=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/"
+			+ "mat-month-view/table/tbody/tr[2]/td[5]/button/span[1]");
 	public WebElement getDateSelect() {
 		return driver.findElement(dateselect);
 	}
@@ -167,13 +170,16 @@ public class ReceiptPage {
 		return driver.findElement(Impsno);
 	}
 	//Page object for Regular Cheque/Tran. Date
-	By regularchequetrandate =By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/form/div/form/div[1]/div/div[3]/div[1]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
+	By regularchequetrandate =By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
+			+ "/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/"
+			+ "form/div/form/div[1]/div/div[3]/div[1]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
 	public WebElement getRegularChequeTranDate() {
 		base.failedElementName = "Receipt-ChequeDate";
 		return driver.findElement(regularchequetrandate);
 	}
 	//Page object for Cheque Calendar date
-	By checquedate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/mat-month-view/table/tbody/tr[2]/td[5]/button/span[1]");
+	By checquedate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/"
+			+ "mat-month-view/table/tbody/tr[2]/td[5]/button/span[1]");
 	public WebElement getChecqueDate() {
 		return driver.findElement(checquedate);
 	}
@@ -228,14 +234,14 @@ public class ReceiptPage {
 	}
 	
 	//Page object for Challan Date
-//	By challandate=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div/form/div[1]/div/div[1]/div[2]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
-//	public WebElement challandate() {
-//        return driver.findElement(challandate);		
-//	}
+    //By challandate=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div/form/div[1]/div/div[1]/div[2]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
+    //public WebElement challandate() {
+    //       return driver.findElement(challandate);		 
+    //}
 	//Page object for date selection
 	//By selectdate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/mat-month-view/table/tbody/tr[3]/td[5]/button/span[1]");
 	//public WebElement getSelectDate() {
-		//return driver.findElement(selectdate);
+	//       return driver.findElement(selectdate);
 	//}
 	
 
@@ -511,8 +517,10 @@ public class ReceiptPage {
   	//Page object for Edit
   	public void GetEditNext()
 	{
-		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[1]")).click();
-		WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
+		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+				+ "mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[1]")).click();
+		WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
+				+ "/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
 		a.click();	
 	}
   	
@@ -534,7 +542,8 @@ public class ReceiptPage {
   	//Page object for Edit Requierd Field
   	public void EditNextRequierdBtn()
 	{
-		WebElement EditNextbtn =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
+		WebElement EditNextbtn =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+				+ "mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
 		EditNextbtn.click();	
 	}
 }

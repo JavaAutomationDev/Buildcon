@@ -185,19 +185,21 @@ public class InquiryPage {
 		base.failedElementName = "Inquiry-Save";
 		return driver.findElement(Save);
 	}
+	
 	//Page object for Update Button
 	By update = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-inquiry/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/form/div[2]/button[2]");
 			public WebElement getUpdate() {
 				base.failedElementName = "Inquiry-Update";
 				return driver.findElement(update);
-			}
+	}
+			
 	//Page object for Edit Button
 	public WebElement getEdit() {
-		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-				+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[1]"));
+		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
+				+ "/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/"
+				+ "mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[1]"));
 
-		
 		base.failedElement = Edit;
 		base.failedElementName = "getEdit Inquiry-Follow_Inquiry";
 
@@ -213,9 +215,8 @@ public class InquiryPage {
 		base.failedElement = null;
 		base.failedElementName = "Missing_Follow_Inquiry";
 		return driver.findElement(Search);
-		
-		
 	}
+	
 	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("//html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-inquires/div/div[1]/div[2]/button[1]");
@@ -223,6 +224,7 @@ public class InquiryPage {
 		base.failedElementName = "Inquiry-ExportExcel";
 		return driver.findElement(ExporttoExcel);
 	}
+	
 	//Page object for Apply Filter
 	By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-inquires/div/div[1]/div[2]/div[3]/button/span[3]");
@@ -251,6 +253,7 @@ public class InquiryPage {
 		base.failedElementName = "Inquiry-EndDate";
 		return driver.findElement(selectendDate);
 	}
+	
 	//Page object for Select Project
 	By selectproject=By.xpath("//mat-select[@placeholder='Select Project']");
 	public void getselectproject(String project) {
@@ -264,24 +267,26 @@ public class InquiryPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
+	
 	//Page object for Reset Button
 	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
 	public WebElement getresetfilter() {
 		base.failedElementName = "Inquiry-ResetFilter";
 		return driver.findElement(resetfilter);
 	}
+	
 	//Page object for Delete
 	public WebElement getDelete() {
 		WebElement deleteButton = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 				+ "/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/"
-				+ "mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[13]/div/a[2]/mat-icon"));
-
+				+ "mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[2]"));
+		base.failedElementName = "Inquiry-Delete";
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", deleteButton);
 		js.executeScript("arguments[0].click();", deleteButton);
-		base.failedElementName = "Inquiry-Delete";
 		return deleteButton;
 	}
+	
 	//Page object for Click Yes
 	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
 			+ "/form/mat-dialog-actions/button[1]");
@@ -298,6 +303,7 @@ public class InquiryPage {
 		base.failedElementName = "Inquiry-TodayFollowup";
 		return driver.findElement(Todayfollowup);
 	}
+	
 	//Page object for Missing Follow Up Details
 	By MissingFollowup = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content/main/"
@@ -308,17 +314,14 @@ public class InquiryPage {
 	}
 
 	//Page object for Add To Prospect
-	By Addprospect = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
-			+ "mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[2]"
-			+ "/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[13]/div/a[3]");
+	By Addprospect = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[3]");
 	public WebElement getAddprospect() {
 		
 		WebElement dropdown = driver.findElement(Addprospect);
 		base.failedElement = dropdown;
 		base.failedElementName = "Inquiry-getunitdropdown";
-		
 		return driver.findElement(Addprospect);
-		
 	}
 	
 	//Page object for Unit DropDown
@@ -334,6 +337,7 @@ public class InquiryPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
+	
 	//Page Object for Select Flat/Shop
 	By SelectFlat = By.xpath("//mat-select[@formcontrolname='flatShopID']");
 	public void getSelectFlat(String Selectflat) {
@@ -347,10 +351,12 @@ public class InquiryPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
+	
 	//Page object for Clear Visitior Name
 	public void Getedit()
 	{
-		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[13]/div/a[1]")).click();
+		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+				+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[1]")).click();
 		WebElement visitorname = driver.findElement(By.xpath("//input[@formcontrolname='visitorName']"));
 		visitorname.clear();
 		visitorname.sendKeys("a");
@@ -363,17 +369,21 @@ public class InquiryPage {
 	public WebElement getBlankoutTime() {
 		return driver.findElement(blankoutTime);
 	}
+	
 	//Page object for Missing follow up details Edit button
 	By missingfollowupeditbtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 				+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[3]/div/div/div/table/tbody/tr[1]/td[13]/div/a");
 	public WebElement getMissingFollowUpEditBtn() {
 		return driver.findElement(missingfollowupeditbtn);
 	}
+	
 	//Page object for Follow up details 
-	By followupdetails = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[2]");
+	By followupdetails = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main"
+			+ "/vex-add-inquiry/div/div[2]/div/mat-tab-group/mat-tab-header/div/div/div/div[2]");
 	public WebElement getFollowUpDetails() {
 		return driver.findElement(followupdetails);
 	}
+	
 	//Page object for Add Follow Details
 	By addfollowdetails = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
 			+ "main/vex-add-inquiry/div/div[1]/div[2]/div/button");

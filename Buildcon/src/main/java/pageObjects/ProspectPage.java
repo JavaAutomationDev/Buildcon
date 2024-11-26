@@ -46,9 +46,6 @@ public class ProspectPage {
 		
 		String optionXPath = "//mat-option//span[contains(text(),'" + siteproject + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
-		
-
-        
 		option.click();
 	}
 
@@ -99,7 +96,7 @@ public class ProspectPage {
 		//Find the 'Out Time' input field
 		WebElement outTimeElement = driver.findElement(outTime);
 
-		// Set the future time in the input field
+		//Set the future time in the input field
 		outTimeElement.sendKeys(formattedFutureTime);
 		base.failedElementName = "Prospect-outtime";
 		return outTimeElement;
@@ -194,6 +191,7 @@ public class ProspectPage {
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
+	
 	//Page object for Save Button
 	By Save = By.xpath("//button[@type='submit']");
 	public WebElement getsave() {
@@ -324,13 +322,10 @@ public class ProspectPage {
 
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + unitD + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
-		
-	
 		option.click();
 	}
 	//Page Object for Select Flat/Shop
 	By SelectFlat = By.xpath("//mat-select[@formcontrolname='flatShopID']");
-	 
 	public void getSelectFlat(String Selectflat) {
 		WebElement dropdown = driver.findElement(SelectFlat);
 		dropdown.click();

@@ -42,56 +42,126 @@ public class ProspectTest extends base {
 	@Test(dataProvider="ProspectAdddata")
 	public void Add_Prospect(String siteproject, String visitorname, String visitordate,String NextfollowUpDT, String referencedBy,
 			String Attende, String ContactNo,String Email, String Address, String Remarks, String Requirement, String Status, String unitD,
-			String Selectflat) throws InterruptedException {
+			String Selectflat) throws InterruptedException, IOException {
+		SoftAssert softAssert=new SoftAssert(); 
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getAddprospect().click();
 
-		Prospect.getsiteproject(siteproject); // Required Field
-		Prospect.getvisitorname().sendKeys(visitorname); // Required Field
+		Prospect.getsiteproject(siteproject); //Required Field
+		
+		Prospect.getvisitorname().sendKeys(visitorname); //Required Field
+		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
+		//Visitor Name Text Data Validation ---------------------------------
+		String valid_string = validateText(visitorname,"VisitorName", 5, 30);
+		String valid_visitorname = valid_string;
+		System.out.println(valid_visitorname);
+		
 		Prospect.getvisitordate().sendKeys(visitordate);
-		Prospect.getIntime().click(); // Click on InTime
-		Prospect.getOk().click(); // Click on Ok for time selection
-		Prospect.getouttime().click(); // Click on OutTime
-		Prospect.getOk().click(); // Click on Ok for time selection
+		
+		Prospect.getIntime().click(); //Click on InTime
+		Prospect.getOk().click(); //Click on Ok for time selection
+		
+		Prospect.getouttime().click(); //Click on OutTime
+		Prospect.getOk().click(); //Click on Ok for time selection
+		
 		Prospect.getNextfollowUpDT().sendKeys(NextfollowUpDT);
+		
 		Prospect.getreferencedBy().sendKeys(referencedBy);
-		Prospect.getAttendee(Attende); // Required Field
-		Prospect.getContactNo().sendKeys(ContactNo); // Required Field
+		//Referenced By Text Data Validation ---------------------------------
+		valid_string = validateText(referencedBy,"ReferencedBy", 5, 30);
+		String valid_referancedby = valid_string;
+		System.out.println(valid_referancedby);		
+		
+		Prospect.getAttendee(Attende); //Required Field
+		
+		Prospect.getContactNo().sendKeys(ContactNo); //Required Field
+		//Contact No Number Validation ---------------------------------
+		valid_string = valid_number(ContactNo, "InquiryContactNo");
+		String valid_contactno = valid_string;
+		System.out.println(valid_contactno);
+		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Prospect Form");
+		
 		Prospect.getEmail().sendKeys(Email);
+		//Email Validation ---------------------------------
+		valid_string = valid_EMail(Email, "InquiryEmail");
+		String valid_email = valid_string;
+		System.out.println(valid_email);		
+		
 		Prospect.getAddress().sendKeys(Address);
+		//Adress Alphanumeric  Validation ---------------------------------
+		valid_string = valid_alphanum(Address, "InquiryAddress", 10);
+		String valid_address = valid_string;
+		System.out.println(valid_address);
+		
 		Prospect.getRemarks().sendKeys(Remarks);
+		//Remarks Text Data Validation ---------------------------------
+		valid_string = validateText(Remarks,"Remarks", 5, 10);
+		String valid_remarks = valid_string;
+		System.out.println(valid_remarks);
+		
 		Prospect.getrequirement().sendKeys(Requirement);
+	
 		Prospect.getstatus(Status);
-		Prospect.getunitdropdown(unitD); // Required Field
-		Prospect.getSelectFlat(Selectflat); // Required Field
+		Prospect.getunitdropdown(unitD); //Required Field
+		Prospect.getSelectFlat(Selectflat); //Required Field
 
 		Thread.sleep(2000);
 		Prospect.getsave().click();
+		
+		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_referancedby, "1ReferencedBy is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
+		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
+		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertAll();
 	}
 
 	//Editing an Existing Prospect using Data Provider
 	@Test(dataProvider = "ProspectEditData")
 	public void Edit_Prospect(String newContactNo, String newEmail, String newAddress,
-			String newRemarks, String newRequirement, String newStatus) throws InterruptedException {
-
+			String newRemarks, String newRequirement, String newStatus) throws InterruptedException, IOException{
+        SoftAssert softAssert = new SoftAssert();
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getEdit();
 
 		Prospect.getContactNo().clear();
 		Prospect.getContactNo().sendKeys(newContactNo);
+		//Contact No Number Validation ---------------------------------
+		String valid_contactno = valid_number(newContactNo, "ProspectContactNo");
+		System.out.println(valid_contactno);
+		
 		Prospect.getEmail().clear();
 		Prospect.getEmail().sendKeys(newEmail);
+		//Email Validation ---------------------------------
+		String valid_email = valid_EMail(newEmail, "ProspectEmail");
+		System.out.println(valid_email);
+		
 		Prospect.getAddress().clear();
 		Prospect.getAddress().sendKeys(newAddress);
+		//Adress Alphanumeric  Validation ---------------------------------
+		String valid_address = valid_alphanum(newAddress, "ProspectAddress", 10);
+		System.out.println(valid_address);
+		
 		Prospect.getRemarks().clear();
 		Prospect.getRemarks().sendKeys(newRemarks);
+		//Remarks Text Data Validation ---------------------------------
+		String valid_remarks = validateText(newRemarks, "Remarks", 5, 10);
+		System.out.println(valid_remarks);
+				
 		Prospect.getrequirement().clear();
 		Prospect.getrequirement().sendKeys(newRequirement);
 		Prospect.getstatus(newStatus);
 		Thread.sleep(2000);
 		Prospect.getsave().click();
+		
+		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
+		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
+		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertAll();
 	}
 
 	//Delete Prospect
@@ -228,11 +298,11 @@ public class ProspectTest extends base {
 		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
 		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
 
-		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In time is required.']"));
-		softAssert.assertEquals(Intime.getText(), "In time is required.");
+		WebElement Intime =driver.findElement(By.xpath("//span[normalize-space()='In Time is required.']"));
+		softAssert.assertEquals(Intime.getText(), "In Time is required.");
 
-		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out time is required.']"));
-		softAssert.assertEquals(Outtime.getText(), "Out time is required.");
+		WebElement Outtime =driver.findElement(By.xpath("//span[normalize-space()='Out Time is required.']"));
+		softAssert.assertEquals(Outtime.getText(), "Out Time is required.");
 
 		WebElement Attedee =driver.findElement(By.xpath("//span[normalize-space()='Attendee is required.']"));
 		softAssert.assertEquals(Attedee.getText(), "Attendee is required.");

@@ -39,49 +39,49 @@ public class EmployeeTest extends base {
 	}
 
 	//Add Employee with All Modules - All Roles
-	@Test(dataProvider="EmployeeAddData")
+	@Test(dataProvider="EmployeeAddDataAllRoles")
 	public void Add_Employee_All_Roles(String profileImg,String Firstname,String Midllename,String Lastname,String Username,String designation,
 			String dob,String email,String Role,String City,String State,String mobileno,String password,String address,String Project,
 			String Adharcard,String pancard) throws InterruptedException {
-
-			EmployeePage employee = new EmployeePage(driver);
-
 		SoftAssert softAssert = new SoftAssert();
-		
+		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
 		employee.Nextbtn().click();
-
 		employee.getProfileImg().sendKeys(profileImg);
+		
 		softAssert.assertFalse(Firstname.isEmpty(), "First name is required.");
 		softAssert.assertNotNull(Firstname, "First name cannot be null.");
-		employee.getfname().sendKeys(Firstname);// Required Field
-		
+		employee.getfname().sendKeys(Firstname);//Required Field
+	    //First Name Data Validation
 		String valid_string = valid_text(Firstname, "firstname");
 		String valid_firstname = valid_string;
 		System.out.println(valid_firstname);
-		employee.getmname().sendKeys(Midllename);
 		
+		employee.getmname().sendKeys(Midllename);
+		//Middle Name Data Validation
 		String valid_string1 = valid_text(Midllename, "middlename");
 		String valid_middlename = valid_string1;
 		System.out.println(valid_middlename);
 
 		softAssert.assertFalse(Lastname.isEmpty(), "Last name is required.");
 		softAssert.assertNotNull(Lastname, "Last name cannot be null.");
-		employee.getlname().sendKeys(Lastname);// Required Field
-		
+		employee.getlname().sendKeys(Lastname);//Required Field
+		//Last Name Data Validation
 		String valid_string2 = valid_text(Lastname, "lastname");
 		String valid_Lastname = valid_string2;
 		System.out.println(valid_Lastname);
 
 		employee.getUserName().sendKeys(Username);
+		//User Name Data Validation
 		String valid_string3 = valid_text(Username, "username");
 		String valid_username = valid_string3;
 		System.out.println(valid_username);
 
 		softAssert.assertFalse(designation.isEmpty(), "Designation is required.");
 		softAssert.assertNotNull(designation, "Designation cannot be null.");
-		employee.getDesignation().sendKeys(designation);// Required Field
+		employee.getDesignation().sendKeys(designation);//Required Field
+		//Designation Data Validation
 		String valid_string4 = valid_text(designation, "Designation");
 		String valid_designation = valid_string4;
 		System.out.println(valid_designation);
@@ -92,43 +92,39 @@ public class EmployeeTest extends base {
 		softAssert.assertNotNull(email, "Email cannot be null.");
 		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 		softAssert.assertTrue(email.matches(emailRegex), "Invalid email format.");
-		employee.getEmail().sendKeys(email);// Required Field
-		
+		employee.getEmail().sendKeys(email);//Required Field
+		//Email Validation
 		String valid_string5 = valid_EMail(email, "Email");
 		String valid_emailid= valid_string5;
 		System.out.println(valid_emailid);
 
 		employee.getRoles(Role);
 		employee.getcity().sendKeys(City);
-		
+		//City Data Validation
 		String valid_string6 = valid_text(City, "city");
 		String valid_city = valid_string6;
 		System.out.println(valid_city);
 
 		softAssert.assertFalse(State.isEmpty(), "State is required.");
 		softAssert.assertNotNull(State, "State cannot be null.");
-		employee.getstate(State);// Required Field
-		
-
-
+		employee.getstate(State);//Required Field
+	
 		softAssert.assertFalse(mobileno.isEmpty(), "Mobile number is required.");
 		softAssert.assertNotNull(mobileno, "Mobile number cannot be null.");
-		employee.getMobileno().sendKeys(mobileno);// Required Field
-		
-              
+		employee.getMobileno().sendKeys(mobileno);//Required Field
+	    //Mobile no Data Validation
 		String valid_string8 = valid_number(mobileno, "Contactnumber");
 		String valid_contactnumber = valid_string8;
 		System.out.println(valid_contactnumber);
 
 		employee.getPassword().sendKeys(password);
-		
+		//Password Data Validation
 		String valid_string9 = valid_alphanum(password, "password", 10);
 		String valid_password = valid_string9;
 		System.out.println(valid_password);
 		
-		
 		employee.getAddress().sendKeys(address);
-		
+	    //Address Data Validation	
 		String valid_string10 = valid_alphanum(address, "ADDRESS", 40);
 		String valid_address = valid_string10;
 		System.out.println(valid_address);
@@ -137,34 +133,21 @@ public class EmployeeTest extends base {
 
 		softAssert.assertFalse(Adharcard.isEmpty(), "Aadhar card file path is required.");
 		softAssert.assertNotNull(Adharcard, "Aadhar card file path cannot be null.");
-		employee.uploadAdharCard().sendKeys(Adharcard);// Required Field
+		employee.uploadAdharCard().sendKeys(Adharcard);//Required Field
 
 		softAssert.assertFalse(pancard.isEmpty(), "PAN card is required.");
 		softAssert.assertNotNull(pancard, "PAN card cannot be null.");
-		employee.getPancard().sendKeys(pancard);// Required Field
+		employee.getPancard().sendKeys(pancard);//Required Field
 
 		WebElement genderElement = employee.SelectGender();
 		softAssert.assertTrue(genderElement.isEnabled(), "Gender selection is required but not enabled.");
 		genderElement.click();
-		employee.SelectGender().click();// Required Field
+		employee.SelectGender().click();//Required Field
 
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 		
-		// data validation soft assert:
-		 softAssert.assertEquals(valid_firstname, "Firstname is a  valid text");
-		 softAssert.assertEquals(valid_middlename,"middlename is a valid text");
-		 softAssert.assertEquals(valid_Lastname,  "Lastname is a valid text");
-		 softAssert.assertEquals(valid_username, "username is a valid text");
-		 softAssert.assertEquals(valid_designation, "Designation is a text");
-		 softAssert.assertEquals(valid_emailid, "Email is a valid text");
-		 softAssert.assertEquals(valid_city, "city is a valid text");
-		 softAssert.assertEquals(valid_contactnumber, "contactname is a valid");
-		 softAssert.assertEquals(valid_password, "password is a Valid Alpha-Numeric");
-		 softAssert.assertEquals(valid_address, "address is a Valid Alpha-Numeric");
-		
-		// employee.Shownumber().click();
-		
+		//employee.Shownumber().click();
 		
 		employee.Empradiobtn().click();
 		employee.Projectradiobtn().click();
@@ -176,28 +159,35 @@ public class EmployeeTest extends base {
 		employee.Bookingsradiobtn().click();
 		employee.Documentsradiobtn().click();
 
-
 		Thread.sleep(2000);
 		employee.Createbtn().click();
-
+		
+		//Data validation soft assert
+		softAssert.assertEquals(valid_firstname, "Firstname is a  valid text");
+		softAssert.assertEquals(valid_middlename,"middlename is a valid text");
+		softAssert.assertEquals(valid_Lastname,  "Lastname is a valid text");
+		softAssert.assertEquals(valid_username, "username is a valid text");
+		softAssert.assertEquals(valid_designation, "Designation is a text");
+		softAssert.assertEquals(valid_emailid, "Email is a valid text");
+		softAssert.assertEquals(valid_city, "city is a valid text");
+		softAssert.assertEquals(valid_contactnumber, "contactname is a valid");
+		softAssert.assertEquals(valid_password, "password is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_address, "address is a Valid Alpha-Numeric");		
 		softAssert.assertAll();
 	}
 
 	private String valid_text(String firstname, String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	// Add Employee with All Modules - Only View
-	@Test(dataProvider = "EmployeeAddData")
+	//Add Employee with All Modules - Only View
+	@Test(dataProvider = "EmployeeAddDataOnlyView")
 	public void Add_Employee_Only_View(String profileImg, String Firstname, String Midllename, String Lastname,
 			String Username, String designation, String dob, String email, String Role, String City, String State,
 			String mobileno, String password, String address, String Project, String Adharcard, String pancard)
 			throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
-
 		employee.getaddemployee().click();
 		employee.getProfileImg().sendKeys(profileImg);
 		employee.getfname().sendKeys(Firstname);
@@ -218,230 +208,166 @@ public class EmployeeTest extends base {
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
 
-
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
+		
 		employee.EmpSelectbtn().click();
-		employee.EmpEntry().click();
-		employee.EmpModify().click();
-		employee.EmpRemove().click();
-		employee.EmpExport().click();
+		employee.EmpView().click();
 
 		employee.Projectselectbtn().click();
-		employee.ProjectEntry().click();
-		employee.ProjectModify().click();
-		employee.ProjectRemove().click();
-		employee.ProjectExport().click();
+		employee.ProjectView().click();
 
 		employee.Receiptselectbtn().click();
-		employee.ReceiptEntry().click();
-		employee.ReceiptModify().click();
-		employee.ReceiptRemove().click();
-		employee.ReceiptExport().click();
+		employee.ReceiptView().click();
 
 		employee.Collectionselectbtn().click();
-		employee.CollectionExport().click();
-
+		employee.CollectionView().click();
+		
 		employee.Customerselectbtn().click();
-		employee.CustomerExport().click();
-
-
+		employee.CustomerView().click();
+		
 		Thread.sleep(2000);
+		employee.InquirySelectbtn().click();
 		employee.InquiryEntry().click();
-		employee.InquiryModify().click();
-		employee.InquiryRemove().click();
-		employee.InquiryExport().click();
-
+		
 		employee.ProspectSelectbtn().click();
 		employee.ProspectView().click();
 
-		employee.BookingEntry().click();
-		employee.BookingModify().click();
-		employee.BookingRemove().click();
-		employee.BookingExport().click();
-		employee.ApproveReject().click();
-		employee.AllowBooking().click();
-
+		employee.BookingSelectBtn().click();
+		employee.BookingView().click();
+		
 		employee.DocumentSelectbtn().click();
-		employee.DocumentEntry().click();
-		employee.DocumentModify().click();
-		employee.DocumentRemove().click();
-		employee.DocumentExport().click();
-
-
+		employee.DocumentView().click();
+		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();
 	}
 
-	// Add Employee with All Modules - Only Add
-	@Test(dataProvider = "EmployeeAddData")
+	//Add Employee with All Modules - Only Add
+	@Test(dataProvider = "EmployeeAddDataOnlyAdd")
 	public void Add_Employee_Only_Add(String profileImg, String Firstname, String Midllename, String Lastname,
 			String Username, String designation, String dob, String email, String Role, String City, String State,
 			String mobileno, String password, String address, String Project, String Adharcard, String pancard)
 			throws InterruptedException {
+		
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
-
 		employee.getaddemployee().click();
 		employee.getProfileImg().sendKeys(profileImg);
 		employee.getfname().sendKeys(Firstname);
 		employee.getmname().sendKeys(Midllename);
-		
-
 		employee.getlname().sendKeys(Lastname);
-		
 		employee.getUserName().sendKeys(Username);
-		
-
 		employee.getDesignation().sendKeys(designation);
-		
-
 		employee.getDOB().sendKeys(dob);
 		employee.getEmail().sendKeys(email);
-		
-
 		employee.getRoles(Role);
 		employee.getcity().sendKeys(City);
-		
-
 		employee.getstate(State);
 		employee.getMobileno().sendKeys(mobileno);
-		
-
-
 		employee.getPassword().sendKeys(password);
-		
-
 		employee.getAddress().sendKeys(address);
-		
-
 		employee.getProjectAccess(Project);
-
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
-
 		employee.SelectGender().click();
-
 
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 
 		employee.EmpSelectbtn().click();
-		employee.EmpModify().click();
-		employee.EmpRemove().click();
-		employee.EmpExport().click();
-
+		employee.EmpEntry().click();
+		
 		employee.Projectselectbtn().click();
-		employee.ProjectModify().click();
-		employee.ProjectRemove().click();
-		employee.ProjectExport().click();
-
+		employee.ProjectEntry().click();
+		
 		employee.Receiptselectbtn().click();
-		employee.ReceiptModify().click();
-		employee.ReceiptRemove().click();
-		employee.ReceiptExport().click();
-
-		employee.Collectionselectbtn().click();
-		employee.CollectionExport().click();
-
-		employee.Customerselectbtn().click();
-		employee.CustomerExport().click();
-
-		employee.InquiryModify().click();
-		employee.InquiryRemove().click();
-		employee.InquiryExport().click();
-
+		employee.ReceiptEntry().click();
+		
+		employee.InquirySelectbtn().click();
+		employee.InquiryEntry().click();
+		
 		employee.ProspectSelectbtn().click();
-		employee.ProspectView().click();
 		employee.ProspectEntry().click();
-
-		employee.BookingModify().click();
-		employee.BookingRemove().click();
-		employee.BookingExport().click();
-		employee.ApproveReject().click();
-		employee.AllowBooking().click();
-
+		
+		employee.BookingSelectBtn().click();
+		employee.BookingEntry().click();
+		
 		employee.DocumentSelectbtn().click();
 		employee.DocumentView().click();
-		employee.DocumentEntry().click();
-
-
+		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();
 	}
 
-	// Add Employee with All Modules - Only Edit
-	@Test(dataProvider = "EmployeeAddData")
-	public void Add_Employee_Only_Edit(String profileImg, String Firstname, String Midllename, String Lastname,
+	//Add Employee with All Modules - Only Edit
+	@Test(dataProvider = "EmployeeAddDataOnlyEdit")
+	public void Add_Employee_Only_Edit(String profileImg, String Firstname, String Middlename, String Lastname,
 			String Username, String designation, String dob, String email, String Role, String City, String State,
 			String mobileno, String password, String address, String Project, String Adharcard, String pancard)
 			throws InterruptedException, IOException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
-
 		employee.getaddemployee().click();
 		employee.getProfileImg().sendKeys(profileImg);
-		employee.getfname().sendKeys(Firstname);
 		
+		employee.getfname().sendKeys(Firstname);
+		//First Name Data Validation
 		String valid_string1 = validateText(Firstname, "Contactnumber",10, 20);
 		String valid_Firstname = valid_string1;
 		System.out.println(valid_Firstname);
 
-		employee.getmname().sendKeys(Midllename);
-		
-		String valid_string2 = validateText(Midllename, "middlename",10, 20);
+		employee.getmname().sendKeys(Middlename);
+		//Middle Name Data Validation
+		String valid_string2 = validateText(Middlename, "Middlename",10, 20);
 		String valid_middlename = valid_string2;
 		System.out.println(valid_middlename);
 
 		employee.getlname().sendKeys(Lastname);
-		
+		//Last Name Data Validation
 		String valid_string3 = validateText(Lastname, "lastname",10, 20);
 		String valid_Lastname = valid_string3;
 		System.out.println(valid_Lastname);
 
 		employee.getUserName().sendKeys(Username);
-		
+		//User Name Data Validation
 		String valid_string4 = validateText(Username, "username",5, 20);
 		String valid_username = valid_string4;
 		System.out.println(valid_username);
 
 		employee.getDesignation().sendKeys(designation);
-		
-		String valid_string5 = valid_alphanum(Username, "username", 20);
-		String valid_designation = valid_string5;
-		System.out.println(valid_designation);
 		employee.getDOB().sendKeys(dob);
-		employee.getEmail().sendKeys(email);
 		
+		employee.getEmail().sendKeys(email);
+		//Email Validation
 		String valid_string6 = valid_EMail(email, "username");
 		String valid_email = valid_string6;
 		System.out.println(valid_email);
 		
 		employee.getRoles(Role);
+		
 		employee.getcity().sendKeys(City);
-
+        //City Data Validation
 		String valid_string7= validateText(City, "city", 5, 15);
 		String valid_city = valid_string7;
 		System.out.println(valid_city);
 		
 		employee.getstate(State);
-		employee.getMobileno().sendKeys(mobileno);
 		
+		employee.getMobileno().sendKeys(mobileno);
+		//Mobile No Data Validation
 		String valid_string8= valid_number(mobileno, "number");
 		String valid_mobilenumber = valid_string8;
 		System.out.println(valid_mobilenumber);
 		
-		
 		employee.getPassword().sendKeys(password);
-
+        //Password Data Validation
 		String valid_string9= valid_alphanumeric(password, "Password");
 		String valid_password = valid_string9;
 		System.out.println(valid_password);
 		
-		
 		employee.getAddress().sendKeys(address);
+		//Address Data Validation
 		String valid_string10= valid_alphanumeric(address, "Address");
 		String valid_Address = valid_string10;
 		System.out.println(valid_Address);
@@ -451,61 +377,49 @@ public class EmployeeTest extends base {
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
 
-
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 
 		employee.EmpSelectbtn().click();
-		employee.EmpEntry().click();
-		employee.EmpRemove().click();
-		employee.EmpExport().click();
-
+		employee.EmpModify().click();
+		
+		employee.Projectselectbtn().click();
+		employee.ProjectModify().click();
+		
 		employee.Receiptselectbtn().click();
-		employee.ReceiptEntry().click();
-		employee.ReceiptRemove().click();
-		employee.ReceiptExport().click();
-
-		employee.InquiryEntry().click();
-		employee.InquiryRemove().click();
-		employee.InquiryExport().click();
-
+		employee.ReceiptModify().click();
+		
+		employee.InquirySelectbtn().click();
+        employee.InquiryModify().click();
+		
 		employee.ProspectSelectbtn().click();
-		employee.ProspectEntry().click();
-		employee.ProspectRemove().click();
-		employee.ProspectExport().click();
-		employee.ProspectFollowUp().click();
+		employee.ProspectModify().click();
 
-		employee.BookingEntry().click();
-		employee.BookingRemove().click();
-		employee.BookingExport().click();
-		employee.ApproveReject().click();
-		employee.AllowBooking().click();
-
+		employee.BookingSelectBtn().click();
+		employee.BookingModify().click();
+		
 		employee.DocumentSelectbtn().click();
-		employee.DocumentEntry().click();
-		employee.DocumentRemove().click();
-		employee.DocumentExport().click();
-
+		employee.DocumentModify().click();
+		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();
 	}
 
 	private String valid_alphanumeric(String mobileno, String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	// Add Employee with All Modules - Only Delete
-	@Test(dataProvider = "EmployeeAddData")
+	//Add Employee with All Modules - Only Delete
+	@Test(dataProvider = "EmployeeAddDataOnlyDelete")
 	public void Add_Employee_Only_Delete(String profileImg, String Firstname, String Midllename, String Lastname,
 			String Username, String designation, String dob, String email, String Role, String City, String State,
 			String mobileno, String password, String address, String Project, String Adharcard, String pancard)
 			throws InterruptedException {
+		
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
-
 		employee.getaddemployee().click();
+		
 		employee.getProfileImg().sendKeys(profileImg);
 		employee.getfname().sendKeys(Firstname);
 		employee.getmname().sendKeys(Midllename);
@@ -525,92 +439,93 @@ public class EmployeeTest extends base {
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
 
-
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
-
 		employee.EmpSelectbtn().click();
-		employee.EmpEntry().click();
-		employee.EmpModify().click();
-		employee.EmpExport().click();
-
+		employee.EmpRemove().click();
+		
+		employee.Projectselectbtn().click();
+		employee.ProjectRemove().click();
+		
 		employee.Receiptselectbtn().click();
-		employee.ReceiptEntry().click();
-		employee.ReceiptModify().click();
-		employee.ReceiptExport().click();
-
-		employee.InquiryEntry().click();
-		employee.InquiryModify().click();
-		employee.InquiryExport().click();
-
+		employee.ReceiptRemove().click();
+		
+		employee.InquirySelectbtn().click();
+        employee.InquiryRemove().click();
+		
 		employee.ProspectSelectbtn().click();
 		employee.ProspectRemove().click();
 
-		employee.BookingEntry().click();
-		employee.BookingModify().click();
-		employee.BookingExport().click();
-		employee.ApproveReject().click();
-		employee.AllowBooking().click();
-
+		employee.BookingSelectBtn().click();
+		employee.BookingRemove().click();
+		
 		employee.DocumentSelectbtn().click();
-		employee.DocumentEntry().click();
-		employee.DocumentModify().click();
-		employee.DocumentExport().click();
-
+		employee.DocumentRemove().click();
 
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();
 	}
 
-	// Edit Employee and Active Employee
+	//Edit Employee
 	@Test(dataProvider = "EmployeeEditData")
 	public void Edit_Employee(String Firstname, String Midllename, String designation, String newemail,
 			String newmobileno) throws InterruptedException {
-
-		EmployeePage employee = new EmployeePage(driver);
+		
 		SoftAssert softAssert = new SoftAssert();
-
+		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys(Firstname + Keys.ENTER);// Required Field
+		employee.getSearch().sendKeys(Firstname + Keys.ENTER);//Required Field
 
 		employee.getEdit().click();
-
 
 		employee.getmname().clear();
 		employee.getmname().sendKeys(Midllename);
 
-
 		employee.getDesignation().clear();
-		employee.getDesignation().sendKeys(designation);// Required Field
+		employee.getDesignation().sendKeys(designation);//Required Field
 
+		//Email Validation
 		employee.getEmail().clear();
 		softAssert.assertFalse(newemail.isEmpty(), "Email is required.");
 		softAssert.assertNotNull(newemail, "Email cannot be null.");
 		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 		softAssert.assertTrue(newemail.matches(emailRegex), "Invalid email format.");
-		employee.getEmail().sendKeys(newemail);// Required Field
+		employee.getEmail().sendKeys(newemail);//Required Field
 
 		employee.getMobileno().clear();
 		softAssert.assertFalse(newmobileno.isEmpty(), "Mobile number is required.");
 		softAssert.assertNotNull(newmobileno, "Mobile number cannot be null.");
-		employee.getMobileno().sendKeys(newmobileno);// Required Field
-
-		Thread.sleep(2000);
-		employee.getActiveEmployee().click();
+		employee.getMobileno().sendKeys(newmobileno);//Required Field
 
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
 
 		Thread.sleep(2000);
 		employee.getUpdate().click();
+		softAssert.assertAll();
 	}
+	
+	//Active Inactive Employee
+	@Test(dataProvider = "ActiveInactiveEmployee")
+	public void Active_Inactive_Employee(String Firstname) throws InterruptedException {
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+		employee.getSearch().sendKeys(Firstname + Keys.ENTER);//Required Field
 
-	// Delete Employee
+		employee.getEdit().click();
+		Thread.sleep(2000);
+		employee.getActiveEmployee().click();
+		Thread.sleep(2000);
+		employee.Nextbtn().click();
+		Thread.sleep(2000);
+		employee.getUpdate().click();
+	}
+	
+	//Delete Employee
 	@Test(dataProvider = "EmployeeDeleteData")
 	public void Delete_Employee(String Firstname) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
-
 		employee.getEmployee().click();
 		employee.getSearch().sendKeys(Firstname + Keys.ENTER);
 		employee.deleteEmployee().click();
@@ -619,7 +534,7 @@ public class EmployeeTest extends base {
 		employee.getClickYes().click();
 	}
 
-	// Search Employee
+	//Search Employee
 	@Test(dataProvider = "EmployeeSearchData")
 	public void Search_Employee(String Firstname) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
@@ -629,23 +544,21 @@ public class EmployeeTest extends base {
 		employee.getSearch().sendKeys(Firstname + Keys.ENTER);
 	}
 
-	// Designation Apply Filter
+	//Designation Apply Filter
 	@Test(dataProvider = "EmployeefilterData")
 	public void Apply_Filter(String Filter) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-
 		Thread.sleep(2000);
 		employee.Applyfilter(Filter);
 	}
 
-	// Export to Excel Employee
+	//Export to Excel Employee
 	@Test()
 	public void Export_To_Excel_Employee() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
 
 		Thread.sleep(2000);
 		employee.ExporttoExcel().click();
@@ -697,21 +610,20 @@ public class EmployeeTest extends base {
 		employee.getEmployee().click();
 		employee.getSearch().sendKeys(Firstname+ Keys.ENTER);
 		employee.getEdit().click();
-
-		employee.getfname().sendKeys(Keys.END);
-		for(int i=1;i<=10;i++)
-		{
+		
+		int fname  = employee.getfname().getAttribute("value").length();
+		for (int i = 0; i < fname ; i++) {
 			employee.getfname().sendKeys(Keys.BACK_SPACE);
 		}
-		employee.getlname().click();
-		for (int i = 0; i < 4; i++) {
+		
+		int lname=employee.getlname().getAttribute("value").length();
+		for (int i = 0; i < lname ; i++) {
 			employee.getlname().sendKeys(Keys.BACK_SPACE);
 		}
 
 		employee.getEmail().sendKeys(Keys.END);
 		String emailText = employee.getEmail().getAttribute("value");
 		int emailLength = emailText.length();
-
 		for (int i = 0; i < emailLength; i++) {
 			employee.getEmail().sendKeys(Keys.BACK_SPACE);
 		}
@@ -719,7 +631,6 @@ public class EmployeeTest extends base {
 		employee.getMobileno().sendKeys(Keys.END);
 		String mobiletext=employee.getMobileno().getAttribute("value");
 		int mobileLength=mobiletext.length();
-
 		for (int i = 0; i < mobileLength; i++) {
 			employee.getMobileno().sendKeys(Keys.BACK_SPACE);
 		}
@@ -826,51 +737,98 @@ public class EmployeeTest extends base {
 		}
 	}
 	
-	
-
 	//Close the driver
 	@AfterMethod()
 	public void teardown() {
 		//driver.close();
 	}
 
-	// DataProvider for Add Employee
+	//DataProvider for Add Employee All Roles
 	@DataProvider
-	public Object[][] EmployeeAddData() {
-		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "Automation", "QA", "Test",
-				"Automation", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+	public Object[][] EmployeeAddDataAllRoles() {
+		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpAll", "QAST", "Test",
+				"AutomationAll", "SDET", "06/09/2006", "akash2024@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+				"Sit@321#", "Ambli,Bopal gam", " marin drive lake view ",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
+	}
+	
+	//DataProvider for Add Employee Only View
+	@DataProvider
+	public Object[][] EmployeeAddDataOnlyView() {
+		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpView", "QA", "Test",
+				"AutomationView", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 				"Sit@321#", "Ambli,Bopal gam", " marin drive lake view ",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
 	}
 
-	// DataProvider for Edit Employee
+	//DataProvider for Add Employee Only Add
+	@DataProvider
+	public Object[][] EmployeeAddDataOnlyAdd() {
+		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpAdd", "QA", "Test",
+				"AutomationAdd", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+				"Sit@321#", "Ambli,Bopal gam", " marin drive lake view ",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
+	}
+
+	//DataProvider for Add Employee Only Edit
+	@DataProvider
+	public Object[][] EmployeeAddDataOnlyEdit() {
+		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpEdit", "QA", "Test",
+			"AutomationEdit", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+			"Sit@321#", "Ambli,Bopal gam", " marin drive lake view ",
+			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
+			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
+	}
+	
+	//DataProvider for Add Employee Only Delete
+	@DataProvider
+	public Object[][] EmployeeAddDataOnlyDelete() {
+		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpDelete", "QA", "Test",
+			"AutomationDelete", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+			"Sit@321#", "Ambli,Bopal gam", " marin drive lake view ",
+			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
+			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
+	}
+	
+	//DataProvider for Edit Employee
 	@DataProvider
 	public Object[][] EmployeeEditData() {
 		return new Object[][] {
-				// Firstname, Middlename, Designation, Email, Mobile no
+			     //Firstname, Middlename, Designation, Email, Mobile no
 				{ "Automation", "QAT", "SDET", "akash2024@mail.com", "9806547854" } };
 	}
 
-	// DataProvider for Search Employee
+	//DataProvider for Search Employee
 	@DataProvider
 	public Object[][] EmployeeSearchData() {
 		return new Object[][] {
-				// Firstname
-				{ "Abhimanyu" } };
+				//Firstname
+				{ "Automation Test" } };
 	}
 
-	// DataProvider for Apply Filter for Employee
+	//DataProvider for Apply Filter for Employee
 	@DataProvider
 	public Object[][] EmployeefilterData() {
 		return new Object[][] { { " Developer " } };
 	}
-
-	// DataProvider for Delete Employee
+	
+	//DataProvider for Active Inactive Employee
+	@DataProvider
+	public Object[][] ActiveInactiveEmployee() {
+		return new Object[][] {
+				//Firstname
+				{ "Automation Test" } };
+	}
+	
+	//DataProvider for Delete Employee
 	@DataProvider
 	public Object[][] EmployeeDeleteData() {
 		return new Object[][] {
-				// Firstname
-				{ "Abhimanyu" } };
+				//Firstname
+				{ "Automation Test" } };
 	}
+	
 }
