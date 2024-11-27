@@ -57,7 +57,7 @@ public class InquiryTest extends base {
 		
 		Inquiry.getvisitorname().sendKeys(visitorname);
 		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
-		//Visitor Name Text Data Validation ---------------------------------
+		//Visitor Name Text Data Validation
 		String valid_string = validateText(visitorname,"VisitorName", 5, 30);
 		String valid_visitorname = valid_string;
 		System.out.println(valid_visitorname);
@@ -66,12 +66,12 @@ public class InquiryTest extends base {
 		Inquiry.getOk().click(); //Click on Ok time
 
 		Inquiry.getouttime().click(); //Click on OutTime Required fields
-		Inquiry.getOk().click(); // Click on Ok time
+		Inquiry.getOk().click(); //Click on Ok time
 
 		Inquiry.getNextfollowUpDT().sendKeys(NextfollowUpDT);
 		
 		Inquiry.getreferencedBy().sendKeys(referencedBy);
-		//ReferencedBy  Text Data Validation ---------------------------------
+		//ReferencedBy  Text Data Validation 
 		valid_string = validateText(referencedBy,"ReferencedBy", 5, 30);
 		String valid_referancedby = valid_string;
 		System.out.println(valid_referancedby);
@@ -79,26 +79,26 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);		
 		Inquiry.getAttendee(Attende);
 		Inquiry.getContactNo().sendKeys(ContactNo);
-		//ContactNo Number Validation ---------------------------------
+		//ContactNo Number Validation
 		valid_string = valid_number(ContactNo, "InquiryContactNo");
 		String valid_contactno = valid_string;
 		System.out.println(valid_contactno);
 		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Inquiry");
 
 		Inquiry.getEmail().sendKeys(Email);
-		//Email Validation ---------------------------------
+		//Email Validation
 		valid_string = valid_EMail(Email, "InquiryEmail");
 		String valid_email = valid_string;
 		System.out.println(valid_email);
 				
 		Inquiry.getAddress().sendKeys(Address);
-		//Adress Alphanumeric  Validation ---------------------------------
+		//Adress Alphanumeric  Validation
 		valid_string = valid_alphanum(Address, "InquiryAddress", 10);
 		String valid_address = valid_string;
 		System.out.println(valid_address);
 				
 		Inquiry.getRemarks().sendKeys(Remarks);
-		//Remarks  Text Data Validation ---------------------------------
+		//Remarks  Text Data Validation
 		valid_string = validateText(Remarks,"Remarks", 5, 10);
 		String valid_remarks = valid_string;
 		System.out.println(valid_remarks);
@@ -132,7 +132,7 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getvisitorname().clear();
 		Inquiry.getvisitorname().sendKeys(newvisitorname);
-		//Visitor Name Text Data Validation ---------------------------------
+		//Visitor Name Text Data Validation
 		String valid_string = validateText(newvisitorname,"VisitorName", 5, 30);
 		String valid_visitorname = valid_string;
 		System.out.println(valid_visitorname);
@@ -140,7 +140,7 @@ public class InquiryTest extends base {
 		
 		Inquiry.getContactNo().clear();
 		Inquiry.getContactNo().sendKeys(newContactNo);
-		//ContactNo Number Validation ---------------------------------
+		//ContactNo Number Validation
 		valid_string = valid_number(newContactNo, "InquiryContactNo");
 		String valid_contactno = valid_string;
 		System.out.println(valid_contactno);
@@ -148,7 +148,7 @@ public class InquiryTest extends base {
 
 		Inquiry.getEmail().clear();
 		Inquiry.getEmail().sendKeys(newEmail);
-		//Email Validation ---------------------------------
+		//Email Validation
 		valid_string = valid_EMail(newEmail, "InquiryEmail");
 		String valid_email = valid_string;
 		System.out.println(valid_email);
@@ -156,14 +156,14 @@ public class InquiryTest extends base {
 		
 		Inquiry.getAddress().clear();
 		Inquiry.getAddress().sendKeys(newAddress);
-		//Adress Alphanumeric  Validation ---------------------------------
+		//Adress Alphanumeric  Validation
 		valid_string = valid_alphanum(newAddress, "InquiryAddress",10);
 		String valid_address = valid_string;
 		System.out.println(valid_address);
 				
 		Inquiry.getRemarks().clear();
 		Inquiry.getRemarks().sendKeys(newRemarks);
-		//Remarks  Text Data Validation ---------------------------------
+		//Remarks  Text Data Validation
 		valid_string = validateText(newRemarks,"Remarks", 5, 10);
 		String valid_remarks = valid_string;
 		System.out.println(valid_remarks);
@@ -273,11 +273,6 @@ public class InquiryTest extends base {
 		}else {
 			System.out.println("Vistor name is missed");
 		}
-		
-		//Inquiry.getEdit();
-
-		//Thread.sleep(2000);
-		//Inquiry.getsave().click();
 	}
 
 	//Missing Follow up for click,Search & Edit
@@ -298,13 +293,9 @@ public class InquiryTest extends base {
 		}else {
 			System.out.println("Vistor name is missed");
 		}
-		//Inquiry.getEdit();
-
-		//Thread.sleep(2000);
-		//Inquiry.getUpdate().click();
 	}
 
-	//Add To Prospect
+	//Add To Prospect Inquiry
 	@Test(dataProvider = "InquiryaddprospectData")
 	public void Add_Prospect_Inquiry(String unitD, String Selectflat) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
@@ -399,12 +390,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Add Inactive Attendee Inquiry
-	@Test()
-	public void Verify_Add_Inactive_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="AddInactiveAttendee")
+	public void Verify_Add_Inactive_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(employeename +Keys.ENTER);
 		employee.getEdit().click();
 
 		employee.getActiveEmployee().click();
@@ -425,10 +416,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendee))
 			{
 				Assert.assertFalse(false, "Attende is inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -444,12 +435,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Add Active Attendee Inquiry
-	@Test()
-	public void Verify_Add_Active_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="AddActiveAttendee")
+	public void Verify_Add_Active_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(employeename+Keys.ENTER);
 		employee.getEdit().click();
 
 		employee.getActiveEmployee().click();
@@ -470,10 +461,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendee))
 			{
 				Assert.assertTrue(true, "Attende is Active.");
-				//System.out.println("Test  Pass");
+				//System.out.println("Test Pass");
 				break;
 			}
 			else
@@ -490,12 +481,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Inactive Attendee Inquiry
-	@Test()
-	public void Verify_Edit_Inactive_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="EditInactiveAttendee")
+	public void Verify_Edit_Inactive_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(employeename+Keys.ENTER);
 		employee.getEdit().click();
 
 		employee.getActiveEmployee().click();
@@ -516,10 +507,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendee))
 			{
 				Assert.assertFalse(false, "Attende is inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -535,12 +526,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Attendee Inquiry
-	@Test()
-	public void Verify_Edit_Active_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="EditActiveAttendee")
+	public void Verify_Edit_Active_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(employeename+Keys.ENTER);
 		employee.getEdit().click();
 
 		employee.getActiveEmployee().click();
@@ -561,10 +552,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendee))
 			{
 				Assert.assertTrue(true, "Attende is Active.");
-				//System.out.println("Test  Pass");
+				//System.out.println("Test Pass");
 				break;
 			}
 			else
@@ -582,11 +573,12 @@ public class InquiryTest extends base {
 
 	//Active Inactive Inquiry Status
 	//Verify Add Inactive Inquiry Status
-	@Test()
-	public void Verify_Add_Inactive_Inquiry_Status() throws InterruptedException {
+	@Test(dataProvider="AddInactiveInquiryStatus")
+	public void Verify_Add_Inactive_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
 		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(Statusname+Keys.ENTER);
 		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
 		Inquirystatus.getInquiryActiveInactive().click();
@@ -603,10 +595,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("Akash Inquiry"))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Inquiry Status is inactive.");
-				System.out.println("Test Failed");
+				//System.out.println("Test Failed");
 				break;
 			}
 			else
@@ -622,11 +614,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Add Active Inquiry Status
-	@Test()
-	public void Verify_Add_Active_Inquiry_Status() throws InterruptedException {
+	@Test(dataProvider="AddActiveInquiryStatus")
+	public void Verify_Add_Active_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
 		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(Statusname+Keys.ENTER);
 		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
 		Inquirystatus.getInquiryActiveInactive().click();
@@ -643,10 +636,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Akash Inquiry"))
+			if(b.equalsIgnoreCase(Name))
 			{
 				Assert.assertTrue(true, "Inquiry Status is Active.");
-				System.out.println("Test Pass");
+				//System.out.println("Test Pass");
 				break;
 			}
 			else
@@ -662,11 +655,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Inactive Inquiry Status
-	@Test()
-	public void Verify_Edit_Inactive_Inquiry_Status() throws InterruptedException {
+	@Test(dataProvider="EditInactiveInquiryStatus")
+	public void Verify_Edit_Inactive_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
 		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(Statusname+Keys.ENTER);
 		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
 		Inquirystatus.getInquiryActiveInactive().click();
@@ -683,10 +677,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("Automation Test"))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Inquiry Status is inactive.");
-				System.out.println("Test failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -702,11 +696,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Inquiry Status
-	@Test()
-	public void Verify_Edit_Active_Inquiry_Status() throws InterruptedException {
+	@Test(dataProvider="EditActiveInquiryStatus")
+	public void Verify_Edit_Active_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
 		Inquirystatus.getInquirystatusclick().click();
+		Inquirystatus.getInquirystatussearched().sendKeys(Statusname+Keys.ENTER);
 		Inquirystatus.getEditInquirystatus().click();
 		Thread.sleep(2000);
 		Inquirystatus.getInquiryActiveInactive().click();
@@ -715,7 +710,7 @@ public class InquiryTest extends base {
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click(); 
-		Inquiry.getEdit().click();
+		Inquiry.getEdit();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='statusID']")).click();
 		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
@@ -723,10 +718,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Akash Inquiry"))
+			if(b.equalsIgnoreCase(Name))
 			{
 				Assert.assertTrue(true, "Inquiry Status is Active.");
-				System.out.println("Test Pass");
+				//System.out.println("Test Pass");
 				break;
 			}
 			else
@@ -742,19 +737,20 @@ public class InquiryTest extends base {
 		}
 	}
 	
+	//Inquiry Response Type
 	//Verify Edit Inactive Inquiry Response Type
-	@Test()
-	public void Verify_Edit_Inactive_Inquiry_response_Type() throws InterruptedException {
-		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
-		Iresponse.getconfiguration().click();
+	@Test(dataProvider="EditInactiveInquiryResponseType")
+	public void Verify_Edit_Inactive_Inquiry_Response_Type(String responsetype,String Name) throws InterruptedException {
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
 		Thread.sleep(2000);
-		Iresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryresponsesearched().sendKeys(responsetype+Keys.ENTER);
+		Inquiryresponse.getEditinquiryresponsetype().click();
 		Thread.sleep(2000);
-		Iresponse.getEditinquiryresponsetype().click();
+		Inquiryresponse.getInquiryActiveInactive().click();
 		Thread.sleep(2000);
-		Iresponse.getInquiryActiveInactive().click();
-		Thread.sleep(2000);
-		Iresponse.getEditinquiryresponsesave().click();
+		Inquiryresponse.getEditinquiryresponsesave().click();
 		Thread.sleep(2000);
 		
 		InquiryPage Inquiry = new InquiryPage(driver);
@@ -770,10 +766,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("Nishant"))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Inquiry Response Type is inactive.");
-				System.out.println("Test failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -789,18 +785,18 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Inquiry Response Type
-	@Test()
-	public void Verify_Edit_Active_Inquiry_Resposne_Type() throws InterruptedException {
-		InquiryResponsepage Iresponse = new InquiryResponsepage(driver);
-		Iresponse.getconfiguration().click();
+	@Test(dataProvider="EditActiveInquiryResponseType")
+	public void Verify_Edit_Active_Inquiry_Resposne_Type(String responsetype,String Name) throws InterruptedException {
+		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
+		Inquiryresponse.getconfiguration().click();
 		Thread.sleep(2000);
-		Iresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryresponsesearched().sendKeys(responsetype+Keys.ENTER);
+		Inquiryresponse.getEditinquiryresponsetype().click();
 		Thread.sleep(2000);
-		Iresponse.getEditinquiryresponsetype().click();
+		Inquiryresponse.getInquiryActiveInactive().click();
 		Thread.sleep(2000);
-		Iresponse.getInquiryActiveInactive().click();
-		Thread.sleep(2000);
-		Iresponse.getEditinquiryresponsesave().click();
+		Inquiryresponse.getEditinquiryresponsesave().click();
 		Thread.sleep(2000);
 		
 		InquiryPage Inquiry = new InquiryPage(driver);
@@ -816,10 +812,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("Nishant"))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Inquiry Response Type is Active.");
-				System.out.println("Test failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -836,11 +832,12 @@ public class InquiryTest extends base {
 
 	//Inquiry Communcation mode
 	//Verify Edit Inactive Inquiry Communcation mode
-	@Test()
-	public void Verify_Edit_Inactive_Inquiry_Communcation_mode() throws InterruptedException {
+	@Test(dataProvider="EditInactiveInquiryCommuncation")
+	public void Verify_Edit_Inactive_Inquiry_Communcation_Mode(String Communcationtype,String Name) throws InterruptedException {
 		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
 		Communication.getconfiguration().click();
 		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getsearchinquirycommunication().sendKeys(Communcationtype+Keys.ENTER);
 		Communication.getEditinquirycommunicationrow().click();
 		Thread.sleep(2000);
 		Communication.getActiveInactive().click();
@@ -861,10 +858,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("Akash"))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Inquiry Communcation mode is inactive.");
-				System.out.println("Test failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -880,11 +877,12 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Inquiry Communcation mode
-	@Test()
-	public void Verify_Edit_Active_Inquiry_Communcation_mode() throws InterruptedException {
+	@Test(dataProvider="EditActiveInquiryCommuncation")
+	public void Verify_Edit_Active_Inquiry_Communcation_Mode(String Communcationtype,String Name) throws InterruptedException {
 		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
 		Communication.getconfiguration().click();
 		Communication.getInquirycommunicationmodepageclick().click();
+		Communication.getsearchinquirycommunication().sendKeys(Communcationtype+Keys.ENTER);
 		Communication.getEditinquirycommunicationrow().click();
 		Thread.sleep(2000);
 		Communication.getActiveInactive().click();
@@ -905,10 +903,10 @@ public class InquiryTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("Akash"))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Inquiry Communcation mode is Active.");
-				System.out.println("Test failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -928,7 +926,7 @@ public class InquiryTest extends base {
 	public void teardown() {
 		base.failedElement = null;
 		base.failedElementName = "";
-		//driver.close(); 
+		driver.close(); 
 	}
 
 	//DataProvider for Add Inquiry
@@ -946,11 +944,11 @@ public class InquiryTest extends base {
 		return new Object[][] {{"Test with Chandni","Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
 	}
 
-	//DataProvider Delete Inquiry
+	//DataProvider for Delete Inquiry
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{"9765456789"}};// Just a placeholder for multiple runs	
+				{{"9765456789"}};//Just a placeholder for multiple runs	
 	}
 
 	//DataProvider for Apply Filter for Project
@@ -969,5 +967,75 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryaddprospectData() {
 		return new Object[][] {{" A "," Unit No - 102 (1 Floor) "}};
+	}
+	
+	//DataProvider for Add Inactive Attendee
+	@DataProvider
+	public Object[][] AddInactiveAttendee() {
+		return new Object[][] {{"Automation Test","Automation Test"}};
+	}
+	
+	//DataProvider for Add Active Attendee
+	@DataProvider
+	public Object[][] AddActiveAttendee() {
+		return new Object[][] {{"Automation Test","Automation Test"}};
+	}
+	
+	//DataProvider for Edit Inactive Attendee
+	@DataProvider
+	public Object[][] EditInactiveAttendee() {
+		return new Object[][] {{"Akash Patel","Akash Patel"}};
+	}
+	
+	//DataProvider for Edit Active Attendee
+	@DataProvider
+	public Object[][] EditActiveAttendee() {
+		return new Object[][] {{"Akash Patel","Akash Patel"}};
+	}
+	
+	//DataProvider for Add Inactive Inquiry Status
+	@DataProvider
+	public Object[][] AddInactiveInquiryStatus() {
+		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+	}
+	
+	//DataProvider for Add Active Inquiry Status
+	@DataProvider
+	public Object[][] AddActiveInquiryStatus() {
+		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+	}
+	
+	//DataProvider for Edit Inactive Inquiry Status
+	@DataProvider
+	public Object[][] EditInactiveInquiryStatus() {
+		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+	}
+	
+	//DataProvider for Edit Inactive Inquiry Status
+	@DataProvider
+	public Object[][] EditActiveInquiryStatus() {
+		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+	}
+	
+	//DataProvider for Edit Inactive Inquiry Response Type
+	@DataProvider
+	public Object[][] EditInactiveInquiryResponseType() {
+		return new Object[][] {{" Sitops "," Sitops "}};
+	}
+	//DataProvider for Edit Active Inquiry Response Type
+	@DataProvider
+	public Object[][] EditActiveInquiryResponseType() {
+		return new Object[][] {{" Sitops "," Sitops "}};
+	}
+	
+	//DataProvider for Edit Inactive Inquiry Communcation Mode
+	@DataProvider
+	public Object[][] EditInactiveInquiryCommuncation() {
+		return new Object[][] {{" Office Visit "," Office Visit "}};
+	}
+	//DataProvider for Edit Active Inquiry Communcation Mode
+	@DataProvider
+	public Object[][] EditActiveInquiryCommuncation() {
+		return new Object[][] {{" Office Visit "," Office Visit "}};
 	}
 }

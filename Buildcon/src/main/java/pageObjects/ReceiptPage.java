@@ -116,13 +116,14 @@ public class ReceiptPage {
 		return driver.findElement(dateselect);
 	}
 	//Page object for Next Btn
-	By nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button[2]");
+	By nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
+			+ "main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button");
 	public WebElement getNextBtn() {
 		base.failedElementName = "Receipt-NextBtn";
 		return driver.findElement(nextbtn);
 	}
 
+	
 	//Regular Bank Details
 	//Page object for Regular Bank Name
 	By bankname = By.xpath("//mat-select[@formcontrolname='rBankID']");
@@ -187,7 +188,7 @@ public class ReceiptPage {
 	//Page object for Regular Amount
 	By regularamount =By.xpath("//input[@formcontrolname='rAmount']");
 	public WebElement getRegularAmount() {
-		base.failedElementName = "Receipt-Amount";
+		base.failedElementName = "Receipt-getRegularAmount";
 		return driver.findElement(regularamount);
 	}
 	//Page object for Regular Bank Cancelled
@@ -415,8 +416,8 @@ public class ReceiptPage {
 		return driver.findElement(startdate);
 	}
 	//Page object for select End Date
-	By enddate=By.xpath("/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/div/"
-			+ "mat-month-view/table/tbody/tr[6]/td[5]/button/span[1]");
+	By enddate=By.xpath("//html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]"
+			+ "/mat-calendar/div/mat-month-view/table/tbody/tr[5]/td[4]/button/span[1]");
 	public WebElement getEndDate() {	
 		base.failedElementName = "Receipt-EndDate";
 		return driver.findElement(enddate);
@@ -442,6 +443,7 @@ public class ReceiptPage {
 		base.failedElementName = "Receipt-Reset";
 		return driver.findElement(reset);
 	}
+	
 	//Page object for Edit
 	public WebElement getEdit() {
 		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
@@ -453,18 +455,25 @@ public class ReceiptPage {
 		base.failedElementName = "Receipt-Edit";
 		return Edit;
 	}
-
+	
+	//Page object for Edit Button for Edit Record.
+	By editbtneditrecord = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[23]/div/button[1]");
+    public WebElement getEditBtnEditRecord() {
+    	base.failedElementName = "Receipt-getEditBtnEditRecord";
+    	return driver.findElement(editbtneditrecord);
+    }
+	
 	//Page object for Update Btn
 	By updatebtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[5]/div/div/div/form/div/div[2]/button[2]");
     public WebElement getUpdateBtn() {
     	base.failedElementName = "Receipt-UpdateBtn";
     	return driver.findElement(updatebtn);
-    }	
+    }
 	
 	//Page object for Download Receipt
-	By download=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[3]");
+	By download=By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[1]");
 	public WebElement getDownload() {	
 		base.failedElementName = "Receipt-download";
 		return driver.findElement(download);
@@ -479,21 +488,35 @@ public class ReceiptPage {
 	}
 	
 	//Page object for Print Receipt
-	By printreceipt=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[2]");
+	By printreceipt=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
+			+ "/mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[23]/div/button[2]");
     public WebElement getPrintReceipt() {
     	base.failedElementName = "Receipt-Print";
     	return driver.findElement(printreceipt);
     } 
-    
+    //Page object for Click Three Dot Button
+    By threedotbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+    		+ "mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[23]/div/button[3]");
+    public WebElement getthreedotbtn() {
+    	base.failedElementName = "Receipt-Three Dot Button";
+	    return driver.findElement(threedotbtn);
+    } 
+
+    //Page object for Click Yes
+    By clickyes=By.xpath("/html/body/div[4]/div[4]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
+    public WebElement getClickYes() {
+    	base.failedElementName = "Receipt-Click Yes";
+	    return driver.findElement(clickyes);
+    }
+   
     //Approve Cancel
     //Page object for Approve/Cancel
-    By approvecancel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-    	 		+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[4]");
+    By approvecancel=By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[2]");
     public WebElement getApproveCancel() {
     	base.failedElementName = "Receipt-ApproveCancelled";
    	    return driver.findElement(approvecancel);
     } 
+    
     //Page object for Reason
     By reason=By.xpath("//input[@formcontrolname='reason']");
     public WebElement getReason() {
@@ -502,26 +525,31 @@ public class ReceiptPage {
     } 
     
     //Page object for View Receipt
-    By viewreceipt=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-    		+ "vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[5]");
+    By viewreceipt=By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[3]");
     public WebElement getViewReceipt() {
     	base.failedElementName = "Receipt-View";
     	return driver.findElement(viewreceipt);
     } 
+    //Page object for Send Email Receipt
+    By sendemailreceipt=By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[4]");
+    public WebElement getSendEmailReceipt() {
+    	base.failedElementName = "Receipt-Send Email Receipt";
+    	return driver.findElement(sendemailreceipt);
+    }
     //Page object for Edit Next Button
   	By editnextbtn1 = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
   			+ "vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button");
   	public WebElement getEditNextBtn1() {
   		return driver.findElement(editnextbtn1);
   	}
+  	
   	//Page object for Edit
   	public void GetEditNext()
 	{
 		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-				+ "mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[1]")).click();
-		WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
-				+ "/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
-		a.click();	
+				+ "mat-sidenav-content/main/vex-receipts/div/div[3]/div/div/table/tbody/tr[1]/td[23]/div/button[1]")).click();
+		//WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
+		//a.click();	
 	}
   	
   	//Page object for Add Requierd Field 
@@ -546,4 +574,5 @@ public class ReceiptPage {
 				+ "mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
 		EditNextbtn.click();	
 	}
+  	//Page object for 
 }

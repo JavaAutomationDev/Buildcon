@@ -23,8 +23,6 @@ public class InquiryResponsepage {
 		return driver.findElement(Configurationform);
 	}
 
-
-
 	By InquiryResponsepageclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-configurations/div/div[2]/div/a[10]/div/mat-icon");
 	public WebElement getInquiryResponsepageclick() {
@@ -68,11 +66,7 @@ public class InquiryResponsepage {
 		return driver.findElement(Editinquiryresponsetypeenter);
 	}
 
-	
-	
-
 	//Pom for clickon save button
-
 	By Editinquiryresponsesave = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-response-type-add/div/form/mat-dialog-actions/button[1]");
 	public WebElement getEditinquiryresponsesave() {
@@ -112,7 +106,6 @@ public class InquiryResponsepage {
 	}
 
 	// pom for delete click:
-
 	By Inquiryresponsedeleteclick = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
 
@@ -122,7 +115,6 @@ public class InquiryResponsepage {
 	}
 
 	// pom for delete confirmation:
-
 	By Inquiryresponsedeleteconfirmationk = By.xpath(
 			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 

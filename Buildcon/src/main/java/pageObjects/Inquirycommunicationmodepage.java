@@ -59,8 +59,8 @@ public class Inquirycommunicationmodepage {
 
 	//Page object model for Edit inquiry communication row
 	By Editinquirycommunicationrow = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
-			+ "/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[2]");
+			"//button[@mattooltip='Edit']");
+	
 	public WebElement getEditinquirycommunicationrow() {
 		base.failedElementName = "InquiryCommunicationMode-Editrow";
 		return driver.findElement(Editinquirycommunicationrow);

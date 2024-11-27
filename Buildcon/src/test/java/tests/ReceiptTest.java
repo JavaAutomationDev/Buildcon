@@ -39,56 +39,56 @@ public class ReceiptTest extends base {
 
 	//Add Receipt
 	@Test(dataProvider="ReceiptAddData")
-	public void Add_Project(String Project,String CustomerName,String FlatShop,String BankName,String Bankbranch,
+	public void Add_Receipt(String Project,String CustomerName,String FlatShop,String BankName,String Bankbranch,
 			String PaymentType,String IMPSNO,String RegularAmount,String ChallanNumber,String ReceivedTDSAmount,
 			String TDSTYpe,String GSTbankName,String GSTBankBranch,String ChequeNo,
 			String ReceivedGSTAmount,String ChequeFiles) throws InterruptedException, IOException {
-        
+
 		SoftAssert softAssert=new SoftAssert();
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		receipt.getAddReceipt().click();
-		
+
 		receipt.getProject(Project);//Required Field
 		receipt.getCustormer(CustomerName);//Required Field
 		receipt.getFlatShop(FlatShop);//Required Field
-		
+
 		//receipt.getCalendarClick().click();
-        //receipt.getDateSelect().click();
-        //receipt.getDateSelect().click();
-        
+		//receipt.getDateSelect().click();
+		//receipt.getDateSelect().click();
+
 		receipt.getNextBtn().click();
 		Thread.sleep(2000);
 		receipt.getBankName(BankName);//Required Field
-		
+
 		receipt.getBankBranch().sendKeys(Bankbranch);//Required Field
 		softAssert.assertFalse(Bankbranch.isEmpty(), "Regular Bank Branch is Required.");
-		//Bank Branch Name Text Data Validation ---------------------------------
+		//Bank Branch Name Text Data Validation
 		String valid_string = validateText(Bankbranch,"Bankbranch", 5, 30);
 		String valid_Bankbranch = valid_string;
 		System.out.println(valid_Bankbranch);
-		
+
 
 		receipt.getPaymentType(PaymentType);//Required Field
-			
+
 		receipt.getIMPSNO().sendKeys(IMPSNO);
 		softAssert.assertFalse(IMPSNO.isEmpty(), "IMPS No is Required.");
-		//IMPS No Data Validation ---------------------------------
+		//IMPS No Data Validation
 		String valid_string1 = validateText(IMPSNO,"IMPSNO", 5, 30);
 		String valid_IMPSNO = valid_string1;
 		System.out.println(valid_IMPSNO);
-		
+
 		//receipt.getRegularChequeTranDate().click();
 		//receipt.getChecqueDate().click();
 		//receipt.getChecqueDate().click();
-		
+
 		receipt.getRegularAmount().sendKeys(RegularAmount);//Required Field
 		softAssert.assertFalse(RegularAmount.isEmpty(), "Regular Amount is Required.");
-		//Regular Amount Text Data Validation ---------------------------------
+		//Regular Amount Text Data Validation
 		String valid_string2 = validateText(RegularAmount,"RegularAmount", 5, 30);
 		String valid_RegularAmount = valid_string2;
 		System.out.println(valid_RegularAmount);
-		
+
 		receipt.getRegularBankCancelled().click();
 		receipt.getGSTNO().click();
 		Thread.sleep(2000);
@@ -96,59 +96,59 @@ public class ReceiptTest extends base {
 
 		receipt.getTDSChallanNumber().sendKeys(ChallanNumber);
 		softAssert.assertFalse(ChallanNumber.isEmpty(), "Challan Number is Required.");
-		//Challan Number Data Validation ---------------------------------
+		//Challan Number Data Validation
 		String valid_string3 = validateText(ChallanNumber,"ChallanNumber", 5, 30);
 		String valid_ChallanNumber = valid_string3;
 		System.out.println(valid_ChallanNumber);
-		
+
 		//receipt.challandate();
 		//receipt.getSelectDate().click();
 		//receipt.getSelectDate().click();
-		
+
 		receipt.getReceivedTDSAmount().sendKeys(ReceivedTDSAmount);
 		softAssert.assertFalse(ReceivedTDSAmount.isEmpty(), "Received TDS Amount is Required.");
-		//Received TDS Amount Data Validation ---------------------------------
+		//Received TDS Amount Data Validation
 		String valid_string4 = validateText(ReceivedTDSAmount,"ReceivedTDSAmount", 5, 30);
 		String valid_ReceivedTDSAmount = valid_string4;
 		System.out.println(valid_ReceivedTDSAmount);
-		
+
 		receipt.getTDSType(TDSTYpe);
-		
+
 		Thread.sleep(2000);	
 		receipt.getNextBtn2().click();
 
 		receipt.getGSTBankName(GSTbankName);
-		
+
 		receipt.getGSTBankBranch().sendKeys(GSTBankBranch);
 		softAssert.assertFalse(GSTBankBranch.isEmpty(), "GSTBankBranch is Required.");
-		//GST Bank Branch Data Validation ---------------------------------
+		//GST Bank Branch Data Validation
 		String valid_string5 = validateText(GSTBankBranch,"GSTBankBranch", 5, 30);
 		String valid_GSTBankBranch = valid_string5;
 		System.out.println(valid_GSTBankBranch);
-		
+
 		receipt.getChequeNo().sendKeys(ChequeNo);
 		softAssert.assertFalse(ChequeNo.isEmpty(), "ChequeNo is Required.");
-		//Cheque No Data Validation ---------------------------------
+		//Cheque No Data Validation
 		String valid_string6 = validateText(ChequeNo,"ChequeNo", 5, 30);
 		String valid_ChequeNo = valid_string6;
 		System.out.println(valid_ChequeNo);
-		
+
 		//receipt.chequetransdate();
-        
+
 		receipt.getReceivedGSTAmount().sendKeys(ReceivedGSTAmount);
 		softAssert.assertFalse(ReceivedGSTAmount.isEmpty(), "ReceivedGSTAmount is Required.");
-		//Received GST Amount Data Validation ---------------------------------
+		//Received GST Amount Data Validation
 		String valid_string7 = validateText(ReceivedGSTAmount,"ReceivedGSTAmount", 5, 30);
 		String valid_ReceivedGSTAmount = valid_string7;
 		System.out.println(valid_ReceivedGSTAmount);
-		
+
 		Thread.sleep(2000);
 		receipt.getNextBtn3().click();
 		receipt.getChequeFiles().sendKeys(ChequeFiles);
 
 		Thread.sleep(2000);
 		receipt.getSavebtn().click();
-		
+
 		softAssert.assertEquals(valid_Bankbranch, "Bankbranch is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertEquals(valid_IMPSNO, "IMPSNO is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertEquals(valid_RegularAmount, "RegularAmount is a Valid text - is a valid Minlength - is a valid Maxlength");
@@ -162,65 +162,67 @@ public class ReceiptTest extends base {
 
 	//Editing an existing Receipt using Data Provider
 	@Test(dataProvider="ReceiptEditData")
-	public void Edit_Receipt(String newBankbranch,String newIMPSNO,String newRegularAmount,String newChallanNumber,
+	public void Edit_Receipt(String Receiptno,String newBankbranch,String newIMPSNO,String newRegularAmount,String newChallanNumber,
 			String newGSTBankBranch) throws InterruptedException, IOException {
 		SoftAssert softAssert=new SoftAssert();
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
+		receipt.getSearch().sendKeys(Receiptno +Keys.ENTER);
 
 		Thread.sleep(2000);
-		receipt.getEdit();
+		receipt.getEditBtnEditRecord().click();
+		Thread.sleep(2000);
 		receipt.getEditNext().click();
 
 		receipt.getBankBranch().clear();
 		receipt.getBankBranch().sendKeys(newBankbranch);
 		softAssert.assertFalse(newBankbranch.isEmpty(), "Bank branch is Required.");
-		//Bank branch Data Validation ---------------------------------
-		String valid_string4 = validateText(newBankbranch,"Bankbranch", 5, 30);
+		//Bank branch Data Validation
+		String valid_string4 = validateText(newBankbranch,"Bankbranch", 30, 30);
 		String valid_newBankbranch = valid_string4;
 		System.out.println(valid_newBankbranch);
 
 		receipt.getIMPSNO().clear();
 		receipt.getIMPSNO().sendKeys(newIMPSNO);
 		softAssert.assertFalse(newIMPSNO.isEmpty(), "IMPS NO is Required.");
-		//IMPS NO Data Validation ---------------------------------
-		String valid_string = validateText(newIMPSNO,"IMPSNO", 5, 30);
+		//IMPS NO Data Validation
+		String valid_string = validateText(newIMPSNO,"IMPSNO", 30, 30);
 		String valid_newIMPSNO = valid_string;
 		System.out.println(valid_newIMPSNO);
-		
+
 		receipt.getNextBtn1().click();
-		
+
 		receipt.getRegularAmount().clear();
 		receipt.getRegularAmount().sendKeys(newRegularAmount);
-		softAssert.assertFalse(newRegularAmount.isEmpty(), "Regular Amount is Required.");
-		//Regular Amount Data Validation ---------------------------------
-		String valid_string1 = validateText(newRegularAmount,"RegularAmount", 5, 30);
+		softAssert.assertFalse(newRegularAmount.isEmpty(), "Regular Amount is required");
+		//Regular Amount Data Validation
+		String valid_string1 = validateText(newRegularAmount,"RegularAmount", 30, 30);
 		String valid_newRegularAmount = valid_string1;
 		System.out.println(valid_newRegularAmount);
-		
+
 		receipt.getTDSChallanNumber().clear();
 		receipt.getTDSChallanNumber().sendKeys(newChallanNumber);
 		softAssert.assertFalse(newChallanNumber.isEmpty(), "Challan Number is Required.");
-		//Challan Number Data Validation ---------------------------------
-		String valid_string2 = validateText(newChallanNumber,"ChallanNumber", 5, 30);
+		//Challan Number Data Validation
+		String valid_string2 = validateText(newChallanNumber,"ChallanNumber", 30, 30);
 		String valid_newChallanNumber = valid_string2;
 		System.out.println(valid_newChallanNumber);
-		
+
 		receipt.getNextBtn2().click();
-		
+
 		receipt.getGSTBankBranch().clear();
 		receipt.getGSTBankBranch().sendKeys(newGSTBankBranch);
 		softAssert.assertFalse(newGSTBankBranch.isEmpty(), "GST Bank Branch is Required.");
-		//GST Bank Branch Data Validation ---------------------------------
-		String valid_string3 = validateText(newGSTBankBranch,"GST Bank Branch", 5, 30);
+		//GST Bank Branch Data Validation
+		String valid_string3 = validateText(newGSTBankBranch,"GST Bank Branch", 30, 30);
 		String valid_newGSTBankBranch = valid_string3;
 		System.out.println(valid_newGSTBankBranch);
-		
+
 		receipt.getNextBtn3().click();
 
 		Thread.sleep(2000);
 		receipt.getUpdateBtn().click();
-		
+
 		softAssert.assertEquals(valid_newBankbranch, "newBankbranch is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertEquals(valid_newIMPSNO, "newIMPSNO is a Valid text - is a valid Minlength - is a valid Maxlength");
 		softAssert.assertEquals(valid_newRegularAmount, "newRegularAmount is a Valid text - is a valid Minlength - is a valid Maxlength");
@@ -230,12 +232,15 @@ public class ReceiptTest extends base {
 	}
 
 	//Download Receipt
-	@Test
-	public void Download_Receipt() throws InterruptedException {
+	@Test(dataProvider="DownloadReceiptData")
+	public void Download_Receipt(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
-
+		receipt.getSearch().sendKeys(Receiptno + Keys.ENTER);
 		Thread.sleep(3000);
+		receipt.getthreedotbtn().click();
+		receipt.getthreedotbtn().click();
+		Thread.sleep(10000);
 		receipt.getDownload().click();
 	}
 
@@ -246,7 +251,7 @@ public class ReceiptTest extends base {
 		receipt.getReceipt().click();
 
 		Thread.sleep(2000);
-		receipt.getSearch().sendKeys(Project + Keys.ENTER);;
+		receipt.getSearch().sendKeys(Project + Keys.ENTER);
 	}
 
 	//Export to Excel Receipt
@@ -266,28 +271,55 @@ public class ReceiptTest extends base {
 		receipt.getReceipt().click();
 
 		Thread.sleep(2000);
-		receipt.getPrintReceipt().click();		
+		receipt.getPrintReceipt().click();	
+		String originalWindow = driver.getWindowHandle();
+		driver.switchTo().window(originalWindow);
 	}
 
 	//Approve Cancel Receipt
-	@Test(dataProvider="ReceiptapproveData")
-	public void Approve_Cancel_Receipt(String approve) throws InterruptedException{
+	@Test(dataProvider="ReceiptApproveCancelData")
+	public void Approve_Cancel_Receipt(String Project,String Approve) throws InterruptedException{
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
-
+		receipt.getSearch().sendKeys(Project + Keys.ENTER);
+		Thread.sleep(2000);
+		receipt.getthreedotbtn().click();
+		receipt.getthreedotbtn().click();
 		Thread.sleep(2000);
 		receipt.getApproveCancel().click();
-		receipt.getReason().sendKeys(approve);
+		Thread.sleep(2000);
+		receipt.getReason().sendKeys(Approve);
+		receipt.getClickYes().click();
 	}
 
 	//View Receipt
-	@Test()
-	public void View_Receipt() throws InterruptedException {
+	@Test(dataProvider="ViewReceiptData")
+	public void View_Receipt(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
-
+		receipt.getSearch().sendKeys(Receiptno + Keys.ENTER);
 		Thread.sleep(2000);
-		receipt.getViewReceipt();
+		receipt.getthreedotbtn().click();
+		receipt.getthreedotbtn().click();
+		Thread.sleep(2000);
+		Thread.sleep(2000);
+		receipt.getViewReceipt().click();
+		String originalWindow = driver.getWindowHandle();
+		driver.switchTo().window(originalWindow);
+	}
+
+	//SendEmail Receipt
+	@Test(dataProvider="SendEmailReceiptData")
+	public void SendEmail_Receipt(String Receiptno) throws InterruptedException {
+		ReceiptPage receipt = new ReceiptPage(driver);
+		receipt.getReceipt().click();
+		receipt.getSearch().sendKeys(Receiptno + Keys.ENTER);
+		Thread.sleep(2000);
+		receipt.getthreedotbtn().click();
+		receipt.getthreedotbtn().click();
+		Thread.sleep(2000);
+		receipt.getSendEmailReceipt().click();
+		receipt.getClickYes().click();
 	}
 
 	//Apply Filter Receipt With Date Range
@@ -314,7 +346,7 @@ public class ReceiptTest extends base {
 		receipt.getProjectDropdown(Project);
 	}
 
-	//Apply Filter Receipt Cancelled
+	//Apply Filter Receipt Cancelled Button
 	@Test()
 	public void Apply_Filter_Cancelled_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
@@ -346,6 +378,7 @@ public class ReceiptTest extends base {
 		Thread.sleep(2000);
 		receipt.getReset().click();
 	}
+
 	//Add Receipt Test Mandatory Filed Validation
 	@Test
 	public void Add_Receipt_Test_Mandatory_Filed_Validation() throws InterruptedException {
@@ -353,24 +386,24 @@ public class ReceiptTest extends base {
 		receipt.getReceipt().click();
 		receipt.getAddReceipt().click();
 		receipt.AddRequierdField();
+
 		receipt.getNextBtn().click();
 
 		SoftAssert softAssert = new SoftAssert();
 		WebElement projectname =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 				+ "/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[1]/div[1]/mat-form-field/div[2]/div"));
-		softAssert.assertEquals(projectname.getText(), "Project name is required1.");
+		softAssert.assertEquals(projectname.getText(), " Project Name is required.");
 
-		WebElement customerName =driver.findElement(By.xpath("//span[normalize-space()='Customer name is required.']"));
-		softAssert.assertEquals(customerName.getText(), "Customer name is required.");
+		WebElement customerName =driver.findElement(By.xpath("//span[normalize-space()='Customer Name is required.']"));
+		softAssert.assertEquals(customerName.getText(), "Customer Name is required.");
 
 		WebElement flatshop =driver.findElement(By.xpath("//span[normalize-space()='Flat/Shop is required.']"));
 		softAssert.assertEquals(flatshop.getText(), "Flat/Shop is required.");
 		softAssert.assertAll();
 	}
-	
 	//Edit Receipt Test Mandatory Filed Validation
-		@Test
-		public void Edit_Receipt_Test_Mandatory_Filed_Validation() throws InterruptedException {
+	@Test
+	public void Edit_Receipt_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		receipt.getEdit().click();
@@ -384,22 +417,22 @@ public class ReceiptTest extends base {
 
 		WebElement customerName =driver.findElement(By.xpath("//span[normalize-space()='Customer name is required.']"));
 		softAssert.assertEquals(customerName.getText(), "Customer name is required.");
-			
+
 		WebElement flatshop =driver.findElement(By.xpath("//span[normalize-space()='Flat/Shop is required.']"));
 		softAssert.assertEquals(flatshop.getText(), "Flat/Shop is required.");
 		softAssert.assertAll();
 	}
 
-    //Banks Active Inactive
+	//Banks Active Inactive
 	//Verify Edit InActive Bank in Receipt
-	@Test()
-	public void Verify_Edit_InActive_ProjectType_Project() throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getbankseditclick().click();
-		unit.getActiveStatus().click();		
-		unit.getbankseditsave().click();
+	@Test(dataProvider="EditInactiveData")
+	public void Verify_Edit_InActive_ProjectType_Project(String bankname) throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getbankseditclick().click();
+		Bank.getActiveStatus().click();		
+		Bank.getbankseditsave().click();
 
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -415,7 +448,7 @@ public class ReceiptTest extends base {
 			if(!b.equalsIgnoreCase(" Axis Bank "))
 			{
 				Assert.assertFalse(false, "Bank is Inactive.");
-				System.out.println("Test  failed");
+				System.out.println("Test failed");
 				break;
 			}
 			else
@@ -475,15 +508,14 @@ public class ReceiptTest extends base {
 		//driver.close();
 	}	
 
-	//Add Receipt Data
+	//DataProvider for Add Receipt Data
 	@DataProvider
 	public Object[][] ReceiptAddData() {
 		return new Object[][] {
 			{"SHALIGRAM PRIDE"," Nikanth Tandel "," 3BHK-402 (4th Floor) ","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
 				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","D:\\Fileupload\\BB1qVDNW.jpg"}
 			//{" Project 4 "," Vimal Vankani "," Flats-A - 101 (1st Floor) "," Axis Bank ","South Bopal"," Cash ","","1000000",
-				//"194","10075.57"," 0.75% "," Axis Bank ","PrahladNagar",""},		
-		
+			//"194","10075.57"," 0.75% "," Axis Bank ","PrahladNagar",""},
 		};
 	}
 
@@ -491,7 +523,14 @@ public class ReceiptTest extends base {
 	@DataProvider
 	public Object[][] ReceiptEditData() {
 		return new Object[][] { 
-			{"Ahmedabad","796498723548","97464970021","Thaltej"}};
+			{" PD-5-24 ","Ahmedabad","796498723","97464971","65467978","Thaltej"}};
+	}
+
+	//DataProvider for Download Receipt Data
+	@DataProvider
+	public Object[][] DownloadReceiptData() {
+		return new Object[][] {
+			{" PD-6-24 "}};
 	}
 
 	//DataProvider for Search Data
@@ -501,7 +540,7 @@ public class ReceiptTest extends base {
 			{" Parisar homes "}};
 	}
 
-	//DataProvider for Project Dropdown 
+	//DataProvider for Project Dropdown data
 	@DataProvider
 	public Object[][] Receiptprojectdropdown() {
 		return new Object[][] {
@@ -510,8 +549,29 @@ public class ReceiptTest extends base {
 
 	//DataProvider for Approve Cancel 
 	@DataProvider
-	public Object[][] ReceiptapproveData() {
+	public Object[][] ReceiptApproveCancelData() {
 		return new Object[][] {
-			{"Approve"}};
+			{" Parisar homes ","Approve"}};
+	}
+
+	//DataProvider for View Receipt Data
+	@DataProvider
+	public Object[][] ViewReceiptData() {
+		return new Object[][] {
+			{" PD-6-24 "}};
+	}
+
+	//DataProvider for Send Email Receipt Data
+	@DataProvider
+	public Object[][] SendEmailReceiptData() {
+		return new Object[][] {
+			{" PD-6-24 "}};
+	}
+	
+	//DataProvider for Edit Inactive Data
+	@DataProvider
+	public Object[][] EditInactiveData() {
+		return new Object[][] {
+			{" Axis Bank "}};
 	}
 }
