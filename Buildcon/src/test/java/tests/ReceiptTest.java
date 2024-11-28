@@ -387,12 +387,12 @@ public class ReceiptTest extends base {
 		receipt.getAddReceipt().click();
 		receipt.AddRequierdField();
 
-		receipt.getNextBtn().click();
+		receipt.getHeaderClick().click();
 
 		SoftAssert softAssert = new SoftAssert();
 		WebElement projectname =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 				+ "/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[1]/div[1]/mat-form-field/div[2]/div"));
-		softAssert.assertEquals(projectname.getText(), " Project Name is required.");
+		softAssert.assertEquals(projectname.getText(), "Project Name is required.");
 
 		WebElement customerName =driver.findElement(By.xpath("//span[normalize-space()='Customer Name is required.']"));
 		softAssert.assertEquals(customerName.getText(), "Customer Name is required.");
@@ -406,30 +406,42 @@ public class ReceiptTest extends base {
 	public void Edit_Receipt_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
-		receipt.getEdit().click();
+		receipt.getEditBtnActiveInactive().click();
 		Thread.sleep(2000);
 		receipt.EditNextRequierdBtn();
+		
+		receipt.getBankBranch().sendKeys(Keys.TAB);
+		receipt.getBankBranch().click();
+		int bankbranchname  = receipt.getBankBranch().getAttribute("value").length();
+		for (int i = 0; i < bankbranchname ; i++) {
+			receipt.getBankBranch().sendKeys(Keys.BACK_SPACE);
+		}
+		
+		receipt.getRegularAmount().click();
+		int regularamount  = receipt.getRegularAmount().getAttribute("value").length();
+		for (int i = 0; i < regularamount ; i++) {
+			receipt.getRegularAmount().sendKeys(Keys.BACK_SPACE);
+		}
+		receipt.getRegularAmount().sendKeys(Keys.TAB);
 
 		SoftAssert softAssert = new SoftAssert();
-		WebElement projectname =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
-				+ "/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[1]/div[1]/mat-form-field/div[2]/div"));
-		softAssert.assertEquals(projectname.getText(), "Project name is required1.");
+		WebElement regularbankbranch =driver.findElement(By.xpath("//span[normalize-space()='Regular Bank Branch is Required']"));
+		softAssert.assertEquals(regularbankbranch.getText(), "Regular Bank Branch is Required");
 
-		WebElement customerName =driver.findElement(By.xpath("//span[normalize-space()='Customer name is required.']"));
-		softAssert.assertEquals(customerName.getText(), "Customer name is required.");
-
-		WebElement flatshop =driver.findElement(By.xpath("//span[normalize-space()='Flat/Shop is required.']"));
-		softAssert.assertEquals(flatshop.getText(), "Flat/Shop is required.");
+		WebElement regularAmount =driver.findElement(By.xpath("//span[normalize-space()='Regular Amount is required']"));
+		softAssert.assertEquals(regularAmount.getText(), "Regular Amount is required");
 		softAssert.assertAll();
 	}
 
 	//Banks Active Inactive
-	//Verify Edit InActive Bank in Receipt
-	@Test(dataProvider="EditInactiveData")
-	public void Verify_Edit_InActive_ProjectType_Project(String bankname) throws InterruptedException {
+	//Verify Add InActive Bank in Receipt
+	@Test(dataProvider="AddInactiveBank")
+	public void Verify_Add_InActive_Bank(String Bankname,String Project,String CustomerName,String FlatShop,String Name) 
+			throws InterruptedException {
 		Bankspage Bank = new Bankspage(driver);
 		Bank.getconfiguration().click();
 		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(Bankname+Keys.ENTER);
 		Bank.getbankseditclick().click();
 		Bank.getActiveStatus().click();		
 		Bank.getbankseditsave().click();
@@ -437,6 +449,100 @@ public class ReceiptTest extends base {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		Thread.sleep(2000);
+		receipt.getAddReceipt().click();
+		receipt.getProject(Project);
+		receipt.getCustormer(CustomerName);
+		receipt.getFlatShop(FlatShop);
+		Thread.sleep(2000);
+		receipt.getNextBtn().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(Name))
+			{
+				Assert.assertFalse(false, "Bank is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Verify Add Active Bank in Receipt
+		@Test(dataProvider="AddActiveBank")
+		public void Verify_Add_Active_Bank(String Bankname,String Project,String CustomerName,String FlatShop,String Name) 
+				throws InterruptedException {
+			Bankspage Bank = new Bankspage(driver);
+			Bank.getconfiguration().click();
+			Bank.getBanksclick().click();
+			Bank.getBankssearched().sendKeys(Bankname+Keys.ENTER);
+			Bank.getbankseditclick().click();
+			Bank.getActiveStatus().click();		
+			Bank.getbankseditsave().click();
+
+			ReceiptPage receipt = new ReceiptPage(driver);
+			receipt.getReceipt().click();
+			Thread.sleep(2000);
+			receipt.getAddReceipt().click();
+			receipt.getProject(Project);
+			receipt.getCustormer(CustomerName);
+			receipt.getFlatShop(FlatShop);
+			Thread.sleep(2000);
+			receipt.getNextBtn().click();
+
+			driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
+			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+			int Counter=0;
+			for(int i=0;i<a.size();i++)
+			{
+				String b =a.get(i).getText(); 
+				if(!b.equalsIgnoreCase(Name))
+				{
+					Assert.assertFalse(false, "Bank is Active.");
+					//System.out.println("Test failed");
+					break;
+				}
+				else
+				{
+					Counter = Counter+1;
+					if(Counter>a.size())
+					{
+						System.out.println("Test");	
+						break;
+					}	
+				}
+			}
+		}	
+	
+	
+	//Banks Active Inactive
+	//Verify Edit InActive Bank in Receipt
+	@Test(dataProvider="EditInactiveBank")
+	public void Verify_Edit_InActive_Bank(String Bankname,String Name) throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(Bankname+Keys.ENTER);
+		Bank.getbankseditclick().click();
+		Bank.getActiveStatus().click();		
+		Bank.getbankseditsave().click();
+
+		ReceiptPage receipt = new ReceiptPage(driver);
+		receipt.getReceipt().click();
+		Thread.sleep(2000);
+		receipt.getEditBtnActiveInactive().click();
 		receipt.GetEditNext();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
@@ -445,10 +551,10 @@ public class ReceiptTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(" Axis Bank "))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Bank is Inactive.");
-				System.out.println("Test failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -464,18 +570,20 @@ public class ReceiptTest extends base {
 	}
 
 	//Verify Edit Active Bank in Receipt
-	@Test()
-	public void Verify_Edit_Active_ProjectType_Project() throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getbankseditclick().click();
-		unit.getActiveStatus().click();		
-		unit.getbankseditsave().click();
+	@Test(dataProvider="EditActiveBank")
+	public void Verify_Edit_Active_Bank(String Bankname,String Name) throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(Bankname+Keys.ENTER);
+		Bank.getbankseditclick().click();
+		Bank.getActiveStatus().click();		
+		Bank.getbankseditsave().click();
 
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
 		Thread.sleep(2000);
+		receipt.getEditBtnActiveInactive().click();
 		receipt.GetEditNext();
 
 		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
@@ -484,10 +592,10 @@ public class ReceiptTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(" Axis Bank "))
+			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Bank is Active.");
-				System.out.println("Test  failed");
+				//System.out.println("Test  failed");
 				break;
 			}
 			else
@@ -568,10 +676,31 @@ public class ReceiptTest extends base {
 			{" PD-6-24 "}};
 	}
 	
-	//DataProvider for Edit Inactive Data
+	//DataProvider for Add Inactive Bank
 	@DataProvider
-	public Object[][] EditInactiveData() {
+	public Object[][] AddInactiveBank() {
 		return new Object[][] {
-			{" Axis Bank "}};
+		{" Axis Bank ","SHALIGRAM PRIDE"," Nikanth Tandel "," 3BHK-402 (4th Floor) "," Axis Bank "}};
+	}
+	
+	//DataProvider for Add Active Bank
+	@DataProvider
+	public Object[][] AddActiveBank() {
+		return new Object[][] {
+		{" Axis Bank ","SHALIGRAM PRIDE"," Nikanth Tandel "," 3BHK-402 (4th Floor) "," Axis Bank "}};
+	}
+	
+	//DataProvider for Edit Inactive Bank
+	@DataProvider
+	public Object[][] EditInactiveBank() {
+		return new Object[][] {
+			{" Axis Bank "," Axis Bank "}};
+	}
+	
+	//DataProvider for Edit Active Bank
+	@DataProvider
+	public Object[][] EditActiveBank() {
+		return new Object[][] {
+			{" Axis Bank "," Axis Bank "}};
 	}
 }

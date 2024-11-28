@@ -114,23 +114,27 @@ public class DocumentPage {
 	}
 
 	//Page object for Edit Document
-	By edit = By.xpath("");
-	public WebElement getEdit() {
+	By editDocument = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-documents/div/div[2]/div/div/table/tbody/tr[1]/td[5]/div/a[1]");
+	public WebElement getEditDocument() {
 		base.failedElementName = "Document-Edit";
-		return driver.findElement(edit);
-	}	
+		return driver.findElement(editDocument);
+	}
 	
 	//Page object for Delete Document
-	By delete = By.xpath("");
-	public WebElement getdelete() {
+	By deleteDocument = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-documents/div/div[2]/div/div/table/tbody/tr[1]/td[5]/div/a[2]");
+	public WebElement getDeleteDocument() {
 		base.failedElementName = "Document-Delete";
-		return driver.findElement(delete);
+		return driver.findElement(deleteDocument);
 	}
 	
 	//Page object for View Document
-	By view = By.xpath("");
-	public WebElement getView() {
+	By viewdocumnet = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-documents/div/div[2]/div/div/table/tbody/tr[1]/td[5]/div/a[3]");
+	public WebElement getViewDocument() {
 		base.failedElementName = "Document-View";
-		return driver.findElement(view);
+		return driver.findElement(viewdocumnet);
 	}
+	
 }

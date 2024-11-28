@@ -21,7 +21,7 @@ public class ReceiptPage {
 		this.driver = driver;
 	}
 	
-	// Page object for Receipt Module
+	//Page object for Receipt Module
 	By receipt = By.xpath("//vex-sidenav-item[7]//a[1]");
 	public WebElement getReceipt() {
 		base.failedElementName = "Receipt-ClickMenu";
@@ -116,13 +116,12 @@ public class ReceiptPage {
 		return driver.findElement(dateselect);
 	}
 	//Page object for Next Btn
-	By nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
-			+ "main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button");
+	By nextbtn=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
+			+ "/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button[2]");
 	public WebElement getNextBtn() {
 		base.failedElementName = "Receipt-NextBtn";
 		return driver.findElement(nextbtn);
 	}
-
 	
 	//Regular Bank Details
 	//Page object for Regular Bank Name
@@ -543,13 +542,12 @@ public class ReceiptPage {
   		return driver.findElement(editnextbtn1);
   	}
   	
-  	//Page object for Edit
+  	//Page object for Edit 
   	public void GetEditNext()
 	{
-		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-				+ "mat-sidenav-content/main/vex-receipts/div/div[3]/div/div/table/tbody/tr[1]/td[23]/div/button[1]")).click();
-		//WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
-		//a.click();	
+		WebElement a =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+				+ "mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
+		a.click();	
 	}
   	
   	//Page object for Add Requierd Field 
@@ -574,5 +572,24 @@ public class ReceiptPage {
 				+ "mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button"));
 		EditNextbtn.click();	
 	}
-  	//Page object for 
+  	
+  	//Page object for Header Customer details click
+  	By headerclick = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/mat-step-header");
+  	public WebElement getHeaderClick() {
+  		return driver.findElement(headerclick);
+  	}
+  	
+  	//Page objcte for Edit button for active inactive method
+	By editbtnactiveinactive = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
+			+ "mat-sidenav-content/main/vex-receipts/div/div[2]/div/div/table/tbody/tr[1]/td[23]/div/button[1]");
+  	public WebElement getEditBtnActiveInactive() {
+  		return driver.findElement(editbtnactiveinactive);
+  	}
+  	
+  	//Page objct for Reset button
+  	By resetbtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
+  			+ "main/vex-add-payment/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div/div[2]/button[1]");
+  	public WebElement getResetBtn() {
+  		return driver.findElement(resetbtn);
+  	}
 }

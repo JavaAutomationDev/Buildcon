@@ -32,17 +32,17 @@ public class BookingPage {
 		return driver.findElement(addbooking);
 	}
 
-//Booking Details
+	//Booking Details
 	// page object for Project Name
 	By Projectname = By.xpath("//mat-select[@formcontrolname='projectID']");
 
 	public void getProjectName(String projectname) {
 		WebElement dropdown = driver.findElement(Projectname);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Booking-getProjectName";
-		
+
 		String optionXpath = "//mat-option//span[contains(text(),'" + projectname + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
@@ -54,10 +54,10 @@ public class BookingPage {
 	public void getUnitBlock(String unitblock) {
 		WebElement dropdown = driver.findElement(UnitBlock);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Booking-getSelectFlat";
-		
+
 		String optionXpath = "//mat-option//span[contains(text(),'" + unitblock + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
@@ -69,10 +69,10 @@ public class BookingPage {
 	public void getFlatShop(String flatshop) {
 		WebElement dropdown = driver.findElement(FlatShop);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Booking-getFlatShop";
-		
+
 		String optionXpath = "//mat-option//span[contains(text(),'" + flatshop + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
@@ -84,10 +84,10 @@ public class BookingPage {
 	public void getBookedBy(String bookedby) {
 		WebElement dropdown = driver.findElement(BookedBy);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Booking-getBookedBy";
-		
+
 		String optionXpath = "//mat-option//span[contains(text(),'" + bookedby + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
@@ -101,7 +101,7 @@ public class BookingPage {
 		int year = currentDate.get(Calendar.YEAR);
 		String currentDateString = day + "/" + month + "/" + year;
 		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-booking/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[1]/div/div[5]/mat-form-field/div[1]/div[2]/div[2]/input"))
-				.sendKeys(currentDateString);
+		.sendKeys(currentDateString);
 		base.failedElementName = "Booking-BookingDate";
 	}
 
@@ -111,10 +111,10 @@ public class BookingPage {
 	public void getPaymentPlan(String paymentplan) {
 		WebElement dropdown = driver.findElement(PaymentPlan);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Booking-getPaymentPlan";
-		
+
 		String optionXpath = "//mat-option//span[contains(text(),'" + paymentplan + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
@@ -142,10 +142,10 @@ public class BookingPage {
 	public void BookingStatus(String bookingstatus) {
 		WebElement dropdown = driver.findElement(BookingStatus);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Booking-BookingStatus";
-		
+
 		String optionXpath = "//mat-option//span[contains(text(),'" + bookingstatus + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
@@ -190,7 +190,7 @@ public class BookingPage {
 		return driver.findElement(Nextbtn);
 	}
 
-//Add Customer
+	//Add Customer
 	// page object for Name
 	By Name = By.xpath("//input[@formcontrolname='memberName']");
 
@@ -211,8 +211,8 @@ public class BookingPage {
 	public void Birthdate() {
 		driver.findElement(By.xpath(
 				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main"
-				+ "/vex-add-booking/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/form/div[1]/div/mat-card/mat-card-content/div[1]/div[3]/mat-form-field/div[1]/div[2]/div[2]/input"))
-				.sendKeys("13/09/2006");
+						+ "/vex-add-booking/div/div[2]/div/mat-vertical-stepper/div[2]/div/div/div/form/div[1]/div/mat-card/mat-card-content/div[1]/div[3]/mat-form-field/div[1]/div[2]/div[2]/input"))
+		.sendKeys("13/09/2006");
 		base.failedElementName = "Booking-BirthDate";
 	}
 
@@ -286,7 +286,7 @@ public class BookingPage {
 	public WebElement getNextbtn2() {
 		return driver.findElement(Nextbtn2);
 	}
-//Broker Details
+	//Broker Details
 	// Page Object IS Broker button
 	By isBroker = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-booking/div/div[2]/div/mat-vertical-stepper/div[3]"
 			+ "/div/div/div/form/div[1]/div/mat-form-field/div[1]/div[2]/div[2]/input");
@@ -296,28 +296,28 @@ public class BookingPage {
 	}
 	// Page object Next button (Third Button)
 
-		By getNextbtn3 = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-booking/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div"
-				+ "[1]/div[1]/mat-form-field/div[1]/div[2]/div[2]/mat-checkbox");
-		public WebElement getNextbtn3() {
-			return driver.findElement(getNextbtn3);
-		}
-		
-//Bank Loan Details
+	By getNextbtn3 = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-booking/div/div[2]/div/mat-vertical-stepper/div[3]/div/div/div/form/div"
+			+ "[1]/div[1]/mat-form-field/div[1]/div[2]/div[2]/mat-checkbox");
+	public WebElement getNextbtn3() {
+		return driver.findElement(getNextbtn3);
+	}
+
+	//Bank Loan Details
 	// Page object Bank Loan Details
 	By BankName = By.xpath("//mat-select[@formcontrolname='bankID']");
 
 	public void BankName(String bankname) {
 		WebElement dropdown = driver.findElement(BankName);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Booking-BankName";
-		
+
 		String optionXpath = "//mat-option//span[contains(text(),'" + bankname + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
 	}
-	
+
 	// Page object Loan Amount Details
 	By Loanamt = By.xpath("//input[@formcontrolname='loanAmount']");
 	public WebElement getLoanamt() {
@@ -350,15 +350,15 @@ public class BookingPage {
 	// Click on Book
 	public void getBookbtn() {
 		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-booking/div/div[2]"
-						+ "/div/mat-vertical-stepper/div[4]/div/div/div/form/div[2]/button[2]")).click();
+				+ "/div/mat-vertical-stepper/div[4]/div/div/div/form/div[2]/button[2]")).click();
 	}
 	//Page object for Edit button
 	By Edit = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-bookings/div/div[3]/div/div/table/tbody/tr[1]/td[10]/div/a[1]");
 	public WebElement getEdit() {
 		return driver.findElement(Edit);
-		}		
-     
+	}		
+
 	//Click on Update button
 	By Update = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
 			+ "/main/vex-add-booking/div/div[2]/div/mat-vertical-stepper/div[4]/div/div/div/form/div[2]/button[2]");
@@ -378,135 +378,135 @@ public class BookingPage {
 		base.failedElementName = "Booking-CancelBookingReason";
 		return driver.findElement(Reason);
 	}
-	
+
 	//Click on Agreement to Sale Received checkbox
 	By AgreementSaleRcvd = By.xpath("//input[@class='mdc-checkbox__native-control']");
 	public WebElement getAgreementSaleRcvd() {
 		base.failedElementName = "Booking-AgreementSaleRecd";
 		return driver.findElement(AgreementSaleRcvd);
 	}
-   
+
 	//Click on Cancel Booking button popup
-		By CancelBooking2 = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-confirm-modal/form/mat-dialog-actions/button");
-		public WebElement getCancelBooking2() {
-			return driver.findElement(CancelBooking2);
-		}
+	By CancelBooking2 = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-confirm-modal/form/mat-dialog-actions/button");
+	public WebElement getCancelBooking2() {
+		return driver.findElement(CancelBooking2);
+	}
 	//Click on the Yes button
-		By Yesbutton = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
-		public WebElement getYesbutton() {
-			return driver.findElement(Yesbutton);
-		}
-	
-//Page object for all documents button
-		By alldocuments = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
-				+ "/main/vex-bookings/div/div[3]/div/div/table/tbody/tr[1]/td[10]/div/button");
-		public WebElement getalldocuments() {
-			base.failedElementName = "Booking-allDocuments";
-			return driver.findElement(alldocuments);
-		}
-		//Click on the Documentation Details
-				By DocumentationDetails = By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[1]");
-				public WebElement getDocumentationDetails() {
-					base.failedElementName = "Booking-DocumentationDetails";
-					return driver.findElement(DocumentationDetails);
-				}
-		//Page object for Agreement Number
-				By AgreementNumber = By.xpath("//input[@formcontrolname='agreementNumber']");
-				public WebElement getAgreementNumber() {
-					base.failedElementName = "Booking-AgreementNo";
-					return driver.findElement(AgreementNumber);
-				}		
-		//Page object for Sale Deed Number
-				By SaleDeed = By.xpath("//input[@formcontrolname='saleDeedNumber']");
-				public WebElement getSaleDeed() {
-					base.failedElementName = "Booking-SaleDeedNo";
-					return driver.findElement(SaleDeed);
-				}		
-		//Page object for Save button
-				By Savebutton = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-legal-entry-popup/form/mat-dialog-actions/button[1]");
-				public WebElement getSavebutton() {
-					return driver.findElement(Savebutton);
-				}
-		//Page object for Agreement Form
-				By AgreementForm = By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[2]");
-				public WebElement getAgreementForm() {
-					base.failedElementName = "Booking-AgreementForm";
-					return driver.findElement(AgreementForm);
-				}	
-		
-        //Page object for Booking Form
-				By  BookingForm = By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[3]");
-				public WebElement getBookingForm() {
-					base.failedElementName = "Booking-BookingForm";
-					return driver.findElement(BookingForm);
-				}
-				
-//Page object for Search Booking
-		By BookingSearch = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
-				+ "/mat-sidenav-content/main/vex-bookings/div/div[1]/div[2]/div[1]/input");
-		public WebElement getBookingSearch() {
-			return driver.findElement(BookingSearch);
-     }
-		By BookingSearchclick = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main"
-				+ "/vex-bookings/div/div[1]/div[2]/div[1]/mat-icon");
-		public WebElement getBookingSearchclick() {
-			base.failedElementName = "Booking-SearchClick";
-			return driver.findElement(BookingSearchclick);
-     }
-//Page object for Export to Excel
-		By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-				+ "vex-bookings/div/div[1]/div[2]/div[2]/button");
-		public WebElement getExporttoExcel() {
-			base.failedElementName = "Booking-ExportExcel";
-			return driver.findElement(ExporttoExcel);	
-     }
-//Page object for Apply Filter
-		//By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[1]/div[2]/div[3]/button");
-		//public WebElement getapplyfilter() {
-			//return driver.findElement(filter);
+	By Yesbutton = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
+	public WebElement getYesbutton() {
+		return driver.findElement(Yesbutton);
+	}
+
+	//Page object for all documents button
+	By alldocuments = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
+			+ "/main/vex-bookings/div/div[3]/div/div/table/tbody/tr[1]/td[10]/div/button");
+	public WebElement getalldocuments() {
+		base.failedElementName = "Booking-allDocuments";
+		return driver.findElement(alldocuments);
+	}
+	//Click on the Documentation Details
+	By DocumentationDetails = By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[1]");
+	public WebElement getDocumentationDetails() {
+		base.failedElementName = "Booking-DocumentationDetails";
+		return driver.findElement(DocumentationDetails);
+	}
+	//Page object for Agreement Number
+	By AgreementNumber = By.xpath("//input[@formcontrolname='agreementNumber']");
+	public WebElement getAgreementNumber() {
+		base.failedElementName = "Booking-AgreementNo";
+		return driver.findElement(AgreementNumber);
+	}		
+	//Page object for Sale Deed Number
+	By SaleDeed = By.xpath("//input[@formcontrolname='saleDeedNumber']");
+	public WebElement getSaleDeed() {
+		base.failedElementName = "Booking-SaleDeedNo";
+		return driver.findElement(SaleDeed);
+	}		
+	//Page object for Save button
+	By Savebutton = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-legal-entry-popup/form/mat-dialog-actions/button[1]");
+	public WebElement getSavebutton() {
+		return driver.findElement(Savebutton);
+	}
+	//Page object for Agreement Form
+	By AgreementForm = By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[2]");
+	public WebElement getAgreementForm() {
+		base.failedElementName = "Booking-AgreementForm";
+		return driver.findElement(AgreementForm);
+	}	
+
+	//Page object for Booking Form
+	By  BookingForm = By.xpath("/html/body/div[4]/div[2]/div/div/div/div/button[3]");
+	public WebElement getBookingForm() {
+		base.failedElementName = "Booking-BookingForm";
+		return driver.findElement(BookingForm);
+	}
+
+	//Page object for Search Booking
+	By BookingSearch = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
+			+ "/mat-sidenav-content/main/vex-bookings/div/div[1]/div[2]/div[1]/input");
+	public WebElement getBookingSearch() {
+		return driver.findElement(BookingSearch);
+	}
+	By BookingSearchclick = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main"
+			+ "/vex-bookings/div/div[1]/div[2]/div[1]/mat-icon");
+	public WebElement getBookingSearchclick() {
+		base.failedElementName = "Booking-SearchClick";
+		return driver.findElement(BookingSearchclick);
+	}
+	//Page object for Export to Excel
+	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "vex-bookings/div/div[1]/div[2]/div[2]/button");
+	public WebElement getExporttoExcel() {
+		base.failedElementName = "Booking-ExportExcel";
+		return driver.findElement(ExporttoExcel);	
+	}
+	//Page object for Apply Filter
+	//By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[1]/div[2]/div[3]/button");
+	//public WebElement getapplyfilter() {
+	//return driver.findElement(filter);
 	// }
-//Page object for Date Range
-		By Daterange=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[1]/mat-form-field/div[1]/div[2]/div[2]/mat-datepicker-toggle/button");
-		public WebElement getdaterange() {
-			return driver.findElement(Daterange);
-		}	
-		//Page object for Select start Date
-		By SelectstartDate=By.xpath("//span[@class='mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today']");
-		public WebElement getSelectstartDate() {
-			return driver.findElement(SelectstartDate);
-		}
-		//Page object for Select End Date
-		By selectendDate=By.xpath("//span[normalize-space()='30']");
-		public WebElement getSelectEndDate() {
-			return driver.findElement(selectendDate);		
-}     
-//Page object for Select Booked By dropdown
-		By BookedBy1 = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[2]/mat-form-field");
+	//Page object for Date Range
+	By Daterange=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[1]/mat-form-field/div[1]/div[2]/div[2]/mat-datepicker-toggle/button");
+	public WebElement getdaterange() {
+		return driver.findElement(Daterange);
+	}	
+	//Page object for Select start Date
+	By SelectstartDate=By.xpath("//span[@class='mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today']");
+	public WebElement getSelectstartDate() {
+		return driver.findElement(SelectstartDate);
+	}
+	//Page object for Select End Date
+	By selectendDate=By.xpath("//span[normalize-space()='30']");
+	public WebElement getSelectEndDate() {
+		return driver.findElement(selectendDate);		
+	}     
+	//Page object for Select Booked By dropdown
+	By BookedBy1 = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[2]/mat-form-field");
 
-		public void getbookedby1(String bookedby1) throws InterruptedException {
-			
-			WebElement dropdown = driver.findElement(BookedBy1);
-			dropdown.click();
-			
-			driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option[4]")).click();
-			base.failedElementName = "Booking-BookedBy2";
-//			String optionXpath = "" + bookedby1 + "')]";
-//			WebElement option = driver.findElement(By.xpath(optionXpath));
-//			option.click();
-		}		
-//Page object for Select Project dropdown
-		
+	public void getbookedby1(String bookedby1) throws InterruptedException {
 
-		public void getselectproject(String selectproject) throws InterruptedException {
-			driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[3]/mat-form-field/div[1]/div[2]/div/mat-select")).click();
-			Thread.sleep(10000);
-			driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option[5]")).click();
-			base.failedElementName = "Booking-SelectProject2";
-		}
-//Page object for Reset button
-		By resetfilter=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[5]/button");
-		public WebElement getresetfilter() {
-			return driver.findElement(resetfilter);
-		
-}
+		WebElement dropdown = driver.findElement(BookedBy1);
+		dropdown.click();
+
+		driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option[4]")).click();
+		base.failedElementName = "Booking-BookedBy2";
+		//			String optionXpath = "" + bookedby1 + "')]";
+		//			WebElement option = driver.findElement(By.xpath(optionXpath));
+		//			option.click();
+	}		
+	//Page object for Select Project dropdown
+
+
+	public void getselectproject(String selectproject) throws InterruptedException {
+		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[3]/mat-form-field/div[1]/div[2]/div/mat-select")).click();
+		Thread.sleep(10000);
+		driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option[5]")).click();
+		base.failedElementName = "Booking-SelectProject2";
+	}
+	//Page object for Reset button
+	By resetfilter=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[5]/button");
+	public WebElement getresetfilter() {
+		return driver.findElement(resetfilter);
+
+	}
 }

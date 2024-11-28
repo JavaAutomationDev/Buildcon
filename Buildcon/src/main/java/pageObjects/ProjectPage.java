@@ -779,9 +779,6 @@ public class ProjectPage {
     	return driver.findElement(deleteunit);
     }
     
-	
-	
-	
 	//Export To Excel
 	//Page object for Export To Excel
 	By exporttoexcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"

@@ -228,7 +228,7 @@ public class EmployeeTest extends base {
 		
 		Thread.sleep(2000);
 		employee.InquirySelectbtn().click();
-		employee.InquiryEntry().click();
+		employee.Inquiryview().click();
 		
 		employee.ProspectSelectbtn().click();
 		employee.ProspectView().click();
@@ -474,9 +474,7 @@ public class EmployeeTest extends base {
 		SoftAssert softAssert = new SoftAssert();
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
 		employee.getSearch().sendKeys(Firstname + Keys.ENTER);//Required Field
-
 		employee.getEdit().click();
 
 		employee.getmname().clear();
@@ -654,12 +652,12 @@ public class EmployeeTest extends base {
 
 	//Active Inactive Roles
 	//Verify Add Inactive Roles
-	@Test()
-	public void Verify_Add_Inactive_Roles() throws InterruptedException {
+	@Test(dataProvider="AddInactiveRoles")
+	public void Verify_Add_Inactive_Roles(String Rolename,String name) throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
 		Role.getRoleclick().click();
-		Thread.sleep(2000);
+		Role.getsearchRole().sendKeys(Rolename+Keys.ENTER);
 		Role.getEditRolebuttonclick().click();
 		Thread.sleep(2000);
 		Role.getaddrolename().sendKeys(Keys.TAB);
@@ -677,10 +675,10 @@ public class EmployeeTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("Adminnewside"))
+			if(!b.equalsIgnoreCase(name))
 			{
 				Assert.assertFalse(false, "Roles is inactive.");
-				System.out.println("Test Failed");
+				//System.out.println("Test Failed");
 				break;
 			}
 			else
@@ -696,12 +694,12 @@ public class EmployeeTest extends base {
 	}
 
 	//Verify Add Active Roles
-	@Test()
-	public void Verify_Add_Active_Inquiry_Status() throws InterruptedException {
+	@Test(dataProvider="AddActiveRoles")
+	public void Verify_Add_Active_Inquiry_Status(String Rolename,String name) throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
 		Role.getRoleclick().click();
-		Thread.sleep(2000);
+		Role.getsearchRole().sendKeys(Rolename+Keys.ENTER);
 		Role.getEditRolebuttonclick().click();
 		Thread.sleep(2000);
 		Role.getaddrolename().sendKeys(Keys.TAB);
@@ -719,7 +717,7 @@ public class EmployeeTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Adminnewside"))
+			if(b.equalsIgnoreCase(name))
 			{
 				Assert.assertTrue(true, "Role is Active.");
 				System.out.println("Test Pass");
@@ -829,6 +827,19 @@ public class EmployeeTest extends base {
 		return new Object[][] {
 				//Firstname
 				{ "Automation Test" } };
+	}
+	
+	//DataProvider for Add Inactive Roles
+	@DataProvider
+	public Object[][] AddInactiveRoles() {
+		return new Object[][] {
+				{ " Adminnewside "," Adminnewside " } };
+	}
+	//DataProvider for Add Active Roles
+	@DataProvider
+	public Object[][] AddActiveRoles() {
+		return new Object[][] {
+			{ " Adminnewside "," Adminnewside " } };
 	}
 	
 }
