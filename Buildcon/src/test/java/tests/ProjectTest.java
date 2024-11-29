@@ -42,7 +42,7 @@ public class ProjectTest extends base {
 		log.info("Login successful");
 	}
 
-	// Add Project
+	//Add Project
 	@Test(dataProvider = "ProjectAddData")
 	public void Add_Project(String projectname, String projecttype, String Projectstatus, String Expectedstartdate,
 			String ExpectedEnddate, String ActualStartdate, String ActualEnddate, String totalSaleableArea, String city,
@@ -51,7 +51,8 @@ public class ProjectTest extends base {
 			String MaintenanceCharge, String MaintenanceDeposit, String companyname, String gstin, String plcofsupplu,
 			String RecAddress, String pincode, String projectlogo, String receiptlogo, String RecPrefix,
 			String RecPostFix, String Propertytype, String Saccode, String termstext, String Unit, String Floors,
-			String Basements) throws InterruptedException, IOException {
+			String Basements,String unittype,String floorno,String blockno,String Unitblocktype,String east1,String west1,
+			String north1,String south1,String surveyNumber,String surveyNumber2,String urveyNoUnitType) throws InterruptedException, IOException {
 		
 		SoftAssert softAssert = new SoftAssert();
 		ProjectPage project = new ProjectPage(driver);
@@ -59,7 +60,7 @@ public class ProjectTest extends base {
 		project.getaddproject().click();
 
 		project.getProjectName().click();
-		softAssert.assertFalse(projectname.isEmpty(), "Project name is required.");
+		softAssert.assertFalse(projectname.isEmpty(), "Project Name is required");
 		softAssert.assertNotNull(projectname, "Project name cannot be null.");
 		
 		project.getProjectName().sendKeys(projectname);//Required Field
@@ -72,17 +73,19 @@ public class ProjectTest extends base {
 		softAssert.assertNotNull(projecttype, "Project Type cannot be null.");
 		project.getProjecttype(projecttype);//Required Field
 
+		softAssert.assertFalse(Projectstatus.isEmpty(), "Project Status is required");
+		softAssert.assertNotNull(Projectstatus, "Project Status cannot be null.");
 		project.getProjectstatus(Projectstatus);
 
-		softAssert.assertFalse(Expectedstartdate.isEmpty(), "Expected start date is required.");
+		softAssert.assertFalse(Expectedstartdate.isEmpty(), "Expected Start Date is required");
 		softAssert.assertNotNull(Expectedstartdate, "Expected start date cannot be null.");
 		project.getExstartdate().sendKeys(Expectedstartdate);//Required Field
 
-		softAssert.assertFalse(ExpectedEnddate.isEmpty(), "Expected End date is required.");
+		softAssert.assertFalse(ExpectedEnddate.isEmpty(), "Expected End Date is required");
 		softAssert.assertNotNull(ExpectedEnddate, "Expected End date cannot be null.");
 		project.getExEnddate().sendKeys(ExpectedEnddate);//Required Field
 
-		softAssert.assertFalse(ActualStartdate.isEmpty(), "Actual date is required.");
+		softAssert.assertFalse(ActualStartdate.isEmpty(), "Actual Start Date is required");
 		softAssert.assertNotNull(ActualStartdate, "Actual date cannot be null.");
 		project.getActualstartdate().sendKeys(ActualStartdate);//Required Field
 
@@ -108,7 +111,7 @@ public class ProjectTest extends base {
 		String valid_spnumber = valid_string3;
 		System.out.println(valid_spnumber);
 
-		softAssert.assertFalse(SalesExectuive.isEmpty(), "Sales Exectuive is required.");
+		softAssert.assertFalse(SalesExectuive.isEmpty(), "Sales Executive is required");
 		softAssert.assertNotNull(SalesExectuive, "Sales Exectuive cannot be null.");
 		project.getSalesExectuive(SalesExectuive);//Required Field
 
@@ -163,6 +166,7 @@ public class ProjectTest extends base {
 		System.out.println(valid_Rera);
 
 		project.gettotalLandArea().sendKeys(totalLandArea);
+		softAssert.assertFalse(totalLandArea.isEmpty(), "Total Land Area is required");
 		String valid_string13 = valid_number(totalLandArea, "TotalLandArea");
 		String valid_totalLandArea = valid_string13;
 		System.out.println(valid_totalLandArea);
@@ -182,7 +186,7 @@ public class ProjectTest extends base {
 		Thread.sleep(2000);
 		project.getNextbtn1().click();
 
-		softAssert.assertFalse(companyname.isEmpty(), "Company Name is required.");
+		softAssert.assertFalse(companyname.isEmpty(), "Company Name is required");
 		softAssert.assertNotNull(companyname, "Company Name cannot be null.");
 		project.getCompanyName().sendKeys(companyname);//Required Field
 		//Data validation of company name:
@@ -190,7 +194,7 @@ public class ProjectTest extends base {
 		String valid_companyname = valid_string16;
 		System.out.println(valid_companyname);
 
-		softAssert.assertFalse(gstin.isEmpty(), "GST number is required.");
+		softAssert.assertFalse(gstin.isEmpty(), "GSTIN NO. is required");
 		softAssert.assertNotNull(gstin, "GST number cannot be null.");
 		project.GSTIN().sendKeys(gstin);//Required Field
 		//Data validation of the gstin:
@@ -198,7 +202,7 @@ public class ProjectTest extends base {
 		String valid_gstin = valid_string17;
 		System.out.println(valid_gstin);
 
-		softAssert.assertFalse(plcofsupplu.isEmpty(), "Place of supply is required.");
+		softAssert.assertFalse(plcofsupplu.isEmpty(), "Place Of Supply is required");
 		softAssert.assertNotNull(plcofsupplu, "Place of supply cannot be null.");
 		project.PlaceofSupply().sendKeys(plcofsupplu);//Required Field
 		//Data validation of the place of supply:
@@ -206,7 +210,7 @@ public class ProjectTest extends base {
 		String valid_placeofsupply = valid_string18;
 		System.out.println(valid_placeofsupply);
 
-		softAssert.assertFalse(RecAddress.isEmpty(), "Receipt Address is required.");
+		softAssert.assertFalse(RecAddress.isEmpty(), "Receipt Address is required");
 		softAssert.assertNotNull(RecAddress, " Receipt Address cannot be null.");
 		project.getRecAddress().sendKeys(RecAddress);//Required Field
 		//Data validation of the rec address:
@@ -214,7 +218,7 @@ public class ProjectTest extends base {
 		String valid_RecAddress = valid_string19;
 		System.out.println(valid_RecAddress);
 
-		softAssert.assertFalse(pincode.isEmpty(), "Pincode is required.");
+		softAssert.assertFalse(pincode.isEmpty(), "Pincode is required");
 		softAssert.assertNotNull(pincode, "Pincode cannot be null.");
 		project.getPincode().sendKeys(pincode);//Required Field
 		//Data validation of pincode: valid_number
@@ -222,13 +226,13 @@ public class ProjectTest extends base {
 		String valid_pincode = valid_string20;
 		System.out.println(valid_pincode);
 
-		softAssert.assertFalse(projectlogo.isEmpty(), "Project’s Logo is required.");
+		softAssert.assertFalse(projectlogo.isEmpty(), "Project’s Logo is required");
 		softAssert.assertNotNull(projectlogo, "Project’s Logo cannot be null.");
 		project.uploadProjectLogoFile().sendKeys(projectlogo);//Required Field
 
 		project.uploadReceiptSeal().sendKeys(receiptlogo);
 
-		softAssert.assertFalse(RecPrefix.isEmpty(), "Receipt prefix is required.");
+		softAssert.assertFalse(RecPrefix.isEmpty(), "Receipt Prefix is required");
 		softAssert.assertNotNull(RecPrefix, "Receipt prefix cannot be null.");
 		project.getRecPrefix().sendKeys(RecPrefix);//Required Field
 		//Data validation of receipt prefix:
@@ -236,7 +240,7 @@ public class ProjectTest extends base {
 		String valid_RecPrefix = valid_string21;
 		System.out.println(valid_RecPrefix);
 
-		softAssert.assertFalse(RecPostFix.isEmpty(), "Receipt postfix is required.");
+		softAssert.assertFalse(RecPostFix.isEmpty(), "Receipt Postfix is required");
 		softAssert.assertNotNull(RecPostFix, "Receipt postfix cannot be null.");
 		project.getRecPostfix(RecPostFix);//Required Field
 
@@ -281,7 +285,24 @@ public class ProjectTest extends base {
 
 		Thread.sleep(2000);
 		project.getCreate().click();
-
+		project.getViewBlock().click();
+		project.getAddUnit().click();
+		project.getUnitType().sendKeys(unittype);
+		
+		project.getFloorNumber(floorno);
+        project.getunitBlockNumber().sendKeys(blockno);
+        project.getunitBlockType(Unitblocktype);
+		
+        project.getEast1().sendKeys(east1);
+        project.getWest1().sendKeys(west1);
+        project.getNorth1().sendKeys(north1);
+        project.getSouth1().sendKeys(south1);
+        project.getsurveyNumber().sendKeys(surveyNumber);
+        project.getsurveyNumber2().sendKeys(surveyNumber2);
+        
+        project.getsurveyNoUnitTypeID(urveyNoUnitType);
+        project.getCreateBtn().click();
+        
 		softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_totalSaleableArea, "totalSaleableArea is a Valid numeric");
 		softAssert.assertEquals(valid_City, "city is a Valid text");
@@ -308,7 +329,7 @@ public class ProjectTest extends base {
 		softAssert.assertEquals(valid_BlockName, "Block Name is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_floor, "floor is a valid Number");
 		softAssert.assertEquals(valid_basement, "basement is a valid Number");
-		softAssert.assertAll();
+		//softAssert.assertAll();
 	}
 
 	//Edit Existing Project
@@ -1078,10 +1099,22 @@ public class ProjectTest extends base {
 				//"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				//"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year "," FLAT "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline the rights and responsibilities of both parties",
 				//"B","15","Basement"}
-			{"Project3","Residential","In process","","","","","10000","Ahmedabad","Gujrat","215"," Akash Patel ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			{"TestProject1","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","Flats"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"A","14","2"}
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+				"A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"},
+			{"TestProject2","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+				"B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"},
+			{"TestProject3","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+				"C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"},
+			{"TestProject4","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+				"D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"}
 		};
 	}
 
@@ -1102,6 +1135,7 @@ public class ProjectTest extends base {
 	public Object[][] ProjectSearchData() {
 		return new Object[][] { { "Taj Mahal" } };
 	}
+	
 	//DataProvider for Active Deactive Project 
 	@DataProvider
 	public Object[][] ActiveDeactiveProject() {

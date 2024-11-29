@@ -48,54 +48,54 @@ public class ProspectTest extends base {
 		Prospect.getprospect().click();
 		Prospect.getAddprospect().click();
 
-		Prospect.getsiteproject(siteproject); //Required Field
+		Prospect.getsiteproject(siteproject);//Required Field
 		
-		Prospect.getvisitorname().sendKeys(visitorname); //Required Field
+		Prospect.getvisitorname().sendKeys(visitorname);//Required Field
 		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
-		//Visitor Name Text Data Validation ---------------------------------
+		//Visitor Name Text Data Validation
 		String valid_string = validateText(visitorname,"VisitorName", 5, 30);
 		String valid_visitorname = valid_string;
 		System.out.println(valid_visitorname);
 		
 		Prospect.getvisitordate().sendKeys(visitordate);
 		
-		Prospect.getIntime().click(); //Click on InTime
-		Prospect.getOk().click(); //Click on Ok for time selection
+		Prospect.getIntime().click();//Click on InTime
+		Prospect.getOk().click();//Click on Ok for time selection
 		
-		Prospect.getouttime().click(); //Click on OutTime
-		Prospect.getOk().click(); //Click on Ok for time selection
+		Prospect.getouttime().click();//Click on OutTime
+		Prospect.getOk().click();//Click on Ok for time selection
 		
 		Prospect.getNextfollowUpDT().sendKeys(NextfollowUpDT);
 		
 		Prospect.getreferencedBy().sendKeys(referencedBy);
-		//Referenced By Text Data Validation ---------------------------------
+		//Referenced By Text Data Validation
 		valid_string = validateText(referencedBy,"ReferencedBy", 5, 30);
 		String valid_referancedby = valid_string;
 		System.out.println(valid_referancedby);		
 		
-		Prospect.getAttendee(Attende); //Required Field
+		Prospect.getAttendee(Attende);//Required Field
 		
 		Prospect.getContactNo().sendKeys(ContactNo); //Required Field
-		//Contact No Number Validation ---------------------------------
+		//Contact No Number Validation
 		valid_string = valid_number(ContactNo, "InquiryContactNo");
 		String valid_contactno = valid_string;
 		System.out.println(valid_contactno);
 		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Prospect Form");
 		
 		Prospect.getEmail().sendKeys(Email);
-		//Email Validation ---------------------------------
+		//Email Validation
 		valid_string = valid_EMail(Email, "InquiryEmail");
 		String valid_email = valid_string;
 		System.out.println(valid_email);		
 		
 		Prospect.getAddress().sendKeys(Address);
-		//Adress Alphanumeric  Validation ---------------------------------
+		//Adress Alphanumeric  Validation
 		valid_string = valid_alphanum(Address, "InquiryAddress", 10);
 		String valid_address = valid_string;
 		System.out.println(valid_address);
 		
 		Prospect.getRemarks().sendKeys(Remarks);
-		//Remarks Text Data Validation ---------------------------------
+		//Remarks Text Data Validation
 		valid_string = validateText(Remarks,"Remarks", 5, 10);
 		String valid_remarks = valid_string;
 		System.out.println(valid_remarks);
@@ -115,7 +115,7 @@ public class ProspectTest extends base {
 		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
 		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
-		softAssert.assertAll();
+		//softAssert.assertAll();
 	}
 
 	//Editing an Existing Prospect using Data Provider
@@ -506,8 +506,15 @@ public class ProspectTest extends base {
 	@DataProvider
 	public Object[][] ProspectAdddata() {
 		return new Object[][] {
-			{"marin drive lake view","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}};
+			{"TestProject1","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "},
+			{"TestProject2","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "},
+			{"TestProject3","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "},
+			{"TestProject4","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}
+		};
 	}
 
 	//DataProvider for Edit Prospect

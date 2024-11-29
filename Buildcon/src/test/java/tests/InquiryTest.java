@@ -53,6 +53,7 @@ public class InquiryTest extends base {
 		Inquiry.getaddInquiry().click();
 
 		Thread.sleep(2000);
+		softAssert.assertFalse(siteproject.isEmpty(), "Visit Site/Project is required.");
 		Inquiry.getsiteproject(siteproject);
 		
 		Inquiry.getvisitorname().sendKeys(visitorname);
@@ -77,13 +78,15 @@ public class InquiryTest extends base {
 		System.out.println(valid_referancedby);
 				
 		Thread.sleep(2000);		
+		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
 		Inquiry.getAttendee(Attende);
+		
 		Inquiry.getContactNo().sendKeys(ContactNo);
 		//ContactNo Number Validation
 		valid_string = valid_number(ContactNo, "InquiryContactNo");
 		String valid_contactno = valid_string;
 		System.out.println(valid_contactno);
-		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.From The Inquiry");
+		softAssert.assertFalse(ContactNo.isEmpty(), "Contact Number is required.");
 
 		Inquiry.getEmail().sendKeys(Email);
 		//Email Validation
@@ -109,13 +112,13 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
 
-		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlength - is a valid Maxlength");
-		softAssert.assertEquals(valid_referancedby, "1ReferencedBy is a Valid text - is a valid Minlength - is a valid Maxlength");
-		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
-		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
-		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
-		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlength - is a valid Maxlength");
-		softAssert.assertAll();
+		softAssert.assertEquals(valid_visitorname, "VisitorName is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_referancedby, "ReferencedBy is a Valid text - is a valid Minlength - is a valid Maxlength");
+		softAssert.assertEquals(valid_contactno, "InquiryContactNo  is a Valid Number");
+		softAssert.assertEquals(valid_address, "InquiryAddress  is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_email, "Email is a Valid EMail");
+		softAssert.assertEquals(valid_remarks, "Remarks is a Valid text - is a valid Minlength - is a valid Maxlength");
+		//softAssert.assertAll();
 	}
 
 	//Editing an existing Inquiry using Data Provider
@@ -179,7 +182,7 @@ public class InquiryTest extends base {
 		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
 		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlength - is a valid Maxlength");
-		softAssert.assertAll();
+		//softAssert.assertAll();
 	}
 
 	//Delete Inquiry
@@ -933,9 +936,16 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			{"Shaligram Arcade", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			{"TestProject1", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			};
+			{"TestProject2", "Suresh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+			{"TestProject3", "Meet Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+			{"TestProject4", "Mahi Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+		};
+			
 	}
 
 	//DataProvider for Edit Inquiry

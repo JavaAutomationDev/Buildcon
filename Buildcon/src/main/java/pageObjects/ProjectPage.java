@@ -668,12 +668,16 @@ public class ProjectPage {
   		option.click();
   	}
   
-	//Page object for Floor Number
+  	//Page object for Floor Number
   	By floorNumber=By.xpath("//mat-select[@formcontrolname='floorNumber']");
-    public WebElement getFloorNumber() {
-    	return driver.findElement(floorNumber);
-    }
-	
+  	public void getFloorNumber(String floorno) {
+  		WebElement dropdown = driver.findElement(floorNumber);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + floorno + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
+  	}
+
     //Page object for Unit Block Number
     By unitBlockNumber=By.xpath("//input[@formcontrolname='unitBlockNumber']");
     public WebElement getunitBlockNumber() {

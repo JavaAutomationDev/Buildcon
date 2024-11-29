@@ -20,13 +20,12 @@ public class RoleRightsPage {
 		base.failedElementName = "Inquiry-InquiryMenu";
 		return driver.findElement(Inquiry);
 	}
-	//Page object for Add Inquiry
+	//Page object for Add Inquiry Button
 	By AddInquiry = By.xpath("//span[contains(text(),'Add New Inquiry')]");
 	public WebElement getaddInquiry() {
 		base.failedElementName = "Inquiry-Add";
-		return driver.findElement(AddInquiry);
+		return driver.findElement(AddInquiry);	
 	}
-
 	//Page object for Edit Inquiry Button
 	By Edit = By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[2]/"
@@ -35,8 +34,7 @@ public class RoleRightsPage {
 		base.failedElementName = "Inquiry-Edit";
 		return driver.findElement(Edit);
 	}
-
-	//Page object for Delete Button
+	//Page object for Inquiry Delete Button
 	By deleteinquiry =By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[2]");
 	public WebElement getDeleteInquiry() {
@@ -197,7 +195,6 @@ public class RoleRightsPage {
 		base.failedElementName = "Collection-clickcollection";
 		return driver.findElement(Collection);
 	}
-	
 	//Page object for Export Excel Collecction
 	By ExportExcelCollecction=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content/main/vex-collections/div/div[1]/div[2]/div[2]/div[4]/button");
@@ -213,7 +210,6 @@ public class RoleRightsPage {
 		base.failedElementName = "Document-DocumentModule";
 		return driver.findElement(document);
 	}
-
 	//Page object for Add Document Module
 	By Adddocument = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-documents/div/div[1]/div[2]/button");
