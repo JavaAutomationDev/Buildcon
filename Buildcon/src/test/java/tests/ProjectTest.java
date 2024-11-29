@@ -52,7 +52,8 @@ public class ProjectTest extends base {
 			String RecAddress, String pincode, String projectlogo, String receiptlogo, String RecPrefix,
 			String RecPostFix, String Propertytype, String Saccode, String termstext, String Unit, String Floors,
 			String Basements,String unittype,String floorno,String blockno,String Unitblocktype,String east1,String west1,
-			String north1,String south1,String surveyNumber,String surveyNumber2,String urveyNoUnitType) throws InterruptedException, IOException {
+			String north1,String south1,String surveyNumber,String surveyNumber2,String urveyNoUnitType,String paymentplan,
+			String Paymnetphase,String completepercentage,String paymentpercentage) throws InterruptedException, IOException {
 		
 		SoftAssert softAssert = new SoftAssert();
 		ProjectPage project = new ProjectPage(driver);
@@ -264,27 +265,30 @@ public class ProjectTest extends base {
 		project.getSave().click();
 		Thread.sleep(2000);
 		project.getAddProjectBlock().click();
-		
+		Thread.sleep(2000);
 		project.getUnitBlock().sendKeys(Unit);
 		//Data validation of the block:
 		String valid_string23 = valid_alphanum(Unit, "Block Name", 10);
 		String valid_BlockName= valid_string23;
 		System.out.println(valid_BlockName);
-     
+		
+		Thread.sleep(2000);
 		project.getNumberOfFloors().sendKeys(Floors);
 		//Data validation of the floor:
 		String valid_string24 = valid_number(Floors, "floor");
 		String valid_floor= valid_string24;
 		System.out.println(valid_floor);
 		
+		Thread.sleep(2000);
 		project.getBasements().sendKeys(Basements);
 		//Data validation of the basement:
 		String valid_string25 = valid_number(Basements, "basement");
 		String valid_basement= valid_string25;
 		System.out.println(valid_basement);
-
+        Thread.sleep(2000);
+        
+		project.getProjectBlockCreatebtn().click();
 		Thread.sleep(2000);
-		project.getCreate().click();
 		project.getViewBlock().click();
 		project.getAddUnit().click();
 		project.getUnitType().sendKeys(unittype);
@@ -301,9 +305,19 @@ public class ProjectTest extends base {
         project.getsurveyNumber2().sendKeys(surveyNumber2);
         
         project.getsurveyNoUnitTypeID(urveyNoUnitType);
-        project.getCreateBtn().click();
+        project.getunitCreateBtn().click();
+        project.getBlockconfigurationNextbtn().click();
         
-		softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
+        project.getAddPaymentPlan().click();
+        project.getPaymentPaln(paymentplan);
+        project.getphasename().sendKeys(Paymnetphase);
+        project.getCompletionPercentage().sendKeys(completepercentage);
+        project.getPaymentPercentage().sendKeys(paymentpercentage);
+        project.getPaymentPlanCreateBtn().click();
+        
+        project.getSubmitBtn().click();
+        
+        softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_totalSaleableArea, "totalSaleableArea is a Valid numeric");
 		softAssert.assertEquals(valid_City, "city is a Valid text");
 		softAssert.assertEquals(valid_spnumber, "spno is a Valid Alpha-Numeric");
@@ -1102,19 +1116,19 @@ public class ProjectTest extends base {
 			{"TestProject1","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"},
+				"A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
 			{"TestProject2","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"},
+				"B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
 			{"TestProject3","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"},
+				"C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
 			{"TestProject4","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET"}
+				"D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"}
 		};
 	}
 

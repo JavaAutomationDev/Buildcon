@@ -431,9 +431,10 @@ public class ProjectPage {
     //Block Configuration
 	//Page object for Add Project Block
 	By addprojectblock=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
-			+ "main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[1]/vex-unit-block-list/div/button");	
+			+ "main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[1]/vex-unit-block-list/div/button");
+	
 	public WebElement getAddProjectBlock() {
-		base.failedElementName = "Project-addProjectBlock";
+		base.failedElementName = "Project-AddProjectBlock";
 		return driver.findElement(addprojectblock);
 	}
 	//Page object for Block Name
@@ -455,8 +456,21 @@ public class ProjectPage {
 		base.failedElementName = "Project-Basements";
 		return driver.findElement(basements);
 	}
-	
-	//View Block Details
+	//Page object for Project Block Create btn
+	By ProjectBlockCreatebtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-configure-unit-block/div/mat-dialog-actions/button[2]");	
+	public WebElement getProjectBlockCreatebtn() {
+		base.failedElementName = "Project-ProjectBlockCreatebtn";
+		return driver.findElement(ProjectBlockCreatebtn);
+	}
+    //Page object for Block configuration Next btn
+	By BlockconfigurationNextbtn=By.xpath(" /html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[2]/button[2]");
+	public WebElement getBlockconfigurationNextbtn() {
+		base.failedElementName = "Project-BlockconfigurationNextbtn";
+		return driver.findElement(BlockconfigurationNextbtn);
+	}
+			
+			
+			//View Block Details
 	//Page object for View Block Details
 	By viewblock=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/"
 			+ "div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[1]/vex-unit-block-list/mat-dialog-content/div/div/div[3]/button[1]");	
@@ -747,9 +761,9 @@ public class ProjectPage {
   		option.click();
     }
     
-    //Page objcet for Create Button
+    //Page objcet for Unit Create Button
     By createbtn=By.xpath("/html/body/div[4]/div[4]/div/mat-dialog-container/div/div/vex-unit-block-details/div/mat-dialog-actions/button[2]");
-    public WebElement getCreateBtn() {
+    public WebElement getunitCreateBtn() {
     	return driver.findElement(createbtn);
     }
   
@@ -801,8 +815,12 @@ public class ProjectPage {
 	
 	//Page object for Payment Plan
 	By paymentpaln=By.xpath("//mat-select[@formcontrolname='PaymentPlanDDId']");	
-	public WebElement getPaymentPaln() {
-		return driver.findElement(paymentpaln);
+	public void getPaymentPaln(String paymentPlan) {
+  		WebElement dropdown = driver.findElement(paymentpaln);
+  		dropdown.click();
+  		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + paymentPlan + "')]";  
+  		WebElement option = driver.findElement(By.xpath(optionXPath));
+  		option.click();
 	}
 	
 	//Page object for Phase Name
@@ -823,19 +841,11 @@ public class ProjectPage {
 		return driver.findElement(paymentpercentage);
 	}
 	
-	//Page object for Create
-	By create=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-configure-unit-block/div/mat-dialog-actions/button[1]");	
-	public WebElement getCreate() {
-		base.failedElementName = "Project-Create";
-		return driver.findElement(create);
-	}
-	
-	//Page object for Toster Message
-	//This project name is already in use. Please choose a different name.
-	By toaster=By.xpath("");	
-	public WebElement getToaster() {
-		base.failedElementName = "Project-Toaster";
-		return driver.findElement(toaster);
+	//Page object for Payment Plan Create Btn
+	By PaymentPlanCreateBtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-payment-plan/div/mat-dialog-actions/button[2]");	
+	public WebElement getPaymentPlanCreateBtn() {
+		base.failedElementName = "Project-PaymentPlanCreateBtn";
+		return driver.findElement(PaymentPlanCreateBtn);
 	}
 	
 	//Page object for Edit Button
@@ -916,5 +926,11 @@ public class ProjectPage {
 	By Editbtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-projects/div/div[2]/div/div/table/tbody/tr[1]/td[11]/div/a[2]");
 	public WebElement getEditbtn() {
 		return driver.findElement(Editbtn);
+	}
+	
+	//Page object for Submit Button
+	By Submitbtn = By.xpath("//input[@formcontrolname='projectName']");
+	public WebElement getSubmitBtn() {
+		return driver.findElement(Submitbtn);
 	}
 }

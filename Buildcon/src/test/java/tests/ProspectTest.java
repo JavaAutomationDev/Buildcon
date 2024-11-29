@@ -507,9 +507,9 @@ public class ProspectTest extends base {
 	public Object[][] ProspectAdddata() {
 		return new Object[][] {
 			{"TestProject1","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "},
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A Block","Unit No - A (Ground Floor)"},
 			{"TestProject2","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "},
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","B Block","Unit No - A - 101 (Ground Floor) "},
 			{"TestProject3","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
 				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "},
 			{"TestProject4","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
