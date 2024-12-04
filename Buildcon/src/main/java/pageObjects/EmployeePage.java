@@ -135,7 +135,7 @@ public class EmployeePage {
 
 	//Page object for Project Access
 	By projectaccess= By.xpath("//mat-select[@formcontrolname='projectId']");
-	public void getProjectAccess(String Proejct) {
+	public void getProjectAccess(String Proejct) throws InterruptedException {
 		WebElement dropdown = driver.findElement(projectaccess);
 		dropdown.click();
 		
@@ -145,6 +145,7 @@ public class EmployeePage {
 		String optionXPath = "//mat-option//span[contains(text(),'" + Proejct + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
+		Thread.sleep(2000);
 		dropdown.sendKeys(Keys.ESCAPE); 
 	}
 
@@ -164,8 +165,7 @@ public class EmployeePage {
 		return driver.findElement(Pancard);
 	}
 	//Page object for Select Gender
-	By Gender= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-save"
-			+ "/div/form/mat-dialog-content/div[3]/div[1]/mat-radio-group/mat-radio-button[1]/div/label");
+	By Gender= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-save/div/form/mat-dialog-content/div[3]/div[1]/mat-radio-group/mat-radio-button[1]/div/div/div[3]");
 	public WebElement SelectGender() {
 		base.failedElementName = "Employee-Gender";
 		return driver.findElement(Gender);

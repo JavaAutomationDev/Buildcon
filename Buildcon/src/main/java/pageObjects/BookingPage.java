@@ -495,8 +495,6 @@ public class BookingPage {
 		//			option.click();
 	}		
 	//Page object for Select Project dropdown
-
-
 	public void getselectproject(String selectproject) throws InterruptedException {
 		driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[2]/div/div[3]/mat-form-field/div[1]/div[2]/div/mat-select")).click();
 		Thread.sleep(10000);

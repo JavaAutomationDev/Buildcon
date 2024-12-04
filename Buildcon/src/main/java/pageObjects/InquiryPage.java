@@ -281,9 +281,6 @@ public class InquiryPage {
 				+ "/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/"
 				+ "mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[2]"));
 		base.failedElementName = "Inquiry-Delete";
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", deleteButton);
-		js.executeScript("arguments[0].click();", deleteButton);
 		return deleteButton;
 	}
 	

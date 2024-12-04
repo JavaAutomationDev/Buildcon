@@ -71,6 +71,7 @@ public class AgenciesTest extends base {
 	//Close driver
 	@AfterMethod
 	public void teaddown() {
+		if(driver!=null)
 		driver.close();
 	}
 
@@ -82,7 +83,7 @@ public class AgenciesTest extends base {
 			{"Akash Infotech Ltd",   "MK457",     "A0074",   "09AAACH7409R1ZZ", "U12345AB6784CDE123456",   "",       "",     "40",   "Akash@mail.com" 
 				//address1,          address2,         city,        state,        pincode,   mobileno,          logo
 				,"Bopal Ambli road", "Near BigBazar", "Bopal", "Andhra Pradesh",  "380058", "9856231452", "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
-				//adminfirstname, adminmiddlename, adminlastname, adminmobile,  adminemail,   admindesignation
+				//adminfirstname, adminmiddlename, adminlastname, adminmobile,  adminemail,   admindesignation,   Module Access
 				"Akash",        "SDET",          "Patel",     "8754210235", "ak@mail.com",  "SDET-QA",          "Documents"}};
 	}
 }

@@ -297,13 +297,19 @@ public class ProjectTest extends base {
         project.getunitBlockNumber().sendKeys(blockno);
         project.getunitBlockType(Unitblocktype);
 		
+        Thread.sleep(2000);
         project.getEast1().sendKeys(east1);
+        Thread.sleep(2000);
         project.getWest1().sendKeys(west1);
+        Thread.sleep(2000);
         project.getNorth1().sendKeys(north1);
+        Thread.sleep(2000);
         project.getSouth1().sendKeys(south1);
+        Thread.sleep(2000);
         project.getsurveyNumber().sendKeys(surveyNumber);
+        Thread.sleep(2000);
         project.getsurveyNumber2().sendKeys(surveyNumber2);
-        
+        Thread.sleep(2000);
         project.getsurveyNoUnitTypeID(urveyNoUnitType);
         project.getunitCreateBtn().click();
         project.getBlockconfigurationNextbtn().click();
@@ -348,11 +354,12 @@ public class ProjectTest extends base {
 
 	//Edit Existing Project
 	@Test(dataProvider = "ProjectEditData")
-	public void Edit_Project(String newprojectname,String newprojecttype,String newProjectstatus, String newtotalSaleableArea, String newtotalLandArea,
+	public void Edit_Project(String projectname,String newprojectname,String newprojecttype,String newProjectstatus, String newtotalSaleableArea, String newtotalLandArea,
 			String newcompanyname,String newgstin,String newplaceofsupply,String newRecPostFix)throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
+		project.getSearch().sendKeys(projectname + Keys.ENTER);
 		project.getEdit();
 
 		project.getProjectName().clear();
@@ -454,14 +461,15 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Add Inactive Project status in Project
-	@Test()
-	public void Verify_Add_Inactive_Project_Status_Project() throws InterruptedException {
-		Projectstatuspage unit = new Projectstatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getprojectstatusclick().click();
-		unit.getprojectstatuseditclick().click();
-		unit.getActiveStatus().click();
-		unit.getprojectstatussave().click();
+	@Test(dataProvider="AddInactiveProjectStatusProject")
+	public void Verify_Add_Inactive_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
+		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
+		Projectstatus.getconfiguration().click();
+		Projectstatus.getprojectstatusclick().click();
+		Projectstatus.getprojectStatussearchedchecked().sendKeys(projectstatus+Keys.ENTER);
+		Projectstatus.getprojectstatuseditclick().click();
+		Projectstatus.getActiveStatus().click();
+		Projectstatus.getprojectstatussave().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -473,9 +481,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Akash Status")) {
+			if (!b.equalsIgnoreCase(statusname)) {
 				Assert.assertFalse(false, "Project status is Inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -488,14 +496,15 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Add Active Project Status in Project
-	@Test()
-	public void Verify_Add_Active_Project_Status_Project() throws InterruptedException {
-		Projectstatuspage unit = new Projectstatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getprojectstatusclick().click();
-		unit.getprojectstatuseditclick().click();
-		unit.getActiveStatus().click();
-		unit.getprojectstatussave().click();
+	@Test(dataProvider="AddActiveProjectStatusProject")
+	public void Verify_Add_Active_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
+		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
+		Projectstatus.getconfiguration().click();
+		Projectstatus.getprojectstatusclick().click();
+		Projectstatus.getprojectStatussearchedchecked().sendKeys(projectstatus+Keys.ENTER);
+		Projectstatus.getprojectstatuseditclick().click();
+		Projectstatus.getActiveStatus().click();
+		Projectstatus.getprojectstatussave().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -507,9 +516,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Akash Status")) {
+			if (!b.equalsIgnoreCase(statusname)) {
 				Assert.assertFalse(false, "Project status is Active.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -522,14 +531,15 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit InActive Project Status in Project
-	@Test()
-	public void Verify_Edit_Inactive_Project_Status_Project() throws InterruptedException {
-		Projectstatuspage unit = new Projectstatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getprojectstatusclick().click();
-		unit.getprojectstatuseditclick().click();
-		unit.getActiveStatus().click();
-		unit.getprojectstatussave().click();
+	@Test(dataProvider="EditInactiveProjectStatusProject")
+	public void Verify_Edit_Inactive_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
+		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
+		Projectstatus.getconfiguration().click();
+		Projectstatus.getprojectstatusclick().click();
+		Projectstatus.getprojectStatussearchedchecked().sendKeys(projectstatus+Keys.ENTER);
+		Projectstatus.getprojectstatuseditclick().click();
+		Projectstatus.getActiveStatus().click();
+		Projectstatus.getprojectstatussave().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -541,9 +551,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Akash Status")) {
+			if (!b.equalsIgnoreCase(statusname)) {
 				Assert.assertFalse(false, "Project status is Inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -556,14 +566,15 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit Active Project Status in Project
-	@Test()
-	public void Verify_Edit_Active_Project_Status_Project() throws InterruptedException {
-		Projectstatuspage unit = new Projectstatuspage(driver);
-		unit.getconfiguration().click();
-		unit.getprojectstatusclick().click();
-		unit.getprojectstatuseditclick().click();
-		unit.getActiveStatus().click();
-		unit.getprojectstatussave().click();
+	@Test(dataProvider="EditActiveProjectStatusProject")
+	public void Verify_Edit_Active_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
+		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
+		Projectstatus.getconfiguration().click();
+		Projectstatus.getprojectstatusclick().click();
+		Projectstatus.getprojectStatussearchedchecked().sendKeys(projectstatus+Keys.ENTER);
+		Projectstatus.getprojectstatuseditclick().click();
+		Projectstatus.getActiveStatus().click();
+		Projectstatus.getprojectstatussave().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -575,9 +586,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Akash Status")) {
+			if (!b.equalsIgnoreCase(statusname)) {
 				Assert.assertFalse(false, "Project status is Active.");
-				System.out.println("Test  failed");
+				System.out.println("Test failed");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -590,16 +601,17 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Add Inactive Project Type in Project
-	@Test()
-	public void Verify_Add_Inactive_ProjectType_Project() throws InterruptedException {
-		Projecttypespage projecttype = new Projecttypespage(driver);
-		projecttype.getconfiguration().click();
-		projecttype.projecttypesclick().click();
-		projecttype.geteditprojecttypes().click();
+	@Test(dataProvider="AddInactiveProjectTypeData")
+	public void Verify_Add_Inactive_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
+		Projecttypespage Projecttype = new Projecttypespage(driver);
+		Projecttype.getconfiguration().click();
+		Projecttype.projecttypesclick().click();
+		Projecttype.getsearchprojecttypes().sendKeys(projecttype+Keys.ENTER);
+		Projecttype.geteditprojecttypes().click();
 		Thread.sleep(4000);
-		projecttype.getActiveProject();
+		Projecttype.getActiveProject();
 		Thread.sleep(2000);
-		projecttype.getsavebuttonprojecttypes().click();
+		Projecttype.getsavebuttonprojecttypes().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -610,9 +622,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Addee")) {
+			if (!b.equalsIgnoreCase(typename)) {
 				Assert.assertFalse(false, "Project Type is Inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -625,16 +637,17 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Add Active Project Type in Project
-	@Test()
-	public void Verify_Add_Active_ProjectType_Project() throws InterruptedException {
-		Projecttypespage projecttype = new Projecttypespage(driver);
-		projecttype.getconfiguration().click();
-		projecttype.projecttypesclick().click();
-		projecttype.geteditprojecttypes().click();
+	@Test(dataProvider="AddActiveProjectTypeData")
+	public void Verify_Add_Active_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
+		Projecttypespage Projecttype = new Projecttypespage(driver);
+		Projecttype.getconfiguration().click();
+		Projecttype.projecttypesclick().click();
+		Projecttype.getsearchprojecttypes().sendKeys(projecttype+Keys.ENTER);
+		Projecttype.geteditprojecttypes().click();
 		Thread.sleep(4000);
-		projecttype.getActiveProject();
+		Projecttype.getActiveProject();
 		Thread.sleep(2000);
-		projecttype.getsavebuttonprojecttypes().click();
+		Projecttype.getsavebuttonprojecttypes().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -645,7 +658,7 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Addee")) {
+			if (!b.equalsIgnoreCase(typename)) {
 				Assert.assertFalse(false, "Project Type is active.");
 				System.out.println("Test  failed");
 				break;
@@ -660,16 +673,17 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit Inactive Project Type in Project
-	@Test()
-	public void Verify_Edit_Inactive_ProjectType_Project() throws InterruptedException {
-		Projecttypespage projecttype = new Projecttypespage(driver);
-		projecttype.getconfiguration().click();
-		projecttype.projecttypesclick().click();
-		projecttype.geteditprojecttypes().click();
+	@Test(dataProvider="EditInActiveProjectTypeData")
+	public void Verify_Edit_Inactive_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
+		Projecttypespage Projecttype = new Projecttypespage(driver);
+		Projecttype.getconfiguration().click();
+		Projecttype.projecttypesclick().click();
+		Projecttype.getsearchprojecttypes().sendKeys(projecttype+Keys.ENTER);
+		Projecttype.geteditprojecttypes().click();
 		Thread.sleep(4000);
-		projecttype.getActiveProject();
+		Projecttype.getActiveProject();
 		Thread.sleep(2000);
-		projecttype.getsavebuttonprojecttypes().click();
+		Projecttype.getsavebuttonprojecttypes().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -680,9 +694,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Addee")) {
+			if (!b.equalsIgnoreCase(typename)) {
 				Assert.assertFalse(false, "Edit Project Type is Inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -695,16 +709,17 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit Active Project Type in Project
-	@Test()
-	public void Verify_Edit_Active_ProjectType_Project() throws InterruptedException {
-		Projecttypespage projecttype = new Projecttypespage(driver);
-		projecttype.getconfiguration().click();
-		projecttype.projecttypesclick().click();
-		projecttype.geteditprojecttypes().click();
+	@Test(dataProvider="EditActiveProjectTypeData")
+	public void Verify_Edit_Active_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
+		Projecttypespage Projecttype = new Projecttypespage(driver);
+		Projecttype.getconfiguration().click();
+		Projecttype.projecttypesclick().click();
+		Projecttype.getsearchprojecttypes().sendKeys(projecttype+Keys.ENTER);
+		Projecttype.geteditprojecttypes().click();
 		Thread.sleep(4000);
-		projecttype.getActiveProject();
+		Projecttype.getActiveProject();
 		Thread.sleep(2000);
-		projecttype.getsavebuttonprojecttypes().click();
+		Projecttype.getsavebuttonprojecttypes().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -715,9 +730,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Addee")) {
+			if (!b.equalsIgnoreCase(typename)) {
 				Assert.assertFalse(false, "Project Type is active.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -731,11 +746,12 @@ public class ProjectTest extends base {
 
 	//State With Project Relation
 	//Verify Add Inactive State in Project
-	@Test()
-	public void Verify_Add_Inactive_State_Project() throws InterruptedException {
+	@Test(dataProvider="AddInactiveStateData")
+	public void Verify_Add_Inactive_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
+		state.getstatesearching().sendKeys(Statename+Keys.ENTER);
 
 		Thread.sleep(2000);
 		state.editrow().click();
@@ -753,7 +769,7 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Gujrat")) {
+			if (!b.equalsIgnoreCase(name)) {
 				Assert.assertFalse(false, "State is inactive.");
 				System.out.println("Test  failed");
 				break;
@@ -768,12 +784,12 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Add Active State in Project
-	@Test()
-	public void Verify_Add_Active_State_Project() throws InterruptedException {
+	@Test(dataProvider="AddActiveStateData")
+	public void Verify_Add_Active_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
-
+		state.getstatesearching().sendKeys(Statename+Keys.ENTER);
 		Thread.sleep(2000);
 		state.editrow().click();
 		Thread.sleep(2000);
@@ -790,9 +806,9 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (b.equalsIgnoreCase("Gujrat")) {
+			if (b.equalsIgnoreCase(name)) {
 				Assert.assertFalse(false, "State is Active.");
-				System.out.println("Test  Pass State is Active ");
+				//System.out.println("Test Pass State is Active ");
 				break;
 			} else {
 				Counter = Counter + 1;
@@ -805,12 +821,12 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit Inactive State in Project
-	@Test()
-	public void Verify_Edit_Inactive_State_Project() throws InterruptedException {
+	@Test(dataProvider="EditInActiveStateData")
+	public void Verify_Edit_Inactive_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
-
+		state.getstatesearching().sendKeys(Statename+Keys.ENTER);
 		Thread.sleep(2000);
 		state.editrow().click();
 		Thread.sleep(2000);
@@ -827,7 +843,7 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Gujrat")) {
+			if (!b.equalsIgnoreCase(name)) {
 				Assert.assertFalse(false, "State is inactive.");
 				System.out.println("Test  failed");
 				break;
@@ -842,12 +858,12 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit Active State in Project
-	@Test()
-	public void Verify_Edit_Active_State_Project() throws InterruptedException {
+	@Test(dataProvider="EditActiveStateData")
+	public void Verify_Edit_Active_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
-
+		state.getstatesearching().sendKeys(Statename+Keys.ENTER);
 		Thread.sleep(2000);
 		state.editrow().click();
 		Thread.sleep(2000);
@@ -864,7 +880,7 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (b.equalsIgnoreCase("Gujrat")) {
+			if (b.equalsIgnoreCase(name)) {
 				Assert.assertFalse(false, "State is Active.");
 				System.out.println("Test  failed");
 				break;
@@ -878,15 +894,17 @@ public class ProjectTest extends base {
 		}
 	}
 
+	//Property Type
 	//Verify Edit Inactive Property Type in Project
-	@Test()
-	public void Verify_Edit_Inactive_Property_Type_Project() throws InterruptedException {
-		Propertytypepage unit = new Propertytypepage(driver);
-		unit.getconfiguration().click();
-		unit.getpropertytype().click();
-		unit.geteditpropertytype().click();
-		unit.getActiveStatus().click();
-		unit.getsavebuttoneditpropertytype().click();
+	@Test(dataProvider="EditInactivePropertyTypeData")
+	public void Verify_Edit_Inactive_Property_Type_Project(String propertyname, String name) throws InterruptedException {
+		Propertytypepage PropertyType = new Propertytypepage(driver);
+		PropertyType.getconfiguration().click();
+		PropertyType.getpropertytype().click();
+		PropertyType.getpropertytypesearch().sendKeys(propertyname+Keys.ENTER);
+		PropertyType.geteditpropertytype().click();
+		PropertyType.getActiveStatus().click();
+		PropertyType.getsavebuttoneditpropertytype().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -902,7 +920,7 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(" Bopal Flat ")) {
+			if (!b.equalsIgnoreCase(name)) {
 				Assert.assertFalse(false, "Property Type is Inactive.");
 				System.out.println("Test  failed");
 				break;
@@ -917,14 +935,15 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit Active Property Type in Project
-	@Test()
-	public void Verify_Edit_Active_Property_Type_Project() throws InterruptedException {
-		Propertytypepage unit = new Propertytypepage(driver);
-		unit.getconfiguration().click();
-		unit.getpropertytype().click();
-		unit.geteditpropertytype().click();
-		unit.getActiveStatus().click();
-		unit.getsavebuttoneditpropertytype().click();
+	@Test(dataProvider="EditActivePropertyTypeData")
+	public void Verify_Edit_Active_Property_Type_Project(String propertyname, String name) throws InterruptedException {
+		Propertytypepage PropertyType = new Propertytypepage(driver);
+		PropertyType.getconfiguration().click();
+		PropertyType.getpropertytype().click();
+		PropertyType.getpropertytypesearch().sendKeys(propertyname+Keys.ENTER);
+		PropertyType.geteditpropertytype().click();
+		PropertyType.getActiveStatus().click();
+		PropertyType.getsavebuttoneditpropertytype().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -940,7 +959,7 @@ public class ProjectTest extends base {
 		int Counter = 0;
 		for (int i = 0; i < a.size(); i++) {
 			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase("Bopal Flat")) {
+			if (!b.equalsIgnoreCase(name)) {
 				Assert.assertFalse(false, "Property Type is Active.");
 				System.out.println("Test Pass");
 				break;
@@ -954,14 +973,16 @@ public class ProjectTest extends base {
 		}
 	}
 
+	//SAC Code
 	//Verify Edit Inactive SAC Code in Project
-	@Test()
-	public void Verify_Edit_Inactive_SAC_Code_Project() throws InterruptedException {
-		Saccodepage unit = new Saccodepage(driver);
-		unit.getconfiguration().click();
-		unit.getsaccodeclick().click();
-		unit.getEditclicksaccode().click();
-		unit.getEditsavebutton().click();
+	@Test(dataProvider="EditInactiveSACCode")
+	public void Verify_Edit_Inactive_SAC_Code_Project(String saccode, String sacname) throws InterruptedException {
+		Saccodepage Saccode = new Saccodepage(driver);
+		Saccode.getconfiguration().click();
+		Saccode.getsaccodeclick().click();
+		Saccode.getsearchsaccode().sendKeys(saccode+Keys.ENTER);
+		Saccode.getEditclicksaccode().click();
+		Saccode.getEditsavebutton().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -976,10 +997,10 @@ public class ProjectTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS"))
+			if(!b.equalsIgnoreCase(sacname))
 			{
 				Assert.assertFalse(false, "Property Type is Inactive.");
-				System.out.println("Test  Passed");
+				System.out.println("Test Passed");
 				break;
 			}
 			else
@@ -995,13 +1016,14 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Edit Active SAC Code in Project
-	@Test()
-	public void Verify_Edit_Active_SAC_Code_Project() throws InterruptedException {
-		Saccodepage unit = new Saccodepage(driver);
-		unit.getconfiguration().click();
-		unit.getsaccodeclick().click();
-		unit.getEditclicksaccode().click();
-		unit.getEditsavebutton().click();
+	@Test(dataProvider="EditActiveSACCodeData")
+	public void Verify_Edit_Active_SAC_Code_Project(String saccode, String sacname) throws InterruptedException {
+		Saccodepage Saccode = new Saccodepage(driver);
+		Saccode.getconfiguration().click();
+		Saccode.getsaccodeclick().click();
+		Saccode.getsearchsaccode().sendKeys(saccode+Keys.ENTER);
+		Saccode.getEditclicksaccode().click();
+		Saccode.getEditsavebutton().click();
 
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -1016,10 +1038,10 @@ public class ProjectTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase("995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS"))
+			if(!b.equalsIgnoreCase(sacname))
 			{
 				Assert.assertFalse(false, "Property Type is Active.");
-				System.out.println("Test  Passed");
+				//System.out.println("Test Passed");
 				break;
 			}
 			else
@@ -1065,37 +1087,53 @@ public class ProjectTest extends base {
 	}
 	
 	//Edit Project Test Mandatory Filed Validation
-	@Test
-	public void Edit_Employee_Test_Mandatory_Filed_Validation() throws InterruptedException {
+	@Test(dataProvider="EditEmployeeTestMandatoryData")
+	public void Edit_Employee_Test_Mandatory_Filed_Validation(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
-		project.getEdit().click();
-		
+		project.getSearch().sendKeys(projectname + Keys.ENTER);
+		project.getEditbtn().click();
 		Thread.sleep(2000);
 		project.getProjectNameAssert().click();
-		Thread.sleep(2000);
-		project.getProjectNameAssert().sendKeys(Keys.DELETE);
-		Thread.sleep(2000);
-		project.getEditNext().click();
+		int Pname  = project.getProjectNameAssert().getAttribute("value").length();
+		for (int i = 0; i <Pname ; i++) {
+			project.getProjectNameAssert().sendKeys(Keys.BACK_SPACE);
+		}
+		project.getProjectNameAssert().sendKeys(Keys.TAB);
+		
+		project.getEditExpecetedStartDate().click();
+		int Expecetedstartdate  = project.getEditExpecetedStartDate().getAttribute("value").length();
+		for (int i = 0; i <Expecetedstartdate ; i++) {
+			project.getEditExpecetedStartDate().sendKeys(Keys.BACK_SPACE);
+		}
+		project.getEditExpecetedStartDate().sendKeys(Keys.TAB);
+		
+		project.getEditExpecetedEndDate().click();
+		int Expecetedenddate  = project.getEditExpecetedEndDate().getAttribute("value").length();
+		for (int i = 0; i <Expecetedenddate ; i++) {
+			project.getEditExpecetedEndDate().sendKeys(Keys.BACK_SPACE);
+		}
+		project.getEditExpecetedEndDate().sendKeys(Keys.TAB);
+		
+		project.getEditActualStartDate().click();
+		int Actualstartdate  = project.getEditActualStartDate().getAttribute("value").length();
+		for (int i = 0; i <Actualstartdate ; i++) {
+			project.getEditActualStartDate().sendKeys(Keys.BACK_SPACE);
+		}
+		project.getEditActualStartDate().sendKeys(Keys.TAB);
 		
 		SoftAssert softAssert = new SoftAssert();
-		WebElement projectname =driver.findElement(By.xpath("//span[normalize-space()='Project Name is required']"));
-		softAssert.assertEquals(projectname.getText(), "Project Name is required");
-
-		WebElement projecttype =driver.findElement(By.xpath("//span[normalize-space()='Project Type is required.']"));
-		softAssert.assertEquals(projecttype.getText(), "Project Type is required.");
-
-		WebElement projectstatus =driver.findElement(By.xpath("//span[normalize-space()='Project Status is required']"));
-		softAssert.assertEquals(projectstatus.getText(), "Project Status is required");
+		WebElement Projectname =driver.findElement(By.xpath("//span[normalize-space()='Project Name is required']"));
+		softAssert.assertEquals(Projectname.getText(), "Project Name is required");
 
 		WebElement expectedstartdate =driver.findElement(By.xpath("//span[normalize-space()='Expected Start Date is required']"));
 		softAssert.assertEquals(expectedstartdate.getText(), "Expected Start Date is required");
 
 		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected End Date is required']"));
 		softAssert.assertEquals(expectedenddate.getText(), "Expected End Date is required");
-
-		WebElement salesexecutive =driver.findElement(By.xpath("//span[normalize-space()='Sales Executive is required']"));
-		Assert.assertEquals(salesexecutive.getText(), "Sales Executive is required");	
+		
+		WebElement actualstartdate =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[1]/div/div[6]/mat-form-field/div[2]/div"));
+		softAssert.assertEquals(actualstartdate.getText(), "Actual Start Date is required");
 		softAssert.assertAll();
 	}
 
@@ -1113,19 +1151,19 @@ public class ProjectTest extends base {
 				//"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				//"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year "," FLAT "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline the rights and responsibilities of both parties",
 				//"B","15","Basement"}
-			{"TestProject1","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			{"Automation Project1","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
 				"A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
-			{"TestProject2","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			{"Automation Project2","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
 				"B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
-			{"TestProject3","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			{"Automation Project3","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
 				"C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
-			{"TestProject4","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			{"Automation Project4","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
 				"D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"}
@@ -1135,24 +1173,114 @@ public class ProjectTest extends base {
 	//DataProvider Edit Project Data
 	@DataProvider
 	public Object[][] ProjectEditData() {
-		return new Object[][] { { "Automation Project","Office","In process", "20000", "1000","ABC Infotech","09AAACH7409R1ZZ","BopalGam","Financial Year" } };
+		return new Object[][] { { "Automation Project1","Automation Project1","Office","In process", "20000", "1000","ABC Infotech","09AAACH7409R1ZZ","BopalGam","Financial Year" } };
 	}
 
 	//DataProvider for Delete Project Data
 	@DataProvider
 	public Object[][] Deleteprojectdata() {
-		return new Object[][] { { "Taj Mahal" } };
+		return new Object[][] { { "Automation Project1" } };
 	}
 	
 	//DataProvider for Project Search Data
 	@DataProvider
 	public Object[][] ProjectSearchData() {
-		return new Object[][] { { "Taj Mahal" } };
+		return new Object[][] { { "Automation Project2" } };
 	}
 	
 	//DataProvider for Active Deactive Project 
 	@DataProvider
 	public Object[][] ActiveDeactiveProject() {
-		return new Object[][] { { "Taj Mahal" } };
+		return new Object[][] { { "Automation Project3" } };
 	}
+	
+	//DataProvider for Add Inactive Project Status Project 
+	@DataProvider
+	public Object[][] AddInactiveProjectStatusProject() {
+		return new Object[][] { { " InActive "," InActive " } };
+	}
+	
+	//DataProvider for Add Active Project Status Project 
+	@DataProvider
+	public Object[][] AddActiveProjectStatusProject() {
+		return new Object[][] { { " InActive "," InActive " } };
+	}
+	
+	//DataProvider for Edit Inactive Project Status Project 
+	@DataProvider
+	public Object[][] EditInactiveProjectStatusProject() {
+		return new Object[][] { { " InActive "," InActive " } };
+	}
+	//DataProvider for Edit Active Project Status Project 
+	@DataProvider
+	public Object[][] EditActiveProjectStatusProject() {
+		return new Object[][] { { " InActive "," InActive " } };
+	}
+	//DataProvider for Add Inactive Project Type Data 
+	@DataProvider
+	public Object[][] AddInactiveProjectTypeData() {
+		return new Object[][] { { " Addee "," Addee " } };
+	}
+	//DataProvider for Add Active Project Type Data 
+	@DataProvider
+	public Object[][] AddActiveProjectTypeData() {
+		return new Object[][] { { " Addee "," Addee " } };
+	}
+	//DataProvider for Edit InActive Project Type Data
+	@DataProvider
+	public Object[][] EditInActiveProjectTypeData() {
+		return new Object[][] { { " Addee "," Addee " } };
+	}
+	
+	//DataProvider for Edit Active Project Type Data
+	@DataProvider
+	public Object[][] EditActiveProjectTypeData() {
+		return new Object[][] { { " Addee "," Addee " } };
+	}
+	//DataProvider for Add Inactive State Data
+	@DataProvider
+	public Object[][] AddInactiveStateData() {
+		return new Object[][] { { " Goa "," Goa " } };
+	}
+	//DataProvider for Add Active State Data
+	@DataProvider
+	public Object[][] AddActiveStateData() {
+		return new Object[][] { { " Goa "," Goa "} };
+	}
+	//DataProvider for Edit InActive State Data
+	@DataProvider
+	public Object[][] EditInActiveStateData() {
+		return new Object[][] { { " Goa "," Goa "} };
+	}
+	//DataProvider for Edit Active State Data
+	@DataProvider
+	public Object[][] EditActiveStateData() {
+		return new Object[][] { { " Goa "," Goa "} };
+	}
+	//DataProvider for Edit Inactive Property Type Data
+	@DataProvider
+	public Object[][] EditInactivePropertyTypeData() {
+		return new Object[][] { { " FLAT "," FLAT "} };
+	}
+	//DataProvider for Edit Active Property Type Data
+	@DataProvider
+	public Object[][] EditActivePropertyTypeData() {
+		return new Object[][] { { " FLAT "," FLAT "} };
+	}
+	//DataProvider for Edit Inactive SAC Code Data
+	@DataProvider
+	public Object[][] EditInactiveSACCodeData() {
+		return new Object[][] { { " 200024 "," 200024 "} };
+	}
+	//DataProvider for Edit Active SAC Code Data
+	@DataProvider
+	public Object[][] EditActiveSACCodeData() {
+		return new Object[][] { { " 200024 "," 200024 "} };
+	}
+	//DataProvider for Edit Employee Test Mandatory Data
+	@DataProvider
+	public Object[][] EditEmployeeTestMandatoryData() {
+		return new Object[][] {{"Automation Project1"}};
+	}	
+	
 }

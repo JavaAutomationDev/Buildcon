@@ -43,7 +43,7 @@ public class ProjectPage {
 		WebElement dropdown = driver.findElement(Projecttype);
 		dropdown.click();
 		
-		base.failedElementName = "Project-getProjecttype";
+		base.failedElementName = "Project-Project type";
 		
 		String optionXPath = "//mat-option//span[contains(text(),'" + projecttype + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
@@ -470,7 +470,7 @@ public class ProjectPage {
 	}
 			
 			
-			//View Block Details
+	//View Block Details
 	//Page object for View Block Details
 	By viewblock=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/"
 			+ "div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[1]/vex-unit-block-list/mat-dialog-content/div/div/div[3]/button[1]");	
@@ -715,31 +715,36 @@ public class ProjectPage {
     }
 	
 	//Page object for East1
-    By east1=By.xpath("/html/body/div[3]/div[4]/div/mat-dialog-container/div/div/vex-unit-block-details/div/"
-    		+ "mat-dialog-content/form/div[3]/div/div/div[5]/mat-form-field/div[1]/div[2]/div/input");
+    By east1=By.xpath("/html[1]/body[1]/div[4]/div[4]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-unit-block-details[1]/"
+    		+ "div[1]/mat-dialog-content[1]/form[1]/div[3]/div[1]/div[1]/div[5]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]"); 
     public WebElement getEast1() {
     	return driver.findElement(east1);
     }
     
     //Page object for West1
-    By west1=By.xpath("//input[@id='mat-input-68']");
+    By west1=By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-unit-block-details[1]/"
+    		+ "div[1]/mat-dialog-content[1]/form[1]/div[3]/div[1]/div[1]/div[6]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]");
     public WebElement getWest1() {
+    	JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", west1);
     	return driver.findElement(west1);
     }
     
     //Page object for North1
-    By north1=By.xpath("//input[@id='mat-input-69']");
+    By north1=By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-unit-block-details[1]/"
+    		+ "div[1]/mat-dialog-content[1]/form[1]/div[3]/div[1]/div[1]/div[7]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]");
     public WebElement getNorth1() {
     	return driver.findElement(north1);
     }
 	
     //Page object for South1
-    By south1=By.xpath("//input[@id='mat-input-70']");
+    By south1=By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-unit-block-details[1]/"
+    		+ "div[1]/mat-dialog-content[1]/form[1]/div[3]/div[1]/div[1]/div[8]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]");
     public WebElement getSouth1() {
     	return driver.findElement(south1);
     }
 	
-	//Page objet for survey number
+	//Page objet for Survey Number
     By surveyNumber=By.xpath("//input[@formcontrolname='surveyNumber1']");
     public WebElement getsurveyNumber() {
     	return driver.findElement(surveyNumber);
@@ -933,4 +938,24 @@ public class ProjectPage {
 	public WebElement getSubmitBtn() {
 		return driver.findElement(Submitbtn);
 	}
+	
+	//Page object for Edit Expeceted Start Date
+	By editexpecetedstartdate = By.xpath("//input[@formcontrolname='expectedStartDT']");
+	public WebElement getEditExpecetedStartDate() {
+		return driver.findElement(editexpecetedstartdate);
+	}
+	
+	//Page object for Edit Expeceted End Date
+	By editexpecetedenddate = By.xpath("//input[@formcontrolname='expectedEndDT']");
+	public WebElement getEditExpecetedEndDate() {
+		return driver.findElement(editexpecetedenddate);
+	}
+
+	//Page object for Edit Actual Start Date
+	By editactualstartdate = By.xpath("//input[@formcontrolname='actualStartDT']");
+	public WebElement getEditActualStartDate() {
+		return driver.findElement(editactualstartdate);
+	}
+
+		
 }

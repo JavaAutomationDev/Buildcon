@@ -37,14 +37,14 @@ public class RoleRightsPage {
 	//Page object for Inquiry Delete Button
 	By deleteinquiry =By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
 			+ "vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[14]/div/a[2]");
-	public WebElement getDeleteInquiry() {
+	public WebElement getInquiryDelete() {
 		base.failedElementName = "Inquiry-Delete";	
 		return driver.findElement(deleteinquiry);
 	}
 	//Page object for Export Excel Inquiry
 	By ExportExcelInquiry=By.xpath("//html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-inquires/div/div[1]/div[2]/button[1]");
-	public WebElement getExportExcelInquiry() {
+	public WebElement getInquiryExport() {
 		base.failedElementName = "Inquiry-ExportExcel";
 		return driver.findElement(ExportExcelInquiry);
 	}
@@ -63,13 +63,23 @@ public class RoleRightsPage {
 		base.failedElementName = "Prospect-ClickAdd";
 		return driver.findElement(Addprospect);
 	}
+	//Page object for Edit Prospect Button
+	public WebElement getEditProspect() {
+		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
+				+ "mat-sidenav-container/mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/"
+				+ "mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[15]/div/a[1]"));
+
+		base.failedElement = Edit;
+		base.failedElementName = "Edit-Prospect";
+		return Edit;
+	}
 	//Page object for Delete Button
 	By deleteprospect =By.xpath(
 			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 					+ "mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/"
 					+ "mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[15]/div/a[2]");
 	public WebElement getDeleteProspect() {
-		base.failedElementName = "getDelete Prospect";
+		base.failedElementName = "Delete-Prospect";
 		return driver.findElement(deleteprospect);
 	}
 	//Page object for Export Excel Prospect
@@ -107,7 +117,14 @@ public class RoleRightsPage {
 		base.failedElementName = "Project-Delete";
 		return driver.findElement(DeleteProject);
 	}
-   
+	//Page object for Export to Excel Project
+	By ExporttoExcelproject=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
+			+ "mat-sidenav-container/mat-sidenav-content/main/app-projects/div/div[1]/div[2]/div[2]/button");
+	public WebElement getExporttoExcelProject() {
+		base.failedElementName = "Project-ExportExcel";
+		return driver.findElement(ExporttoExcelproject);
+	}
+
 	//Booking Module
 	//Page object for click Booking module
 	By booking = By.xpath("//vex-sidenav-item[5]//a[1]");
@@ -118,10 +135,16 @@ public class RoleRightsPage {
 	//Page object for Add Booking Module
 	By addbooking = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[1]/div[2]/button");
-	public WebElement AddBooking() {
+	public WebElement getAddBooking() {
 		base.failedElementName = "Booking-AddBooking";
 		return driver.findElement(addbooking);
 	}
+	//Page object for Edit Button Booking
+	By EditBooking = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
+			+ "/mat-sidenav-content/main/vex-bookings/div/div[3]/div/div/table/tbody/tr[1]/td[10]/div/a[1]");
+	public WebElement getEditBooking() {
+		return driver.findElement(EditBooking);
+	}	
 	//Page object for Export Excel Booking
 	By ExportExcelBooking=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
 			+ "mat-sidenav-container/mat-sidenav-content/main/vex-bookings/div/div[1]/div[2]/div[2]/button");
@@ -137,6 +160,7 @@ public class RoleRightsPage {
 		base.failedElementName = "Customer-CustomerModule";
 		return driver.findElement(Customer);
 	}
+	
 	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container"
 			+ "/mat-sidenav-content/main/vex-members/div/div[1]/div[2]/div[2]/button");
@@ -159,6 +183,14 @@ public class RoleRightsPage {
 		base.failedElementName = "Receipt-ClickAdd";
 		return driver.findElement(Addreceipt);
 	}
+	//Page object for Edit Receipt
+	public WebElement getEditReceipt() {
+		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
+				+ "mat-sidenav-container/mat-sidenav-content/main/vex-receipts/"
+				+ "div/div[2]/div/div/table/tbody/tr[1]/td[25]/div/button[1]"));
+		base.failedElementName = "Receipt-Edit";
+		return Edit;
+	}
 	//Page object for Export Excel Receipt
 	By ExportExcelreceipt=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/vex-receipts/div/div[1]/div[2]/div/div[3]/button");
@@ -179,6 +211,13 @@ public class RoleRightsPage {
 	public WebElement getaddemployee() {
 		base.failedElementName = "Employee-AddEmployee";
 		return driver.findElement(Addemployee);
+	}
+	//Page object for Edit Employee
+	By editemployee=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
+			+ "app-employees/div/div[2]/div/div/div[2]/ul/li[4]/a/mat-icon");
+	public WebElement getEditEmployee() {
+		base.failedElementName = "Employee-EditEmployee";
+		return driver.findElement(editemployee);
 	}
 	//Page object for Export Excel Employee
 	By ExportExcelEmployee=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"

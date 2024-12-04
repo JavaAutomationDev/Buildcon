@@ -207,10 +207,6 @@ public class ProspectPage {
 		
 		base.failedElement = Edit;
 		base.failedElementName = "getEdit Prospect-Follow_Inquiry";
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", Edit);
-		js.executeScript("arguments[0].click();", Edit);
 		return Edit;
 	}
 

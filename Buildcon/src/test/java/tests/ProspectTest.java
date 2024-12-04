@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -120,34 +121,35 @@ public class ProspectTest extends base {
 
 	//Editing an Existing Prospect using Data Provider
 	@Test(dataProvider = "ProspectEditData")
-	public void Edit_Prospect(String newContactNo, String newEmail, String newAddress,
+	public void Edit_Prospect(String visitorname,String newContactNo, String newEmail, String newAddress,
 			String newRemarks, String newRequirement, String newStatus) throws InterruptedException, IOException{
         SoftAssert softAssert = new SoftAssert();
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
+		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Prospect.getEdit();
 
 		Prospect.getContactNo().clear();
 		Prospect.getContactNo().sendKeys(newContactNo);
-		//Contact No Number Validation ---------------------------------
+		//Contact No Number Validation
 		String valid_contactno = valid_number(newContactNo, "ProspectContactNo");
 		System.out.println(valid_contactno);
 		
 		Prospect.getEmail().clear();
 		Prospect.getEmail().sendKeys(newEmail);
-		//Email Validation ---------------------------------
+		//Email Validation
 		String valid_email = valid_EMail(newEmail, "ProspectEmail");
 		System.out.println(valid_email);
 		
 		Prospect.getAddress().clear();
 		Prospect.getAddress().sendKeys(newAddress);
-		//Adress Alphanumeric  Validation ---------------------------------
+		//Adress Alphanumeric  Validation
 		String valid_address = valid_alphanum(newAddress, "ProspectAddress", 10);
 		System.out.println(valid_address);
 		
 		Prospect.getRemarks().clear();
 		Prospect.getRemarks().sendKeys(newRemarks);
-		//Remarks Text Data Validation ---------------------------------
+		//Remarks Text Data Validation
 		String valid_remarks = validateText(newRemarks, "Remarks", 5, 10);
 		System.out.println(valid_remarks);
 				
@@ -165,10 +167,11 @@ public class ProspectTest extends base {
 	}
 
 	//Delete Prospect
-	@Test()
-	public void Delete_Prospect() throws InterruptedException {
+	@Test(dataProvider="DeleteProspectData")
+	public void Delete_Prospect(String Attende) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
+		Prospect.getSearch().sendKeys(Attende + Keys.ENTER);
 		Prospect.getDelete();
 		Thread.sleep(2000);
 		Prospect.getClickYes().click();
@@ -292,8 +295,8 @@ public class ProspectTest extends base {
 		Prospect.getsave().click();
 
 		SoftAssert softAssert = new SoftAssert();
-		WebElement Web =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
-		softAssert.assertEquals(Web.getText(), "Visit Site/Project is required.");
+		WebElement Visitsite =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
+		softAssert.assertEquals(Visitsite.getText(), "Visit Site/Project is required.");
 
 		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
 		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
@@ -311,14 +314,43 @@ public class ProspectTest extends base {
 		softAssert.assertEquals(ContactNo.getText(), "Contact Number is required.");	
 		softAssert.assertAll();
 	}
+	
+	//Edit Prospect Test Mandatory Filed Validation
+	@Test(dataProvider="EditProspectTestMandatoryData")
+	public void Edit_Prospect_Test_Mandatory_Filed_Validation(String visitorname ) throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
+		ProspectPage Prospect = new ProspectPage(driver);
+		Prospect.getprospect().click();
+		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
+		Prospect.getEdit().click();
+		Thread.sleep(2000);
+		Prospect.getvisitorname().click();
+		int Vname  = Prospect.getvisitorname().getAttribute("value").length();
+		for (int i = -1; i <Vname ; i++) {
+			Prospect.getvisitorname().sendKeys(Keys.BACK_SPACE);
+		}
+		Prospect.getContactNo().click();
+		int contactno = Prospect.getContactNo().getAttribute("value").length();
+		for (int i = 0; i <contactno ; i++) {
+			Prospect.getContactNo().sendKeys(Keys.BACK_SPACE);
+		}
+		Prospect.getContactNo().sendKeys(Keys.TAB);
+		
+		WebElement VisitorName =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/form/div[1]/div[2]/mat-form-field/div[2]/div"));
+		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
+
+		WebElement ContactNo =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/form/div[1]/div[9]/mat-form-field/div[2]/div"));
+		softAssert.assertEquals(ContactNo.getText(), "Contact Number is required.");
+		softAssert.assertAll();
+	}
 
 	//Verify Add Inactive Attendee Prospect
-	@Test()
-	public void Verify_Add_Inactive_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="AddInactiveAttendeeProspect")
+	public void Verify_Add_Inactive_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
 		employee.getActiveEmployee().click();
 		Thread.sleep(2000);
@@ -337,10 +369,10 @@ public class ProspectTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendename))
 			{
 				Assert.assertFalse(false, "Attende is inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -356,12 +388,12 @@ public class ProspectTest extends base {
 	}
 
 	//Verify Add Active Attendee Prospect
-	@Test()
-	public void Verify_Add_Active_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="AddActiveAttendeeProspect")
+	public void Verify_Add_Active_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
 
 		employee.getActiveEmployee().click();
@@ -382,7 +414,7 @@ public class ProspectTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendename))
 			{
 				Assert.assertTrue(true, "Attende is Active.");
 				//System.out.println("Test  Pass");
@@ -402,12 +434,12 @@ public class ProspectTest extends base {
 	}
 
 	//Verify Edit Inactive Attendee Prospect
-	@Test()
-	public void Verify_Edit_Inactive_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="EditInactiveAttendeeProspect")
+	public void Verify_Edit_Inactive_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
 
 		employee.getActiveEmployee().click();
@@ -428,10 +460,10 @@ public class ProspectTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendename))
 			{
 				Assert.assertFalse(false, "Attende is inactive.");
-				System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -447,12 +479,12 @@ public class ProspectTest extends base {
 	}
 
 	//Verify Edit Active Attendee Prospect
-	@Test()
-	public void Verify_Edit_Active_Attendee_Inquiry() throws InterruptedException {
+	@Test(dataProvider="EditActiveAttendeeProspect")
+	public void Verify_Edit_Active_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 
-		employee.getSearch().sendKeys("Automation");
+		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
 
 		employee.getActiveEmployee().click();
@@ -473,7 +505,7 @@ public class ProspectTest extends base {
 		for(int i=0;i<a.size();i++)
 		{
 			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase("Automation Test"))
+			if(b.equalsIgnoreCase(Attendename))
 			{
 				Assert.assertTrue(true, "Attende is Active.");
 				//System.out.println("Test  Pass");
@@ -493,27 +525,23 @@ public class ProspectTest extends base {
 	}
 
 	//Close the Driver  
-//	@AfterMethod 
-//	public void teardown() { 
-//		
-//		base.failedElement = null;
-//		base.failedElementName = "";
-//		
-//		driver.close();
-//	}
+	@AfterMethod 
+	public void teardown() { 
+		//driver.close();
+	}
 
 	//DataProvider for Add Prospect
 	@DataProvider
 	public Object[][] ProspectAdddata() {
 		return new Object[][] {
-			{"TestProject1","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A Block","Unit No - A (Ground Floor)"},
-			{"TestProject2","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","B Block","Unit No - A - 101 (Ground Floor) "},
-			{"TestProject3","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "},
-			{"TestProject4","Mahesh Patel","","","Vimal Patel", "Chandni Chauhan", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - A - 101 (Ground Floor) "}
+			{"Automation Project1","Mahesh Patel","","","Vimal Patel", "Nilesh Panchal", "9856214565", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A",""},
+			{"Automation Project1","Suresh Patel","","","Vimal Patel", "Nilesh Panchal", "9856214501", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"},
+			{"Automation Project1","Meet Patel","","","Vimal Patel", "Nilesh Panchal", "9856214574", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"},
+			{"Automation Project1","Mahi Patel","","","Vimal Patel", "Nilesh Panchal", "9856214532", 
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"}
 		};
 	}
 
@@ -521,20 +549,62 @@ public class ProspectTest extends base {
 	@DataProvider
 	public Object[][] ProspectEditData() {
 		return new Object[][] {
-			{"9876543210","akash.new@mail.com","New Address, Ahmedabad","Updated Remarks","5BHK","Completed" }};
+			{"Mahi Patel","9876543210","akash.new@mail.com","New Address, Ahmedabad","Updated Remarks","5BHK","Completed" }};
 	}
 
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
 	public Object[][] ProspectProjectFilterData() {
 		return new Object[][] {
-			{"marin drive lake view"}};
+			{"Automation Project1"}};
 	}
 
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] ProspectSearchData() {
 		return new Object[][] {
-			{"Rakesh Patel"}};
+			{"Suryakumar Yadav"}};
+	}
+	
+	//DataProvider for Delete Prospect Data
+	@DataProvider
+	public Object[][] DeleteProspectData() {
+		return new Object[][] {
+			{"Suryakumar Yadav"}};
+	}
+	
+	//DataProvider for Edit Prospect Test Mandatory Data
+	@DataProvider
+	public Object[][] EditProspectTestMandatoryData() {
+		return new Object[][] {
+			{"Suryakumar Yadav"}};
+	}
+	
+	//DataProvider for Add Inactive Attendee Prospect
+	@DataProvider
+	public Object[][] AddInactiveAttendeeProspect() {
+		return new Object[][] {
+			{"Automation Test","Automation Test"}};
+	}
+	
+	//DataProvider for Add Active Attendee Prospect
+	@DataProvider
+	public Object[][] AddActiveAttendeeProspect() {
+		return new Object[][] {
+			{"Automation Test","Automation Test"}};
+	}
+	
+	//DataProvider for Edit Inactive Attendee Prospect
+	@DataProvider
+	public Object[][] EditInactiveAttendeeProspect() {
+		return new Object[][] {			
+			{"Automation Test","Automation Test"}};
+	}
+	
+	//DataProvider for Edit Active Attendee Prospect
+	@DataProvider
+	public Object[][] EditActiveAttendeeProspect() {
+		return new Object[][] {			
+			{"Automation Test","Automation Test"}};
 	}
 }

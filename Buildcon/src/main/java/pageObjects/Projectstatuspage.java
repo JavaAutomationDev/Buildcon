@@ -65,7 +65,7 @@ public class Projectstatuspage {
 
 	// Page object for project status click:
 	By projectStatusEditclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr/td[3]/div/button[2]");
 
 	public WebElement getprojectstatuseditclick() {
 		base.failedElementName = "ProjectStatus-EditClick";

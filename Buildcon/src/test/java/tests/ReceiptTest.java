@@ -265,11 +265,11 @@ public class ReceiptTest extends base {
 	}
 
 	//Print Receipt
-	@Test()
-	public void Print_Receipt() throws InterruptedException {
+	@Test(dataProvider="PrintReceiptData")
+	public void Print_Receipt(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
-
+		receipt.getSearch().sendKeys(Receiptno + Keys.ENTER);
 		Thread.sleep(2000);
 		receipt.getPrintReceipt().click();	
 		String originalWindow = driver.getWindowHandle();
@@ -380,7 +380,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Add Receipt Test Mandatory Filed Validation
-	@Test
+	@Test()
 	public void Add_Receipt_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -402,10 +402,11 @@ public class ReceiptTest extends base {
 		softAssert.assertAll();
 	}
 	//Edit Receipt Test Mandatory Filed Validation
-	@Test
-	public void Edit_Receipt_Test_Mandatory_Filed_Validation() throws InterruptedException {
+	@Test(dataProvider="EditReceiptTestMandatoryData")
+	public void Edit_Receipt_Test_Mandatory_Filed_Validation(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
+		receipt.getSearch().sendKeys(Receiptno + Keys.ENTER);
 		receipt.getEditBtnActiveInactive().click();
 		Thread.sleep(2000);
 		receipt.EditNextRequierdBtn();
@@ -595,7 +596,7 @@ public class ReceiptTest extends base {
 			if(!b.equalsIgnoreCase(Name))
 			{
 				Assert.assertFalse(false, "Bank is Active.");
-				//System.out.println("Test  failed");
+				//System.out.println("Test failed");
 				break;
 			}
 			else
@@ -620,10 +621,14 @@ public class ReceiptTest extends base {
 	@DataProvider
 	public Object[][] ReceiptAddData() {
 		return new Object[][] {
-			{"SHALIGRAM PRIDE"," Nikanth Tandel "," 3BHK-402 (4th Floor) ","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
-				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","D:\\Fileupload\\BB1qVDNW.jpg"}
-			//{" Project 4 "," Vimal Vankani "," Flats-A - 101 (1st Floor) "," Axis Bank ","South Bopal"," Cash ","","1000000",
-			//"194","10075.57"," 0.75% "," Axis Bank ","PrahladNagar",""},
+			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
+				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"},
+			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
+				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"},
+			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
+				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"},
+			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
+				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"}
 		};
 	}
 
@@ -631,16 +636,22 @@ public class ReceiptTest extends base {
 	@DataProvider
 	public Object[][] ReceiptEditData() {
 		return new Object[][] { 
-			{" PD-5-24 ","Ahmedabad","796498723","97464971","65467978","Thaltej"}};
+			{" RecPrefix-1-24 ","Ahmedabad","796498723","97464971","65467978","Thaltej"}};
 	}
 
 	//DataProvider for Download Receipt Data
 	@DataProvider
 	public Object[][] DownloadReceiptData() {
 		return new Object[][] {
-			{" PD-6-24 "}};
+			{" RecPrefix-1-24 "}};
 	}
-
+	//DataProvider for Print Receipt Data
+	@DataProvider
+	public Object[][] PrintReceiptData() {
+		return new Object[][] {
+			{" RecPrefix-1-24 "}};
+	}
+	
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] ReceiptSearchData() {
@@ -666,28 +677,35 @@ public class ReceiptTest extends base {
 	@DataProvider
 	public Object[][] ViewReceiptData() {
 		return new Object[][] {
-			{" PD-6-24 "}};
+			{" RecPrefix-1-24 "}};
 	}
 
 	//DataProvider for Send Email Receipt Data
 	@DataProvider
 	public Object[][] SendEmailReceiptData() {
 		return new Object[][] {
-			{" PD-6-24 "}};
+			{" RecPrefix-1-24 "}};
+	}
+	
+	//DataProvider for Edit Receipt Test Mandatory Data
+	@DataProvider
+	public Object[][] EditReceiptTestMandatoryData() {
+		return new Object[][] {
+			{" RecPrefix-1-24 "}};
 	}
 	
 	//DataProvider for Add Inactive Bank
 	@DataProvider
 	public Object[][] AddInactiveBank() {
 		return new Object[][] {
-		{" Axis Bank ","SHALIGRAM PRIDE"," Nikanth Tandel "," 3BHK-402 (4th Floor) "," Axis Bank "}};
+		{" Axis Bank ","Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)"," Axis Bank "}};
 	}
 	
 	//DataProvider for Add Active Bank
 	@DataProvider
 	public Object[][] AddActiveBank() {
 		return new Object[][] {
-		{" Axis Bank ","SHALIGRAM PRIDE"," Nikanth Tandel "," 3BHK-402 (4th Floor) "," Axis Bank "}};
+		{" Axis Bank ","Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)"," Axis Bank "}};
 	}
 	
 	//DataProvider for Edit Inactive Bank

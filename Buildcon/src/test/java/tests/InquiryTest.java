@@ -123,12 +123,13 @@ public class InquiryTest extends base {
 
 	//Editing an existing Inquiry using Data Provider
 	@Test(dataProvider = "InquiryEditData")
-	public void Edit_Inquiry(String siteproject,String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
+	public void Edit_Inquiry(String Projectname,String siteproject,String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
 			String newRequirement, String newStatus) throws InterruptedException, IOException {
 
 		SoftAssert softAssert = new SoftAssert();
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Inquiry.getSearch().sendKeys(Projectname + Keys.ENTER);
 		Inquiry.getEdit();
 		Inquiry.getsiteproject(siteproject);
 		
@@ -191,9 +192,10 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearch().sendKeys(contactNo + Keys.ENTER);
-		Inquiry.getDelete();
+		Inquiry.getDelete().click();
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
+		Thread.sleep(2000);
 	}
 
 	//Export To Excel Inquiry
@@ -300,15 +302,16 @@ public class InquiryTest extends base {
 
 	//Add To Prospect Inquiry
 	@Test(dataProvider = "InquiryaddprospectData")
-	public void Add_Prospect_Inquiry(String unitD, String Selectflat) throws InterruptedException {
+	public void Add_Prospect_Inquiry(String Attende,String unitD, String Selectflat) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Inquiry.getSearch().sendKeys(Attende + Keys.ENTER);
 		Inquiry.getAddprospect().click();
 		Inquiry.getunitdropdown(unitD);
 		Inquiry.getSelectFlat(Selectflat);
-
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
+		Thread.sleep(2000);
 	}
 
 	//Add Inquiry Test Mandatory Field Validation
@@ -346,10 +349,11 @@ public class InquiryTest extends base {
 	}
 
 	//Edit Inquiry Test Mandatory Field Validation
-	@Test()
-	public void Edit_Inquiry_Test_Mandatory_Field_Validation() throws InterruptedException {
+	@Test(dataProvider="EditInquiryMandatoryData")
+	public void Edit_Inquiry_Test_Mandatory_Field_Validation(String Attende) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Inquiry.getSearch().sendKeys(Attende + Keys.ENTER);
 		Inquiry.Getedit();
 		Thread.sleep(2000);
 		
@@ -936,13 +940,13 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			{"TestProject1", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			{"Automation Project1", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			{"TestProject2", "Suresh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			{"Automation Project1", "Suresh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			{"TestProject3", "Meet Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			{"Automation Project1", "Meet Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			{"TestProject4", "Mahi Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			{"Automation Project1", "Mahi Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
 		};
 			
@@ -951,101 +955,108 @@ public class InquiryTest extends base {
 	//DataProvider for Edit Inquiry
 	@DataProvider
 	public Object[][] InquiryEditData() {
-		return new Object[][] {{"Test with Chandni","Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
+		return new Object[][] 
+				{{"Automation Project1","Automation Project1","Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
 	}
 
 	//DataProvider for Delete Inquiry
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{"9765456789"}};//Just a placeholder for multiple runs	
+				{{"Suresh Patel"}};
 	}
 
-	//DataProvider for Apply Filter for Project
+	//DataProvider for Inquiry Apply Filter for Project
 	@DataProvider
 	public Object[][] InquiryprojectfilterData() {
-		return new Object[][] { {"SHALIGRAM PRIDE"} };
+		return new Object[][] { {"Automation Project1"} };
 	}
 
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] InquirySearchData() {
-		return new Object[][] { {"Rakesh Patel"} };
+		return new Object[][] { {"Mahesh Patel"} };
 	}
 
 	//DataProvider for Add Prospect Data
 	@DataProvider
 	public Object[][] InquiryaddprospectData() {
-		return new Object[][] {{" A "," Unit No - 102 (1 Floor) "}};
+		return new Object[][] {{"Mahesh Patel"," A "," Unit No - 101 (1 Floor) "}};
 	}
 	
+	//DataProvider for Edit Inquiry Mandatory Data
+	@DataProvider
+	public Object[][] EditInquiryMandatoryData() {
+		return new Object[][] {{"Nilesh Panchal"}};
+	}
+
 	//DataProvider for Add Inactive Attendee
 	@DataProvider
 	public Object[][] AddInactiveAttendee() {
-		return new Object[][] {{"Automation Test","Automation Test"}};
+		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
 	//DataProvider for Add Active Attendee
 	@DataProvider
 	public Object[][] AddActiveAttendee() {
-		return new Object[][] {{"Automation Test","Automation Test"}};
+		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
 	//DataProvider for Edit Inactive Attendee
 	@DataProvider
 	public Object[][] EditInactiveAttendee() {
-		return new Object[][] {{"Akash Patel","Akash Patel"}};
+		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
 	//DataProvider for Edit Active Attendee
 	@DataProvider
 	public Object[][] EditActiveAttendee() {
-		return new Object[][] {{"Akash Patel","Akash Patel"}};
+		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
 	//DataProvider for Add Inactive Inquiry Status
 	@DataProvider
 	public Object[][] AddInactiveInquiryStatus() {
-		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+		return new Object[][] {{"In Progress","In Progress"}};
 	}
 	
 	//DataProvider for Add Active Inquiry Status
 	@DataProvider
 	public Object[][] AddActiveInquiryStatus() {
-		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+		return new Object[][] {{"In Progress","In Progress"}};
 	}
 	
 	//DataProvider for Edit Inactive Inquiry Status
 	@DataProvider
 	public Object[][] EditInactiveInquiryStatus() {
-		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+		return new Object[][] {{"In Progress","In Progress"}};
 	}
 	
 	//DataProvider for Edit Inactive Inquiry Status
 	@DataProvider
 	public Object[][] EditActiveInquiryStatus() {
-		return new Object[][] {{" Akash Inquiry "," Akash Inquiry "}};
+		return new Object[][] {{"In Progress","In Progress"}};
 	}
 	
 	//DataProvider for Edit Inactive Inquiry Response Type
 	@DataProvider
 	public Object[][] EditInactiveInquiryResponseType() {
-		return new Object[][] {{" Sitops "," Sitops "}};
+		return new Object[][] {{"Partial","Partial"}};
 	}
 	//DataProvider for Edit Active Inquiry Response Type
 	@DataProvider
 	public Object[][] EditActiveInquiryResponseType() {
-		return new Object[][] {{" Sitops "," Sitops "}};
+		return new Object[][] {{"Partial","Partial"}};
 	}
 	
 	//DataProvider for Edit Inactive Inquiry Communcation Mode
 	@DataProvider
 	public Object[][] EditInactiveInquiryCommuncation() {
-		return new Object[][] {{" Office Visit "," Office Visit "}};
+		return new Object[][] {{"Face to Face","Face to Face"}};
 	}
 	//DataProvider for Edit Active Inquiry Communcation Mode
 	@DataProvider
 	public Object[][] EditActiveInquiryCommuncation() {
-		return new Object[][] {{" Office Visit "," Office Visit "}};
+		return new Object[][] {{"Face to Face","Face to Face"}};
 	}
 }
