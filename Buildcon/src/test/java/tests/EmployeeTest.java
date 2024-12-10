@@ -197,7 +197,7 @@ public class EmployeeTest extends base {
 		employee.getDesignation().sendKeys(designation);
 		employee.getDOB().sendKeys(dob);
 		employee.getEmail().sendKeys(email);
-		employee.getRoles(Role);
+		//employee.getRoles(Role);
 		employee.getcity().sendKeys(City);
 		employee.getstate(State);
 		employee.getMobileno().sendKeys(mobileno);
@@ -261,7 +261,7 @@ public class EmployeeTest extends base {
 		employee.getDesignation().sendKeys(designation);
 		employee.getDOB().sendKeys(dob);
 		employee.getEmail().sendKeys(email);
-		employee.getRoles(Role);
+		//employee.getRoles(Role);
 		employee.getcity().sendKeys(City);
 		employee.getstate(State);
 		employee.getMobileno().sendKeys(mobileno);
@@ -294,7 +294,7 @@ public class EmployeeTest extends base {
 		employee.BookingEntry().click();
 		
 		employee.DocumentSelectbtn().click();
-		employee.DocumentView().click();
+		employee.DocumentEntry().click();
 		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();
@@ -344,7 +344,7 @@ public class EmployeeTest extends base {
 		String valid_email = valid_string6;
 		System.out.println(valid_email);
 		
-		employee.getRoles(Role);
+		//employee.getRoles(Role);
 		
 		employee.getcity().sendKeys(City);
         //City Data Validation
@@ -462,6 +462,70 @@ public class EmployeeTest extends base {
 		employee.DocumentSelectbtn().click();
 		employee.DocumentRemove().click();
 
+		Thread.sleep(2000);
+		employee.CreateBtn1().click();
+	}
+	
+	//Add Employee with All Modules - Only Export
+	@Test(dataProvider = "EmployeeAddDataOnlyExport")
+	public void Add_Employee_Only_Export(String profileImg, String Firstname, String Midllename, String Lastname,
+			String Username, String designation, String dob, String email, String Role, String City, String State,
+			String mobileno, String password, String address, String Project, String Adharcard, String pancard)
+			throws InterruptedException {
+		
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+		employee.getaddemployee().click();
+		
+		employee.getProfileImg().sendKeys(profileImg);
+		employee.getfname().sendKeys(Firstname);
+		employee.getmname().sendKeys(Midllename);
+		employee.getlname().sendKeys(Lastname);
+		employee.getUserName().sendKeys(Username);
+		employee.getDesignation().sendKeys(designation);
+		employee.getDOB().sendKeys(dob);
+		employee.getEmail().sendKeys(email);
+		//employee.getRoles(Role);
+		employee.getcity().sendKeys(City);
+		employee.getstate(State);
+		employee.getMobileno().sendKeys(mobileno);
+		employee.getPassword().sendKeys(password);
+		employee.getAddress().sendKeys(address);
+		employee.getProjectAccess(Project);
+		employee.uploadAdharCard().sendKeys(Adharcard);
+		employee.getPancard().sendKeys(pancard);
+		employee.SelectGender().click();
+
+		Thread.sleep(2000);
+		employee.Nextbtn().click();
+		
+		employee.EmpSelectbtn().click();
+		employee.EmpExport().click();
+		
+		employee.Projectselectbtn().click();
+		employee.ProjectExport().click();
+		
+		employee.Receiptselectbtn().click();
+		employee.ReceiptExport().click();
+		
+		employee.Collectionselectbtn().click();
+		employee.CollectionExport().click();
+		
+		employee.Customerselectbtn().click();
+		employee.CustomerExport().click();
+		
+		employee.InquirySelectbtn().click();
+        employee.InquiryExport().click();
+        
+		employee.ProspectSelectbtn().click();
+		employee.ProspectExport().click();
+		
+		employee.BookingSelectBtn().click();
+		employee.BookingExport().click();
+		
+		employee.DocumentSelectbtn().click();
+		employee.DocumentExport().click();
+		
 		Thread.sleep(2000);
 		employee.CreateBtn1().click();
 	}
@@ -695,7 +759,7 @@ public class EmployeeTest extends base {
 
 	//Verify Add Active Roles
 	@Test(dataProvider="AddActiveRoles")
-	public void Verify_Add_Active_Inquiry_Status(String Rolename,String name) throws InterruptedException {
+	public void Verify_Add_Active_Roles(String Rolename,String name) throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
 		Role.getRoleclick().click();
@@ -735,6 +799,90 @@ public class EmployeeTest extends base {
 		}
 	}
 	
+	//Verify Edit Inactive Roles
+	@Test(dataProvider="EditInactiveRoles")
+	public void Verify_Edit_Inactive_Roles(String Rolename,String name) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getsearchRole().sendKeys(Rolename+Keys.ENTER);
+		Role.getEditRolebuttonclick().click();
+		Thread.sleep(2000);
+		Role.getaddrolename().sendKeys(Keys.TAB);
+		Thread.sleep(2000);
+		Role.getActiveInactiveRoles().click();
+		Role.geteditsavebuttonrole().click();
+
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+		employee.getaddemployee().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(name))
+			{
+				Assert.assertFalse(false, "Roles is inactive.");
+				//System.out.println("Test Failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active Roles
+	@Test(dataProvider="EditActiveRoles")
+	public void Verify_Edit_Active_Roles(String Rolename,String name) throws InterruptedException {
+		Rolepage Role = new Rolepage(driver);
+		Role.getconfiguration().click();
+		Role.getRoleclick().click();
+		Role.getsearchRole().sendKeys(Rolename+Keys.ENTER);
+		Role.getEditRolebuttonclick().click();
+		Thread.sleep(2000);
+		Role.getaddrolename().sendKeys(Keys.TAB);
+		Thread.sleep(2000);
+		Role.getActiveInactiveRoles().click();
+		Role.geteditsavebuttonrole().click();
+
+		EmployeePage employee = new EmployeePage(driver);
+		employee.getEmployee().click();
+		employee.getaddemployee().click();
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(b.equalsIgnoreCase(name))
+			{
+				Assert.assertTrue(true, "Role is Active.");
+				System.out.println("Test Pass");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");
+					break;
+				}	
+			}
+		}
+	}
+
 	//Close the driver
 	@AfterMethod()
 	public void teardown() {
@@ -755,7 +903,7 @@ public class EmployeeTest extends base {
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyView() {
 		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpView", "QA", "Test",
-				"AutomationView", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+				"AutomationView", "SDET", "06/09/2006", "akash23@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 				"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -765,7 +913,7 @@ public class EmployeeTest extends base {
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyAdd() {
 		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpAdd", "QA", "Test",
-				"AutomationAdd", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+				"AutomationAdd", "SDET", "06/09/2006", "akash22@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 				"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -775,7 +923,7 @@ public class EmployeeTest extends base {
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyEdit() {
 		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpEdit", "QA", "Test",
-			"AutomationEdit", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+			"AutomationEdit", "SDET", "06/09/2006", "akash29@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -785,8 +933,18 @@ public class EmployeeTest extends base {
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyDelete() {
 		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpDelete", "QA", "Test",
-			"AutomationDelete", "SDET", "06/09/2006", "akash20@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
-			"Sit@321#", "Ambli,Bopal gam", " marin drive lake view ",
+			"AutomationDelete", "SDET", "06/09/2006", "akash28@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
+			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
+			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
+	}
+	
+	//DataProvider for Add Employee Only Export
+	@DataProvider
+	public Object[][] EmployeeAddDataOnlyExport() {
+		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpExport", "QA", "Test",
+			"AutomationExport", "SDET", "06/09/2006", "akash21@mailinator.com", "", "Ahmedabad", "Goa", "9801211254",
+			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
 	}
@@ -842,4 +1000,17 @@ public class EmployeeTest extends base {
 			{ " Adminnewside "," Adminnewside " } };
 	}
 	
+	//DataProvider for Edit Inactive Roles
+	@DataProvider
+	public Object[][] EditInactiveRoles() {
+		return new Object[][] {
+			{ " Adminnewside "," Adminnewside " } };
+	}
+	
+	//DataProvider for Edit Active Roles
+	@DataProvider
+	public Object[][] EditActiveRoles() {
+		return new Object[][] {
+			{ " Adminnewside "," Adminnewside " } };
+	}	
 }

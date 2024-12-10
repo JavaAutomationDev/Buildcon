@@ -82,7 +82,7 @@ public class ProjecttypesTest extends base {
 	}
 
 	//Status Change Project Type
-	@Test
+	@Test()
 	public void Status_Change_Project_Types() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
@@ -92,7 +92,7 @@ public class ProjecttypesTest extends base {
 	}
 
 	//Delete Project Type
-	@Test
+	@Test()
 	public void Delete_Project_Type() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
@@ -112,7 +112,7 @@ public class ProjecttypesTest extends base {
 	}
 
 	//Add Validation Project Types
-	@Test
+	@Test()
 	public void Add_Validation_Project_Types() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -162,7 +162,7 @@ public class ProjecttypesTest extends base {
 	}
 
 	//Excel Project Types
-	@Test
+	@Test()
 	public void Excel_Project_Types() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
@@ -182,13 +182,13 @@ public class ProjecttypesTest extends base {
 		return new Object[][] { { "physics123333333333" } };
 	}
 
-	//DataProvider for Edit
+	//DataProvider for Edit Data
 	@DataProvider
 	public Object[][] getEditdata() {
 		return new Object[][] { { "chemisry11" } };
 	}
 
-	//DataProvider for Serach 
+	//DataProvider for Serach Data
 	@DataProvider
 	public Object[][] getsearched() {
 		return new Object[][] { { "CCR" } };

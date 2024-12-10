@@ -482,52 +482,51 @@ public class ReceiptTest extends base {
 	}
 	
 	//Verify Add Active Bank in Receipt
-		@Test(dataProvider="AddActiveBank")
-		public void Verify_Add_Active_Bank(String Bankname,String Project,String CustomerName,String FlatShop,String Name) 
-				throws InterruptedException {
-			Bankspage Bank = new Bankspage(driver);
-			Bank.getconfiguration().click();
-			Bank.getBanksclick().click();
-			Bank.getBankssearched().sendKeys(Bankname+Keys.ENTER);
-			Bank.getbankseditclick().click();
-			Bank.getActiveStatus().click();		
-			Bank.getbankseditsave().click();
+	@Test(dataProvider="AddActiveBank")
+	public void Verify_Add_Active_Bank(String Bankname,String Project,String CustomerName,String FlatShop,String Name) 
+			throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(Bankname+Keys.ENTER);
+		Bank.getbankseditclick().click();
+		Bank.getActiveStatus().click();		
+		Bank.getbankseditsave().click();
 
-			ReceiptPage receipt = new ReceiptPage(driver);
-			receipt.getReceipt().click();
-			Thread.sleep(2000);
-			receipt.getAddReceipt().click();
-			receipt.getProject(Project);
-			receipt.getCustormer(CustomerName);
-			receipt.getFlatShop(FlatShop);
-			Thread.sleep(2000);
-			receipt.getNextBtn().click();
+		ReceiptPage receipt = new ReceiptPage(driver);
+		receipt.getReceipt().click();
+		Thread.sleep(2000);
+		receipt.getAddReceipt().click();
+		receipt.getProject(Project);
+		receipt.getCustormer(CustomerName);
+		receipt.getFlatShop(FlatShop);
+		Thread.sleep(2000);
+		receipt.getNextBtn().click();
 
-			driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
-			List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-			int Counter=0;
-			for(int i=0;i<a.size();i++)
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(Name))
 			{
-				String b =a.get(i).getText(); 
-				if(!b.equalsIgnoreCase(Name))
-				{
-					Assert.assertFalse(false, "Bank is Active.");
-					//System.out.println("Test failed");
-					break;
-				}
-				else
-				{
-					Counter = Counter+1;
-					if(Counter>a.size())
-					{
-						System.out.println("Test");	
-						break;
-					}	
-				}
+				Assert.assertFalse(false, "Bank is Active.");
+				//System.out.println("Test failed");
+				break;
 			}
-		}	
-	
-	
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}	
+
 	//Banks Active Inactive
 	//Verify Edit InActive Bank in Receipt
 	@Test(dataProvider="EditInactiveBank")

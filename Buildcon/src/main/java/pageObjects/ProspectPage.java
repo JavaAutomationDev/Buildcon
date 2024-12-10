@@ -265,7 +265,7 @@ public class ProspectPage {
 		option.click();
 	}
 	//Page object for Reset Button
-	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
+	By resetfilter=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/div[5]/button");
 	public WebElement getresetfilter() {
 		base.failedElementName = "Prospect-ResetFilter";
 		return driver.findElement(resetfilter);

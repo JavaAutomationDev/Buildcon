@@ -78,8 +78,20 @@ public class CollectionPage {
 		return driver.findElement(SelectendDate);
 	}
 	
+	//Page object for Project Select Dropdown Button
+	By projcetdropdown=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-collections/div/div[2]/div/div[2]/mat-form-field/div[1]/div[2]/div/mat-select");
+	public void getProjcetdropdown(String ProjectDropdown) {
+		WebElement dropdown = driver.findElement(projcetdropdown);
+		dropdown.click();
+		
+		base.failedElementName = "Collection-Projcet Dropdown";
+		 String optionXPath = "//span[@class='mdc-list-item__primary-text' and text()='" + ProjectDropdown + "']";  
+		WebElement option = driver.findElement(By.xpath(optionXPath));
+		option.click();
+	}
+	
 	//Page object for Reset Button
-	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
+	By resetfilter=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-collections/div/div[2]/div/div[3]/button");
 	public WebElement getresetfilter() {
 		base.failedElementName = "Collection-ResetFilter";
 		return driver.findElement(resetfilter);

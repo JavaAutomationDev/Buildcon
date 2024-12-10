@@ -82,7 +82,7 @@ public class ProjectStatusTest extends base {
 	}
 
 	//Status Change Project Status
-	@Test
+	@Test()
 	public void Status_Change_Project_Status() throws InterruptedException {
 		Projectstatuspage unit = new Projectstatuspage(driver);
 		unit.getconfiguration().click();
@@ -93,7 +93,7 @@ public class ProjectStatusTest extends base {
 	}
 
 	//Delete Project Status
-	@Test
+	@Test()
 	public void Delete_Project_Status() throws InterruptedException {
 		Projectstatuspage unit = new Projectstatuspage(driver);
 		unit.getconfiguration().click();
@@ -115,7 +115,7 @@ public class ProjectStatusTest extends base {
 	}
 
 	//Excel Project Status
-	@Test
+	@Test()
 	public void Excel_Project_Status() throws InterruptedException {
 		Projectstatuspage unit = new Projectstatuspage(driver);
 		unit.getconfiguration().click();
@@ -126,7 +126,7 @@ public class ProjectStatusTest extends base {
 	}
 
 	//Add Validation Project Status
-	@Test
+	@Test()
 	public void Add_Validation_Project_Status() throws InterruptedException {
 		Projectstatuspage projectstatus = new Projectstatuspage(driver);
 		SoftAssert softAssert = new SoftAssert();
@@ -152,14 +152,17 @@ public class ProjectStatusTest extends base {
     //Edit Validation Project Status
 	@Test(dataProvider = "getEditdata")
 	public void Edit_validation_Project_Status(String Editprojectstatus1) throws InterruptedException {
-		Projectstatuspage projectstatus = new Projectstatuspage(driver);
 		SoftAssert softAssert = new SoftAssert();
+		Projectstatuspage projectstatus = new Projectstatuspage(driver);
 		projectstatus.getconfiguration().click();
 		projectstatus.getprojectstatusclick().click();
+		
 		projectstatus.getprojectstatuseditclick().click();
-		for (int i = 1; i <= 13; i++) {
+		int projectclick  = projectstatus.getprojectstatuseditclick().getAttribute("value").length();
+		for (int i = 1; i <= projectclick; i++) {
 			projectstatus.getprojectStatuseditnewdataadd().sendKeys(Keys.BACK_SPACE);
 		}
+		
 		projectstatus.getprojectstatussave().click();
 		Thread.sleep(2000);
 

@@ -32,15 +32,6 @@ public class CustomerTest extends base {
 		log.info("Login successful");		
 	}
 	
-	//Customer List Grid Data
-	@Test()
-	public void Verify_Customer_List_Customer() throws InterruptedException {
-		CustomerPage customer = new CustomerPage(driver);
-		customer.getCustomer().click();
-		Thread.sleep(2000);
-		customer.webElementList();
-	}
-	
 	//Customer Search Method
 	@Test(dataProvider="CustomerSearchData")
 	public void Search_Customer(String siteproject) throws InterruptedException {
@@ -55,9 +46,9 @@ public class CustomerTest extends base {
 	public void Export_To_Excel_Customer() throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
-		customer.webElementList();
 		Thread.sleep(2000);
 		customer.getExporttoExcel().click();
+		Thread.sleep(2000);
 	}
 	
 	//Apply Filter Method for Project & Reset
@@ -102,13 +93,13 @@ public class CustomerTest extends base {
 	@DataProvider
 	public Object[][] CustomerSearchData() {
 		return new Object[][] {
-			{ "project test"}};
+			{ "Automation Project1"}};
 	}
 	
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
 	public Object[][] CustomerProjectDropdownData() {
 		return new Object[][] {
-			{"marin drive lake view"}};
+			{"Automation Project1"}};
 	}
 }

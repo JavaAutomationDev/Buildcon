@@ -975,7 +975,7 @@ public class ProjectTest extends base {
 
 	//SAC Code
 	//Verify Edit Inactive SAC Code in Project
-	@Test(dataProvider="EditInactiveSACCode")
+	@Test(dataProvider="EditInactiveSACCodeData")
 	public void Verify_Edit_Inactive_SAC_Code_Project(String saccode, String sacname) throws InterruptedException {
 		Saccodepage Saccode = new Saccodepage(driver);
 		Saccode.getconfiguration().click();

@@ -80,7 +80,7 @@ public class PaymentsplanTest extends base {
 	}
 
 	//Delete Payments Plan
-	@Test
+	@Test()
 	public void Delete_banks() throws InterruptedException {
 		PaymentsPlanpage unit = new PaymentsPlanpage(driver);
 		unit.getconfiguration().click();
@@ -101,7 +101,7 @@ public class PaymentsplanTest extends base {
 		Thread.sleep(2000);
 	}
 	
-	@Test
+	@Test()
 	public void Excel_banks() throws InterruptedException {
 		PaymentsPlanpage unit = new PaymentsPlanpage(driver);
 		unit.getconfiguration().click();
@@ -112,7 +112,7 @@ public class PaymentsplanTest extends base {
 	
 
 	//Add Validation Payment Plan
-	@Test
+	@Test()
 	public void Add_Validation_Payment_Plan() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
@@ -138,7 +138,7 @@ public class PaymentsplanTest extends base {
 		softAssert.assertAll();
 	}
 
-	@Test
+	@Test()
 	public void Edit_validationpaymentsplan() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
@@ -159,11 +159,10 @@ public class PaymentsplanTest extends base {
 			paymentplan.getaddpaymentplandataenter().sendKeys(Keys.BACK_SPACE);
 		}
 		paymentplan.getEditpaymentplansave().click();
+		
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-payment-plan-master-add/"
 				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
-
-		
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
@@ -173,11 +172,11 @@ public class PaymentsplanTest extends base {
 		softAssert.assertAll();
 
 	}
-//
+
 	 //close the driver
 	@AfterMethod
 	public void teaddown() {
-		// driver.close();
+		driver.close();
 	}
 
 	//DataProvider for Add Payments Plan

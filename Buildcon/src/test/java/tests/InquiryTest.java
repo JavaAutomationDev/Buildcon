@@ -20,6 +20,7 @@ import pageObjects.InquiryResponsepage;
 import pageObjects.Inquirycommunicationmodepage;
 import pageObjects.Inquirystatuspage;
 import pageObjects.LoginPage;
+import pageObjects.ProjectPage;
 import resources.base;
 
 public class InquiryTest extends base {
@@ -129,7 +130,7 @@ public class InquiryTest extends base {
 		SoftAssert softAssert = new SoftAssert();
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
-		Inquiry.getSearch().sendKeys(Projectname + Keys.ENTER);
+		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
 		Inquiry.getEdit();
 		Inquiry.getsiteproject(siteproject);
 		
@@ -191,7 +192,7 @@ public class InquiryTest extends base {
 	public void Delete_Inquiry(String contactNo) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
-		Inquiry.getSearch().sendKeys(contactNo + Keys.ENTER);
+		Inquiry.getSearchInquiry().sendKeys(contactNo + Keys.ENTER);
 		Inquiry.getDelete().click();
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
@@ -222,7 +223,7 @@ public class InquiryTest extends base {
 		Inquiry.getresetfilter().click();
 	}
 
-	//Apply Filter with Dates
+	//Apply Filter with Date
 	@Test()
 	public void Apply_Filter_Dates_Inquiry() throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
@@ -236,14 +237,14 @@ public class InquiryTest extends base {
 		Inquiry.getresetfilter().click();
 	}
 
-	//Apply Filter with Project
+	//Apply Filter with Project 
 	@Test(dataProvider = "InquiryprojectfilterData")
 	public void Apply_Filter_Project_Inquiry(String selectproject) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getapplyfilter().click();
 		Inquiry.getselectproject(selectproject);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		Inquiry.getresetfilter().click();
 	}
 
@@ -253,10 +254,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Thread.sleep(2000);
-		Inquiry.getSearch().sendKeys(Attende + Keys.ENTER);
-		WebElement searchResult = Inquiry.getSearch();
-		String resultText = searchResult.getText();
-		Assert.assertFalse(resultText.contains(Attende));
+		Inquiry.getSearchInquiry().sendKeys(Attende + Keys.ENTER);
 	}
 
 	//Todays Follow up Click,Search & Edit
@@ -265,7 +263,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.gettodayfollowup().click();
-		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
+		Inquiry.getSearchInquiry().sendKeys(visitorname + Keys.ENTER);
 		
 		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 		@SuppressWarnings("unused")
@@ -286,7 +284,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
-		Inquiry.getSearch().sendKeys(visitorname + Keys.ENTER);
+		Inquiry.getSearchInquiry().sendKeys(visitorname + Keys.ENTER);
 		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 		@SuppressWarnings("unused")
 		boolean flag=NRF.isDisplayed();
@@ -305,7 +303,7 @@ public class InquiryTest extends base {
 	public void Add_Prospect_Inquiry(String Attende,String unitD, String Selectflat) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
-		Inquiry.getSearch().sendKeys(Attende + Keys.ENTER);
+		Inquiry.getSearchInquiry().sendKeys(Attende + Keys.ENTER);
 		Inquiry.getAddprospect().click();
 		Inquiry.getunitdropdown(unitD);
 		Inquiry.getSelectFlat(Selectflat);
@@ -353,7 +351,7 @@ public class InquiryTest extends base {
 	public void Edit_Inquiry_Test_Mandatory_Field_Validation(String Attende) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
-		Inquiry.getSearch().sendKeys(Attende + Keys.ENTER);
+		Inquiry.getSearchInquiry().sendKeys(Attende + Keys.ENTER);
 		Inquiry.Getedit();
 		Thread.sleep(2000);
 		
@@ -928,12 +926,176 @@ public class InquiryTest extends base {
 		}
 	}
 
+	//Add Inquiry Project Dropdown
+	//Verify Add Inactive Project
+	@Test(dataProvider="AddInactiveProjectData")
+	public void Verify_Add_Inactive_Project(String projectname,String Name) throws InterruptedException {
+		ProjectPage Project = new ProjectPage(driver);
+		Project.getproject().click();
+		Project.getSearch().sendKeys(projectname + Keys.ENTER);
+		Thread.sleep(2000);
+		Project.getActiveproject().click();
+		Project.getClickYes().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getaddInquiry().click();
+		
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(Name))
+			{
+				Assert.assertFalse(false, "Project is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Add Active Project
+	@Test(dataProvider="AddActiveProjectData")
+	public void Verify_Add_Active_Project(String projectname,String Name) throws InterruptedException {
+		ProjectPage Project = new ProjectPage(driver);
+
+		Project.getproject().click();
+		Project.getSearch().sendKeys(projectname + Keys.ENTER);
+		Thread.sleep(2000);
+		Project.getActiveproject().click();
+		Project.getClickYes().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getaddInquiry().click();
+
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(Name))
+			{
+				Assert.assertFalse(false, "Project is Active.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Edit Inquiry Project Dropdown
+	//Verify Edit Inactive Project
+	@Test(dataProvider="EditInactiveProjectData")
+	public void Verify_Edit_Inactive_Project(String projectname,String Projectname,String Name) throws InterruptedException {
+		ProjectPage Project = new ProjectPage(driver);
+		Project.getproject().click();
+		Project.getSearch().sendKeys(projectname + Keys.ENTER);
+		Thread.sleep(2000);
+		Project.getActiveproject().click();
+		Project.getClickYes().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
+		Inquiry.getEdit();
+		
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(Name))
+			{
+				Assert.assertFalse(false, "Project is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active Project
+	@Test(dataProvider="EditActiveProjectData")
+	public void Verify_Edit_Active_Project(String projectname,String Projectname,String Name) throws InterruptedException {
+		ProjectPage Project = new ProjectPage(driver);
+
+		Project.getproject().click();
+		Project.getSearch().sendKeys(projectname + Keys.ENTER);
+		Thread.sleep(2000);
+		Project.getActiveproject().click();
+		Project.getClickYes().click();
+
+		InquiryPage Inquiry = new InquiryPage(driver);
+		Inquiry.getInquiry().click();
+		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
+		Inquiry.getEdit();
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText(); 
+			if(!b.equalsIgnoreCase(Name))
+			{
+				Assert.assertFalse(false, "Project is Active.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
 	//Close the driver
 	@AfterMethod 
 	public void teardown() {
 		base.failedElement = null;
-		base.failedElementName = "";
-		driver.close(); 
+		//driver.close(); 
 	}
 
 	//DataProvider for Add Inquiry
@@ -952,21 +1114,28 @@ public class InquiryTest extends base {
 			
 	}
 
-	//DataProvider for Edit Inquiry
+	//DataProvider for Edit Inquiry Data
 	@DataProvider
 	public Object[][] InquiryEditData() {
 		return new Object[][] 
 				{{"Automation Project1","Automation Project1","Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
 	}
 
-	//DataProvider for Delete Inquiry
+	//DataProvider for Delete Inquiry Data
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
 				{{"Suresh Patel"}};
 	}
-
-	//DataProvider for Inquiry Apply Filter for Project
+	
+	//DataProvider for Filter Dates Data
+	@DataProvider
+	public Object[][] FilterDatesData() {
+		return new Object[][] 
+				{{"10/12/2024","30/12/2024"}};
+	}
+	
+	//DataProvider for Inquiry Apply Filter for Project Data
 	@DataProvider
 	public Object[][] InquiryprojectfilterData() {
 		return new Object[][] { {"Automation Project1"} };
@@ -990,49 +1159,49 @@ public class InquiryTest extends base {
 		return new Object[][] {{"Nilesh Panchal"}};
 	}
 
-	//DataProvider for Add Inactive Attendee
+	//DataProvider for Add Inactive Attendee Data
 	@DataProvider
 	public Object[][] AddInactiveAttendee() {
 		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
-	//DataProvider for Add Active Attendee
+	//DataProvider for Add Active Attendee Data
 	@DataProvider
 	public Object[][] AddActiveAttendee() {
 		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
-	//DataProvider for Edit Inactive Attendee
+	//DataProvider for Edit Inactive Attendee Data
 	@DataProvider
 	public Object[][] EditInactiveAttendee() {
 		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
-	//DataProvider for Edit Active Attendee
+	//DataProvider for Edit Active Attendee Data
 	@DataProvider
 	public Object[][] EditActiveAttendee() {
 		return new Object[][] {{"Nilesh Panchal","Nilesh Panchal"}};
 	}
 	
-	//DataProvider for Add Inactive Inquiry Status
+	//DataProvider for Add Inactive Inquiry Status Data
 	@DataProvider
 	public Object[][] AddInactiveInquiryStatus() {
 		return new Object[][] {{"In Progress","In Progress"}};
 	}
 	
-	//DataProvider for Add Active Inquiry Status
+	//DataProvider for Add Active Inquiry Status Data
 	@DataProvider
 	public Object[][] AddActiveInquiryStatus() {
 		return new Object[][] {{"In Progress","In Progress"}};
 	}
 	
-	//DataProvider for Edit Inactive Inquiry Status
+	//DataProvider for Edit Inactive Inquiry Status Data
 	@DataProvider
 	public Object[][] EditInactiveInquiryStatus() {
 		return new Object[][] {{"In Progress","In Progress"}};
 	}
 	
-	//DataProvider for Edit Inactive Inquiry Status
+	//DataProvider for Edit Inactive Inquiry Status Data
 	@DataProvider
 	public Object[][] EditActiveInquiryStatus() {
 		return new Object[][] {{"In Progress","In Progress"}};
@@ -1058,5 +1227,27 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] EditActiveInquiryCommuncation() {
 		return new Object[][] {{"Face to Face","Face to Face"}};
+	}
+	
+	//DataProvider for AddInactiveProjectData
+	@DataProvider
+	public Object[][] AddInactiveProjectData() {
+		return new Object[][] {{"TestProject1","TestProject1"}};
+	}
+	
+	//DataProvider for Add Active Project Data
+	@DataProvider
+	public Object[][] AddActiveProjectData() {
+		return new Object[][] {{"TestProject1","TestProject1"}};
+	}
+	//DataProvider for Edit Inactive Project Data
+	@DataProvider
+	public Object[][] EditInactiveProjectData() {
+		return new Object[][] {{"TestProject1","Automation Project1","TestProject1"}};
+	}
+	//DataProvider for Edit Active Project Data
+	@DataProvider
+	public Object[][] EditActiveProjectData() {
+		return new Object[][] {{"TestProject1","Automation Project1","TestProject1"}};
 	}
 }

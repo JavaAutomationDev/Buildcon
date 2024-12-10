@@ -12,7 +12,7 @@ import pageObjects.RoleRightsPage;
 import pageObjects.LoginPage;
 import resources.base;
 
-public class RoleRightsOnlyViewTest extends base {
+public class RoleRightsOnlyModifyTest extends base {
 
 	public static org.apache.logging.log4j.Logger log = LogManager.getLogger(base.class.getName());
 
@@ -32,9 +32,9 @@ public class RoleRightsOnlyViewTest extends base {
 		log.info("Login successful");
 	}
 
-	//Verify Only View Roles Inquiry
+	//Verify Only Modify Roles Inquiry
 	@Test()
-	public void Verify_OnlyViewRoles_Inquiry() {
+	public void Verify_OnlyModify_Roles_Inquiry() {
 		SoftAssert softAssert=new SoftAssert();
 		RoleRightsPage Inquiry = new RoleRightsPage(driver);
 		Inquiry.getInquiry().click();
@@ -50,7 +50,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Add Inquiry visible: " + flag);
 		softAssert.assertFalse(flag);
-      
+
 		//Inquiry Edit Button
 		flag = false;
 		try {
@@ -61,8 +61,8 @@ public class RoleRightsOnlyViewTest extends base {
 			flag = false;
 		}
 		System.out.println("Is Edit Inquiry visible: " + flag);
-		softAssert.assertFalse(flag);
-		
+		softAssert.assertTrue(flag);
+
 		//Inquiry Delete Button
 		flag = false;
 		try {
@@ -74,7 +74,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Delete Inquiry visible: " + flag);
 		softAssert.assertFalse(flag);
-		
+
 		//Inquiry Export Excel Button
 		flag = false;
 		try {
@@ -89,9 +89,9 @@ public class RoleRightsOnlyViewTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Verify Only View Roles Prospect
+	//Verify Only Modify Roles Prospect
 	@Test()
-	public void Verify_OnlyViewRoles_Prospect() {
+	public void Verify_OnlyModify_Roles_Prospect() {
 		SoftAssert softAssert=new SoftAssert();
 		RoleRightsPage Prospect = new RoleRightsPage(driver);
 		Prospect.getprospect().click();
@@ -108,7 +108,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Add Prospect visible: " + flag);
 		softAssert.assertFalse(flag);
-		
+
 		//Prospect Edit Button
 		flag = false;
 		try {
@@ -119,8 +119,8 @@ public class RoleRightsOnlyViewTest extends base {
 			flag = false;
 		}
 		System.out.println("Is Edit Prospect visible: " + flag);
-		softAssert.assertFalse(flag);
-		
+		softAssert.assertTrue(flag);
+
 		//Prospect Delete Button
 		flag = false;
 		try {
@@ -147,9 +147,9 @@ public class RoleRightsOnlyViewTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Verify Only View Roles Project
+	//Verify Only Modify Roles Project
 	@Test()
-	public void Verify_OnlyViewRoles_Project() {
+	public void Verify_OnlyModify_Roles_Project() {
 		SoftAssert softAssert=new SoftAssert();
 		RoleRightsPage Project = new RoleRightsPage(driver);
 		Project.getproject().click();
@@ -166,7 +166,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Add Project visible: " + flag);
 		softAssert.assertFalse(flag);	
-		
+
 		//Project Edit Button
 		flag = false;
 		try {
@@ -177,7 +177,7 @@ public class RoleRightsOnlyViewTest extends base {
 			flag = false;
 		}
 		System.out.println("Is Edit Project visible: " + flag);
-		softAssert.assertFalse(flag);	
+		softAssert.assertTrue(flag);	
 
 		//Project Delete Button
 		flag = false;
@@ -190,7 +190,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Delete Project visible: " + flag);
 		softAssert.assertFalse(flag);
-		
+
 		//Project Export Excel Button
 		flag = false;
 		try {
@@ -205,9 +205,9 @@ public class RoleRightsOnlyViewTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Verify Only View Roles Booking
+	//Verify Only Modify Roles Booking
 	@Test()
-	public void Verify_OnlyViewRoles_Booking() {
+	public void Verify_OnlyModify_Roles_Booking() {
 		SoftAssert softAssert=new SoftAssert();
 		RoleRightsPage Booking = new RoleRightsPage(driver);
 		Booking.getBooking().click();
@@ -224,7 +224,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Add Booking visible: " + flag);
 		softAssert.assertFalse(flag);	
-		
+
 		//Booking Edit Button
 		flag = false;
 		try {
@@ -237,8 +237,8 @@ public class RoleRightsOnlyViewTest extends base {
 			flag = false;
 		}
 		System.out.println("Is Edit Booking visible: " + flag);
-		softAssert.assertFalse(flag);	
-  
+		softAssert.assertTrue(flag);	
+
 		//Booking export Excel Button
 		flag = false;
 		try {
@@ -255,30 +255,9 @@ public class RoleRightsOnlyViewTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Verify Only View Roles Customer
+	//Verify Only Modify Roles Receipt
 	@Test()
-	public void Verify_OnlyViewRoles_Customer() {
-		SoftAssert softAssert=new SoftAssert();
-		RoleRightsPage Customer = new RoleRightsPage(driver);
-		Customer.getCustomer().click();
-		boolean flag = false;
-		try {
-			WebElement ExportCustomer = Customer.getExporttoExcel();
-			//Check if the element is displayed
-			flag = ExportCustomer.isDisplayed();
-		} catch (Exception e) {
-			//Element not found, set flag to false
-			System.out.println("Element not found: " + e.getMessage());
-			flag = false;
-		}
-		System.out.println("Is Export Customer visible: " + flag);
-		softAssert.assertFalse(flag);	
-		softAssert.assertAll();
-	}
-
-	//Verify Only View Roles Receipt
-	@Test()
-	public void Verify_OnlyViewRoles_Receipt() {
+	public void Verify_OnlyModify_Roles_Receipt() {
 		SoftAssert softAssert=new SoftAssert();
 		RoleRightsPage Receipt = new RoleRightsPage(driver);
 		Receipt.getReceipt().click();
@@ -295,7 +274,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Add Receipt visible: " + flag);
 		softAssert.assertFalse(flag);	
-		
+
 		//Receipt Edit Button
 		flag = false;
 		try {
@@ -306,8 +285,8 @@ public class RoleRightsOnlyViewTest extends base {
 			flag = false;
 		}
 		System.out.println("Is Edit Receipt visible: " + flag);
-		softAssert.assertFalse(flag);	
-		
+		softAssert.assertTrue(flag);	
+
 		//Receipt Export Excel Button
 		flag = false;
 		try {
@@ -322,9 +301,9 @@ public class RoleRightsOnlyViewTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Verify Only View Roles Employee
+	//Verify Only Modify Roles Employee
 	@Test()
-	public void Verify_OnlyViewRoles_Employee() {
+	public void Verify_OnlyModify_Roles_Employee() {
 		SoftAssert softAssert=new SoftAssert();
 		RoleRightsPage Employee = new RoleRightsPage(driver);
 		Employee.getEmployee().click();
@@ -341,7 +320,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Add Employee visible: " + flag);
 		softAssert.assertFalse(flag);
-		
+
 		//Employee Edit Button
 		flag = false;
 		try {
@@ -352,8 +331,8 @@ public class RoleRightsOnlyViewTest extends base {
 			flag = false;
 		}
 		System.out.println("Is Edit Employee visible: " + flag);
-		softAssert.assertFalse(flag);
-		
+		softAssert.assertTrue(flag);
+
 		//Employee Export Excel Button
 		flag = false;
 		try {
@@ -369,9 +348,9 @@ public class RoleRightsOnlyViewTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Verify Only View Roles Document
+	//Verify Only Modify Roles Document
 	@Test()
-	public void Verify_OnlyViewRoles_Document() {
+	public void Verify_OnlyModify_Roles_Document() {
 		SoftAssert softAssert=new SoftAssert();
 		RoleRightsPage Document = new RoleRightsPage(driver);
 		Document.getDocument().click();
@@ -388,7 +367,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Add Document visible: " + flag);
 		softAssert.assertFalse(flag);
-		
+
 		//Document Edit Button
 		flag = false;
 		try {
@@ -399,8 +378,8 @@ public class RoleRightsOnlyViewTest extends base {
 			flag = false;
 		}
 		System.out.println("Is Edit Document visible: " + flag);
-		softAssert.assertFalse(flag);
-		
+		softAssert.assertTrue(flag);
+
 		//Document Delete Button
 		flag = false;
 		try {
@@ -412,7 +391,7 @@ public class RoleRightsOnlyViewTest extends base {
 		}
 		System.out.println("Is Delete Document visible: " + flag);
 		softAssert.assertFalse(flag);
-		
+
 		//Document View Button
 		flag = false;
 		try {

@@ -59,7 +59,7 @@ public class CustomerPage {
 	}
 	
 	//Page object for Reset Button
-	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
+	By resetfilter=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-members/div/div[2]/div/div[3]/button");
 	public WebElement getresetfilter() {
 		base.failedElementName = "Customer-ResetFilter";
 		return driver.findElement(resetfilter);

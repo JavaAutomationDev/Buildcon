@@ -70,6 +70,16 @@ public class CollectionTest extends base {
 		collection.getresetfilter().click();	
 	}
 	
+	//Apply Filter Method for Project
+	@Test(dataProvider="ApplyFilterProjectData")
+	public void Apply_Filter_Project_Collection(String projectname) throws InterruptedException {
+		CollectionPage collection = new CollectionPage(driver);
+		collection.getcollection().click();
+		collection.getapplyfilter().click();
+		collection.getProjcetdropdown(projectname);
+		collection.getresetfilter().click();	
+	}
+	
 	//Collection Information Method
 	@Test(dataProvider="InformationCollection")
 	public void Information_Collection(String unitno) throws InterruptedException {
@@ -116,6 +126,13 @@ public class CollectionTest extends base {
 			{"Taj Mahal"}};
 	}
 	
+	//DataProvider for Apply Filter Project Data
+	@DataProvider
+	public Object[][] ApplyFilterProjectData() {
+		return new Object[][] {
+			{" Automation Project1 "}};
+	}
+		
 	//DataProvider for Information Collection
 	@DataProvider
 	public Object[][] InformationCollection() {
@@ -136,4 +153,5 @@ public class CollectionTest extends base {
 		return new Object[][] {
 			{" 3BHKsss NO - 103 "}};
 	}
+	
 }

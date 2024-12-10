@@ -209,11 +209,11 @@ public class InquiryPage {
 		return Edit;
 	}
 
-	//Page object for Search
-	By Search = By.xpath("//input[@type='search']");
-	public WebElement getSearch() {
+	//Page object for Search Inquiry
+	By Search = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[1]/div[2]/div[1]/input");
+	public WebElement getSearchInquiry() {
 		base.failedElement = null;
-		base.failedElementName = "Missing_Follow_Inquiry";
+		base.failedElementName = "Inquiry-SearchInquiry";
 		return driver.findElement(Search);
 	}
 	
@@ -261,7 +261,7 @@ public class InquiryPage {
 		dropdown.click();
 
 		base.failedElement = dropdown;
-		base.failedElementName = "getselectproject Inquiry-Apply Filter";
+		base.failedElementName = "Inquiry-ApplyFiltergetselectproject";
 
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + project + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
@@ -269,7 +269,7 @@ public class InquiryPage {
 	}
 	
 	//Page object for Reset Button
-	By resetfilter=By.xpath("//button[@mattooltip='Reset Filters']");
+	By resetfilter=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[2]/div/div[5]/button");
 	public WebElement getresetfilter() {
 		base.failedElementName = "Inquiry-ResetFilter";
 		return driver.findElement(resetfilter);

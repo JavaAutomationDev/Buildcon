@@ -527,7 +527,7 @@ public class ProspectTest extends base {
 	//Close the Driver  
 	@AfterMethod 
 	public void teardown() { 
-		//driver.close();
+		driver.close();
 	}
 
 	//DataProvider for Add Prospect
@@ -535,7 +535,7 @@ public class ProspectTest extends base {
 	public Object[][] ProspectAdddata() {
 		return new Object[][] {
 			{"Automation Project1","Mahesh Patel","","","Vimal Patel", "Nilesh Panchal", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A",""},
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"},
 			{"Automation Project1","Suresh Patel","","","Vimal Patel", "Nilesh Panchal", "9856214501", 
 				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"},
 			{"Automation Project1","Meet Patel","","","Vimal Patel", "Nilesh Panchal", "9856214574", 
