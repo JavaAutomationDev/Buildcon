@@ -1,7 +1,6 @@
 package tests;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
@@ -72,11 +71,11 @@ public class ProjectTest extends base {
 
 		softAssert.assertFalse(projecttype.isEmpty(), "Project Type is required.");
 		softAssert.assertNotNull(projecttype, "Project Type cannot be null.");
-		project.getProjecttype(projecttype);//Required Field
+		project.getProjecttype(projecttype.trim());//Required Field
 
 		softAssert.assertFalse(Projectstatus.isEmpty(), "Project Status is required");
 		softAssert.assertNotNull(Projectstatus, "Project Status cannot be null.");
-		project.getProjectstatus(Projectstatus);
+		project.getProjectstatus(Projectstatus.trim());
 
 		softAssert.assertFalse(Expectedstartdate.isEmpty(), "Expected Start Date is required");
 		softAssert.assertNotNull(Expectedstartdate, "Expected start date cannot be null.");
@@ -104,7 +103,7 @@ public class ProjectTest extends base {
 		String valid_City = valid_string2;
 		System.out.println(valid_City);
 
-		project.getstate(State);
+		project.getstate(State.trim());
 		
 		project.getspNo().sendKeys(Spno);
 		//Data validation for spno:
@@ -114,7 +113,7 @@ public class ProjectTest extends base {
 
 		softAssert.assertFalse(SalesExectuive.isEmpty(), "Sales Executive is required");
 		softAssert.assertNotNull(SalesExectuive, "Sales Exectuive cannot be null.");
-		project.getSalesExectuive(SalesExectuive);//Required Field
+		project.getSalesExectuive(SalesExectuive.trim());//Required Field
 
 		project.getdescription().sendKeys(Description);
 		//Data validation for description:
@@ -243,13 +242,13 @@ public class ProjectTest extends base {
 
 		softAssert.assertFalse(RecPostFix.isEmpty(), "Receipt Postfix is required");
 		softAssert.assertNotNull(RecPostFix, "Receipt postfix cannot be null.");
-		project.getRecPostfix(RecPostFix);//Required Field
+		project.getRecPostfix(RecPostFix.trim());//Required Field
 
 		Thread.sleep(2000);
 		project.getNextbtn2().click();
-		project.getPropertyType(Propertytype);
+		project.getPropertyType(Propertytype.trim());
 
-		project.getSACcode(Saccode);
+		project.getSACcode(Saccode.trim());
 		project.getActionbtn().click();
 
 		project.getNextbtn3().click();
@@ -293,9 +292,9 @@ public class ProjectTest extends base {
 		project.getAddUnit().click();
 		project.getUnitType().sendKeys(unittype);
 		
-		project.getFloorNumber(floorno);
+		project.getFloorNumber(floorno.trim());
         project.getunitBlockNumber().sendKeys(blockno);
-        project.getunitBlockType(Unitblocktype);
+        project.getunitBlockType(Unitblocktype.trim());
 		
         Thread.sleep(2000);
         project.getEast1().sendKeys(east1);
@@ -310,12 +309,13 @@ public class ProjectTest extends base {
         Thread.sleep(2000);
         project.getsurveyNumber2().sendKeys(surveyNumber2);
         Thread.sleep(2000);
-        project.getsurveyNoUnitTypeID(urveyNoUnitType);
+        project.getsurveyNoUnitTypeID(urveyNoUnitType.trim());
         project.getunitCreateBtn().click();
+        project.getUnitCrossBtn().click();
         project.getBlockconfigurationNextbtn().click();
         
         project.getAddPaymentPlan().click();
-        project.getPaymentPaln(paymentplan);
+        project.getPaymentPaln(paymentplan.trim());
         project.getphasename().sendKeys(Paymnetphase);
         project.getCompletionPercentage().sendKeys(completepercentage);
         project.getPaymentPercentage().sendKeys(paymentpercentage);
@@ -349,7 +349,7 @@ public class ProjectTest extends base {
 		softAssert.assertEquals(valid_BlockName, "Block Name is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_floor, "floor is a valid Number");
 		softAssert.assertEquals(valid_basement, "basement is a valid Number");
-		//softAssert.assertAll();
+		softAssert.assertAll();
 	}
 
 	//Edit Existing Project
@@ -475,25 +475,8 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getaddproject().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(statusname)) {
-				Assert.assertFalse(false, "Project status is Inactive.");
-				//System.out.println("Test failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
-	}
+        project.AddInactiveProjectStatusProject(statusname);
+	}	
 
 	//Verify Add Active Project Status in Project
 	@Test(dataProvider="AddActiveProjectStatusProject")
@@ -510,24 +493,7 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getaddproject().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(statusname)) {
-				Assert.assertFalse(false, "Project status is Active.");
-				//System.out.println("Test failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.AddActiveProjectStatusProject(statusname);
 	}
 
 	//Verify Edit InActive Project Status in Project
@@ -545,25 +511,9 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getEditbtn().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(statusname)) {
-				Assert.assertFalse(false, "Project status is Inactive.");
-				//System.out.println("Test failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.EditInactiveProjectStatusProject(statusname);
 	}
+		
 
 	//Verify Edit Active Project Status in Project
 	@Test(dataProvider="EditActiveProjectStatusProject")
@@ -580,24 +530,7 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getEditbtn().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(statusname)) {
-				Assert.assertFalse(false, "Project status is Active.");
-				System.out.println("Test failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.EditActiveProjectStatusProject(statusname); 
 	}
 
 	//Verify Add Inactive Project Type in Project
@@ -616,24 +549,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(typename)) {
-				Assert.assertFalse(false, "Project Type is Inactive.");
-				//System.out.println("Test failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.AddInactiveProjectTypeData(typename);
 	}
 
 	//Verify Add Active Project Type in Project
@@ -652,24 +568,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(typename)) {
-				Assert.assertFalse(false, "Project Type is active.");
-				System.out.println("Test  failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.AddActiveProjectTypeData(typename);
 	}
 
 	//Verify Edit Inactive Project Type in Project
@@ -688,24 +587,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(typename)) {
-				Assert.assertFalse(false, "Edit Project Type is Inactive.");
-				//System.out.println("Test failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.EditInActiveProjectTypeData(typename);
 	}
 
 	//Verify Edit Active Project Type in Project
@@ -724,24 +606,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(typename)) {
-				Assert.assertFalse(false, "Project Type is active.");
-				//System.out.println("Test failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.EditActiveProjectType(typename);
 	}
 
 	//State With Project Relation
@@ -763,24 +628,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(name)) {
-				Assert.assertFalse(false, "State is inactive.");
-				System.out.println("Test  failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.AddInactiveStateData(name);
 	}
 
 	//Verify Add Active State in Project
@@ -800,24 +648,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (b.equalsIgnoreCase(name)) {
-				Assert.assertFalse(false, "State is Active.");
-				//System.out.println("Test Pass State is Active ");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.AddActiveStateData(name);
 	}
 
 	//Verify Edit Inactive State in Project
@@ -837,24 +668,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(name)) {
-				Assert.assertFalse(false, "State is inactive.");
-				System.out.println("Test  failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.EditInActiveStateData(name); 
 	}
 
 	//Verify Edit Active State in Project
@@ -874,24 +688,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (b.equalsIgnoreCase(name)) {
-				Assert.assertFalse(false, "State is Active.");
-				System.out.println("Test  failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.EditActiveStateData(name);
 	}
 
 	//Property Type
@@ -914,25 +711,8 @@ public class ProjectTest extends base {
 		project.getNextbtn1().click();
 		Thread.sleep(2000);
 		project.getNextbtn2().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='propertyType']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(name)) {
-				Assert.assertFalse(false, "Property Type is Inactive.");
-				System.out.println("Test  failed");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
-	}
+        project.EditInactivePropertyTypeData(name);
+	}		
 
 	//Verify Edit Active Property Type in Project
 	@Test(dataProvider="EditActivePropertyTypeData")
@@ -953,24 +733,7 @@ public class ProjectTest extends base {
 		project.getEditNext().click();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='propertyType']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter = 0;
-		for (int i = 0; i < a.size(); i++) {
-			String b = a.get(i).getText();
-			if (!b.equalsIgnoreCase(name)) {
-				Assert.assertFalse(false, "Property Type is Active.");
-				System.out.println("Test Pass");
-				break;
-			} else {
-				Counter = Counter + 1;
-				if (Counter > a.size()) {
-					System.out.println("Test");
-					break;
-				}
-			}
-		}
+        project.EditActivePropertyTypeData(name);
 	}
 
 	//SAC Code
@@ -990,29 +753,7 @@ public class ProjectTest extends base {
 		project.GetEditNext();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='sacCode']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(sacname))
-			{
-				Assert.assertFalse(false, "Property Type is Inactive.");
-				System.out.println("Test Passed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+        project.EditInactiveSACCodeData(sacname);
 	}
 
 	//Verify Edit Active SAC Code in Project
@@ -1031,29 +772,7 @@ public class ProjectTest extends base {
 		project.GetEditNext();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='sacCode']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(sacname))
-			{
-				Assert.assertFalse(false, "Property Type is Active.");
-				//System.out.println("Test Passed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+        project.EditActiveSACCodeData(sacname);
 	}
 
 	//Add Project Test Mandatory Filed Validation
@@ -1154,19 +873,19 @@ public class ProjectTest extends base {
 			{"Automation Project1","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
+				"A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
 			{"Automation Project2","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
+				"B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
 			{"Automation Project3","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"},
+				"C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
 			{"Automation Project4","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","10%"}
+				"D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"}
 		};
 	}
 
@@ -1219,68 +938,67 @@ public class ProjectTest extends base {
 	//DataProvider for Add Inactive Project Type Data 
 	@DataProvider
 	public Object[][] AddInactiveProjectTypeData() {
-		return new Object[][] { { " Addee "," Addee " } };
+		return new Object[][] { { " SIT ProjectType "," SIT ProjectType " } };
 	}
 	//DataProvider for Add Active Project Type Data 
 	@DataProvider
 	public Object[][] AddActiveProjectTypeData() {
-		return new Object[][] { { " Addee "," Addee " } };
+		return new Object[][] { { " SIT ProjectType "," SIT ProjectType " } };
 	}
 	//DataProvider for Edit InActive Project Type Data
 	@DataProvider
 	public Object[][] EditInActiveProjectTypeData() {
-		return new Object[][] { { " Addee "," Addee " } };
+		return new Object[][] { { " SIT ProjectType "," SIT ProjectType " } };
 	}
 	
 	//DataProvider for Edit Active Project Type Data
 	@DataProvider
 	public Object[][] EditActiveProjectTypeData() {
-		return new Object[][] { { " Addee "," Addee " } };
+		return new Object[][] { { " SIT ProjectType "," SIT ProjectType " } };
 	}
 	//DataProvider for Add Inactive State Data
 	@DataProvider
 	public Object[][] AddInactiveStateData() {
-		return new Object[][] { { " Goa "," Goa " } };
+		return new Object[][] { { " SIT State "," SIT State " } };
 	}
 	//DataProvider for Add Active State Data
 	@DataProvider
 	public Object[][] AddActiveStateData() {
-		return new Object[][] { { " Goa "," Goa "} };
+		return new Object[][] { { " SIT State "," SIT State "} };
 	}
 	//DataProvider for Edit InActive State Data
 	@DataProvider
 	public Object[][] EditInActiveStateData() {
-		return new Object[][] { { " Goa "," Goa "} };
+		return new Object[][] { { " SIT State "," SIT State "} };
 	}
 	//DataProvider for Edit Active State Data
 	@DataProvider
 	public Object[][] EditActiveStateData() {
-		return new Object[][] { { " Goa "," Goa "} };
+		return new Object[][] { { " SIT State "," SIT State "} };
 	}
 	//DataProvider for Edit Inactive Property Type Data
 	@DataProvider
 	public Object[][] EditInactivePropertyTypeData() {
-		return new Object[][] { { " FLAT "," FLAT "} };
+		return new Object[][] { { " SIT PropertyType "," SIT PropertyType "} };
 	}
 	//DataProvider for Edit Active Property Type Data
 	@DataProvider
 	public Object[][] EditActivePropertyTypeData() {
-		return new Object[][] { { " FLAT "," FLAT "} };
+		return new Object[][] { { " SIT PropertyType "," SIT PropertyType "} };
 	}
 	//DataProvider for Edit Inactive SAC Code Data
 	@DataProvider
 	public Object[][] EditInactiveSACCodeData() {
-		return new Object[][] { { " 200024 "," 200024 "} };
+		return new Object[][] { { " 555555 "," 555555 "} };
 	}
 	//DataProvider for Edit Active SAC Code Data
 	@DataProvider
 	public Object[][] EditActiveSACCodeData() {
-		return new Object[][] { { " 200024 "," 200024 "} };
+		return new Object[][] { { " 555555 "," 555555 "} };
 	}
 	//DataProvider for Edit Employee Test Mandatory Data
 	@DataProvider
 	public Object[][] EditEmployeeTestMandatoryData() {
 		return new Object[][] {{"Automation Project1"}};
-	}	
-	
+	}		
 }

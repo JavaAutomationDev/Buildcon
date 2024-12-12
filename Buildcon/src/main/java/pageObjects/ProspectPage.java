@@ -5,11 +5,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import resources.base;
 
@@ -201,12 +203,10 @@ public class ProspectPage {
 
 	//Page object for Edit Button
 	public WebElement getEdit() {
-		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/"
-				+ "mat-sidenav-container/mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/"
-				+ "mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr[1]/td[15]/div/a[1]"));
+		WebElement Edit = driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-prospect/vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/div/div/table/tbody/tr/td[15]/div/a[1]"));
 		
 		base.failedElement = Edit;
-		base.failedElementName = "getEdit Prospect-Follow_Inquiry";
+		base.failedElementName = "Prospect-getEdit";
 		return Edit;
 	}
 
@@ -332,5 +332,114 @@ public class ProspectPage {
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Selectflat + "')]";  
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
+	}
+	
+	//Add Inactive Attendee Prospect
+	//Page object for Verify Add Inactive Attendee Prospect
+	public void AddInactiveAttendeeProspect(String Attendename) {	
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(b.equalsIgnoreCase(Attendename))
+			{
+				Assert.assertFalse(false, "Attende is inactive.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Add Active Attendee Prospect
+	//Page object for Verify Add Active Attendee Prospect
+	public void AddActiveAttendeeProspect(String Attendename) {	
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(b.equalsIgnoreCase(Attendename))
+			{
+				Assert.assertFalse(false, "Attende is inactive.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Edit Inactive Attendee Prospect
+	//Page object for Verify Edit Inactive Attendee Prospect
+	public void EditInactiveAttendeeProspect(String Attendename){
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(b.equalsIgnoreCase(Attendename))
+			{
+				Assert.assertFalse(false, "Attende is inactive.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Edit Active Attendee Prospect
+	//Verify Edit Active Attendee Prospect
+	public void EditActiveAttendeeProspect(String Attendename){
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(b.equalsIgnoreCase(Attendename))
+			{
+				Assert.assertTrue(true, "Attende is Active.");
+				//System.out.println("Test  Pass");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");
+					Assert.assertTrue(false, "Attende is InActive.");
+					break;
+				}	
+			}
+		}
 	}
 }

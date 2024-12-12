@@ -3,12 +3,14 @@ package pageObjects;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import resources.base;
 
@@ -432,7 +434,7 @@ public class ProjectPage {
 	//Page object for Add Project Block
 	By addprojectblock=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
 			+ "main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[6]/div/div/div/div[1]/vex-unit-block-list/div/button");
-	
+
 	public WebElement getAddProjectBlock() {
 		base.failedElementName = "Project-AddProjectBlock";
 		return driver.findElement(addprojectblock);
@@ -722,24 +724,19 @@ public class ProjectPage {
     }
     
     //Page object for West1
-    By west1=By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-unit-block-details[1]/"
-    		+ "div[1]/mat-dialog-content[1]/form[1]/div[3]/div[1]/div[1]/div[6]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]");
+    By west1=By.xpath("/html/body/div[4]/div[4]/div/mat-dialog-container/div/div/vex-unit-block-details/div/mat-dialog-content/form/div[3]/div/div/div[6]/mat-form-field/div[1]/div[2]/div/input");
     public WebElement getWest1() {
-    	JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", west1);
     	return driver.findElement(west1);
     }
     
     //Page object for North1
-    By north1=By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-unit-block-details[1]/"
-    		+ "div[1]/mat-dialog-content[1]/form[1]/div[3]/div[1]/div[1]/div[7]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]");
+    By north1=By.xpath("/html/body/div[4]/div[4]/div/mat-dialog-container/div/div/vex-unit-block-details/div/mat-dialog-content/form/div[3]/div/div/div[7]/mat-form-field/div[1]/div[2]/div/input");
     public WebElement getNorth1() {
     	return driver.findElement(north1);
     }
 	
     //Page object for South1
-    By south1=By.xpath("/html[1]/body[1]/div[3]/div[4]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-unit-block-details[1]/"
-    		+ "div[1]/mat-dialog-content[1]/form[1]/div[3]/div[1]/div[1]/div[8]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]");
+    By south1=By.xpath("/html/body/div[4]/div[4]/div/mat-dialog-container/div/div/vex-unit-block-details/div/mat-dialog-content/form/div[3]/div/div/div[8]/mat-form-field/div[1]/div[2]/div/input");
     public WebElement getSouth1() {
     	return driver.findElement(south1);
     }
@@ -771,7 +768,13 @@ public class ProjectPage {
     public WebElement getunitCreateBtn() {
     	return driver.findElement(createbtn);
     }
-  
+    
+    //Page object for Cross Button for unit Blocks close
+    By crossbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-block-details-list/div/div[1]/div[2]/a");
+    public WebElement getUnitCrossBtn() {
+    	return driver.findElement(crossbtn);
+    }
+    
     //Page object for Upload From Excel
     By uploadfromexcel=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-unit-block-details-list/div/div[1]/div[2]/button[2]");
     public WebElement getUploadFromExcel() {
@@ -829,7 +832,7 @@ public class ProjectPage {
 	}
 	
 	//Page object for Phase Name
-	By phasename=By.xpath("//mat-select[@formcontrolname='phase']");	
+	By phasename=By.xpath("//input[@formcontrolname='phase']");	
 	public WebElement getphasename() {
 		return driver.findElement(phasename);
 	}
@@ -957,5 +960,368 @@ public class ProjectPage {
 		return driver.findElement(editactualstartdate);
 	}
 
-		
+	//Verify Add Inactive Project status in Project
+	//Page object for Verify Add Inactive Project status in Project
+	public void AddInactiveProjectStatusProject(String statusname) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(statusname)) {
+				Assert.assertFalse(false, "Project status is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Add Active Project Status in Project
+	//Verify Add Active Project Status in Project
+	//Page object for Verify Add Active Project Status in Project
+	public void AddActiveProjectStatusProject(String statusname) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(statusname)) {
+				Assert.assertFalse(false, "Project status is Active.");
+				//System.out.println("Test failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Edit InActive Project Status in Project
+	//Verify Edit InActive Project Status in Project
+	//Page object for Verify Edit InActive Project Status in Project
+	public void EditInactiveProjectStatusProject(String statusname) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(statusname)) {
+				Assert.assertFalse(false, "Project status is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Verify Edit Active Project Status in Project
+	//Page object for Verify Edit Active Project Status in Project
+	public void EditActiveProjectStatusProject(String statusname) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectStatusID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(statusname)) {
+				Assert.assertFalse(false, "Project status is Active.");
+				System.out.println("Test failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Add Inactive Project Type in Project
+	//Page object for Verify Add Inactive Project Type in Project
+	public void AddInactiveProjectTypeData(String typename) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(typename)) {
+				Assert.assertFalse(false, "Project Type is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	//Verify Add Active Project Type in Project
+	//Page object for Verify Add Active Project Type in Project
+	public void AddActiveProjectTypeData(String typename) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(typename)) {
+				Assert.assertFalse(false, "Project Type is active.");
+				System.out.println("Test  failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Verify Edit Inactive Project Type in Project
+	//Page object for Verify Edit Inactive Project Type in Project
+	public void EditInActiveProjectTypeData(String typename) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(typename)) {
+				Assert.assertFalse(false, "Edit Project Type is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+
+	//Verify Edit Active Project Type in Project
+	//Page object for Verify Edit Active Project Type in Project
+	public void EditActiveProjectType(String typename) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='projectTypeID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(typename)) {
+				Assert.assertFalse(false, "Project Type is active.");
+				//System.out.println("Test failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//State With Project Relation
+	//Verify Add Inactive State in Project
+	//Page object for Verify Add Inactive State in Project
+	public void AddInactiveStateData(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(name)) {
+				Assert.assertFalse(false, "State is inactive.");
+				System.out.println("Test  failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Verify Add Active State in Project
+	//Page object for Verify Add Active State in Project
+	public void AddActiveStateData(String name) {	
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (b.equalsIgnoreCase(name)) {
+				Assert.assertFalse(false, "State is Active.");
+				//System.out.println("Test Pass State is Active ");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	//Verify Edit Inactive State in Project
+	//Page object for Verify Edit Inactive State in Project
+	public void EditInActiveStateData(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(name)) {
+				Assert.assertFalse(false, "State is inactive.");
+				System.out.println("Test  failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Verify Edit Active State in Project
+	//Page object for Verify Edit Active State in Project
+	public void EditActiveStateData(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='stateID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (b.equalsIgnoreCase(name)) {
+				Assert.assertFalse(false, "State is Active.");
+				System.out.println("Test  failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Property Type
+	//Verify Edit Inactive Property Type in Project
+	//Page obejct for Verify Edit Inactive Property Type in Project
+	public void EditInactivePropertyTypeData(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='propertyType']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(name)) {
+				Assert.assertFalse(false, "Property Type is Inactive.");
+				System.out.println("Test  failed");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//Verify Edit Active Property Type in Project
+	//Page object for Verify Edit Active Property Type in Project
+	public void EditActivePropertyTypeData(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='propertyType']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter = 0;
+		for (int i = 0; i < a.size(); i++) {
+			String b = a.get(i).getText().trim();
+			if (!b.equalsIgnoreCase(name)) {
+				Assert.assertFalse(false, "Property Type is Active.");
+				System.out.println("Test Pass");
+				break;
+			} else {
+				Counter = Counter + 1;
+				if (Counter > a.size()) {
+					System.out.println("Test");
+					break;
+				}
+			}
+		}
+	}
+	
+	//SAC Code
+	//Verify Edit Inactive SAC Code in Project
+	//Page object for Verify Edit Inactive SAC Code in Project
+	public void EditInactiveSACCodeData(String sacname) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='sacCode']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(!b.equalsIgnoreCase(sacname))
+			{
+				Assert.assertFalse(false, "Property Type is Inactive.");
+				//System.out.println("Test Passed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+	
+	//Verify Edit Active SAC Code in Project
+	//Page object for Verify Edit Active SAC Code in Project
+	public void EditActiveSACCodeData(String sacname) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='sacCode']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(!b.equalsIgnoreCase(sacname))
+			{
+				Assert.assertFalse(false, "Property Type is Active.");
+				//System.out.println("Test Passed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}	
 }

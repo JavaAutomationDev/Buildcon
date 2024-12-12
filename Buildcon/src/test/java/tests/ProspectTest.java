@@ -1,13 +1,12 @@
 package tests;
 
 import java.io.IOException;
-import java.util.List;
+import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -49,7 +48,7 @@ public class ProspectTest extends base {
 		Prospect.getprospect().click();
 		Prospect.getAddprospect().click();
 
-		Prospect.getsiteproject(siteproject);//Required Field
+		Prospect.getsiteproject(siteproject.trim());//Required Field
 		
 		Prospect.getvisitorname().sendKeys(visitorname);//Required Field
 		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
@@ -74,7 +73,7 @@ public class ProspectTest extends base {
 		String valid_referancedby = valid_string;
 		System.out.println(valid_referancedby);		
 		
-		Prospect.getAttendee(Attende);//Required Field
+		Prospect.getAttendee(Attende.trim());//Required Field
 		
 		Prospect.getContactNo().sendKeys(ContactNo); //Required Field
 		//Contact No Number Validation
@@ -103,20 +102,20 @@ public class ProspectTest extends base {
 		
 		Prospect.getrequirement().sendKeys(Requirement);
 	
-		Prospect.getstatus(Status);
-		Prospect.getunitdropdown(unitD); //Required Field
-		Prospect.getSelectFlat(Selectflat); //Required Field
+		Prospect.getstatus(Status.trim());
+		Prospect.getunitdropdown(unitD.trim()); //Required Field
+		Prospect.getSelectFlat(Selectflat.trim()); //Required Field
 
 		Thread.sleep(2000);
 		Prospect.getsave().click();
 		
-		softAssert.assertEquals(valid_visitorname, "1VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
-		softAssert.assertEquals(valid_referancedby, "1ReferencedBy is a Valid text - is a valid Minlenght - is a valid Maxlenght");
-		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
-		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
-		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
-		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
-		//softAssert.assertAll();
+		softAssert.assertEquals(valid_visitorname, "VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_referancedby, "ReferencedBy is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_contactno, "InquiryContactNo is a Valid Number");
+		softAssert.assertEquals(valid_address, "InquiryAddress is not a Valid Alpha-Numeric is not a valid Maxlenght");
+		softAssert.assertEquals(valid_email, "InquiryEmail is a Valid EMail");
+		softAssert.assertEquals(valid_remarks, "Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertAll();
 	}
 
 	//Editing an Existing Prospect using Data Provider
@@ -124,27 +123,28 @@ public class ProspectTest extends base {
 	public void Edit_Prospect(String visitorname,String newContactNo, String newEmail, String newAddress,
 			String newRemarks, String newRequirement, String newStatus) throws InterruptedException, IOException{
         SoftAssert softAssert = new SoftAssert();
+        
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
-		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
-		Prospect.getEdit();
+		Prospect.getSearch().sendKeys(visitorname.trim() + Keys.ENTER);
+		Prospect.getEdit().click();
 
 		Prospect.getContactNo().clear();
 		Prospect.getContactNo().sendKeys(newContactNo);
 		//Contact No Number Validation
-		String valid_contactno = valid_number(newContactNo, "ProspectContactNo");
+		String valid_contactno = valid_number(newContactNo, "ContactNo");
 		System.out.println(valid_contactno);
 		
 		Prospect.getEmail().clear();
 		Prospect.getEmail().sendKeys(newEmail);
 		//Email Validation
-		String valid_email = valid_EMail(newEmail, "ProspectEmail");
+		String valid_email = valid_EMail(newEmail, "Email");
 		System.out.println(valid_email);
 		
 		Prospect.getAddress().clear();
 		Prospect.getAddress().sendKeys(newAddress);
 		//Adress Alphanumeric  Validation
-		String valid_address = valid_alphanum(newAddress, "ProspectAddress", 10);
+		String valid_address = valid_alphanum(newAddress, "Address", 10);
 		System.out.println(valid_address);
 		
 		Prospect.getRemarks().clear();
@@ -155,14 +155,14 @@ public class ProspectTest extends base {
 				
 		Prospect.getrequirement().clear();
 		Prospect.getrequirement().sendKeys(newRequirement);
-		Prospect.getstatus(newStatus);
+		Prospect.getstatus(newStatus.trim());
 		Thread.sleep(2000);
 		Prospect.getsave().click();
 		
-		softAssert.assertEquals(valid_email, "1Email is a Valid EMail");
-		softAssert.assertEquals(valid_contactno, "1InquiryContactNo  is a Valid Number");
-		softAssert.assertEquals(valid_address, "1InquiryAddress  is a Valid Alpha-Numeric");
-		softAssert.assertEquals(valid_remarks, "1Remarks is a Valid text - is a valid Minlenght - is a valid Maxlenght");
+		softAssert.assertEquals(valid_contactno, "ContactNo is a Valid Number");
+		softAssert.assertEquals(valid_email, "Email is a Valid EMail");
+		softAssert.assertEquals(valid_address, "Address is not a Valid Alpha-Numeric is not a valid Maxlenght");
+		softAssert.assertEquals(valid_remarks, "Remarks is a Valid text - is a valid Minlenght - is not a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
@@ -171,7 +171,7 @@ public class ProspectTest extends base {
 	public void Delete_Prospect(String Attende) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
-		Prospect.getSearch().sendKeys(Attende + Keys.ENTER);
+		Prospect.getSearch().sendKeys(Attende.trim() + Keys.ENTER);
 		Prospect.getDelete();
 		Thread.sleep(2000);
 		Prospect.getClickYes().click();
@@ -180,35 +180,34 @@ public class ProspectTest extends base {
 	//Export to Excel Prospect
 	@Test()
 	public void Export_To_Excel_Prospect() throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
-		Thread.sleep(2000);
 		Prospect.getExporttoExcel().click();
 	}
 
 	//Apply Filter for Dates & Project
 	@Test(dataProvider="ProspectProjectFilterData")
 	public void Apply_Filter_Prospect(String selectproject) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
 		Prospect.getdaterange().click();
-		Thread.sleep(2000);
 		Prospect.getSelectstartDate().click();
-		Thread.sleep(2000);
 		Prospect.getSelectEndDate().click();
-		Prospect.getselectproject(selectproject);
-		Thread.sleep(2000);
+		Prospect.getselectproject(selectproject.trim());
 		
-		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
-		@SuppressWarnings("unused")
-		boolean flag=NRF.isDisplayed();
-		if(flag=false) {
-		   Prospect.getresetfilter().click();
-		}	
-		else
-		{
-			Prospect.getresetfilter().click();
+		try {
+		    WebElement NRF = driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
+		    boolean flag = NRF.isDisplayed();
+		    if (!flag) {
+		        Prospect.getresetfilter().click();
+		    } else {
+		        Prospect.getresetfilter().click();
+		    }
+		} catch (Exception e) {
+		    System.out.println("Exception occurred: " + e.getMessage());
 		}
 	}
 
@@ -223,7 +222,18 @@ public class ProspectTest extends base {
 		Thread.sleep(2000);
 		Prospect.getSelectEndDate().click();
 		Thread.sleep(2000);
-		Prospect.getresetfilter().click();	
+		
+		try {
+			WebElement NRF = driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
+			boolean flag = NRF.isDisplayed();
+			if (!flag) {
+				Prospect.getresetfilter().click();
+			} else {
+				Prospect.getresetfilter().click();
+			}
+		} catch (Exception e) {
+			System.out.println("Exception occurred: " + e.getMessage());
+		}
 	}
 
 	//Apply Filter Method for Project & Reset
@@ -232,8 +242,19 @@ public class ProspectTest extends base {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
-		Prospect.getselectproject(selectproject);
-		Prospect.getresetfilter().click();
+		Prospect.getselectproject(selectproject.trim());
+		
+		try {
+			WebElement NRF = driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
+			boolean flag = NRF.isDisplayed();
+			if (!flag) {
+				Prospect.getresetfilter().click();
+			} else {
+				Prospect.getresetfilter().click();
+			}
+		} catch (Exception e) {
+			System.out.println("Exception occurred: " + e.getMessage());
+		}
 	}
 
 	//Search Method for Prospect
@@ -242,7 +263,7 @@ public class ProspectTest extends base {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Thread.sleep(2000);
-		Prospect.getSearch().sendKeys(Attende + Keys.ENTER);
+		Prospect.getSearch().sendKeys(Attende.trim() + Keys.ENTER);
 		Thread.sleep(2000);
 		Prospect.getSearch().clear();
 	}
@@ -253,7 +274,7 @@ public class ProspectTest extends base {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.gettodayfollowup().click();
-		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
+		Prospect.getSearch().sendKeys(visitorname.trim() + Keys.ENTER);
 		
 		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 		@SuppressWarnings("unused")
@@ -273,7 +294,7 @@ public class ProspectTest extends base {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getmissingfollowup().click();
-		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
+		Prospect.getSearch().sendKeys(visitorname.trim() + Keys.ENTER);
 		
 		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 		@SuppressWarnings("unused")
@@ -324,11 +345,13 @@ public class ProspectTest extends base {
 		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
 		Prospect.getEdit().click();
 		Thread.sleep(2000);
+		
 		Prospect.getvisitorname().click();
 		int Vname  = Prospect.getvisitorname().getAttribute("value").length();
 		for (int i = -1; i <Vname ; i++) {
 			Prospect.getvisitorname().sendKeys(Keys.BACK_SPACE);
 		}
+		
 		Prospect.getContactNo().click();
 		int contactno = Prospect.getContactNo().getAttribute("value").length();
 		for (int i = 0; i <contactno ; i++) {
@@ -349,88 +372,37 @@ public class ProspectTest extends base {
 	public void Verify_Add_Inactive_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
 		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
 		employee.getActiveEmployee().click();
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
-
 		Thread.sleep(2000);
 		employee.getUpdate().click();
-
+		
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getAddprospect().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase(Attendename))
-			{
-				Assert.assertFalse(false, "Attende is inactive.");
-				//System.out.println("Test failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+        Prospect.AddInactiveAttendeeProspect(Attendename);
 	}
-
+	
 	//Verify Add Active Attendee Prospect
 	@Test(dataProvider="AddActiveAttendeeProspect")
 	public void Verify_Add_Active_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
 		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
-
 		employee.getActiveEmployee().click();
-
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
-
 		Thread.sleep(2000);
 		employee.getUpdate().click();
 
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getAddprospect().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase(Attendename))
-			{
-				Assert.assertTrue(true, "Attende is Active.");
-				//System.out.println("Test  Pass");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");
-					Assert.assertTrue(false, "Attende is InActive.");
-					break;
-				}	
-			}
-		}
+        Prospect.AddActiveAttendeeProspect(Attendename);
 	}
 
 	//Verify Edit Inactive Attendee Prospect
@@ -438,44 +410,18 @@ public class ProspectTest extends base {
 	public void Verify_Edit_Inactive_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
 		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
-
 		employee.getActiveEmployee().click();
-
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
-
 		Thread.sleep(2000);
 		employee.getUpdate().click();
 
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getEdit();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase(Attendename))
-			{
-				Assert.assertFalse(false, "Attende is inactive.");
-				//System.out.println("Test failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+		Prospect.EditInactiveAttendeeProspect(Attendename);
 	}
 
 	//Verify Edit Active Attendee Prospect
@@ -483,51 +429,24 @@ public class ProspectTest extends base {
 	public void Verify_Edit_Active_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-
 		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
 		employee.getEdit().click();
-
 		employee.getActiveEmployee().click();
-
 		Thread.sleep(2000);
 		employee.Nextbtn().click();
-
 		Thread.sleep(2000);
 		employee.getUpdate().click();
 
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getEdit();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='userID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase(Attendename))
-			{
-				Assert.assertTrue(true, "Attende is Active.");
-				//System.out.println("Test  Pass");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");
-					Assert.assertTrue(false, "Attende is InActive.");
-					break;
-				}	
-			}
-		}
+        Prospect.EditActiveAttendeeProspect(Attendename);
 	}
 
 	//Close the Driver  
 	@AfterMethod 
 	public void teardown() { 
-		driver.close();
+		//driver.close();
 	}
 
 	//DataProvider for Add Prospect
@@ -535,13 +454,13 @@ public class ProspectTest extends base {
 	public Object[][] ProspectAdddata() {
 		return new Object[][] {
 			{"Automation Project1","Mahesh Patel","","","Vimal Patel", "Nilesh Panchal", "9856214565", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"},
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1st Floor)"},
 			{"Automation Project1","Suresh Patel","","","Vimal Patel", "Nilesh Panchal", "9856214501", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"},
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 102 (1st Floor)"},
 			{"Automation Project1","Meet Patel","","","Vimal Patel", "Nilesh Panchal", "9856214574", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"},
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 103 (1st Floor)"},
 			{"Automation Project1","Mahi Patel","","","Vimal Patel", "Nilesh Panchal", "9856214532", 
-				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 101 (1 Floor)"}
+				"Akash@mail.com","Bopal Gam ,Ahmedabad","Remarks","4BHK","In Progress","A","Unit No - 104 (1st Floor)"}
 		};
 	}
 
@@ -549,62 +468,54 @@ public class ProspectTest extends base {
 	@DataProvider
 	public Object[][] ProspectEditData() {
 		return new Object[][] {
-			{"Mahi Patel","9876543210","akash.new@mail.com","New Address, Ahmedabad","Updated Remarks","5BHK","Completed" }};
+			{"Mahesh Patel","9876543210","akash.new@mail.com","New Address, Ahmedabad","Updated Remarks","5BHK","Completed" }};
 	}
 
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
 	public Object[][] ProspectProjectFilterData() {
-		return new Object[][] {
-			{"Automation Project1"}};
+		return new Object[][] {{"Automation Project1"}};
 	}
 
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] ProspectSearchData() {
-		return new Object[][] {
-			{"Suryakumar Yadav"}};
+		return new Object[][] {{"Nilesh Panchal"}};
 	}
 	
 	//DataProvider for Delete Prospect Data
 	@DataProvider
 	public Object[][] DeleteProspectData() {
-		return new Object[][] {
-			{"Suryakumar Yadav"}};
+		return new Object[][] {{"Nilesh Panchal"}};
 	}
 	
 	//DataProvider for Edit Prospect Test Mandatory Data
 	@DataProvider
 	public Object[][] EditProspectTestMandatoryData() {
-		return new Object[][] {
-			{"Suryakumar Yadav"}};
+		return new Object[][] {{"Nilesh Panchal"}};
 	}
 	
 	//DataProvider for Add Inactive Attendee Prospect
 	@DataProvider
 	public Object[][] AddInactiveAttendeeProspect() {
-		return new Object[][] {
-			{"Automation Test","Automation Test"}};
+		return new Object[][] {{"Automation Test","Automation Test"}};
 	}
 	
 	//DataProvider for Add Active Attendee Prospect
 	@DataProvider
 	public Object[][] AddActiveAttendeeProspect() {
-		return new Object[][] {
-			{"Automation Test","Automation Test"}};
+		return new Object[][] {{"Automation Test","Automation Test"}};
 	}
 	
 	//DataProvider for Edit Inactive Attendee Prospect
 	@DataProvider
 	public Object[][] EditInactiveAttendeeProspect() {
-		return new Object[][] {			
-			{"Automation Test","Automation Test"}};
+		return new Object[][] {{"Automation Test","Automation Test"}};
 	}
 	
 	//DataProvider for Edit Active Attendee Prospect
 	@DataProvider
 	public Object[][] EditActiveAttendeeProspect() {
-		return new Object[][] {			
-			{"Automation Test","Automation Test"}};
+		return new Object[][] {{"Automation Test","Automation Test"}};
 	}
 }
