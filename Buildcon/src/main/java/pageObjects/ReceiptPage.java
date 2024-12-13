@@ -592,4 +592,113 @@ public class ReceiptPage {
   	public WebElement getResetBtn() {
   		return driver.findElement(resetbtn);
   	}
+  	
+     //Banks Active Inactive
+  	//Verify Add InActive Bank in Receipt
+    //PAge object for Verify Add InActive Bank in Receipt 
+  	public void AddInactiveBank(String Name) {
+  		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(!b.equalsIgnoreCase(Name))
+			{
+				Assert.assertFalse(false, "Bank is Inactive.");
+				//System.out.println("Test failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+  	
+  //Verify Add Active Bank in Receipt
+  //Page object for Verify Add Active Bank in Receipt
+  	public void AddActiveBank(String Name) {
+  		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
+  		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+  		int Counter=0;
+  		for(int i=0;i<a.size();i++)
+  		{
+  			String b =a.get(i).getText().trim(); 
+  			if(!b.equalsIgnoreCase(Name))
+  			{
+  				Assert.assertFalse(false, "Bank is Active.");
+  				//System.out.println("Test failed");
+  				break;
+  			}
+  			else
+  			{
+  				Counter = Counter+1;
+  				if(Counter>a.size())
+  				{
+  					System.out.println("Test");	
+  					break;
+  				}	
+  			}
+  		}
+  	}
+  	
+    //Banks Active Inactive
+  	//Verify Edit InActive Bank in Receipt
+  	public void EditInactiveBank(String Name) {
+  		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
+  		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+  		int Counter=0;
+  		for(int i=0;i<a.size();i++)
+  		{
+  			String b =a.get(i).getText().trim(); 
+  			if(!b.equalsIgnoreCase(Name))
+  			{
+  				Assert.assertFalse(false, "Bank is Inactive.");
+  				//System.out.println("Test failed");
+  				break;
+  			}
+  			else
+  			{
+  				Counter = Counter+1;
+  				if(Counter>a.size())
+  				{
+  					System.out.println("Test");	
+  					break;
+  				}	
+  			}
+  		}
+  	}
+  	
+  	//Verify Edit Active Bank in Receipt
+  	//Page object for Verify Edit Active Bank in Receipt
+  	public void EditActiveBank(String Name) {
+  		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
+  		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+  		int Counter=0;
+  		for(int i=0;i<a.size();i++)
+  		{
+  			String b =a.get(i).getText().trim(); 
+  			if(!b.equalsIgnoreCase(Name))
+  			{
+  				Assert.assertFalse(false, "Bank is Inactive.");
+  				//System.out.println("Test failed");
+  				break;
+  			}
+  			else
+  			{
+  				Counter = Counter+1;
+  				if(Counter>a.size())
+  				{
+  					System.out.println("Test");	
+  					break;
+  				}	
+  			}
+  		}
+  	}
 }

@@ -53,7 +53,7 @@ public class ProjectTest extends base {
 			String Basements,String unittype,String floorno,String blockno,String Unitblocktype,String east1,String west1,
 			String north1,String south1,String surveyNumber,String surveyNumber2,String urveyNoUnitType,String paymentplan,
 			String Paymnetphase,String completepercentage,String paymentpercentage) throws InterruptedException, IOException {
-		
+
 		SoftAssert softAssert = new SoftAssert();
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -62,7 +62,7 @@ public class ProjectTest extends base {
 		project.getProjectName().click();
 		softAssert.assertFalse(projectname.isEmpty(), "Project Name is required");
 		softAssert.assertNotNull(projectname, "Project name cannot be null.");
-		
+
 		project.getProjectName().sendKeys(projectname);//Required Field
 		//Data validation of project name field:
 		String valid_string = valid_alphanum(projectname, "projectname", 10);
@@ -90,7 +90,7 @@ public class ProjectTest extends base {
 		project.getActualstartdate().sendKeys(ActualStartdate);//Required Field
 
 		project.getActualenddate().sendKeys(ActualEnddate);
-		
+
 		project.getTotalsaleableArea().sendKeys(totalSaleableArea); //valid_number
 		//Data validation of totalSaleableArea:
 		String valid_string1 = valid_number(totalSaleableArea, "TotalSaleableArea");
@@ -104,7 +104,7 @@ public class ProjectTest extends base {
 		System.out.println(valid_City);
 
 		project.getstate(State.trim());
-		
+
 		project.getspNo().sendKeys(Spno);
 		//Data validation for spno:
 		String valid_string3 = valid_alphanum(Spno, "spno", 10);
@@ -270,60 +270,60 @@ public class ProjectTest extends base {
 		String valid_string23 = valid_alphanum(Unit, "Block Name", 10);
 		String valid_BlockName= valid_string23;
 		System.out.println(valid_BlockName);
-		
+
 		Thread.sleep(2000);
 		project.getNumberOfFloors().sendKeys(Floors);
 		//Data validation of the floor:
 		String valid_string24 = valid_number(Floors, "floor");
 		String valid_floor= valid_string24;
 		System.out.println(valid_floor);
-		
+
 		Thread.sleep(2000);
 		project.getBasements().sendKeys(Basements);
 		//Data validation of the basement:
 		String valid_string25 = valid_number(Basements, "basement");
 		String valid_basement= valid_string25;
 		System.out.println(valid_basement);
-        Thread.sleep(2000);
-        
+		Thread.sleep(2000);
+
 		project.getProjectBlockCreatebtn().click();
 		Thread.sleep(2000);
 		project.getViewBlock().click();
 		project.getAddUnit().click();
 		project.getUnitType().sendKeys(unittype);
-		
+
 		project.getFloorNumber(floorno.trim());
-        project.getunitBlockNumber().sendKeys(blockno);
-        project.getunitBlockType(Unitblocktype.trim());
-		
-        Thread.sleep(2000);
-        project.getEast1().sendKeys(east1);
-        Thread.sleep(2000);
-        project.getWest1().sendKeys(west1);
-        Thread.sleep(2000);
-        project.getNorth1().sendKeys(north1);
-        Thread.sleep(2000);
-        project.getSouth1().sendKeys(south1);
-        Thread.sleep(2000);
-        project.getsurveyNumber().sendKeys(surveyNumber);
-        Thread.sleep(2000);
-        project.getsurveyNumber2().sendKeys(surveyNumber2);
-        Thread.sleep(2000);
-        project.getsurveyNoUnitTypeID(urveyNoUnitType.trim());
-        project.getunitCreateBtn().click();
-        project.getUnitCrossBtn().click();
-        project.getBlockconfigurationNextbtn().click();
-        
-        project.getAddPaymentPlan().click();
-        project.getPaymentPaln(paymentplan.trim());
-        project.getphasename().sendKeys(Paymnetphase);
-        project.getCompletionPercentage().sendKeys(completepercentage);
-        project.getPaymentPercentage().sendKeys(paymentpercentage);
-        project.getPaymentPlanCreateBtn().click();
-        
-        project.getSubmitBtn().click();
-        
-        softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
+		project.getunitBlockNumber().sendKeys(blockno);
+		project.getunitBlockType(Unitblocktype.trim());
+
+		Thread.sleep(2000);
+		project.getEast1().sendKeys(east1);
+		Thread.sleep(2000);
+		project.getWest1().sendKeys(west1);
+		Thread.sleep(2000);
+		project.getNorth1().sendKeys(north1);
+		Thread.sleep(2000);
+		project.getSouth1().sendKeys(south1);
+		Thread.sleep(2000);
+		project.getsurveyNumber().sendKeys(surveyNumber);
+		Thread.sleep(2000);
+		project.getsurveyNumber2().sendKeys(surveyNumber2);
+		Thread.sleep(2000);
+		project.getsurveyNoUnitTypeID(urveyNoUnitType.trim());
+		project.getunitCreateBtn().click();
+		project.getUnitCrossBtn().click();
+		project.getBlockconfigurationNextbtn().click();
+
+		project.getAddPaymentPlan().click();
+		project.getPaymentPaln(paymentplan.trim());
+		project.getphasename().sendKeys(Paymnetphase);
+		project.getCompletionPercentage().sendKeys(completepercentage);
+		project.getPaymentPercentage().sendKeys(paymentpercentage);
+		project.getPaymentPlanCreateBtn().click();
+
+		project.getSubmitBtn().click();
+
+		softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
 		softAssert.assertEquals(valid_totalSaleableArea, "totalSaleableArea is a Valid numeric");
 		softAssert.assertEquals(valid_City, "city is a Valid text");
 		softAssert.assertEquals(valid_spnumber, "spno is a Valid Alpha-Numeric");
@@ -360,7 +360,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getSearch().sendKeys(projectname + Keys.ENTER);
-		project.getEdit();
+		project.getEdit().click();
 
 		project.getProjectName().clear();
 		softAssert.assertFalse(newprojectname.isEmpty(), "Project name is required.");
@@ -370,10 +370,10 @@ public class ProjectTest extends base {
 		String valid_string = valid_alphanum(newprojectname, "projectname", 10);
 		String valid_projectname = valid_string;
 		System.out.println(valid_projectname);
-		
+
 		project.getProjecttype(newprojecttype);
 		project.getProjectstatus(newProjectstatus);
-		
+
 		project.getTotalsaleableArea().clear();
 		project.getTotalsaleableArea().sendKeys(newtotalSaleableArea);
 		//Data validation of totalSaleableArea:
@@ -391,23 +391,23 @@ public class ProjectTest extends base {
 		System.out.println(valid_newtotalLandArea);
 
 		project.getNextbtn1().click();
-		
+
 		project.getCompanyName().clear();
 		project.getCompanyName().sendKeys(newcompanyname);
-		
+
 		project.GSTIN().clear();
 		project.GSTIN().sendKeys(newgstin);
-		
+
 		project.PlaceofSupply().clear();
 		project.PlaceofSupply().sendKeys(newplaceofsupply);
 		project.getRecPostfix(newRecPostFix);
-		
+
 		project.getNextbtn2().click();
 		project.getNextbtn3().click();
 
 		Thread.sleep(2000);
 		project.getSave().click();
-		
+
 		softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
 		softAssert.assertAll();
 	}
@@ -475,7 +475,7 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getaddproject().click();
-        project.AddInactiveProjectStatusProject(statusname);
+		project.AddInactiveProjectStatusProject(statusname);
 	}	
 
 	//Verify Add Active Project Status in Project
@@ -493,7 +493,7 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getaddproject().click();
-        project.AddActiveProjectStatusProject(statusname);
+		project.AddActiveProjectStatusProject(statusname);
 	}
 
 	//Verify Edit InActive Project Status in Project
@@ -511,9 +511,9 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getEditbtn().click();
-        project.EditInactiveProjectStatusProject(statusname);
+		project.EditInactiveProjectStatusProject(statusname);
 	}
-		
+
 
 	//Verify Edit Active Project Status in Project
 	@Test(dataProvider="EditActiveProjectStatusProject")
@@ -530,7 +530,7 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getEditbtn().click();
-        project.EditActiveProjectStatusProject(statusname); 
+		project.EditActiveProjectStatusProject(statusname); 
 	}
 
 	//Verify Add Inactive Project Type in Project
@@ -549,7 +549,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-        project.AddInactiveProjectTypeData(typename);
+		project.AddInactiveProjectTypeData(typename);
 	}
 
 	//Verify Add Active Project Type in Project
@@ -568,7 +568,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-        project.AddActiveProjectTypeData(typename);
+		project.AddActiveProjectTypeData(typename);
 	}
 
 	//Verify Edit Inactive Project Type in Project
@@ -587,7 +587,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-        project.EditInActiveProjectTypeData(typename);
+		project.EditInActiveProjectTypeData(typename);
 	}
 
 	//Verify Edit Active Project Type in Project
@@ -606,7 +606,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-        project.EditActiveProjectType(typename);
+		project.EditActiveProjectType(typename);
 	}
 
 	//State With Project Relation
@@ -628,7 +628,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-        project.AddInactiveStateData(name);
+		project.AddInactiveStateData(name);
 	}
 
 	//Verify Add Active State in Project
@@ -648,7 +648,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-        project.AddActiveStateData(name);
+		project.AddActiveStateData(name);
 	}
 
 	//Verify Edit Inactive State in Project
@@ -668,7 +668,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-        project.EditInActiveStateData(name); 
+		project.EditInActiveStateData(name); 
 	}
 
 	//Verify Edit Active State in Project
@@ -688,7 +688,7 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-        project.EditActiveStateData(name);
+		project.EditActiveStateData(name);
 	}
 
 	//Property Type
@@ -711,7 +711,7 @@ public class ProjectTest extends base {
 		project.getNextbtn1().click();
 		Thread.sleep(2000);
 		project.getNextbtn2().click();
-        project.EditInactivePropertyTypeData(name);
+		project.EditInactivePropertyTypeData(name);
 	}		
 
 	//Verify Edit Active Property Type in Project
@@ -733,7 +733,7 @@ public class ProjectTest extends base {
 		project.getEditNext().click();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-        project.EditActivePropertyTypeData(name);
+		project.EditActivePropertyTypeData(name);
 	}
 
 	//SAC Code
@@ -753,7 +753,7 @@ public class ProjectTest extends base {
 		project.GetEditNext();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-        project.EditInactiveSACCodeData(sacname);
+		project.EditInactiveSACCodeData(sacname);
 	}
 
 	//Verify Edit Active SAC Code in Project
@@ -772,7 +772,7 @@ public class ProjectTest extends base {
 		project.GetEditNext();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-        project.EditActiveSACCodeData(sacname);
+		project.EditActiveSACCodeData(sacname);
 	}
 
 	//Add Project Test Mandatory Filed Validation
@@ -804,7 +804,7 @@ public class ProjectTest extends base {
 		softAssert.assertEquals(salesexecutive.getText(), "Sales Executive is required");		
 		softAssert.assertAll();
 	}
-	
+
 	//Edit Project Test Mandatory Filed Validation
 	@Test(dataProvider="EditEmployeeTestMandatoryData")
 	public void Edit_Employee_Test_Mandatory_Filed_Validation(String projectname) throws InterruptedException {
@@ -819,28 +819,28 @@ public class ProjectTest extends base {
 			project.getProjectNameAssert().sendKeys(Keys.BACK_SPACE);
 		}
 		project.getProjectNameAssert().sendKeys(Keys.TAB);
-		
+
 		project.getEditExpecetedStartDate().click();
 		int Expecetedstartdate  = project.getEditExpecetedStartDate().getAttribute("value").length();
 		for (int i = 0; i <Expecetedstartdate ; i++) {
 			project.getEditExpecetedStartDate().sendKeys(Keys.BACK_SPACE);
 		}
 		project.getEditExpecetedStartDate().sendKeys(Keys.TAB);
-		
+
 		project.getEditExpecetedEndDate().click();
 		int Expecetedenddate  = project.getEditExpecetedEndDate().getAttribute("value").length();
 		for (int i = 0; i <Expecetedenddate ; i++) {
 			project.getEditExpecetedEndDate().sendKeys(Keys.BACK_SPACE);
 		}
 		project.getEditExpecetedEndDate().sendKeys(Keys.TAB);
-		
+
 		project.getEditActualStartDate().click();
 		int Actualstartdate  = project.getEditActualStartDate().getAttribute("value").length();
 		for (int i = 0; i <Actualstartdate ; i++) {
 			project.getEditActualStartDate().sendKeys(Keys.BACK_SPACE);
 		}
 		project.getEditActualStartDate().sendKeys(Keys.TAB);
-		
+
 		SoftAssert softAssert = new SoftAssert();
 		WebElement Projectname =driver.findElement(By.xpath("//span[normalize-space()='Project Name is required']"));
 		softAssert.assertEquals(Projectname.getText(), "Project Name is required");
@@ -850,7 +850,7 @@ public class ProjectTest extends base {
 
 		WebElement expectedenddate =driver.findElement(By.xpath("//span[normalize-space()='Expected End Date is required']"));
 		softAssert.assertEquals(expectedenddate.getText(), "Expected End Date is required");
-		
+
 		WebElement actualstartdate =driver.findElement(By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-project-save/div/div[2]/div/mat-vertical-stepper/div[1]/div/div/div/form/div[1]/div/div[6]/mat-form-field/div[2]/div"));
 		softAssert.assertEquals(actualstartdate.getText(), "Actual Start Date is required");
 		softAssert.assertAll();
@@ -866,26 +866,22 @@ public class ProjectTest extends base {
 	@DataProvider
 	public Object[][] ProjectAddData() {
 		return new Object[][] {
-			//{"Automation Project1","Commercial","Planning","","","","","10000","Goa","Goa","215"," Akash Patel ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
-				//"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","65475","5600","254000","SHALIGRAM SPACE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-				//"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year "," FLAT "," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline the rights and responsibilities of both parties",
-				//"B","15","Basement"}
 			{"Automation Project1","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
-				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
+			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+			 "A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
 			{"Automation Project2","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
-				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
+			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+			 "B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
 			{"Automation Project3","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
-				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
+			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+			 "C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
 			{"Automation Project4","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
-				"30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-				"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-				"D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"}
+			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+			 "D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"}
 		};
 	}
 
@@ -900,31 +896,31 @@ public class ProjectTest extends base {
 	public Object[][] Deleteprojectdata() {
 		return new Object[][] { { "Automation Project1" } };
 	}
-	
+
 	//DataProvider for Project Search Data
 	@DataProvider
 	public Object[][] ProjectSearchData() {
 		return new Object[][] { { "Automation Project2" } };
 	}
-	
+
 	//DataProvider for Active Deactive Project 
 	@DataProvider
 	public Object[][] ActiveDeactiveProject() {
 		return new Object[][] { { "Automation Project3" } };
 	}
-	
+
 	//DataProvider for Add Inactive Project Status Project 
 	@DataProvider
 	public Object[][] AddInactiveProjectStatusProject() {
 		return new Object[][] { { " InActive "," InActive " } };
 	}
-	
+
 	//DataProvider for Add Active Project Status Project 
 	@DataProvider
 	public Object[][] AddActiveProjectStatusProject() {
 		return new Object[][] { { " InActive "," InActive " } };
 	}
-	
+
 	//DataProvider for Edit Inactive Project Status Project 
 	@DataProvider
 	public Object[][] EditInactiveProjectStatusProject() {
@@ -950,7 +946,7 @@ public class ProjectTest extends base {
 	public Object[][] EditInActiveProjectTypeData() {
 		return new Object[][] { { " SIT ProjectType "," SIT ProjectType " } };
 	}
-	
+
 	//DataProvider for Edit Active Project Type Data
 	@DataProvider
 	public Object[][] EditActiveProjectTypeData() {

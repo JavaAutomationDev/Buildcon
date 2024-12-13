@@ -1,13 +1,11 @@
 package tests;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -401,6 +399,7 @@ public class ReceiptTest extends base {
 		softAssert.assertEquals(flatshop.getText(), "Flat/Shop is required.");
 		softAssert.assertAll();
 	}
+
 	//Edit Receipt Test Mandatory Filed Validation
 	@Test(dataProvider="EditReceiptTestMandatoryData")
 	public void Edit_Receipt_Test_Mandatory_Filed_Validation(String Receiptno) throws InterruptedException {
@@ -410,14 +409,14 @@ public class ReceiptTest extends base {
 		receipt.getEditBtnActiveInactive().click();
 		Thread.sleep(2000);
 		receipt.EditNextRequierdBtn();
-		
+
 		receipt.getBankBranch().sendKeys(Keys.TAB);
 		receipt.getBankBranch().click();
 		int bankbranchname  = receipt.getBankBranch().getAttribute("value").length();
 		for (int i = 0; i < bankbranchname ; i++) {
 			receipt.getBankBranch().sendKeys(Keys.BACK_SPACE);
 		}
-		
+
 		receipt.getRegularAmount().click();
 		int regularamount  = receipt.getRegularAmount().getAttribute("value").length();
 		for (int i = 0; i < regularamount ; i++) {
@@ -451,36 +450,14 @@ public class ReceiptTest extends base {
 		receipt.getReceipt().click();
 		Thread.sleep(2000);
 		receipt.getAddReceipt().click();
-		receipt.getProject(Project);
-		receipt.getCustormer(CustomerName);
-		receipt.getFlatShop(FlatShop);
+		receipt.getProject(Project.trim());
+		receipt.getCustormer(CustomerName.trim());
+		receipt.getFlatShop(FlatShop.trim());
 		Thread.sleep(2000);
 		receipt.getNextBtn().click();
+		receipt.AddInactiveBank(Name);
+	}	
 
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(Name))
-			{
-				Assert.assertFalse(false, "Bank is Inactive.");
-				//System.out.println("Test failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
-	}
-	
 	//Verify Add Active Bank in Receipt
 	@Test(dataProvider="AddActiveBank")
 	public void Verify_Add_Active_Bank(String Bankname,String Project,String CustomerName,String FlatShop,String Name) 
@@ -497,34 +474,12 @@ public class ReceiptTest extends base {
 		receipt.getReceipt().click();
 		Thread.sleep(2000);
 		receipt.getAddReceipt().click();
-		receipt.getProject(Project);
-		receipt.getCustormer(CustomerName);
-		receipt.getFlatShop(FlatShop);
+		receipt.getProject(Project.trim());
+		receipt.getCustormer(CustomerName.trim());
+		receipt.getFlatShop(FlatShop.trim());
 		Thread.sleep(2000);
 		receipt.getNextBtn().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(Name))
-			{
-				Assert.assertFalse(false, "Bank is Active.");
-				//System.out.println("Test failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+		receipt.AddActiveBank(Name);
 	}	
 
 	//Banks Active Inactive
@@ -544,29 +499,7 @@ public class ReceiptTest extends base {
 		Thread.sleep(2000);
 		receipt.getEditBtnActiveInactive().click();
 		receipt.GetEditNext();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(Name))
-			{
-				Assert.assertFalse(false, "Bank is Inactive.");
-				//System.out.println("Test failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+		receipt.EditInactiveBank(Name);
 	}
 
 	//Verify Edit Active Bank in Receipt
@@ -585,29 +518,7 @@ public class ReceiptTest extends base {
 		Thread.sleep(2000);
 		receipt.getEditBtnActiveInactive().click();
 		receipt.GetEditNext();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='rBankID']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(Name))
-			{
-				Assert.assertFalse(false, "Bank is Active.");
-				//System.out.println("Test failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+		receipt.EditActiveBank(Name);
 	}
 
 	//Close the driver
@@ -631,93 +542,80 @@ public class ReceiptTest extends base {
 		};
 	}
 
-	//DataProvider for Edit Receipt
+	//DataProvider for Edit Receipt Data
 	@DataProvider
 	public Object[][] ReceiptEditData() {
-		return new Object[][] { 
-			{" RecPrefix-1-24 ","Ahmedabad","796498723","97464971","65467978","Thaltej"}};
+		return new Object[][] { {" RecPrefix-1-24 ","Ahmedabad","796498723","97464971","65467978","Thaltej"}};
 	}
 
 	//DataProvider for Download Receipt Data
 	@DataProvider
 	public Object[][] DownloadReceiptData() {
-		return new Object[][] {
-			{" RecPrefix-1-24 "}};
+		return new Object[][] {{" RecPrefix-1-24 "}};
 	}
 	//DataProvider for Print Receipt Data
 	@DataProvider
 	public Object[][] PrintReceiptData() {
-		return new Object[][] {
-			{" RecPrefix-1-24 "}};
+		return new Object[][] {{" RecPrefix-1-24 "}};
 	}
-	
+
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] ReceiptSearchData() {
-		return new Object[][] {
-			{" Parisar homes "}};
+		return new Object[][] {{" Parisar homes "}};
 	}
 
 	//DataProvider for Project Dropdown data
 	@DataProvider
 	public Object[][] Receiptprojectdropdown() {
-		return new Object[][] {
-			{" Parisar homes "}};
+		return new Object[][] {{" Parisar homes "}};
 	}
 
-	//DataProvider for Approve Cancel 
+	//DataProvider for Approve Cancel Data
 	@DataProvider
 	public Object[][] ReceiptApproveCancelData() {
-		return new Object[][] {
-			{" Parisar homes ","Approve"}};
+		return new Object[][] {{" Parisar homes ","Approve"}};
 	}
 
 	//DataProvider for View Receipt Data
 	@DataProvider
 	public Object[][] ViewReceiptData() {
-		return new Object[][] {
-			{" RecPrefix-1-24 "}};
+		return new Object[][] {{" RecPrefix-1-24 "}};
 	}
 
 	//DataProvider for Send Email Receipt Data
 	@DataProvider
 	public Object[][] SendEmailReceiptData() {
-		return new Object[][] {
-			{" RecPrefix-1-24 "}};
+		return new Object[][] {{" RecPrefix-1-24 "}};
 	}
-	
+
 	//DataProvider for Edit Receipt Test Mandatory Data
 	@DataProvider
 	public Object[][] EditReceiptTestMandatoryData() {
-		return new Object[][] {
-			{" RecPrefix-1-24 "}};
+		return new Object[][] {{" RecPrefix-1-24 "}};
 	}
-	
-	//DataProvider for Add Inactive Bank
+
+	//DataProvider for Add Inactive Bank Data
 	@DataProvider
 	public Object[][] AddInactiveBank() {
-		return new Object[][] {
-		{" Axis Bank ","Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)"," Axis Bank "}};
+		return new Object[][] {{" SIT Bank ","Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)"," Axis Bank "}};
 	}
-	
-	//DataProvider for Add Active Bank
+
+	//DataProvider for Add Active Bank Data
 	@DataProvider
 	public Object[][] AddActiveBank() {
-		return new Object[][] {
-		{" Axis Bank ","Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)"," Axis Bank "}};
+		return new Object[][] {{" SIT Bank ","Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)"," Axis Bank "}};
 	}
-	
-	//DataProvider for Edit Inactive Bank
+
+	//DataProvider for Edit Inactive Bank Data
 	@DataProvider
 	public Object[][] EditInactiveBank() {
-		return new Object[][] {
-			{" Axis Bank "," Axis Bank "}};
+		return new Object[][] {{" SIT Bank "," SIT Bank "}};
 	}
-	
-	//DataProvider for Edit Active Bank
+
+	//DataProvider for Edit Active Bank Data
 	@DataProvider
 	public Object[][] EditActiveBank() {
-		return new Object[][] {
-			{" Axis Bank "," Axis Bank "}};
+		return new Object[][] {{" SIT Bank "," SIT Bank"}};
 	}
 }

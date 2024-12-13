@@ -1,10 +1,13 @@
 package pageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import resources.base;
 
@@ -82,13 +85,13 @@ public class EmployeePage {
 	//Page object for Roles
 	By Roles= By.xpath("//mat-select[@formcontrolname='roleRightId']");
 	public void getRoles(String Role) {
-		
+
 		WebElement dropdown = driver.findElement(Roles);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Employee-getRoles";
-		
+
 		String optionXPath = "//mat-option//span[contains(text(),'" + Role + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -102,13 +105,13 @@ public class EmployeePage {
 	//Page object for State
 	By state= By.xpath("//mat-select[@formcontrolname='stateId']");
 	public void getstate(String State) {
-		
+
 		WebElement dropdown = driver.findElement(state);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Employee-getstate";
-		
+
 		String optionXPath = "//mat-option//span[contains(text(),'" + State + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -138,10 +141,10 @@ public class EmployeePage {
 	public void getProjectAccess(String Proejct) throws InterruptedException {
 		WebElement dropdown = driver.findElement(projectaccess);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Employee-getProjectAccess";
-		
+
 		String optionXPath = "//mat-option//span[contains(text(),'" + Proejct + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
@@ -265,11 +268,11 @@ public class EmployeePage {
 		return driver.findElement(empselectbtn);
 	}
 	//Page object for Employee View
-		By empview= By.xpath("//mat-checkbox[@formcontrolname='isEmployeeView']");
-		public WebElement EmpView() {
-			base.failedElementName = "Employee-ProjectEntry";
-			return driver.findElement(empview);
-		}
+	By empview= By.xpath("//mat-checkbox[@formcontrolname='isEmployeeView']");
+	public WebElement EmpView() {
+		base.failedElementName = "Employee-ProjectEntry";
+		return driver.findElement(empview);
+	}
 	//Page object for Employee Entry
 	By empentry= By.xpath("//mat-checkbox[@formcontrolname='isEmployeeEntry']");
 	public WebElement EmpEntry() {
@@ -427,11 +430,11 @@ public class EmployeePage {
 		return driver.findElement(inquiryselectbtn);
 	}
 	//Page object for Inquiry View
-		By inquiryview=By.xpath("//mat-checkbox[@formcontrolname='isInquiryView']");
-		public WebElement Inquiryview() {
-			base.failedElementName = "Employee-InquiryEntry";
-			return driver.findElement(inquiryview);
-		}
+	By inquiryview=By.xpath("//mat-checkbox[@formcontrolname='isInquiryView']");
+	public WebElement Inquiryview() {
+		base.failedElementName = "Employee-InquiryEntry";
+		return driver.findElement(inquiryview);
+	}
 	//Page object for Inquiry Entry
 	By inquiryentry=By.xpath("//mat-checkbox[@formcontrolname='isInquiryEntry']");
 	public WebElement InquiryEntry() {
@@ -463,7 +466,7 @@ public class EmployeePage {
 		base.failedElementName = "Employee-Inquiryfollowup";
 		return driver.findElement(inquiryfollowup);
 	}
-	
+
 	//Page object for Prospect
 	//Page object for Prospect Select Btn
 	By prospectselectbtn=By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-roles/div/"
@@ -637,8 +640,8 @@ public class EmployeePage {
 	public WebElement getEdit() {
 		base.failedElementName = "Employee-EditEmployee";
 		return driver.findElement(editemployee);
-    }	
-	
+	}	
+
 	//Page object for Active Employee
 	By activeemployee=By.xpath("//mat-checkbox[@formcontrolname='isActive']");
 	public WebElement getActiveEmployee() {
@@ -647,22 +650,22 @@ public class EmployeePage {
 		base.failedElementName = "Employee-getActiveEmployee";
 		return element;
 	}
-	
+
 	//Page object for Apply Filter
 	By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[3]/button");
 	public void Applyfilter(String Filter) {
 		WebElement dropdown = driver.findElement(filter);
 		dropdown.click();
-		
+
 		base.failedElement = dropdown;
 		base.failedElementName = "Employee-Applyfilter";
-		
+
 		String optionXPath = "//span[contains(@class, 'mdc-list-item__primary-text') and contains(text(), '" + Filter + "')]";
 		WebElement option = driver.findElement(By.xpath(optionXPath));
 		option.click();
 	}
-	
+
 	//Page object for Export to Excel
 	By ExporttoExcel=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[4]/button");
@@ -670,7 +673,7 @@ public class EmployeePage {
 		base.failedElementName = "Employee-ExportExcel";
 		return driver.findElement(ExporttoExcel);
 	}
-	
+
 	//Page object for Delete Employee
 	By deleteemp=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-employees/div/div[2]/div/div/div[2]/ul/li[3]/a/mat-icon");
@@ -678,12 +681,121 @@ public class EmployeePage {
 		base.failedElementName = "Employee-Delete";
 		return driver.findElement(deleteemp);
 	}
-	
+
 	//Page object for Click Yes
 	By ClickYes = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up"
 			+ "/form/mat-dialog-actions/button[1]");
 	public WebElement getClickYes() {
 		base.failedElementName = "Employee-DeleteYes";
 		return driver.findElement(ClickYes);
+	}
+
+	//Active Inactive Roles
+	//Verify Add Inactive Roles
+	//PAge object for Verify Add Inactive Roles
+	public void AddInactiveRoles(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(!b.equalsIgnoreCase(name))
+			{
+				Assert.assertFalse(false, "Roles is inactive.");
+				//System.out.println("Test Failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Add Active Roles
+	//Page object for Verify Add Active Roles
+	public void AddActiveRoles(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(b.equalsIgnoreCase(name))
+			{
+				Assert.assertTrue(true, "Role is Active.");
+				System.out.println("Test Pass");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Inactive Roles
+	//Page object for Verify Edit Inactive Roles
+	public void EditInactiveRoles(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(!b.equalsIgnoreCase(name))
+			{
+				Assert.assertFalse(false, "Roles is inactive.");
+				//System.out.println("Test Failed");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");	
+					break;
+				}	
+			}
+		}
+	}
+
+	//Verify Edit Active Roles
+	//Page object for Verify Edit Active Roles
+	public void EditActiveRoles(String name) {
+		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
+		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
+		int Counter=0;
+		for(int i=0;i<a.size();i++)
+		{
+			String b =a.get(i).getText().trim(); 
+			if(b.equalsIgnoreCase(name))
+			{
+				Assert.assertTrue(true, "Role is Active.");
+				System.out.println("Test Pass");
+				break;
+			}
+			else
+			{
+				Counter = Counter+1;
+				if(Counter>a.size())
+				{
+					System.out.println("Test");
+					break;
+				}	
+			}
+		}
 	}
 }

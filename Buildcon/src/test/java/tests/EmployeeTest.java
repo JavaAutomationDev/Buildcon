@@ -1,13 +1,11 @@
 package tests;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -98,7 +96,7 @@ public class EmployeeTest extends base {
 		String valid_emailid= valid_string5;
 		System.out.println(valid_emailid);
 
-		employee.getRoles(Role);
+		employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
 		//City Data Validation
 		String valid_string6 = valid_text(City, "city");
@@ -107,7 +105,7 @@ public class EmployeeTest extends base {
 
 		softAssert.assertFalse(State.isEmpty(), "State is required.");
 		softAssert.assertNotNull(State, "State cannot be null.");
-		employee.getstate(State);//Required Field
+		employee.getstate(State.trim());//Required Field
 	
 		softAssert.assertFalse(mobileno.isEmpty(), "Mobile number is required.");
 		softAssert.assertNotNull(mobileno, "Mobile number cannot be null.");
@@ -129,7 +127,7 @@ public class EmployeeTest extends base {
 		String valid_address = valid_string10;
 		System.out.println(valid_address);
 		
-		employee.getProjectAccess(Project);
+		employee.getProjectAccess(Project.trim());
 
 		softAssert.assertFalse(Adharcard.isEmpty(), "Aadhar card file path is required.");
 		softAssert.assertNotNull(Adharcard, "Aadhar card file path cannot be null.");
@@ -197,13 +195,13 @@ public class EmployeeTest extends base {
 		employee.getDesignation().sendKeys(designation);
 		employee.getDOB().sendKeys(dob);
 		employee.getEmail().sendKeys(email);
-		//employee.getRoles(Role);
+		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
-		employee.getstate(State);
+		employee.getstate(State.trim());
 		employee.getMobileno().sendKeys(mobileno);
 		employee.getPassword().sendKeys(password);
 		employee.getAddress().sendKeys(address);
-		employee.getProjectAccess(Project);
+		employee.getProjectAccess(Project.trim());
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
@@ -261,13 +259,13 @@ public class EmployeeTest extends base {
 		employee.getDesignation().sendKeys(designation);
 		employee.getDOB().sendKeys(dob);
 		employee.getEmail().sendKeys(email);
-		//employee.getRoles(Role);
+		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
-		employee.getstate(State);
+		employee.getstate(State.trim());
 		employee.getMobileno().sendKeys(mobileno);
 		employee.getPassword().sendKeys(password);
 		employee.getAddress().sendKeys(address);
-		employee.getProjectAccess(Project);
+		employee.getProjectAccess(Project.trim());
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
@@ -344,7 +342,7 @@ public class EmployeeTest extends base {
 		String valid_email = valid_string6;
 		System.out.println(valid_email);
 		
-		//employee.getRoles(Role);
+		//employee.getRoles(Role.trim());
 		
 		employee.getcity().sendKeys(City);
         //City Data Validation
@@ -352,7 +350,7 @@ public class EmployeeTest extends base {
 		String valid_city = valid_string7;
 		System.out.println(valid_city);
 		
-		employee.getstate(State);
+		employee.getstate(State.trim());
 		
 		employee.getMobileno().sendKeys(mobileno);
 		//Mobile No Data Validation
@@ -372,7 +370,7 @@ public class EmployeeTest extends base {
 		String valid_Address = valid_string10;
 		System.out.println(valid_Address);
 		
-		employee.getProjectAccess(Project);
+		employee.getProjectAccess(Project.trim());
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
@@ -428,13 +426,13 @@ public class EmployeeTest extends base {
 		employee.getDesignation().sendKeys(designation);
 		employee.getDOB().sendKeys(dob);
 		employee.getEmail().sendKeys(email);
-		employee.getRoles(Role);
+		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
-		employee.getstate(State);
+		employee.getstate(State.trim());
 		employee.getMobileno().sendKeys(mobileno);
 		employee.getPassword().sendKeys(password);
 		employee.getAddress().sendKeys(address);
-		employee.getProjectAccess(Project);
+		employee.getProjectAccess(Project.trim());
 		employee.uploadAdharCard().sendKeys(Adharcard);
 		employee.getPancard().sendKeys(pancard);
 		employee.SelectGender().click();
@@ -485,9 +483,9 @@ public class EmployeeTest extends base {
 		employee.getDesignation().sendKeys(designation);
 		employee.getDOB().sendKeys(dob);
 		employee.getEmail().sendKeys(email);
-		//employee.getRoles(Role);
+		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
-		employee.getstate(State);
+		employee.getstate(State.trim());
 		employee.getMobileno().sendKeys(mobileno);
 		employee.getPassword().sendKeys(password);
 		employee.getAddress().sendKeys(address);
@@ -589,7 +587,7 @@ public class EmployeeTest extends base {
 	public void Delete_Employee(String Firstname) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
-		employee.getSearch().sendKeys(Firstname + Keys.ENTER);
+		employee.getSearch().sendKeys(Firstname.trim() + Keys.ENTER);
 		employee.deleteEmployee().click();
 
 		Thread.sleep(2000);
@@ -732,29 +730,7 @@ public class EmployeeTest extends base {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(name))
-			{
-				Assert.assertFalse(false, "Roles is inactive.");
-				//System.out.println("Test Failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
+        employee.AddInactiveRoles(name);
 	}
 
 	//Verify Add Active Roles
@@ -774,29 +750,7 @@ public class EmployeeTest extends base {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase(name))
-			{
-				Assert.assertTrue(true, "Role is Active.");
-				System.out.println("Test Pass");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");
-					break;
-				}	
-			}
-		}
+        employee.AddActiveRoles(name);
 	}
 	
 	//Verify Edit Inactive Roles
@@ -816,30 +770,8 @@ public class EmployeeTest extends base {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(!b.equalsIgnoreCase(name))
-			{
-				Assert.assertFalse(false, "Roles is inactive.");
-				//System.out.println("Test Failed");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");	
-					break;
-				}	
-			}
-		}
-	}
+        employee.EditInactiveRoles(name);
+	}		
 
 	//Verify Edit Active Roles
 	@Test(dataProvider="EditActiveRoles")
@@ -858,29 +790,7 @@ public class EmployeeTest extends base {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
-
-		driver.findElement(By.xpath("//mat-select[@formcontrolname='roleRightId']")).click();
-		List<WebElement> a = driver.findElements(By.xpath("/html/body/div[4]/div[2]/div/div/mat-option"));
-		int Counter=0;
-		for(int i=0;i<a.size();i++)
-		{
-			String b =a.get(i).getText(); 
-			if(b.equalsIgnoreCase(name))
-			{
-				Assert.assertTrue(true, "Role is Active.");
-				System.out.println("Test Pass");
-				break;
-			}
-			else
-			{
-				Counter = Counter+1;
-				if(Counter>a.size())
-				{
-					System.out.println("Test");
-					break;
-				}	
-			}
-		}
+        employee.EditActiveRoles(name);
 	}
 
 	//Close the driver
@@ -982,35 +892,29 @@ public class EmployeeTest extends base {
 	//DataProvider for Delete Employee
 	@DataProvider
 	public Object[][] EmployeeDeleteData() {
-		return new Object[][] {
-				//Firstname
-				{ "Automation Test" } };
+		return new Object[][] {{ "Automation Test" },{ "AutomationEmpAdd" },{ "AutomationEmpAll" },{ "AutomationEmpDelete" } };
 	}
 	
 	//DataProvider for Add Inactive Roles
 	@DataProvider
 	public Object[][] AddInactiveRoles() {
-		return new Object[][] {
-				{ " Adminnewside "," Adminnewside " } };
+		return new Object[][] {{ " Adminnewside "," Adminnewside " } };
 	}
 	//DataProvider for Add Active Roles
 	@DataProvider
 	public Object[][] AddActiveRoles() {
-		return new Object[][] {
-			{ " Adminnewside "," Adminnewside " } };
+		return new Object[][] {{ " Adminnewside "," Adminnewside " } };
 	}
 	
 	//DataProvider for Edit Inactive Roles
 	@DataProvider
 	public Object[][] EditInactiveRoles() {
-		return new Object[][] {
-			{ " Adminnewside "," Adminnewside " } };
+		return new Object[][] {	{ " Adminnewside "," Adminnewside " } };
 	}
 	
 	//DataProvider for Edit Active Roles
 	@DataProvider
 	public Object[][] EditActiveRoles() {
-		return new Object[][] {
-			{ " Adminnewside "," Adminnewside " } };
+		return new Object[][] {{ " Adminnewside "," Adminnewside " } };
 	}	
 }
