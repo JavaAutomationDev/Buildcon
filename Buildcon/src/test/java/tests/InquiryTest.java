@@ -221,8 +221,8 @@ public class InquiryTest extends base {
 	}
 
 	//Apply Filter with Date
-	@Test()
-	public void Apply_Filter_Dates_Inquiry() throws InterruptedException {
+	@Test(dataProvider="FilterDatesData")
+	public void Apply_Filter_Dates_Inquiry(String startdate,String Enddate) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getapplyfilter().click();
@@ -231,7 +231,7 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.getSelectEndDate().click();
 		Thread.sleep(2000);
-		Inquiry.getresetfilter().click();
+		//Inquiry.getresetfilter().click();
 	}
 
 	//Apply Filter with Project 
@@ -745,20 +745,20 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{"Suresh Patel"}};
-	}
-	
-	//DataProvider for Filter Dates Data
-	@DataProvider
-	public Object[][] FilterDatesData() {
-		return new Object[][] 
-				{{"10/12/2024","30/12/2024"}};
+				{{"Suresh Patel"},{"Mahesh Patel"},{"Meet Patel"},{"Mahi Patel"}};
 	}
 	
 	//DataProvider for Inquiry Apply Filter for Project Data
 	@DataProvider
 	public Object[][] InquiryprojectfilterData() {
 		return new Object[][] { {"Automation Project1"} };
+	}
+
+	//DataProvider for Filter Dates Data
+	@DataProvider
+	public Object[][] FilterDatesData() {
+		return new Object[][] 
+				{{"01/11/2024","30/12/2024"}};
 	}
 
 	//DataProvider for Search Data

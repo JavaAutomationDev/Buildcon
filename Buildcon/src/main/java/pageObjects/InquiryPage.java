@@ -243,7 +243,7 @@ public class InquiryPage {
 	}
 
 	//Page object for Select Start Date
-	By SelectstartDate=By.xpath("//span[@class='mat-calendar-body-cell-content mat-focus-indicator mat-calendar-body-today']");
+	By SelectstartDate=By.xpath("//span[normalize-space()='1']");
 	public WebElement getSelectstartDate() {
 		base.failedElementName = "Inquiry-StartDate";
 		return driver.findElement(SelectstartDate);

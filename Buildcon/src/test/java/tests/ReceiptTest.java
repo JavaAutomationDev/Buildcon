@@ -34,7 +34,7 @@ public class ReceiptTest extends base {
 		loginPage.getsignIn().click();
 		log.info("Login successful");
 	}
-
+	
 	//Add Receipt
 	@Test(dataProvider="ReceiptAddData")
 	public void Add_Receipt(String Project,String CustomerName,String FlatShop,String BankName,String Bankbranch,
@@ -533,11 +533,11 @@ public class ReceiptTest extends base {
 		return new Object[][] {
 			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
 				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"},
-			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
+			{"Automation Project2","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
 				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"},
-			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
+			{"Automation Project3","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
 				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"},
-			{"Automation Project1","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
+			{"Automation Project4","Rohit Sharma","FLAT-102 (1st Floor)","HDFC Bank","Bopal"," IMPS ","7890548","10000","78565545",
 				"457"," 0% ","HDFC Bank","Bopal","54682485","65464","C:\\125ktm.jpg"}
 		};
 	}

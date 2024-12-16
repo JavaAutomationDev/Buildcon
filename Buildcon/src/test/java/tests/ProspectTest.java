@@ -486,7 +486,7 @@ public class ProspectTest extends base {
 	//DataProvider for Delete Prospect Data
 	@DataProvider
 	public Object[][] DeleteProspectData() {
-		return new Object[][] {{"Nilesh Panchal"}};
+		return new Object[][] {{"Suresh Patel"},{"Mahesh Patel"},{"Meet Patel"},{"Mahi Patel"}};
 	}
 	
 	//DataProvider for Edit Prospect Test Mandatory Data

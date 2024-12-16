@@ -894,7 +894,7 @@ public class ProjectTest extends base {
 	//DataProvider for Delete Project Data
 	@DataProvider
 	public Object[][] Deleteprojectdata() {
-		return new Object[][] { { "Automation Project1" } };
+		return new Object[][] { { "Automation Project1" },{"Automation Project2"},{"Automation Project3"},{"Automation Project4"} };
 	}
 
 	//DataProvider for Project Search Data
