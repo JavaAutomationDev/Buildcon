@@ -42,7 +42,7 @@ public class ProjectTest extends base {
 	}
 
 	//Add Project
-	@Test(dataProvider = "ProjectAddData")
+	@Test(dataProvider = "ProjectAddData",priority=1)
 	public void Add_Project(String projectname, String projecttype, String Projectstatus, String Expectedstartdate,
 			String ExpectedEnddate, String ActualStartdate, String ActualEnddate, String totalSaleableArea, String city,
 			String State, String Spno, String SalesExectuive, String Description, String Address, String East,
@@ -314,13 +314,14 @@ public class ProjectTest extends base {
 		project.getUnitCrossBtn().click();
 		project.getBlockconfigurationNextbtn().click();
 
+		Thread.sleep(2000);
 		project.getAddPaymentPlan().click();
-		project.getPaymentPaln(paymentplan.trim());
+		project.getPaymentPaln(paymentplan);
 		project.getphasename().sendKeys(Paymnetphase);
 		project.getCompletionPercentage().sendKeys(completepercentage);
 		project.getPaymentPercentage().sendKeys(paymentpercentage);
 		project.getPaymentPlanCreateBtn().click();
-
+		Thread.sleep(2000);
 		project.getSubmitBtn().click();
 
 		softAssert.assertEquals(valid_projectname, "projectname is a Valid Alpha-Numeric");
@@ -353,7 +354,7 @@ public class ProjectTest extends base {
 	}
 
 	//Edit Existing Project
-	@Test(dataProvider = "ProjectEditData")
+	@Test(dataProvider = "ProjectEditData",priority=2)
 	public void Edit_Project(String projectname,String newprojectname,String newprojecttype,String newProjectstatus, String newtotalSaleableArea, String newtotalLandArea,
 			String newcompanyname,String newgstin,String newplaceofsupply,String newRecPostFix)throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
@@ -371,8 +372,8 @@ public class ProjectTest extends base {
 		String valid_projectname = valid_string;
 		System.out.println(valid_projectname);
 
-		project.getProjecttype(newprojecttype);
-		project.getProjectstatus(newProjectstatus);
+		project.getProjecttype(newprojecttype.trim());
+		project.getProjectstatus(newProjectstatus.trim());
 
 		project.getTotalsaleableArea().clear();
 		project.getTotalsaleableArea().sendKeys(newtotalSaleableArea);
@@ -400,7 +401,7 @@ public class ProjectTest extends base {
 
 		project.PlaceofSupply().clear();
 		project.PlaceofSupply().sendKeys(newplaceofsupply);
-		project.getRecPostfix(newRecPostFix);
+		project.getRecPostfix(newRecPostFix.trim());
 
 		project.getNextbtn2().click();
 		project.getNextbtn3().click();
@@ -413,7 +414,7 @@ public class ProjectTest extends base {
 	}
 
 	//Delete Project
-	@Test(dataProvider="Deleteprojectdata")
+	@Test(dataProvider="Deleteprojectdata",priority=24)
 	public void Delete_Project(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -427,7 +428,7 @@ public class ProjectTest extends base {
 	}
 
 	//Export to Excel
-	@Test()
+	@Test(priority=3)
 	public void Export_To_Excel_Project() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -436,7 +437,7 @@ public class ProjectTest extends base {
 	}
 
 	//Search Project
-	@Test(dataProvider = "ProjectSearchData")
+	@Test(dataProvider = "ProjectSearchData",priority=4)
 	public void Search_Project(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -450,7 +451,7 @@ public class ProjectTest extends base {
 	}
 
 	//Active Deactive Project
-	@Test(dataProvider = "ActiveDeactiveProject")
+	@Test(dataProvider = "ActiveDeactiveProject",priority=5)
 	public void Active_Deactive_Project(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -461,7 +462,7 @@ public class ProjectTest extends base {
 	}
 
 	//Verify Add Inactive Project status in Project
-	@Test(dataProvider="AddInactiveProjectStatusProject")
+	@Test(dataProvider="AddInactiveProjectStatusProject",priority=6)
 	public void Verify_Add_Inactive_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
 		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
 		Projectstatus.getconfiguration().click();
@@ -475,11 +476,11 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getaddproject().click();
-		project.AddInactiveProjectStatusProject(statusname);
+		project.AddInactiveProjectStatusProject(statusname.trim());
 	}	
 
 	//Verify Add Active Project Status in Project
-	@Test(dataProvider="AddActiveProjectStatusProject")
+	@Test(dataProvider="AddActiveProjectStatusProject",priority=7)
 	public void Verify_Add_Active_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
 		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
 		Projectstatus.getconfiguration().click();
@@ -493,11 +494,11 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getaddproject().click();
-		project.AddActiveProjectStatusProject(statusname);
+		project.AddActiveProjectStatusProject(statusname.trim());
 	}
 
 	//Verify Edit InActive Project Status in Project
-	@Test(dataProvider="EditInactiveProjectStatusProject")
+	@Test(dataProvider="EditInactiveProjectStatusProject",priority=8)
 	public void Verify_Edit_Inactive_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
 		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
 		Projectstatus.getconfiguration().click();
@@ -511,12 +512,12 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getEditbtn().click();
-		project.EditInactiveProjectStatusProject(statusname);
+		project.EditInactiveProjectStatusProject(statusname.trim());
 	}
 
 
 	//Verify Edit Active Project Status in Project
-	@Test(dataProvider="EditActiveProjectStatusProject")
+	@Test(dataProvider="EditActiveProjectStatusProject",priority=9)
 	public void Verify_Edit_Active_Project_Status_Project(String projectstatus,String statusname) throws InterruptedException {
 		Projectstatuspage Projectstatus = new Projectstatuspage(driver);
 		Projectstatus.getconfiguration().click();
@@ -530,11 +531,11 @@ public class ProjectTest extends base {
 		project.getproject().click();
 		Thread.sleep(2000);
 		project.getEditbtn().click();
-		project.EditActiveProjectStatusProject(statusname); 
+		project.EditActiveProjectStatusProject(statusname.trim()); 
 	}
 
 	//Verify Add Inactive Project Type in Project
-	@Test(dataProvider="AddInactiveProjectTypeData")
+	@Test(dataProvider="AddInactiveProjectTypeData",priority=10)
 	public void Verify_Add_Inactive_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
 		Projecttypespage Projecttype = new Projecttypespage(driver);
 		Projecttype.getconfiguration().click();
@@ -549,11 +550,11 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-		project.AddInactiveProjectTypeData(typename);
+		project.AddInactiveProjectTypeData(typename.trim());
 	}
 
 	//Verify Add Active Project Type in Project
-	@Test(dataProvider="AddActiveProjectTypeData")
+	@Test(dataProvider="AddActiveProjectTypeData",priority=11)
 	public void Verify_Add_Active_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
 		Projecttypespage Projecttype = new Projecttypespage(driver);
 		Projecttype.getconfiguration().click();
@@ -568,11 +569,11 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-		project.AddActiveProjectTypeData(typename);
+		project.AddActiveProjectTypeData(typename.trim());
 	}
 
 	//Verify Edit Inactive Project Type in Project
-	@Test(dataProvider="EditInActiveProjectTypeData")
+	@Test(dataProvider="EditInActiveProjectTypeData",priority=12)
 	public void Verify_Edit_Inactive_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
 		Projecttypespage Projecttype = new Projecttypespage(driver);
 		Projecttype.getconfiguration().click();
@@ -587,11 +588,11 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-		project.EditInActiveProjectTypeData(typename);
+		project.EditInActiveProjectTypeData(typename.trim());
 	}
 
 	//Verify Edit Active Project Type in Project
-	@Test(dataProvider="EditActiveProjectTypeData")
+	@Test(dataProvider="EditActiveProjectTypeData",priority=13)
 	public void Verify_Edit_Active_ProjectType_Project(String projecttype,String typename) throws InterruptedException {
 		Projecttypespage Projecttype = new Projecttypespage(driver);
 		Projecttype.getconfiguration().click();
@@ -606,12 +607,12 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-		project.EditActiveProjectType(typename);
+		project.EditActiveProjectType(typename.trim());
 	}
 
 	//State With Project Relation
 	//Verify Add Inactive State in Project
-	@Test(dataProvider="AddInactiveStateData")
+	@Test(dataProvider="AddInactiveStateData",priority=14)
 	public void Verify_Add_Inactive_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
@@ -628,11 +629,11 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-		project.AddInactiveStateData(name);
+		project.AddInactiveStateData(name.trim());
 	}
 
 	//Verify Add Active State in Project
-	@Test(dataProvider="AddActiveStateData")
+	@Test(dataProvider="AddActiveStateData",priority=15)
 	public void Verify_Add_Active_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
@@ -648,11 +649,11 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getaddproject().click();
-		project.AddActiveStateData(name);
+		project.AddActiveStateData(name.trim());
 	}
 
 	//Verify Edit Inactive State in Project
-	@Test(dataProvider="EditInActiveStateData")
+	@Test(dataProvider="EditInActiveStateData",priority=16)
 	public void Verify_Edit_Inactive_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
@@ -668,11 +669,11 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-		project.EditInActiveStateData(name); 
+		project.EditInActiveStateData(name.trim()); 
 	}
 
 	//Verify Edit Active State in Project
-	@Test(dataProvider="EditActiveStateData")
+	@Test(dataProvider="EditActiveStateData",priority=17)
 	public void Verify_Edit_Active_State_Project(String Statename, String name) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
@@ -688,12 +689,12 @@ public class ProjectTest extends base {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
 		project.getEditbtn().click();
-		project.EditActiveStateData(name);
+		project.EditActiveStateData(name.trim());
 	}
 
 	//Property Type
 	//Verify Edit Inactive Property Type in Project
-	@Test(dataProvider="EditInactivePropertyTypeData")
+	@Test(dataProvider="EditInactivePropertyTypeData",priority=18)
 	public void Verify_Edit_Inactive_Property_Type_Project(String propertyname, String name) throws InterruptedException {
 		Propertytypepage PropertyType = new Propertytypepage(driver);
 		PropertyType.getconfiguration().click();
@@ -711,11 +712,11 @@ public class ProjectTest extends base {
 		project.getNextbtn1().click();
 		Thread.sleep(2000);
 		project.getNextbtn2().click();
-		project.EditInactivePropertyTypeData(name);
+		project.EditInactivePropertyTypeData(name.trim());
 	}		
 
 	//Verify Edit Active Property Type in Project
-	@Test(dataProvider="EditActivePropertyTypeData")
+	@Test(dataProvider="EditActivePropertyTypeData",priority=19)
 	public void Verify_Edit_Active_Property_Type_Project(String propertyname, String name) throws InterruptedException {
 		Propertytypepage PropertyType = new Propertytypepage(driver);
 		PropertyType.getconfiguration().click();
@@ -733,12 +734,12 @@ public class ProjectTest extends base {
 		project.getEditNext().click();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-		project.EditActivePropertyTypeData(name);
+		project.EditActivePropertyTypeData(name.trim());
 	}
 
 	//SAC Code
 	//Verify Edit Inactive SAC Code in Project
-	@Test(dataProvider="EditInactiveSACCodeData")
+	@Test(dataProvider="EditInactiveSACCodeData",priority=20)
 	public void Verify_Edit_Inactive_SAC_Code_Project(String saccode, String sacname) throws InterruptedException {
 		Saccodepage Saccode = new Saccodepage(driver);
 		Saccode.getconfiguration().click();
@@ -753,11 +754,11 @@ public class ProjectTest extends base {
 		project.GetEditNext();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-		project.EditInactiveSACCodeData(sacname);
+		project.EditInactiveSACCodeData(sacname.trim());
 	}
 
 	//Verify Edit Active SAC Code in Project
-	@Test(dataProvider="EditActiveSACCodeData")
+	@Test(dataProvider="EditActiveSACCodeData",priority=21)
 	public void Verify_Edit_Active_SAC_Code_Project(String saccode, String sacname) throws InterruptedException {
 		Saccodepage Saccode = new Saccodepage(driver);
 		Saccode.getconfiguration().click();
@@ -772,11 +773,11 @@ public class ProjectTest extends base {
 		project.GetEditNext();
 		project.getNextbtn1().click();
 		project.getNextbtn2().click();
-		project.EditActiveSACCodeData(sacname);
+		project.EditActiveSACCodeData(sacname.trim());
 	}
 
 	//Add Project Test Mandatory Filed Validation
-	@Test
+	@Test(priority=22)
 	public void Add_Employee_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -806,7 +807,7 @@ public class ProjectTest extends base {
 	}
 
 	//Edit Project Test Mandatory Filed Validation
-	@Test(dataProvider="EditEmployeeTestMandatoryData")
+	@Test(dataProvider="EditEmployeeTestMandatoryData",priority=23)
 	public void Edit_Employee_Test_Mandatory_Filed_Validation(String projectname) throws InterruptedException {
 		ProjectPage project = new ProjectPage(driver);
 		project.getproject().click();
@@ -814,8 +815,8 @@ public class ProjectTest extends base {
 		project.getEditbtn().click();
 		Thread.sleep(2000);
 		project.getProjectNameAssert().click();
-		int Pname  = project.getProjectNameAssert().getAttribute("value").length();
-		for (int i = 0; i <Pname ; i++) {
+		int Projname  = project.getProjectNameAssert().getAttribute("value").length();
+		for (int i = 0; i <Projname ; i++) {
 			project.getProjectNameAssert().sendKeys(Keys.BACK_SPACE);
 		}
 		project.getProjectNameAssert().sendKeys(Keys.TAB);
@@ -866,22 +867,25 @@ public class ProjectTest extends base {
 	@DataProvider
 	public Object[][] ProjectAddData() {
 		return new Object[][] {
-			{"Automation Project1","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
-			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
-			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-			 "A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
 			{"Automation Project2","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-			 "B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
+			 "A Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","SIT PaymentPlan","1","10","100"},
+			
 			{"Automation Project3","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-			 "C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"},
+			 "B Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","SIT PaymentPlan","2","10","100"},
+			
 			{"Automation Project4","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
 			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
 			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
-			 "D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","Testpayment1","Firstphase","10%","100%"}
+			 "C Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","SIT PaymentPlan","3","10","100"},
+			
+			{"Automation Project5","AddProject1","In process","","","","","10000","Ahmedabad","Goa","215"," Nilesh Panchal ","Execute the building and infrastructure work","3rd Floor, Shaligram Corporates, C.J Road, Ambli, Ahmedabad, Gujarat 380058",
+			 "30 MTRS. ROAD","Play Ground","F.P. NO. 954","Neighbourhood Auda Garden","964","210","Approved","100000","250000","250000","SHALIGRAM ONE LLP","29GGGGG1314R9Z6","Ahmedabad","SHALIGRAM CORPORATES, 9TH FLOOR, B/H. DISHMAN HOUSE, OPP. SANKALP GRACE-II, ISCON-AMBLI ROAD, AHMEDABAD","380058",
+			 "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png","D:\\Fileupload\\125ktm.jpg","RecPrefix"," Financial Year ","FLAT"," 995411 - CONSTRUCTION SERVICES OF RESIDENTIAL BUILDINGS ","A legal agreement between a service provider and its user that outline.",
+			 "D Block","14","2","3BHK","2","A","FLAT","east1","west1","north1","south","321654","3465","SQ.FEET","SIT PaymentPlan","4","10","100"}
 		};
 	}
 
@@ -894,7 +898,7 @@ public class ProjectTest extends base {
 	//DataProvider for Delete Project Data
 	@DataProvider
 	public Object[][] Deleteprojectdata() {
-		return new Object[][] { { "Automation Project1" },{"Automation Project2"},{"Automation Project3"},{"Automation Project4"} };
+		return new Object[][] { {"Automation Project5"},{"Automation Project2"},{"Automation Project3"},{"Automation Project4"} };
 	}
 
 	//DataProvider for Project Search Data

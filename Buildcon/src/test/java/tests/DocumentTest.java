@@ -31,17 +31,16 @@ public class DocumentTest extends base {
 	}
 
 	//Add Document
-	@Test(dataProvider="DocumentAddData")
+	@Test(dataProvider="DocumentAddData",priority=1)
 	public void Add_Document(String DTitle) throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
 		document.getAddDocument().click();
-		document.getDocumentTitle().sendKeys(DTitle);
-		
+		document.getDocumentTitle().sendKeys(DTitle.trim());		
 	}
 
 	//Editing an existing Document using Data Provider
-	@Test
+	@Test(priority=2)
 	public void Edit_Document() throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
@@ -49,7 +48,7 @@ public class DocumentTest extends base {
 	}
 	
 	//Search Document
-	@Test(dataProvider="DocumentSearchData")
+	@Test(dataProvider="DocumentSearchData",priority=3)
 	public void Search_Document(String Project) throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
 		document.getDocument().click();
@@ -62,7 +61,7 @@ public class DocumentTest extends base {
 		document.getDocument().click();
 	}
 	
-	//Apply Filter Reset
+	//Apply Filter Reset 
 	@Test()
 	public void Apply_Filter_Reset_Receipt() throws InterruptedException {
 		DocumentPage document = new DocumentPage(driver);
@@ -75,21 +74,21 @@ public class DocumentTest extends base {
 		driver.close();
 	}	
 
-	//DataProvider Add Document
+	//DataProvider Add Document Data
 	@DataProvider
 	public Object[][] DocumentAddData() {
 		return new Object[][] {
 			{"Pan Card"}};
 	}
 
-	//DataProvider for Edit Document
+	//DataProvider for Edit Document Data
 	@DataProvider
 	public Object[][] DocumentEditData() {
 		return new Object[][] { 
 			{ }};
 	}
 
-	//DataProvider for Search Document
+	//DataProvider for Search Document Data
 	@DataProvider
 	public Object[][] DocumentSearchData() {
 		return new Object[][] {

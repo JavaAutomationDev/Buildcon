@@ -27,7 +27,7 @@ public class InquiryStatusTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		// Login process
+		//Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));
 		loginPage.getUserName().sendKeys(prop.getProperty("USER"));
@@ -37,7 +37,7 @@ public class InquiryStatusTest extends base {
 	}
 
 	// Add Inquiry Status
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority=1)
 	public void Add_Inquiry_Status(String Inquirystatuspage1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
@@ -53,14 +53,12 @@ public class InquiryStatusTest extends base {
 		Thread.sleep(3000);
 		Inquirystatus.getAddInquirystatussave().click();
 		Thread.sleep(2000);
-		softAssert.assertEquals(valid_inquirystatuspage,
-				"inquirystatuspage is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertEquals(valid_inquirystatuspage,"inquirystatuspage is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
-
 	}
 
-	// Edit Inquiry Status
-	@Test(dataProvider = "getEditdata")
+	//Edit Inquiry Status
+	@Test(dataProvider = "getEditdata",priority=2)
 	public void Edit_inquirystatus(String inqsearched, String Inquirystatuspage1) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		SoftAssert softAssert = new SoftAssert();
@@ -79,15 +77,12 @@ public class InquiryStatusTest extends base {
 		Thread.sleep(3000);
 		Inquirystatus.getEditInquirystatussave().click();
 		Thread.sleep(3000);
-		softAssert.assertEquals(valid_inquirystatuspage,
-				"inquirystatuspage is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertEquals(valid_inquirystatuspage,"inquirystatuspage is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
-
 	}
 
-	// Status Inquiry
-	@Test(dataProvider = "getstatuschanged")
-
+	//Status Inquiry
+	@Test(dataProvider = "getstatuschanged",priority=3)
 	public void Status_inquirystatus(String inqsearched) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -99,12 +94,7 @@ public class InquiryStatusTest extends base {
 		Inquirystatus.getChangeInquirystatusconfirm().click();
 		Thread.sleep(2000);
 	}
-
-	@DataProvider
-	public Object[][] getstatuschanged() {
-		return new Object[][] { { "inqsta123", } };
-	}
-
+	
 	@Test(dataProvider = "getdelete")
 	public void delete_inquirystatus(String inqsearched) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
@@ -117,14 +107,8 @@ public class InquiryStatusTest extends base {
 		Thread.sleep(2000);
 		Inquirystatus.getInquirystatusdeleteconfirmationk().click();
 		Thread.sleep(2000);
-
 	}
-
-	@DataProvider
-	public Object[][] getdelete() {
-		return new Object[][] { { "tips123" } };
-	}
-
+	
 	// Search Inquiry Status
 	@Test(dataProvider = "getsearched")
 	public void searched_inquirystatus(String Inquirystatuspage1) throws InterruptedException {
@@ -137,8 +121,8 @@ public class InquiryStatusTest extends base {
 		Thread.sleep(2000);
 	}
 
-	// Excel Inquiry
-	@Test
+	//Excel Inquiry
+	@Test()
 	public void Excel_inquirystatus() throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -147,7 +131,7 @@ public class InquiryStatusTest extends base {
 		Thread.sleep(2000);
 	}
 
-	@Test
+	@Test()
 	public void Add_Validation_Inquiry_Status() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
@@ -186,15 +170,10 @@ public class InquiryStatusTest extends base {
 		Inquirystatus.getEditInquirystatusnew().clear();
 		Thread.sleep(1000);
 		// Inquirystatus.getEditInquirystatusclick().click();
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
-		Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		int editinquirystatus  = Inquirystatus.getEditInquirystatusnew().getAttribute("value").length();
+		for (int i = 0; i <editinquirystatus ; i++) {
+			Inquirystatus.getEditInquirystatusnew().sendKeys(Keys.BACK_SPACE);
+		}
 
 		Thread.sleep(2000);
 		Inquirystatus.getEditInquirystatussave().click();
@@ -209,34 +188,47 @@ public class InquiryStatusTest extends base {
 		String expectedMessage = "Inquiry Status name is required";
 		softAssert.assertEquals("Inquiry Status name is required", expectedMessage, actualMessage);
 		softAssert.assertAll();
-
 	}
 
-	@DataProvider
-	public Object[][] geteditmandatory() {
-		return new Object[][] { { "inqsta123", } };
-	}
-
-	// close the driver
+	//Close the driver
 	@AfterMethod
 	public void teaddown() {
 		driver.close();
 	}
 
-	// DataProvider for Add
+	//DataProvider for Add Data
 	@DataProvider
 	public Object[][] getAdddata() {
 		return new Object[][] { { "approvedatatus123", } };
 	}
-
+	
+	//DataProvider for Edit Data
 	@DataProvider
 	public Object[][] getEditdata() {
 		return new Object[][] { { "approvedatatus123", "inqsta123" } };
 	}
+	
+	//DataProvider for Delete Data
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "tips123" } };
+	}
 
-	// DataProvider for Apply Searched
+	//DataProvider for Apply Searched
 	@DataProvider
 	public Object[][] getsearched() {
 		return new Object[][] { { "Nishant" } };
+	}
+	
+	//Data Provider for Status Changed
+	@DataProvider
+	public Object[][] getstatuschanged() {
+		return new Object[][] { { "inqsta123", } };
+	}
+	
+	//DataProvider for Edit Mandatory Field
+	@DataProvider
+	public Object[][] geteditmandatory() {
+		return new Object[][] { { "inqsta123", } };
 	}
 }

@@ -15,6 +15,7 @@ import org.testng.asserts.SoftAssert;
 import pageObjects.Bankspage;
 import pageObjects.LoginPage;
 import pageObjects.ReceiptPage;
+import pageObjects.SelectfilterDatesPage;
 import resources.base;
 
 public class ReceiptTest extends base {
@@ -36,7 +37,7 @@ public class ReceiptTest extends base {
 	}
 	
 	//Add Receipt
-	@Test(dataProvider="ReceiptAddData")
+	@Test(dataProvider="ReceiptAddData",priority=1)
 	public void Add_Receipt(String Project,String CustomerName,String FlatShop,String BankName,String Bankbranch,
 			String PaymentType,String IMPSNO,String RegularAmount,String ChallanNumber,String ReceivedTDSAmount,
 			String TDSTYpe,String GSTbankName,String GSTBankBranch,String ChequeNo,
@@ -159,7 +160,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Editing an existing Receipt using Data Provider
-	@Test(dataProvider="ReceiptEditData")
+	@Test(dataProvider="ReceiptEditData",priority=2)
 	public void Edit_Receipt(String Receiptno,String newBankbranch,String newIMPSNO,String newRegularAmount,String newChallanNumber,
 			String newGSTBankBranch) throws InterruptedException, IOException {
 		SoftAssert softAssert=new SoftAssert();
@@ -230,7 +231,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Download Receipt
-	@Test(dataProvider="DownloadReceiptData")
+	@Test(dataProvider="DownloadReceiptData",priority=3)
 	public void Download_Receipt(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -243,7 +244,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Search Receipt
-	@Test(dataProvider="ReceiptSearchData")
+	@Test(dataProvider="ReceiptSearchData",priority=4)
 	public void Search_Receipt(String Project) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -253,7 +254,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Export to Excel Receipt
-	@Test()
+	@Test(priority=5)
 	public void Export_To_Excel_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -263,7 +264,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Print Receipt
-	@Test(dataProvider="PrintReceiptData")
+	@Test(dataProvider="PrintReceiptData",priority=6)
 	public void Print_Receipt(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -275,7 +276,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Approve Cancel Receipt
-	@Test(dataProvider="ReceiptApproveCancelData")
+	@Test(dataProvider="ReceiptApproveCancelData",priority=7)
 	public void Approve_Cancel_Receipt(String Project,String Approve) throws InterruptedException{
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -291,7 +292,7 @@ public class ReceiptTest extends base {
 	}
 
 	//View Receipt
-	@Test(dataProvider="ViewReceiptData")
+	@Test(dataProvider="ViewReceiptData",priority=8)
 	public void View_Receipt(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -307,7 +308,7 @@ public class ReceiptTest extends base {
 	}
 
 	//SendEmail Receipt
-	@Test(dataProvider="SendEmailReceiptData")
+	@Test(dataProvider="SendEmailReceiptData",priority=9)
 	public void SendEmail_Receipt(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -321,20 +322,20 @@ public class ReceiptTest extends base {
 	}
 
 	//Apply Filter Receipt With Date Range
-	@Test()
-	public void Apply_Filter_Date_Range() throws InterruptedException {
+	@Test(dataProvider="ReceiptDateFilter",priority=10)
+	public void Apply_Filter_Date_Range(String daterange,String Daterange) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
+		SelectfilterDatesPage receiptdates = new SelectfilterDatesPage(driver); 
 		receipt.getReceipt().click();
 
 		Thread.sleep(2000);
 		receipt.getapplyfilter().click();
 		receipt.getDateRange().click();
-		receipt.getStartDate().click();
-		receipt.getEndDate().click();
+		receiptdates.getSelectDateRange(daterange, Daterange);
 	}
 
 	//Apply Filter Receipt With Project Dropdown
-	@Test(dataProvider="Receiptprojectdropdown")
+	@Test(dataProvider="Receiptprojectdropdown",priority=11)
 	public void Apply_Filter_Project_Dropdown(String Project) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -345,7 +346,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Apply Filter Receipt Cancelled Button
-	@Test()
+	@Test(priority=12)
 	public void Apply_Filter_Cancelled_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -356,7 +357,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Apply Filter Receipt All
-	@Test()
+	@Test(priority=13)
 	public void Apply_Filter_All_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -367,7 +368,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Apply Filter Receipt Reset
-	@Test()
+	@Test(priority=14)
 	public void Apply_Filter_Reset_Receipt() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -378,7 +379,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Add Receipt Test Mandatory Filed Validation
-	@Test()
+	@Test(priority=15)
 	public void Add_Receipt_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -401,7 +402,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Edit Receipt Test Mandatory Filed Validation
-	@Test(dataProvider="EditReceiptTestMandatoryData")
+	@Test(dataProvider="EditReceiptTestMandatoryData",priority=16)
 	public void Edit_Receipt_Test_Mandatory_Filed_Validation(String Receiptno) throws InterruptedException {
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
@@ -435,7 +436,7 @@ public class ReceiptTest extends base {
 
 	//Banks Active Inactive
 	//Verify Add InActive Bank in Receipt
-	@Test(dataProvider="AddInactiveBank")
+	@Test(dataProvider="AddInactiveBank",priority=17)
 	public void Verify_Add_InActive_Bank(String Bankname,String Project,String CustomerName,String FlatShop,String Name) 
 			throws InterruptedException {
 		Bankspage Bank = new Bankspage(driver);
@@ -459,7 +460,7 @@ public class ReceiptTest extends base {
 	}	
 
 	//Verify Add Active Bank in Receipt
-	@Test(dataProvider="AddActiveBank")
+	@Test(dataProvider="AddActiveBank",priority=18)
 	public void Verify_Add_Active_Bank(String Bankname,String Project,String CustomerName,String FlatShop,String Name) 
 			throws InterruptedException {
 		Bankspage Bank = new Bankspage(driver);
@@ -484,7 +485,7 @@ public class ReceiptTest extends base {
 
 	//Banks Active Inactive
 	//Verify Edit InActive Bank in Receipt
-	@Test(dataProvider="EditInactiveBank")
+	@Test(dataProvider="EditInactiveBank",priority=19)
 	public void Verify_Edit_InActive_Bank(String Bankname,String Name) throws InterruptedException {
 		Bankspage Bank = new Bankspage(driver);
 		Bank.getconfiguration().click();
@@ -503,7 +504,7 @@ public class ReceiptTest extends base {
 	}
 
 	//Verify Edit Active Bank in Receipt
-	@Test(dataProvider="EditActiveBank")
+	@Test(dataProvider="EditActiveBank",priority=20)
 	public void Verify_Edit_Active_Bank(String Bankname,String Name) throws InterruptedException {
 		Bankspage Bank = new Bankspage(driver);
 		Bank.getconfiguration().click();
@@ -570,7 +571,13 @@ public class ReceiptTest extends base {
 	public Object[][] Receiptprojectdropdown() {
 		return new Object[][] {{" Parisar homes "}};
 	}
-
+	
+	//DataProvider for Receipt Date Filter Data
+	@DataProvider
+	public Object[][] ReceiptDateFilter() {
+		return new Object[][] {{"11/DEC/2024","18/DEC/2024"}};
+	}
+	
 	//DataProvider for Approve Cancel Data
 	@DataProvider
 	public Object[][] ReceiptApproveCancelData() {

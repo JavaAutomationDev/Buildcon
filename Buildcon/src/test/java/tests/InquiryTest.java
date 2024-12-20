@@ -18,6 +18,7 @@ import pageObjects.Inquirycommunicationmodepage;
 import pageObjects.Inquirystatuspage;
 import pageObjects.LoginPage;
 import pageObjects.ProjectPage;
+import pageObjects.SelectfilterDatesPage;
 import resources.base;
 
 public class InquiryTest extends base {
@@ -40,7 +41,7 @@ public class InquiryTest extends base {
 	}
 
 	//Add Inquiry
-	@Test(dataProvider = "InquiryAdddata")
+	@Test(dataProvider = "InquiryAdddata",priority=1)
 	public void Add_Inquiry(String siteproject, String visitorname, String NextfollowUpDT, String referencedBy,
 			String Attende, String ContactNo, String Email, String Address, String Remarks, String Requirement,
 			String Status) throws InterruptedException, IOException {
@@ -52,7 +53,7 @@ public class InquiryTest extends base {
 
 		Thread.sleep(2000);
 		softAssert.assertFalse(siteproject.isEmpty(), "Visit Site/Project is required.");
-		Inquiry.getsiteproject(siteproject.trim());
+		Inquiry.getsiteproject(siteproject);
 		
 		Inquiry.getvisitorname().sendKeys(visitorname.trim());
 		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
@@ -77,7 +78,7 @@ public class InquiryTest extends base {
 				
 		Thread.sleep(2000);		
 		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
-		Inquiry.getAttendee(Attende.trim());
+		Inquiry.getAttendee(Attende);
 		
 		Inquiry.getContactNo().sendKeys(ContactNo);
 		//ContactNo Number Validation
@@ -120,7 +121,7 @@ public class InquiryTest extends base {
 	}
 
 	//Editing an existing Inquiry using Data Provider
-	@Test(dataProvider = "InquiryEditData")
+	@Test(dataProvider = "InquiryEditData",priority=2)
 	public void Edit_Inquiry(String Projectname,String siteproject,String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
 			String newRequirement, String newStatus) throws InterruptedException, IOException {
 
@@ -155,7 +156,6 @@ public class InquiryTest extends base {
 		String valid_email = valid_string;
 		System.out.println(valid_email);
 		
-		
 		Inquiry.getAddress().clear();
 		Inquiry.getAddress().sendKeys(newAddress);
 		//Adress Alphanumeric  Validation
@@ -185,11 +185,12 @@ public class InquiryTest extends base {
 	}
 
 	//Delete Inquiry
-	@Test(dataProvider="InquiryDeleteData")
-	public void Delete_Inquiry(String contactNo) throws InterruptedException {
+	@Test(dataProvider="InquiryDeleteData",priority=29)
+	public void Delete_Inquiry(String Visitiorname) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
-		Inquiry.getSearchInquiry().sendKeys(contactNo + Keys.ENTER);
+		Inquiry.getSearchInquiry().sendKeys(Visitiorname + Keys.ENTER);
+		Thread.sleep(2000);
 		Inquiry.getDelete().click();
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
@@ -197,7 +198,7 @@ public class InquiryTest extends base {
 	}
 
 	//Export To Excel Inquiry
-	@Test()
+	@Test(priority=3)
 	public void Export_To_Excel_Inquiry() throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -206,36 +207,34 @@ public class InquiryTest extends base {
 	}
 
 	//Apply Filter for Dates & Project
-	@Test(dataProvider = "InquiryprojectfilterData")
-	public void Apply_Filter_Inquiry(String selectproject) throws InterruptedException {
+	@Test(dataProvider = "InquiryprojectfilterData",priority=4)
+	public void Apply_Filter_Inquiry(String daterange,String Daterange,String selectproject) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
+		SelectfilterDatesPage Inquirydates = new SelectfilterDatesPage(driver); 
 		Inquiry.getInquiry().click();
 		Inquiry.getapplyfilter().click();
 		Inquiry.getdaterange().click();
-		Inquiry.getSelectstartDate().click();
-		Inquiry.getSelectEndDate().click();
-		Thread.sleep(2000);
+		Inquirydates.getSelectDateRange(daterange, Daterange);
 		Inquiry.getselectproject(selectproject.trim());
 		Thread.sleep(2000);
 		Inquiry.getresetfilter().click();
 	}
 
 	//Apply Filter with Date
-	@Test(dataProvider="FilterDatesData")
-	public void Apply_Filter_Dates_Inquiry(String startdate,String Enddate) throws InterruptedException {
+	@Test(dataProvider="FilterDatesData",priority=5)
+	public void Apply_Filter_Dates_Inquiry(String daterange,String Daterange) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
+		SelectfilterDatesPage Inquirydates = new SelectfilterDatesPage(driver); 
 		Inquiry.getInquiry().click();
 		Inquiry.getapplyfilter().click();
 		Inquiry.getdaterange().click();
-		Inquiry.getSelectstartDate().click();
+		Inquirydates.getSelectDateRange(daterange, Daterange);
 		Thread.sleep(2000);
-		Inquiry.getSelectEndDate().click();
-		Thread.sleep(2000);
-		//Inquiry.getresetfilter().click();
+		Inquiry.getresetfilter().click();
 	}
 
 	//Apply Filter with Project 
-	@Test(dataProvider = "InquiryprojectfilterData")
+	@Test(dataProvider = "InquirySelectProject",priority=6)
 	public void Apply_Filter_Project_Inquiry(String selectproject) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -246,7 +245,7 @@ public class InquiryTest extends base {
 	}
 
 	//Search Inquiry
-	@Test(dataProvider = "InquirySearchData")
+	@Test(dataProvider = "InquirySearchData",priority=7)
 	public void Search_Inquiry(String Attende) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -255,7 +254,7 @@ public class InquiryTest extends base {
 	}
 
 	//Todays Follow up Click,Search & Edit
-	@Test(dataProvider = "InquirySearchData")
+	@Test(dataProvider = "InquirySearchData",priority=8)
 	public void Today_Follow_Inquiry(String visitorname) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -271,12 +270,12 @@ public class InquiryTest extends base {
 			Thread.sleep(2000);
 			Inquiry.getUpdate().click();
 		}else {
-			System.out.println("Vistor name is missed");
+			System.out.println("No Data for Today's Follow Details.");
 		}
 	}
 
 	//Missing Follow up for click,Search & Edit
-	@Test(dataProvider = "InquirySearchData")
+	@Test(dataProvider = "InquirySearchData",priority=9)
 	public void Missing_Follow_Inquiry(String visitorname) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -291,26 +290,28 @@ public class InquiryTest extends base {
 			Thread.sleep(2000);
 			Inquiry.getUpdate().click();
 		}else {
-			System.out.println("Vistor name is missed");
+			System.out.println("No Data for Missing Follow Details.");
 		}
 	}
 
 	//Add To Prospect Inquiry
-	@Test(dataProvider = "InquiryaddprospectData")
+	@Test(dataProvider = "InquiryaddprospectData",priority=10)
 	public void Add_Prospect_Inquiry(String Attende,String unitD, String Selectflat) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Attende.trim() + Keys.ENTER);
+		Thread.sleep(2000);
 		Inquiry.getAddprospect().click();
 		Inquiry.getunitdropdown(unitD.trim());
-		Inquiry.getSelectFlat(Selectflat.trim());
+		Thread.sleep(2000);
+		Inquiry.getSelectFlat(Selectflat);
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
 		Thread.sleep(2000);
 	}
 
 	//Add Inquiry Test Mandatory Field Validation
-	@Test
+	@Test(priority=11)
 	public void Add_Inquiry_Test_Mandatory_Field_Validation() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		InquiryPage Inquiry = new InquiryPage(driver);
@@ -344,11 +345,12 @@ public class InquiryTest extends base {
 	}
 
 	//Edit Inquiry Test Mandatory Field Validation
-	@Test(dataProvider="EditInquiryMandatoryData")
+	@Test(dataProvider="EditInquiryMandatoryData",priority=12)
 	public void Edit_Inquiry_Test_Mandatory_Field_Validation(String Attende) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Attende.trim() + Keys.ENTER);
+		Thread.sleep(2000);
 		Inquiry.Getedit();
 		Thread.sleep(2000);
 		
@@ -389,7 +391,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Add Inactive Attendee Inquiry
-	@Test(dataProvider="AddInactiveAttendee")
+	@Test(dataProvider="AddInactiveAttendee",priority=13)
 	public void Verify_Add_Inactive_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -408,7 +410,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Add Active Attendee Inquiry
-	@Test(dataProvider="AddActiveAttendee")
+	@Test(dataProvider="AddActiveAttendee",priority=14)
 	public void Verify_Add_Active_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -427,7 +429,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Inactive Attendee Inquiry
-	@Test(dataProvider="EditInactiveAttendee")
+	@Test(dataProvider="EditInactiveAttendee",priority=15)
 	public void Verify_Edit_Inactive_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -446,7 +448,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Attendee Inquiry
-	@Test(dataProvider="EditActiveAttendee")
+	@Test(dataProvider="EditActiveAttendee",priority=16)
 	public void Verify_Edit_Active_Attendee_Inquiry(String employeename,String Attendee) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -466,7 +468,7 @@ public class InquiryTest extends base {
 
 	//Active Inactive Inquiry Status
 	//Verify Add Inactive Inquiry Status
-	@Test(dataProvider="AddInactiveInquiryStatus")
+	@Test(dataProvider="AddInactiveInquiryStatus",priority=17)
 	public void Verify_Add_Inactive_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -485,7 +487,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Add Active Inquiry Status
-	@Test(dataProvider="AddActiveInquiryStatus")
+	@Test(dataProvider="AddActiveInquiryStatus",priority=18)
 	public void Verify_Add_Active_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -504,7 +506,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Inactive Inquiry Status
-	@Test(dataProvider="EditInactiveInquiryStatus")
+	@Test(dataProvider="EditInactiveInquiryStatus",priority=19)
 	public void Verify_Edit_Inactive_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -523,7 +525,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Inquiry Status
-	@Test(dataProvider="EditActiveInquiryStatus")
+	@Test(dataProvider="EditActiveInquiryStatus",priority=20)
 	public void Verify_Edit_Active_Inquiry_Status(String Statusname, String Name) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -543,7 +545,7 @@ public class InquiryTest extends base {
 	
 	//Inquiry Response Type
 	//Verify Edit Inactive Inquiry Response Type
-	@Test(dataProvider="EditInactiveInquiryResponseType")
+	@Test(dataProvider="EditInactiveInquiryResponseType",priority=21)
 	public void Verify_Edit_Inactive_Inquiry_Response_Type(String responsetype,String Name) throws InterruptedException {
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
 		Inquiryresponse.getconfiguration().click();
@@ -560,6 +562,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
+		Thread.sleep(2000);
 		Inquiry.getMissingFollowUpEditBtn().click();
 		Inquiry.getFollowUpDetails().click();
 		Inquiry.getAddFollowDetails().click();
@@ -567,7 +570,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Inquiry Response Type
-	@Test(dataProvider="EditActiveInquiryResponseType")
+	@Test(dataProvider="EditActiveInquiryResponseType",priority=22)
 	public void Verify_Edit_Active_Inquiry_Resposne_Type(String responsetype,String Name) throws InterruptedException {
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
 		Inquiryresponse.getconfiguration().click();
@@ -584,6 +587,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
+		Thread.sleep(2000);
 		Inquiry.getMissingFollowUpEditBtn().click();
 		Inquiry.getFollowUpDetails().click();
 		Inquiry.getAddFollowDetails().click();
@@ -592,7 +596,7 @@ public class InquiryTest extends base {
 
 	//Inquiry Communcation mode
 	//Verify Edit Inactive Inquiry Communcation mode
-	@Test(dataProvider="EditInactiveInquiryCommuncation")
+	@Test(dataProvider="EditInactiveInquiryCommuncation",priority=23)
 	public void Verify_Edit_Inactive_Inquiry_Communcation_Mode(String Communcationtype,String Name) throws InterruptedException {
 		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
 		Communication.getconfiguration().click();
@@ -608,6 +612,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
+		Thread.sleep(2000);
 		Inquiry.getMissingFollowUpEditBtn().click();
 		Inquiry.getFollowUpDetails().click();
 		Inquiry.getAddFollowDetails().click();
@@ -615,7 +620,7 @@ public class InquiryTest extends base {
 	}
 
 	//Verify Edit Active Inquiry Communcation mode
-	@Test(dataProvider="EditActiveInquiryCommuncation")
+	@Test(dataProvider="EditActiveInquiryCommuncation",priority=24)
 	public void Verify_Edit_Active_Inquiry_Communcation_Mode(String Communcationtype,String Name) throws InterruptedException {
 		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
 		Communication.getconfiguration().click();
@@ -631,6 +636,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
+		Thread.sleep(2000);
 		Inquiry.getMissingFollowUpEditBtn().click();
 		Inquiry.getFollowUpDetails().click();
 		Inquiry.getAddFollowDetails().click();
@@ -639,7 +645,7 @@ public class InquiryTest extends base {
 		
 	//Add Inquiry Project Dropdown
 	//Verify Add Inactive Project
-	@Test(dataProvider="AddInactiveProjectData")
+	@Test(dataProvider="AddInactiveProjectData",priority=25)
 	public void Verify_Add_Inactive_Project(String projectname,String Name) throws InterruptedException {
 		ProjectPage Project = new ProjectPage(driver);
 		Project.getproject().click();
@@ -650,13 +656,14 @@ public class InquiryTest extends base {
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Thread.sleep(1000);
 		Inquiry.getaddInquiry().click();
 		Thread.sleep(2000);
 		Inquiry.AddInactiveProjectData(Name);
 	}	
 
 	//Verify Add Active Project
-	@Test(dataProvider="AddActiveProjectData")
+	@Test(dataProvider="AddActiveProjectData",priority=26)
 	public void Verify_Add_Active_Project(String projectname,String Name) throws InterruptedException {
 		ProjectPage Project = new ProjectPage(driver);
 
@@ -668,6 +675,7 @@ public class InquiryTest extends base {
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
+		Thread.sleep(1000);
 		Inquiry.getaddInquiry().click();
 		Thread.sleep(2000);
 		Inquiry.AddActiveProjectData(Name);
@@ -675,7 +683,7 @@ public class InquiryTest extends base {
 	
 	//Edit Inquiry Project Dropdown
 	//Verify Edit Inactive Project
-	@Test(dataProvider="EditInactiveProjectData")
+	@Test(dataProvider="EditInactiveProjectData",priority=27)
 	public void Verify_Edit_Inactive_Project(String projectname,String Projectname,String Name) throws InterruptedException {
 		ProjectPage Project = new ProjectPage(driver);
 		Project.getproject().click();
@@ -687,13 +695,14 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
+		Thread.sleep(1000);
 		Inquiry.getEdit();
 		Thread.sleep(2000);
 		Inquiry.EditInactiveProjectData(Name);
 	}
 
 	//Verify Edit Active Project
-	@Test(dataProvider="EditActiveProjectData")
+	@Test(dataProvider="EditActiveProjectData",priority=28)
 	public void Verify_Edit_Active_Project(String projectname,String Projectname,String Name) throws InterruptedException {
 		ProjectPage Project = new ProjectPage(driver);
 
@@ -706,6 +715,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
+		Thread.sleep(2000);
 		Inquiry.getEdit();
 		Thread.sleep(2000);
 		Inquiry.EditActiveProjectData(Name);
@@ -722,12 +732,15 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			{"Automation Project1", "Mahesh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			{"Automation Project1", "Mahesh Patel","", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			{"Automation Project2", "Suresh Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
+			
+			{"Automation Project2", "Suresh Patel","", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+			
 			{"Automation Project3", "Meet Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+			
 			{"Automation Project4", "Mahi Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
 			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
 		};
@@ -745,20 +758,26 @@ public class InquiryTest extends base {
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{"Suresh Patel"},{"Mahesh Patel"},{"Meet Patel"},{"Mahi Patel"}};
+				{{"Gulshan Patel"},{"Niki Patel"},{"Rohit Patel"},{"Rinku Patel"}
+			};
 	}
 	
 	//DataProvider for Inquiry Apply Filter for Project Data
 	@DataProvider
 	public Object[][] InquiryprojectfilterData() {
+		return new Object[][] { {"12/OCT/2024","31/DEC/2024","Automation Project1"} };
+	}
+	
+	//DataProvider for Inquiry Select Project
+	@DataProvider
+	public Object[][] InquirySelectProject() {
 		return new Object[][] { {"Automation Project1"} };
 	}
 
 	//DataProvider for Filter Dates Data
 	@DataProvider
 	public Object[][] FilterDatesData() {
-		return new Object[][] 
-				{{"01/11/2024","30/12/2024"}};
+		return new Object[][] {{"11/DEC/2021","17/DEC/2022"}};
 	}
 
 	//DataProvider for Search Data
@@ -770,37 +789,37 @@ public class InquiryTest extends base {
 	//DataProvider for Add Prospect Data
 	@DataProvider
 	public Object[][] InquiryaddprospectData() {
-		return new Object[][] {{"Mahesh Patel"," A "," Unit No - 101 (1 Floor) "}};
+		return new Object[][] {{"Mahesh Patel"," A "," Unit No - 102 (1 Floor) "}};
 	}
 	
 	//DataProvider for Edit Inquiry Mandatory Data
 	@DataProvider
 	public Object[][] EditInquiryMandatoryData() {
-		return new Object[][] {{"Mahi Patel       "}};
+		return new Object[][] {{"Rohit Patel"}};
 	}
 
 	//DataProvider for Add Inactive Attendee Data
 	@DataProvider
 	public Object[][] AddInactiveAttendee() {
-		return new Object[][] {{"         Automation Test ","Automation Test"}};
+		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
 	
 	//DataProvider for Add Active Attendee Data
 	@DataProvider
 	public Object[][] AddActiveAttendee() {
-		return new Object[][] {{"   Automation Test ","Automation Test"}};
+		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
 	
 	//DataProvider for Edit Inactive Attendee Data
 	@DataProvider
 	public Object[][] EditInactiveAttendee() {
-		return new Object[][] {{"   Automation Test ","Automation Test"}};
+		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
 	
 	//DataProvider for Edit Active Attendee Data
 	@DataProvider
 	public Object[][] EditActiveAttendee() {
-		return new Object[][] {{"   Automation Test ","Automation Test"}};
+		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
 	
 	//DataProvider for Add Inactive Inquiry Status Data
@@ -852,22 +871,22 @@ public class InquiryTest extends base {
 	//DataProvider for AddInactiveProjectData
 	@DataProvider
 	public Object[][] AddInactiveProjectData() {
-		return new Object[][] {{"TestProject1","TestProject1"}};
+		return new Object[][] {{"Automation Project3","Automation Project3"}};
 	}
 	
 	//DataProvider for Add Active Project Data
 	@DataProvider
 	public Object[][] AddActiveProjectData() {
-		return new Object[][] {{"TestProject1","TestProject1"}};
+		return new Object[][] {{"Automation Project3","Automation Project3"}};
 	}
 	//DataProvider for Edit Inactive Project Data
 	@DataProvider
 	public Object[][] EditInactiveProjectData() {
-		return new Object[][] {{"TestProject1","Automation Project1","TestProject1"}};
+		return new Object[][] {{"Automation Project3","Automation Project1","Automation Project3"}};
 	}
 	//DataProvider for Edit Active Project Data
 	@DataProvider
 	public Object[][] EditActiveProjectData() {
-		return new Object[][] {{"TestProject1","Automation Project1","TestProject1"}};
+		return new Object[][] {{"Automation Project4","Automation Project4","Automation Project4"}};
 	}
 }

@@ -16,6 +16,7 @@ import org.testng.asserts.SoftAssert;
 import pageObjects.EmployeePage;
 import pageObjects.LoginPage;
 import pageObjects.ProspectPage;
+import pageObjects.SelectfilterDatesPage;
 import resources.base;
 
 public class ProspectTest extends base {
@@ -39,7 +40,7 @@ public class ProspectTest extends base {
 	}
 
 	//Add Prospect
-	@Test(dataProvider="ProspectAdddata")
+	@Test(dataProvider="ProspectAdddata",priority=1)
 	public void Add_Prospect(String siteproject, String visitorname, String visitordate,String NextfollowUpDT, String referencedBy,
 			String Attende, String ContactNo,String Email, String Address, String Remarks, String Requirement, String Status, String unitD,
 			String Selectflat) throws InterruptedException, IOException {
@@ -119,7 +120,7 @@ public class ProspectTest extends base {
 	}
 
 	//Editing an Existing Prospect using Data Provider
-	@Test(dataProvider = "ProspectEditData")
+	@Test(dataProvider = "ProspectEditData",priority=2)
 	public void Edit_Prospect(String visitorname,String newContactNo, String newEmail, String newAddress,
 			String newRemarks, String newRequirement, String newStatus) throws InterruptedException, IOException{
         SoftAssert softAssert = new SoftAssert();
@@ -127,6 +128,7 @@ public class ProspectTest extends base {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getSearch().sendKeys(visitorname.trim() + Keys.ENTER);
+		Thread.sleep(2000);
 		Prospect.getEdit().click();
 
 		Prospect.getContactNo().clear();
@@ -167,7 +169,7 @@ public class ProspectTest extends base {
 	}
 
 	//Delete Prospect
-	@Test(dataProvider="DeleteProspectData")
+	@Test(dataProvider="DeleteProspectData",priority=16)
 	public void Delete_Prospect(String Attende) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
@@ -178,7 +180,7 @@ public class ProspectTest extends base {
 	}
 
 	//Export to Excel Prospect
-	@Test()
+	@Test(priority=3)
 	public void Export_To_Excel_Prospect() throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		ProspectPage Prospect = new ProspectPage(driver);
@@ -187,15 +189,15 @@ public class ProspectTest extends base {
 	}
 
 	//Apply Filter for Dates & Project
-	@Test(dataProvider="ProspectProjectFilterData")
-	public void Apply_Filter_Prospect(String selectproject) throws InterruptedException {
+	@Test(dataProvider="ProspectProjectFilterData",priority=4)
+	public void Apply_Filter_Prospect(String daterange,String Daterange,String selectproject) throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		ProspectPage Prospect = new ProspectPage(driver);
+		SelectfilterDatesPage Prodpectdates = new SelectfilterDatesPage(driver); 
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
 		Prospect.getdaterange().click();
-		Prospect.getSelectstartDate().click();
-		Prospect.getSelectEndDate().click();
+		Prodpectdates.getSelectDateRange(daterange, Daterange);
 		Prospect.getselectproject(selectproject.trim());
 		
 		try {
@@ -212,17 +214,14 @@ public class ProspectTest extends base {
 	}
 
 	//Apply Filter for Dates
-	@Test()
-	public void Apply_Filter_Dates_Prospect() throws InterruptedException {
+	@Test(dataProvider="ProspectFilterDate",priority=5)
+	public void Apply_Filter_Dates_Prospect(String daterange,String Daterange) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
+		SelectfilterDatesPage Prodpectdates = new SelectfilterDatesPage(driver); 
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
 		Prospect.getdaterange().click();
-		Prospect.getSelectstartDate().click();
-		Thread.sleep(2000);
-		Prospect.getSelectEndDate().click();
-		Thread.sleep(2000);
-		
+		Prodpectdates.getSelectDateRange(daterange, Daterange);
 		try {
 			WebElement NRF = driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 			boolean flag = NRF.isDisplayed();
@@ -237,12 +236,12 @@ public class ProspectTest extends base {
 	}
 
 	//Apply Filter Method for Project & Reset
-	@Test(dataProvider="ProspectProjectFilterData")
+	@Test(dataProvider="ProspectProjectResetData",priority=6)
 	public void Apply_Filter_Project_Prospect(String selectproject) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
-		Prospect.getselectproject(selectproject.trim());
+		Prospect.getselectproject(selectproject);
 		
 		try {
 			WebElement NRF = driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
@@ -258,7 +257,7 @@ public class ProspectTest extends base {
 	}
 
 	//Search Method for Prospect
-	@Test(dataProvider="ProspectSearchData")
+	@Test(dataProvider="ProspectSearchData",priority=7)
 	public void Search_Prospect(String Attende) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
@@ -269,7 +268,7 @@ public class ProspectTest extends base {
 	}
 
 	//Todays Follow up click,Search & Edit Method
-	@Test(dataProvider="ProspectSearchData")
+	@Test(dataProvider="ProspectSearchData",priority=8)
 	public void Today_Follow_Up_Prospect(String visitorname) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
@@ -289,7 +288,7 @@ public class ProspectTest extends base {
 	}
 
 	//Missing Follow up for click,Search & Edit Method
-	@Test(dataProvider="ProspectSearchData")
+	@Test(dataProvider="ProspectSearchData",priority=9)
 	public void Missing_Follow_Up_Prospect(String visitorname) throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
@@ -307,7 +306,7 @@ public class ProspectTest extends base {
 	}
 
 	//Add Prospect Test Mandatory Filed Validation
-	@Test
+	@Test(priority=10)
 	public void Add_Prospect_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
@@ -337,12 +336,12 @@ public class ProspectTest extends base {
 	}
 	
 	//Edit Prospect Test Mandatory Filed Validation
-	@Test(dataProvider="EditProspectTestMandatoryData")
+	@Test(dataProvider="EditProspectTestMandatoryData",priority=11)
 	public void Edit_Prospect_Test_Mandatory_Filed_Validation(String visitorname ) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
-		Prospect.getSearch().sendKeys(visitorname + Keys.ENTER);
+		Prospect.getSearch().sendKeys(visitorname.trim() + Keys.ENTER);
 		Prospect.getEdit().click();
 		Thread.sleep(2000);
 		
@@ -368,7 +367,7 @@ public class ProspectTest extends base {
 	}
 
 	//Verify Add Inactive Attendee Prospect
-	@Test(dataProvider="AddInactiveAttendeeProspect")
+	@Test(dataProvider="AddInactiveAttendeeProspect",priority=12)
 	public void Verify_Add_Inactive_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -387,7 +386,7 @@ public class ProspectTest extends base {
 	}
 	
 	//Verify Add Active Attendee Prospect
-	@Test(dataProvider="AddActiveAttendeeProspect")
+	@Test(dataProvider="AddActiveAttendeeProspect",priority=13)
 	public void Verify_Add_Active_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -406,7 +405,7 @@ public class ProspectTest extends base {
 	}
 
 	//Verify Edit Inactive Attendee Prospect
-	@Test(dataProvider="EditInactiveAttendeeProspect")
+	@Test(dataProvider="EditInactiveAttendeeProspect",priority=14)
 	public void Verify_Edit_Inactive_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -425,7 +424,7 @@ public class ProspectTest extends base {
 	}
 
 	//Verify Edit Active Attendee Prospect
-	@Test(dataProvider="EditActiveAttendeeProspect")
+	@Test(dataProvider="EditActiveAttendeeProspect",priority=15)
 	public void Verify_Edit_Active_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -474,9 +473,21 @@ public class ProspectTest extends base {
 	//DataProvider for Filter Project Dropdown
 	@DataProvider
 	public Object[][] ProspectProjectFilterData() {
+		return new Object[][] {{"11/DEC/2024","17/DEC/2024","Automation Project1"}};
+	}
+	
+	//DataProvider for Filter Prospect Filter Date Data
+	@DataProvider
+	public Object[][] ProspectFilterDate() {
+		return new Object[][] {{"11/DEC/2024","17/DEC/2024"}};
+	}
+	
+	//Data Provider for Prospect Project Reset Data
+	@DataProvider
+	public Object[][] ProspectProjectResetData() {
 		return new Object[][] {{"Automation Project1"}};
 	}
-
+	
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] ProspectSearchData() {
@@ -498,24 +509,24 @@ public class ProspectTest extends base {
 	//DataProvider for Add Inactive Attendee Prospect
 	@DataProvider
 	public Object[][] AddInactiveAttendeeProspect() {
-		return new Object[][] {{"Automation Test","Automation Test"}};
+		return new Object[][] {{"AutomationEmpExport Test","AutomationEmpExport Test"}};
 	}
 	
 	//DataProvider for Add Active Attendee Prospect
 	@DataProvider
 	public Object[][] AddActiveAttendeeProspect() {
-		return new Object[][] {{"Automation Test","Automation Test"}};
+		return new Object[][] {{"AutomationEmpExport Test","AutomationEmpExport Test"}};
 	}
 	
 	//DataProvider for Edit Inactive Attendee Prospect
 	@DataProvider
 	public Object[][] EditInactiveAttendeeProspect() {
-		return new Object[][] {{"Automation Test","Automation Test"}};
+		return new Object[][] {{"AutomationEmpExport Test","AutomationEmpExport Test"}};
 	}
 	
 	//DataProvider for Edit Active Attendee Prospect
 	@DataProvider
 	public Object[][] EditActiveAttendeeProspect() {
-		return new Object[][] {{"Automation Test","Automation Test"}};
+		return new Object[][] {{"AutomationEmpExport Test","AutomationEmpExport Test"}};
 	}
 }

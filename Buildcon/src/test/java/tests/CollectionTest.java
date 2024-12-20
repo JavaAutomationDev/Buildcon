@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import pageObjects.CollectionPage;
 import pageObjects.LoginPage;
+import pageObjects.SelectfilterDatesPage;
 import resources.base;
 
 public class CollectionTest extends base {
@@ -33,7 +34,7 @@ public class CollectionTest extends base {
 	}
 	
 	//Collection Total Method
-	@Test()
+	@Test(priority=1)
 	public void Total_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
@@ -42,16 +43,16 @@ public class CollectionTest extends base {
 	}
 	
 	//Collection Search Method
-	@Test(dataProvider="CollectionSearchData")
+	@Test(dataProvider="CollectionSearchData",priority=2)
 	public void Search_Collection(String siteproject) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
-		collection.getSearch().sendKeys(siteproject + Keys.ENTER);
+		collection.getSearch().sendKeys(siteproject.trim() + Keys.ENTER);
 		collection.getSearch().clear();
 	}
 	
 	//Collection Export To Excel Method
-	@Test()
+	@Test(priority=3)
 	public void Export_To_Excel_Collection() throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
@@ -59,55 +60,55 @@ public class CollectionTest extends base {
 	}
 	
 	//Apply Filter Method for Dates
-	@Test()
-	public void Apply_Filter_Dates_Collection() throws InterruptedException {
+	@Test(dataProvider="CollectionFilterDate",priority=4)
+	public void Apply_Filter_Dates_Collection(String daterange,String Daterange) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
+		SelectfilterDatesPage collectiondates = new SelectfilterDatesPage(driver);
 		collection.getcollection().click();
 		collection.getapplyfilter().click();
 		collection.getdaterange().click();
-		collection.getSelectstartDate().click();
-		collection.getSelectEndDate().click();
-		collection.getresetfilter().click();	
+		collectiondates.getSelectDateRange(daterange, Daterange);
+		//collection.getresetfilter().click();	
 	}
 	
 	//Apply Filter Method for Project
-	@Test(dataProvider="ApplyFilterProjectData")
+	@Test(dataProvider="ApplyFilterProjectData",priority=5)
 	public void Apply_Filter_Project_Collection(String projectname) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getapplyfilter().click();
-		collection.getProjcetdropdown(projectname);
+		collection.getProjcetdropdown(projectname.trim());
 		collection.getresetfilter().click();	
 	}
 	
 	//Collection Information Method
-	@Test(dataProvider="InformationCollection")
+	@Test(dataProvider="InformationCollection",priority=6)
 	public void Information_Collection(String unitno) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
-		collection.getSearch().sendKeys(unitno + Keys.ENTER);
+		collection.getSearch().sendKeys(unitno.trim() + Keys.ENTER);
 		collection.getInfoBtn().click();
 		Thread.sleep(2000);
         collection.getPrintInfoBtn().click();
 	}
 	
 	//Print Collection Receipt Method
-	@Test(dataProvider="PrintCollectionReceipt")
+	@Test(dataProvider="PrintCollectionReceipt",priority=7)
 	public void Print_Collection_Receipt(String unitno) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
-		collection.getSearch().sendKeys(unitno + Keys.ENTER);
+		collection.getSearch().sendKeys(unitno.trim() + Keys.ENTER);
 		collection.getInfoBtn().click();
 		Thread.sleep(2000);
         collection.getPrintInfoBtn().click();
 	}
 	
 	//Download Collection Receipt Method
-	@Test(dataProvider="DownloadCollectionReceipt")
+	@Test(dataProvider="DownloadCollectionReceipt",priority=8)
 	public void Download_Collection_Receipt(String unitno) throws InterruptedException {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
-		collection.getSearch().sendKeys(unitno + Keys.ENTER);
+		collection.getSearch().sendKeys(unitno.trim() + Keys.ENTER);
 		collection.getInfoBtn().click();
 		Thread.sleep(2000);
 		collection.getDownloadReceiptBtn().click();
@@ -123,7 +124,14 @@ public class CollectionTest extends base {
 	@DataProvider
 	public Object[][] CollectionSearchData() {
 		return new Object[][] {
-			{"Taj Mahal"}};
+			{"Automation Project1"}};
+	}
+	
+	//DataProvider for Collection Filter Date Data
+	@DataProvider
+	public Object[][] CollectionFilterDate() {
+		return new Object[][] {
+			{"11/DEC/2024","19/DEC/2024"}};
 	}
 	
 	//DataProvider for Apply Filter Project Data
@@ -137,21 +145,21 @@ public class CollectionTest extends base {
 	@DataProvider
 	public Object[][] InformationCollection() {
 		return new Object[][] {
-			{" 3BHKsss NO - 103 "}};
+			{" FLAT NO - 102"}};
 	}
 	
 	//DataProvider for Print Collection Receipt
 	@DataProvider
 	public Object[][] PrintCollectionReceipt() {
 		return new Object[][] {
-			{" 3BHKsss NO - 103 "}};
+			{" FLAT NO - 102"}};
 	}
 	
 	//DataProvider for Download Collection Receipt
 	@DataProvider
 	public Object[][] DownloadCollectionReceipt() {
 		return new Object[][] {
-			{" 3BHKsss NO - 103 "}};
+			{" FLAT NO - 102"}};
 	}
 	
 }

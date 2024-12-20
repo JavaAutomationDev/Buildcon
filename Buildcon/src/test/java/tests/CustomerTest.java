@@ -33,16 +33,16 @@ public class CustomerTest extends base {
 	}
 	
 	//Customer Search Method
-	@Test(dataProvider="CustomerSearchData")
+	@Test(dataProvider="CustomerSearchData",priority=1)
 	public void Search_Customer(String siteproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		Thread.sleep(2000);
-		customer.getSearch().sendKeys(siteproject + Keys.ENTER);
+		customer.getSearch().sendKeys(siteproject.trim() + Keys.ENTER);
 	}
 
 	//Customer Export to Excel Method
-	@Test()
+	@Test(priority=2)
 	public void Export_To_Excel_Customer() throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
@@ -52,13 +52,13 @@ public class CustomerTest extends base {
 	}
 	
 	//Apply Filter Method for Project & Reset
-	@Test(dataProvider="CustomerProjectDropdownData")
+	@Test(dataProvider="CustomerProjectDropdownData",priority=3)
 	public void Apply_Filter_Project_Customer(String selectproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.getapplyfilter().click();
 		Thread.sleep(2000);
-		customer.getselectproject(selectproject);
+		customer.getselectproject(selectproject.trim());
 		Thread.sleep(2000);
 		customer.getresetfilter().click();
 		Thread.sleep(2000);
@@ -72,13 +72,13 @@ public class CustomerTest extends base {
 	}
 	
 	//Apply Filter Method for Project Cancel
-	@Test(dataProvider="CustomerProjectDropdownData")
+	@Test(dataProvider="CustomerProjectDropdownData",priority=4)
 	public void Apply_Filter_Project_Customer_Cancel(String selectproject) throws InterruptedException {
 		CustomerPage customer = new CustomerPage(driver);
 		customer.getCustomer().click();
 		customer.getapplyfilter().click();
 		Thread.sleep(2000);
-		customer.getselectproject(selectproject);
+		customer.getselectproject(selectproject.trim());
 		Thread.sleep(2000);
 		customer.getCancelRadioBtn().click();
 	}
