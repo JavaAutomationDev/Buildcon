@@ -45,8 +45,9 @@ public class EmployeeTest extends base {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getaddemployee().click();
-		employee.Nextbtn().click();
-		employee.getProfileImg().sendKeys(profileImg);
+		//employee.Nextbtn().click();
+		Thread.sleep(2000);
+		//employee.getProfileImg().sendKeys(profileImg);
 
 		softAssert.assertFalse(Firstname.isEmpty(), "First name is required.");
 		softAssert.assertNotNull(Firstname, "First name cannot be null.");
@@ -83,8 +84,9 @@ public class EmployeeTest extends base {
 		String valid_string4 = valid_text(designation, "Designation");
 		String valid_designation = valid_string4;
 		System.out.println(valid_designation);
-
-		employee.getDOB().sendKeys(dob);
+        
+		employee.getClickDOB().click();
+		employee.getDOB(dob);
 
 		softAssert.assertFalse(email.isEmpty(), "Email is required.");
 		softAssert.assertNotNull(email, "Email cannot be null.");
@@ -146,7 +148,6 @@ public class EmployeeTest extends base {
 		employee.Nextbtn().click();
 
 		//employee.Shownumber().click();
-
 		employee.Empradiobtn().click();
 		employee.Projectradiobtn().click();
 		employee.Receiptradiobtn().click();
@@ -160,7 +161,6 @@ public class EmployeeTest extends base {
 		Thread.sleep(2000);
 		employee.Createbtn().click();
 
-		//Data validation soft assert
 		softAssert.assertEquals(valid_firstname, "Firstname is a  valid text");
 		softAssert.assertEquals(valid_middlename,"middlename is a valid text");
 		softAssert.assertEquals(valid_Lastname,  "Lastname is a valid text");
@@ -193,7 +193,8 @@ public class EmployeeTest extends base {
 		employee.getlname().sendKeys(Lastname);
 		employee.getUserName().sendKeys(Username);
 		employee.getDesignation().sendKeys(designation);
-		employee.getDOB().sendKeys(dob);
+		employee.getClickDOB().click();
+		employee.getDOB(dob);
 		employee.getEmail().sendKeys(email);
 		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
@@ -257,7 +258,8 @@ public class EmployeeTest extends base {
 		employee.getlname().sendKeys(Lastname);
 		employee.getUserName().sendKeys(Username);
 		employee.getDesignation().sendKeys(designation);
-		employee.getDOB().sendKeys(dob);
+		employee.getClickDOB().click();
+		employee.getDOB(dob);
 		employee.getEmail().sendKeys(email);
 		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
@@ -334,7 +336,8 @@ public class EmployeeTest extends base {
 		System.out.println(valid_username);
 
 		employee.getDesignation().sendKeys(designation);
-		employee.getDOB().sendKeys(dob);
+		employee.getClickDOB().click();
+		employee.getDOB(dob);
 
 		employee.getEmail().sendKeys(email);
 		//Email Validation
@@ -342,7 +345,7 @@ public class EmployeeTest extends base {
 		String valid_email = valid_string6;
 		System.out.println(valid_email);
 
-		//employee.getRoles(Role.trim());
+		//employee.getRoles(Role);
 
 		employee.getcity().sendKeys(City);
 		//City Data Validation
@@ -424,7 +427,8 @@ public class EmployeeTest extends base {
 		employee.getlname().sendKeys(Lastname);
 		employee.getUserName().sendKeys(Username);
 		employee.getDesignation().sendKeys(designation);
-		employee.getDOB().sendKeys(dob);
+		employee.getClickDOB().click();
+		employee.getDOB(dob);
 		employee.getEmail().sendKeys(email);
 		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
@@ -481,7 +485,8 @@ public class EmployeeTest extends base {
 		employee.getlname().sendKeys(Lastname);
 		employee.getUserName().sendKeys(Username);
 		employee.getDesignation().sendKeys(designation);
-		employee.getDOB().sendKeys(dob);
+		employee.getClickDOB().click();
+		employee.getDOB(dob);
 		employee.getEmail().sendKeys(email);
 		//employee.getRoles(Role.trim());
 		employee.getcity().sendKeys(City);
@@ -625,7 +630,7 @@ public class EmployeeTest extends base {
 	}
 
 	//Add Employee Test Mandatory Filed Validation
-	@Test
+	@Test()
 	public void Add_Employee_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
@@ -802,8 +807,8 @@ public class EmployeeTest extends base {
 	//DataProvider for Add Employee All Roles
 	@DataProvider
 	public Object[][] EmployeeAddDataAllRoles() {
-		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpAll", "QAST", "Test",
-			"AutomationAll", "SDET", "06/09/2006", "akash2024@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+		return new Object[][] { { "‪D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpAll", "QAST", "Test",
+			"AutomationAll", "SDET", "6/JAN/2000", "akash2024@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -812,8 +817,8 @@ public class EmployeeTest extends base {
 	//DataProvider for Add Employee Only View
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyView() {
-		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpView", "QA", "Test",
-			"AutomationView", "SDET", "06/09/2006", "akash23@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+		return new Object[][] { { "C:\\125ktm.jpg", "AutomationEmpView", "QA", "Test",
+			"AutomationView", "SDET", "6/JAN/2002", "akash23@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -822,8 +827,8 @@ public class EmployeeTest extends base {
 	//DataProvider for Add Employee Only Add
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyAdd() {
-		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpAdd", "QA", "Test",
-			"AutomationAdd", "SDET", "06/09/2006", "akash22@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+		return new Object[][] { { "C:\\125ktm.jpg", "AutomationEmpAdd", "QA", "Test",
+			"AutomationAdd", "SDET", "15/MAR/2000", "akash22@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -832,8 +837,8 @@ public class EmployeeTest extends base {
 	//DataProvider for Add Employee Only Edit
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyEdit() {
-		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpEdit", "QA", "Test",
-			"AutomationEdit", "SDET", "06/09/2006", "akash29@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+		return new Object[][] { { "C:\\125ktm.jpg", "AutomationEmpEdit", "QA", "Test",
+			"AutomationEdit", "SDET", "14/APR/2001", "akash29@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -842,8 +847,8 @@ public class EmployeeTest extends base {
 	//DataProvider for Add Employee Only Delete
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyDelete() {
-		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpDelete", "QA", "Test",
-			"AutomationDelete", "SDET", "06/09/2006", "akash28@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
+		return new Object[][] { { "C:\\125ktm.jpg", "AutomationEmpDelete", "QA", "Test",
+			"AutomationDelete", "SDET", "21/MAY/2003", "akash28@mailinator.com", "", "Ahmedabad", "Goa", "9865321254",
 			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
@@ -852,8 +857,8 @@ public class EmployeeTest extends base {
 	//DataProvider for Add Employee Only Export
 	@DataProvider
 	public Object[][] EmployeeAddDataOnlyExport() {
-		return new Object[][] { { "D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", "AutomationEmpExport", "QA", "Test",
-			"AutomationExport", "SDET", "06/09/2006", "akash21@mailinator.com", "", "Ahmedabad", "Goa", "9801211254",
+		return new Object[][] { { "C:\\125ktm.jpg", "AutomationEmpExport", "QA", "Test",
+			"AutomationExport", "SDET", "19/JUL/2004", "akash21@mailinator.com", "", "Ahmedabad", "Goa", "9801211254",
 			"Sit@321#", "Ambli,Bopal gam", "Automation Project1",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png",
 			"D:\\Fileupload\\mt15v2mtrightfrontthreequarter.png", } };
