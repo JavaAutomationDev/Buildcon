@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,9 +19,10 @@ import resources.base;
 
 public class InquiryPage {
 	public WebDriver driver;
-
+    public boolean flag;
+    
 	public InquiryPage(WebDriver driver) {
-		this.driver = driver;
+		this.driver = driver;	
 	}
 
 	//Page object for click Inquiry Module
@@ -196,6 +198,41 @@ public class InquiryPage {
 		base.failedElementName = "Inquiry-Update";
 		return driver.findElement(update);
 	}
+    
+	//Page Object for Missing Inquiry Follow Up
+	By missingfollowupcalender = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-add-inquiry/div/div[2]/div/mat-tab-group/div/mat-tab-body[1]/div/form/div[1]/div[6]/mat-form-field/div[1]/div[2]/div[3]/mat-datepicker-toggle/button");
+	public WebElement getMissingfollowupcalender() {
+		base.failedElementName = "Inquiry-Update";
+		return driver.findElement(missingfollowupcalender);
+	}
+	
+	//Page Object for Missing Inquiry Follow Up
+	public WebElement getMissinnextfollowupdate(String followup) throws InterruptedException {
+		String btn1="/html/body/div[4]/div[2]/div/mat-datepicker-content/div[2]/mat-calendar/mat-calendar-header/div/div/button[1]";
+		driver.findElement(By.xpath(btn1)).click();
+		Thread.sleep(2000);
+
+		//Start Year Select
+		String[] YearParts =followup.split("/");
+		String Year = YearParts[2];
+		String Yearxpath="//span[normalize-space()='"+Year+"']";
+		WebElement YearField = driver.findElement(By.xpath(Yearxpath));
+		YearField.click();
+
+		//Start Date
+		String[] MonthParts = followup.split("/");
+		String Month = MonthParts[1];
+		String Monthxpath="//span[normalize-space()='"+Month+"']";
+		driver.findElement(By.xpath(Monthxpath)).click();		
+
+		//Open Start Date Picker
+		String[] DayParts = followup.split("/");
+		String Day = DayParts[0];
+		String Dayxpath="//span[normalize-space()='"+Day+"']";
+		WebElement startDateField = driver.findElement(By.xpath(Dayxpath));
+		startDateField.click();
+		return startDateField;
+	}
 
 	//Page object for Edit Button
 	public WebElement getEdit() {
@@ -212,6 +249,14 @@ public class InquiryPage {
 		return Edit;
 	}
 
+	//Page object for Missing follow up Edit button
+	By missingeditbtn = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[2]/div/mat-tab-group/div/mat-tab-body[3]/div/div/div/table/tbody/tr/td[14]/div/a");
+	public WebElement getMissingEditbtn() {
+		base.failedElement = null;
+		base.failedElementName = "Inquiry-Missing Follow Up Edit Button ";
+		return driver.findElement(missingeditbtn);
+	}
+	
 	//Page object for Search Inquiry
 	By Search = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquires/div/div[1]/div[2]/div[1]/input");
 	public WebElement getSearchInquiry() {
@@ -821,6 +866,19 @@ public class InquiryPage {
 		}
 	}
 
+	//Page object for Page not found 
+	public boolean NoPageFound() {
+		try {
+			int t = driver.findElements(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']")).size();
+			if(t==0) {
+				flag=false;
+			}else {
+				flag=true;
+				System.out.println("No Data for Missing Follow Details.");
+			}
+		} catch (NoSuchElementException e) {
 
-
+		}
+		return flag;
+	}
 }

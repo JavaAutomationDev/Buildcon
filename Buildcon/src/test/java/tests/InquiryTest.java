@@ -1,6 +1,7 @@
 package tests;
 
 import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -54,14 +55,14 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		softAssert.assertFalse(siteproject.isEmpty(), "Visit Site/Project is required.");
 		Inquiry.getsiteproject(siteproject);
-		
-		Inquiry.getvisitorname().sendKeys(visitorname.trim());
+
+		Inquiry.getvisitorname().sendKeys(visitorname);
 		softAssert.assertFalse(visitorname.isEmpty(), "Visitor Name is required.");
 		//Visitor Name Text Data Validation
 		String valid_string = validateText(visitorname,"VisitorName", 5, 30);
 		String valid_visitorname = valid_string;
 		System.out.println(valid_visitorname);
-		
+
 		Inquiry.getIntime().click(); //click on InTime Required fields
 		Inquiry.getOk().click(); //Click on Ok time
 
@@ -69,17 +70,17 @@ public class InquiryTest extends base {
 		Inquiry.getOk().click(); //Click on Ok time
 
 		Inquiry.getNextfollowUpDT().sendKeys(NextfollowUpDT);
-		
+
 		Inquiry.getreferencedBy().sendKeys(referencedBy);
 		//ReferencedBy  Text Data Validation 
 		valid_string = validateText(referencedBy,"ReferencedBy", 5, 30);
 		String valid_referancedby = valid_string;
 		System.out.println(valid_referancedby);
-				
+
 		Thread.sleep(2000);		
 		softAssert.assertFalse(Attende.isEmpty(), "Attendee is required.");
 		Inquiry.getAttendee(Attende);
-		
+
 		Inquiry.getContactNo().sendKeys(ContactNo);
 		//ContactNo Number Validation
 		valid_string = valid_number(ContactNo, "InquiryContactNo");
@@ -92,25 +93,26 @@ public class InquiryTest extends base {
 		valid_string = valid_EMail(Email, "InquiryEmail");
 		String valid_email = valid_string;
 		System.out.println(valid_email);
-				
+
 		Inquiry.getAddress().sendKeys(Address);
 		//Adress Alphanumeric  Validation
 		valid_string = valid_alphanum(Address, "InquiryAddress", 10);
 		String valid_address = valid_string;
 		System.out.println(valid_address);
-				
+
 		Inquiry.getRemarks().sendKeys(Remarks);
 		//Remarks  Text Data Validation
 		valid_string = validateText(Remarks,"Remarks", 5, 10);
 		String valid_remarks = valid_string;
 		System.out.println(valid_remarks);
-		
+
 		Inquiry.getrequirement().sendKeys(Requirement);
 		Inquiry.getstatus(Status);
 
 		Thread.sleep(2000);
 		Inquiry.getsave().click();
-
+		Thread.sleep(2000);
+		
 		softAssert.assertEquals(valid_visitorname, "VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
 		softAssert.assertEquals(valid_referancedby, "ReferencedBy is a Valid text - is a valid Minlenght - is a valid Maxlenght");
 		softAssert.assertEquals(valid_contactno, "InquiryContactNo is a Valid Number");
@@ -122,16 +124,16 @@ public class InquiryTest extends base {
 
 	//Editing an existing Inquiry using Data Provider
 	@Test(dataProvider = "InquiryEditData",priority=2)
-	public void Edit_Inquiry(String Projectname,String siteproject,String newvisitorname,String newContactNo, String newEmail, String newAddress, String newRemarks,
-			String newRequirement, String newStatus) throws InterruptedException, IOException {
-
+	public void Edit_Inquiry(String Projectname,String siteproject,String newvisitorname,String newContactNo, String newEmail, 
+			String newAddress,String newRemarks,String newRequirement, String newStatus) throws InterruptedException, IOException {
 		SoftAssert softAssert = new SoftAssert();
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
 		Inquiry.getEdit();
+		Thread.sleep(2000);
 		Inquiry.getsiteproject(siteproject.trim());
-		
+
 		Thread.sleep(2000);
 		Inquiry.getvisitorname().clear();
 		Inquiry.getvisitorname().sendKeys(newvisitorname);
@@ -140,7 +142,7 @@ public class InquiryTest extends base {
 		String valid_visitorname = valid_string;
 		System.out.println(valid_visitorname);
 		softAssert.assertFalse(newvisitorname.isEmpty(), "Visitor Name is required.");
-		
+
 		Inquiry.getContactNo().clear();
 		Inquiry.getContactNo().sendKeys(newContactNo);
 		//ContactNo Number Validation
@@ -155,27 +157,27 @@ public class InquiryTest extends base {
 		valid_string = valid_EMail(newEmail, "InquiryEmail");
 		String valid_email = valid_string;
 		System.out.println(valid_email);
-		
+
 		Inquiry.getAddress().clear();
 		Inquiry.getAddress().sendKeys(newAddress);
 		//Adress Alphanumeric  Validation
 		valid_string = valid_alphanum(newAddress, "InquiryAddress",10);
 		String valid_address = valid_string;
 		System.out.println(valid_address);
-				
+
 		Inquiry.getRemarks().clear();
 		Inquiry.getRemarks().sendKeys(newRemarks);
 		//Remarks  Text Data Validation
 		valid_string = validateText(newRemarks,"Remarks", 5, 10);
 		String valid_remarks = valid_string;
 		System.out.println(valid_remarks);
-		
+
 		Inquiry.getrequirement().clear();
 		Inquiry.getrequirement().sendKeys(newRequirement);
 		Inquiry.getstatus(newStatus.trim());
 		Inquiry.getUpdate().click();
-		
 		Thread.sleep(2000);
+		
 		softAssert.assertEquals(valid_visitorname, "VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
 		softAssert.assertEquals(valid_email, "InquiryEmail is a Valid EMail");
 		softAssert.assertEquals(valid_contactno, "InquiryContactNo is a Valid Number");
@@ -190,7 +192,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Visitiorname + Keys.ENTER);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		Inquiry.getDelete().click();
 		Thread.sleep(2000);
 		Inquiry.getClickYes().click();
@@ -254,43 +256,33 @@ public class InquiryTest extends base {
 	}
 
 	//Todays Follow up Click,Search & Edit
-	@Test(dataProvider = "InquirySearchData",priority=8)
+	@Test(dataProvider = "TodaysFollowUpData",priority=8)
 	public void Today_Follow_Inquiry(String visitorname) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.gettodayfollowup().click();
 		Inquiry.getSearchInquiry().sendKeys(visitorname.trim() + Keys.ENTER);
-		
-		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
-		@SuppressWarnings("unused")
-		boolean flag=NRF.isDisplayed();
-		if(flag=false) {
-			
-			Inquiry.getEdit();
-			Thread.sleep(2000);
-			Inquiry.getUpdate().click();
-		}else {
-			System.out.println("No Data for Today's Follow Details.");
-		}
+		boolean flag=Inquiry.NoPageFound();
+		if (flag == false) {}
 	}
 
 	//Missing Follow up for click,Search & Edit
-	@Test(dataProvider = "InquirySearchData",priority=9)
-	public void Missing_Follow_Inquiry(String visitorname) throws InterruptedException {
+	@Test(dataProvider = "MissingFollowUpData",priority=9)
+	public void Missing_Follow_Inquiry(String visitorname,String followup) throws InterruptedException {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
 		Inquiry.getSearchInquiry().sendKeys(visitorname.trim() + Keys.ENTER);
-		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
-		@SuppressWarnings("unused")
-		boolean flag=NRF.isDisplayed();
-		if(flag=false) {
-			
-			Inquiry.getEdit();
-			Thread.sleep(2000);
-			Inquiry.getUpdate().click();
-		}else {
-			System.out.println("No Data for Missing Follow Details.");
+		boolean flag=Inquiry.NoPageFound();
+		if (flag == false) {
+		Inquiry.getMissingEditbtn().click();
+		Thread.sleep(2000);
+		Inquiry.getMissingfollowupcalender().click();
+		Thread.sleep(2000);
+		Inquiry.getMissinnextfollowupdate(followup);
+		Thread.sleep(2000);
+		Inquiry.getUpdate().click();
+		Thread.sleep(2000);
 		}
 	}
 
@@ -319,7 +311,7 @@ public class InquiryTest extends base {
 		Inquiry.getaddInquiry().click();
 		Inquiry.getsave().click();
 		Thread.sleep(2000);
-		
+
 		WebElement Visitsiteproject =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
 		softAssert.assertEquals(Visitsiteproject.getText(), "Visit Site/Project is required.");
 
@@ -328,12 +320,12 @@ public class InquiryTest extends base {
 
 		WebElement Intime =driver.findElement(By.xpath(
 				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-				+ "vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[4]/mat-form-field/div[2]/div/mat-error"));
+						+ "vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[4]/mat-form-field/div[2]/div/mat-error"));
 		softAssert.assertEquals(Intime.getText(), "In Time is required.");
 
 		WebElement Outtime =driver.findElement(By.xpath(
 				"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-				+ "vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[5]/mat-form-field/div[2]/div/mat-error"));
+						+ "vex-add-inquiry/div/div[2]/div/div/form/div[1]/div[5]/mat-form-field/div[2]/div/mat-error"));
 		softAssert.assertEquals(Outtime.getText(), "Out Time is required.");
 
 		WebElement Attedee =driver.findElement(By.xpath("//span[normalize-space()='Attendee is required.']"));
@@ -353,26 +345,28 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiry.Getedit();
 		Thread.sleep(2000);
-		
+
 		Inquiry.getIntime().click();
+		Thread.sleep(2000);
 		Inquiry.getOk().click();
 		int intime  = Inquiry.getIntime().getAttribute("value").length();
 		for (int i = 0; i <intime ; i++) {
 			Inquiry.getIntime().sendKeys(Keys.BACK_SPACE);
 		}
 		Inquiry.getIntime().sendKeys(Keys.TAB);
-
+		Thread.sleep(2000);
 		Inquiry.getBlankoutTime().sendKeys(Keys.DELETE);
+		Thread.sleep(2000);
 		Inquiry.getBlankoutTime().sendKeys(Keys.TAB);
-
+		Thread.sleep(2000);
 		Inquiry.getContactNo().click();
-        int contactno=Inquiry.getContactNo().getAttribute("value").length();
+		int contactno=Inquiry.getContactNo().getAttribute("value").length();
 		for(int i=1;i<=contactno;i++)
 		{
 			Inquiry.getContactNo().sendKeys(Keys.BACK_SPACE);
 		}
 		Inquiry.getContactNo().sendKeys(Keys.TAB);
-		
+
 		SoftAssert softAssert = new SoftAssert();
 		WebElement VisitorName =driver.findElement(By.xpath("//span[normalize-space()='Visitor Name is required.']"));
 		softAssert.assertEquals(VisitorName.getText(), "Visitor Name is required.");
@@ -406,7 +400,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
-        Inquiry.AddInactiveAttendee(Attendee);
+		Inquiry.AddInactiveAttendee(Attendee);
 	}
 
 	//Verify Add Active Attendee Inquiry
@@ -421,7 +415,7 @@ public class InquiryTest extends base {
 		employee.Nextbtn().click();
 		Thread.sleep(2000);
 		employee.getUpdate().click();
-		
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click(); 
 		Inquiry.getaddInquiry().click();
@@ -440,7 +434,7 @@ public class InquiryTest extends base {
 		employee.Nextbtn().click();
 		Thread.sleep(2000);
 		employee.getUpdate().click();
-		
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getEdit();
@@ -459,11 +453,11 @@ public class InquiryTest extends base {
 		employee.Nextbtn().click();
 		Thread.sleep(2000);
 		employee.getUpdate().click();
-		
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click(); 
 		Inquiry.getEdit();
-        Inquiry.EditInactiveAttendee(Attendee);
+		Inquiry.EditInactiveAttendee(Attendee);
 	}
 
 	//Active Inactive Inquiry Status
@@ -479,11 +473,11 @@ public class InquiryTest extends base {
 		Inquirystatus.getInquiryActiveInactive().click();
 		Thread.sleep(2000);
 		Inquirystatus.getEditInquirystatussave().click();
-		
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getaddInquiry().click();
-        Inquiry.AddInactiveInquiryStatus(Name); 
+		Inquiry.AddInactiveInquiryStatus(Name); 
 	}
 
 	//Verify Add Active Inquiry Status
@@ -502,7 +496,7 @@ public class InquiryTest extends base {
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click(); 
 		Inquiry.getaddInquiry().click();
-        Inquiry.AddActiveInquiryStatus(Name);
+		Inquiry.AddActiveInquiryStatus(Name);
 	}
 
 	//Verify Edit Inactive Inquiry Status
@@ -542,7 +536,7 @@ public class InquiryTest extends base {
 		Inquiry.getEdit();
 		Inquiry.EditActiveInquiryStatus(Name);
 	}
-	
+
 	//Inquiry Response Type
 	//Verify Edit Inactive Inquiry Response Type
 	@Test(dataProvider="EditInactiveInquiryResponseType",priority=21)
@@ -558,7 +552,7 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiryresponse.getEditinquiryresponsesave().click();
 		Thread.sleep(2000);
-		
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
@@ -583,7 +577,7 @@ public class InquiryTest extends base {
 		Thread.sleep(2000);
 		Inquiryresponse.getEditinquiryresponsesave().click();
 		Thread.sleep(2000);
-		
+
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getmissingfollowup().click();
@@ -616,7 +610,7 @@ public class InquiryTest extends base {
 		Inquiry.getMissingFollowUpEditBtn().click();
 		Inquiry.getFollowUpDetails().click();
 		Inquiry.getAddFollowDetails().click();
-        Inquiry.EditInactiveInquiryCommuncation(Name);
+		Inquiry.EditInactiveInquiryCommuncation(Name);
 	}
 
 	//Verify Edit Active Inquiry Communcation mode
@@ -642,7 +636,7 @@ public class InquiryTest extends base {
 		Inquiry.getAddFollowDetails().click();
 		Inquiry.EditActiveInquiryCommuncation(Name);
 	}
-		
+
 	//Add Inquiry Project Dropdown
 	//Verify Add Inactive Project
 	@Test(dataProvider="AddInactiveProjectData",priority=25)
@@ -652,7 +646,9 @@ public class InquiryTest extends base {
 		Project.getSearch().sendKeys(projectname + Keys.ENTER);
 		Thread.sleep(2000);
 		Project.getActiveproject().click();
+		Thread.sleep(2000);
 		Project.getClickYes().click();
+		Thread.sleep(2000);
 
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
@@ -660,27 +656,30 @@ public class InquiryTest extends base {
 		Inquiry.getaddInquiry().click();
 		Thread.sleep(2000);
 		Inquiry.AddInactiveProjectData(Name);
+		Thread.sleep(2000);
 	}	
 
 	//Verify Add Active Project
 	@Test(dataProvider="AddActiveProjectData",priority=26)
 	public void Verify_Add_Active_Project(String projectname,String Name) throws InterruptedException {
 		ProjectPage Project = new ProjectPage(driver);
-
 		Project.getproject().click();
 		Project.getSearch().sendKeys(projectname + Keys.ENTER);
 		Thread.sleep(2000);
 		Project.getActiveproject().click();
+		Thread.sleep(2000);
 		Project.getClickYes().click();
-
+		Thread.sleep(2000);
+		
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Thread.sleep(1000);
 		Inquiry.getaddInquiry().click();
 		Thread.sleep(2000);
 		Inquiry.AddActiveProjectData(Name);
+		Thread.sleep(2000);
 	}
-	
+
 	//Edit Inquiry Project Dropdown
 	//Verify Edit Inactive Project
 	@Test(dataProvider="EditInactiveProjectData",priority=27)
@@ -690,8 +689,10 @@ public class InquiryTest extends base {
 		Project.getSearch().sendKeys(projectname + Keys.ENTER);
 		Thread.sleep(2000);
 		Project.getActiveproject().click();
+		Thread.sleep(2000);
 		Project.getClickYes().click();
-
+		Thread.sleep(2000);
+		
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
@@ -699,6 +700,7 @@ public class InquiryTest extends base {
 		Inquiry.getEdit();
 		Thread.sleep(2000);
 		Inquiry.EditInactiveProjectData(Name);
+		Thread.sleep(2000);
 	}
 
 	//Verify Edit Active Project
@@ -710,8 +712,10 @@ public class InquiryTest extends base {
 		Project.getSearch().sendKeys(projectname + Keys.ENTER);
 		Thread.sleep(2000);
 		Project.getActiveproject().click();
+		Thread.sleep(2000);
 		Project.getClickYes().click();
-
+		Thread.sleep(2000);
+		
 		InquiryPage Inquiry = new InquiryPage(driver);
 		Inquiry.getInquiry().click();
 		Inquiry.getSearchInquiry().sendKeys(Projectname + Keys.ENTER);
@@ -719,55 +723,55 @@ public class InquiryTest extends base {
 		Inquiry.getEdit();
 		Thread.sleep(2000);
 		Inquiry.EditActiveProjectData(Name);
+		Thread.sleep(2000);
 	}
-		
+
 	//Close the driver
-	@AfterMethod 
+	@AfterMethod
 	public void teardown() {
 		base.failedElement = null;
-		//driver.close(); 
+		driver.close(); 
 	}
 
 	//DataProvider for Add Inquiry
 	@DataProvider
 	public Object[][] InquiryAdddata() {
 		return new Object[][] { 
-			{"Automation Project1", "Mahesh Patel","", "Vimal Patel", " Nilesh Panchal", "9746547979",
-			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			
-			{"Automation Project2", "Suresh Patel","", "Vimal Patel", " Nilesh Panchal", "9746547979",
-			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			
-			{"Automation Project3", "Meet Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
-			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
-			
-			{"Automation Project4", "Mahi Patel", "", "Vimal Patel", " Nilesh Panchal", "9746547979",
-			"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+			{"Automation Project1", "Mahesh Patel","", "Vimal Patel", " Nilesh Panchal", "9825630021",
+				"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+
+			{"Automation Project2", "Surendra Patel","", "Vimal Patel", " Nilesh Panchal", "9632147852",
+					"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+
+			{"Automation Project3", "Meet Patel", "", "Vimal Patel", " Nilesh Panchal", "8523697410",
+						"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
+
+			{"Automation Project4", "Mahi Patel", "", "Vimal Patel", " Nilesh Panchal", "9901236541",
+							"nilesh@gmail.com", "Shreenand Nagar, Part 4, Vejalpur, Ahmedabad", "Remarks", "4BHK", "In Progress" },
 		};
-			
+
 	}
 
 	//DataProvider for Edit Inquiry Data
 	@DataProvider
 	public Object[][] InquiryEditData() {
 		return new Object[][] 
-				{{"Automation Project1","Automation Project1","Testing","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
+				{{"Automation Project1","Automation Project1","Mahi Patel Update","9876543210","akash.new@mail.com","Thaltej Square, Ahmedabad","Updated Remarks","5BHK","Completed"}};
 	}
 
 	//DataProvider for Delete Inquiry Data
 	@DataProvider
 	public Object[][] InquiryDeleteData() {
 		return new Object[][] 
-				{{"Gulshan Patel"},{"Niki Patel"},{"Rohit Patel"},{"Rinku Patel"}
-			};
+				{{"Mahesh Patel"},{"Surendra Patel"},{"Meet Patel"},{"Mahi Patel"}};
 	}
-	
+
 	//DataProvider for Inquiry Apply Filter for Project Data
 	@DataProvider
 	public Object[][] InquiryprojectfilterData() {
 		return new Object[][] { {"12/OCT/2024","31/DEC/2024","Automation Project1"} };
 	}
-	
+
 	//DataProvider for Inquiry Select Project
 	@DataProvider
 	public Object[][] InquirySelectProject() {
@@ -786,16 +790,28 @@ public class InquiryTest extends base {
 		return new Object[][] { {"Mahesh Patel"} };
 	}
 
+	//DataProvider for Todays Follow Up Data
+	@DataProvider
+	public Object[][] TodaysFollowUpData() {
+		return new Object[][] { {"Shubham Patel"} };
+	}
+
+	//DataProvider for Missing Follow Up Data
+	@DataProvider
+	public Object[][] MissingFollowUpData() {
+		return new Object[][] { {"Akki Patel","26/DEC/2024"} };
+	}
+
 	//DataProvider for Add Prospect Data
 	@DataProvider
 	public Object[][] InquiryaddprospectData() {
 		return new Object[][] {{"Mahesh Patel"," A "," Unit No - 102 (1 Floor) "}};
 	}
-	
+
 	//DataProvider for Edit Inquiry Mandatory Data
 	@DataProvider
 	public Object[][] EditInquiryMandatoryData() {
-		return new Object[][] {{"Rohit Patel"}};
+		return new Object[][] {{"Mahesh Patel"}};
 	}
 
 	//DataProvider for Add Inactive Attendee Data
@@ -803,49 +819,49 @@ public class InquiryTest extends base {
 	public Object[][] AddInactiveAttendee() {
 		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
-	
+
 	//DataProvider for Add Active Attendee Data
 	@DataProvider
 	public Object[][] AddActiveAttendee() {
 		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
-	
+
 	//DataProvider for Edit Inactive Attendee Data
 	@DataProvider
 	public Object[][] EditInactiveAttendee() {
 		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
-	
+
 	//DataProvider for Edit Active Attendee Data
 	@DataProvider
 	public Object[][] EditActiveAttendee() {
 		return new Object[][] {{"AutomationEmpEdit","AutomationEmpEdit"}};
 	}
-	
+
 	//DataProvider for Add Inactive Inquiry Status Data
 	@DataProvider
 	public Object[][] AddInactiveInquiryStatus() {
 		return new Object[][] {{"SIT InquiryStatus","SIT InquiryStatus"}};
 	}
-	
+
 	//DataProvider for Add Active Inquiry Status Data
 	@DataProvider
 	public Object[][] AddActiveInquiryStatus() {
 		return new Object[][] {{"SIT InquiryStatus","SIT InquiryStatus"}};
 	}
-	
+
 	//DataProvider for Edit Inactive Inquiry Status Data
 	@DataProvider
 	public Object[][] EditInactiveInquiryStatus() {
 		return new Object[][] {{"SIT InquiryStatus","SIT InquiryStatus"}};
 	}
-	
+
 	//DataProvider for Edit Inactive Inquiry Status Data
 	@DataProvider
 	public Object[][] EditActiveInquiryStatus() {
 		return new Object[][] {{"SIT InquiryStatus","SIT InquiryStatus"}};
 	}
-	
+
 	//DataProvider for Edit Inactive Inquiry Response Type
 	@DataProvider
 	public Object[][] EditInactiveInquiryResponseType() {
@@ -856,7 +872,7 @@ public class InquiryTest extends base {
 	public Object[][] EditActiveInquiryResponseType() {
 		return new Object[][] {{"SIT InquiryResponseType","SIT InquiryResponseType"}};
 	}
-	
+
 	//DataProvider for Edit Inactive Inquiry Communcation Mode
 	@DataProvider
 	public Object[][] EditInactiveInquiryCommuncation() {
@@ -867,17 +883,17 @@ public class InquiryTest extends base {
 	public Object[][] EditActiveInquiryCommuncation() {
 		return new Object[][] {{"SIT InquiryCommunicationMode","SIT InquiryCommunicationMode"}};
 	}
-	
+
 	//DataProvider for AddInactiveProjectData
 	@DataProvider
 	public Object[][] AddInactiveProjectData() {
 		return new Object[][] {{"Automation Project3","Automation Project3"}};
 	}
-	
+
 	//DataProvider for Add Active Project Data
 	@DataProvider
 	public Object[][] AddActiveProjectData() {
-		return new Object[][] {{"Automation Project3","Automation Project3"}};
+		return new Object[][] {{"Automation Project2","Automation Project2"}};
 	}
 	//DataProvider for Edit Inactive Project Data
 	@DataProvider
@@ -887,6 +903,6 @@ public class InquiryTest extends base {
 	//DataProvider for Edit Active Project Data
 	@DataProvider
 	public Object[][] EditActiveProjectData() {
-		return new Object[][] {{"Automation Project4","Automation Project4","Automation Project4"}};
+		return new Object[][] {{"Automation Project2","Automation Project2","Automation Project2"}};
 	}
 }

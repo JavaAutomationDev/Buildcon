@@ -109,6 +109,7 @@ public class ProspectTest extends base {
 
 		Thread.sleep(2000);
 		Prospect.getsave().click();
+		Thread.sleep(2000);
 		
 		softAssert.assertEquals(valid_visitorname, "VisitorName is a Valid text - is a valid Minlenght - is a valid Maxlenght");
 		softAssert.assertEquals(valid_referancedby, "ReferencedBy is a Valid text - is a valid Minlenght - is a valid Maxlenght");
@@ -160,6 +161,7 @@ public class ProspectTest extends base {
 		Prospect.getstatus(newStatus.trim());
 		Thread.sleep(2000);
 		Prospect.getsave().click();
+		Thread.sleep(2000);
 		
 		softAssert.assertEquals(valid_contactno, "ContactNo is a Valid Number");
 		softAssert.assertEquals(valid_email, "Email is a Valid EMail");
@@ -177,6 +179,7 @@ public class ProspectTest extends base {
 		Prospect.getDelete();
 		Thread.sleep(2000);
 		Prospect.getClickYes().click();
+		Thread.sleep(2000);
 	}
 
 	//Export to Excel Prospect
@@ -186,6 +189,7 @@ public class ProspectTest extends base {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getExporttoExcel().click();
+		Thread.sleep(2000);
 	}
 
 	//Apply Filter for Dates & Project
@@ -198,6 +202,7 @@ public class ProspectTest extends base {
 		Prospect.getapplyfilter().click();
 		Prospect.getdaterange().click();
 		Prodpectdates.getSelectDateRange(daterange, Daterange);
+		Thread.sleep(2000);
 		Prospect.getselectproject(selectproject.trim());
 		
 		try {
@@ -222,6 +227,7 @@ public class ProspectTest extends base {
 		Prospect.getapplyfilter().click();
 		Prospect.getdaterange().click();
 		Prodpectdates.getSelectDateRange(daterange, Daterange);
+		Thread.sleep(2000);
 		try {
 			WebElement NRF = driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 			boolean flag = NRF.isDisplayed();
@@ -242,7 +248,7 @@ public class ProspectTest extends base {
 		Prospect.getprospect().click();
 		Prospect.getapplyfilter().click();
 		Prospect.getselectproject(selectproject);
-		
+		Thread.sleep(2000);
 		try {
 			WebElement NRF = driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 			boolean flag = NRF.isDisplayed();
@@ -265,6 +271,7 @@ public class ProspectTest extends base {
 		Prospect.getSearch().sendKeys(Attende.trim() + Keys.ENTER);
 		Thread.sleep(2000);
 		Prospect.getSearch().clear();
+		Thread.sleep(2000);
 	}
 
 	//Todays Follow up click,Search & Edit Method
@@ -274,16 +281,15 @@ public class ProspectTest extends base {
 		Prospect.getprospect().click();
 		Prospect.gettodayfollowup().click();
 		Prospect.getSearch().sendKeys(visitorname.trim() + Keys.ENTER);
-		
+		Thread.sleep(2000);
 		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 		@SuppressWarnings("unused")
 		boolean flag=NRF.isDisplayed();
 		if(flag=false) {
-		
 		Prospect.getEdit();
-
 		Thread.sleep(2000);
 		Prospect.getsave().click();
+		Thread.sleep(2000);
 		}
 	}
 
@@ -294,7 +300,7 @@ public class ProspectTest extends base {
 		Prospect.getprospect().click();
 		Prospect.getmissingfollowup().click();
 		Prospect.getSearch().sendKeys(visitorname.trim() + Keys.ENTER);
-		
+		Thread.sleep(2000);
 		WebElement NRF =driver.findElement(By.cssSelector("img[src='../../../../assets/img/no-data-found.png']"));
 		@SuppressWarnings("unused")
 		boolean flag=NRF.isDisplayed();
@@ -302,6 +308,7 @@ public class ProspectTest extends base {
 		Prospect.getEdit();
 		Thread.sleep(2000);
 		Prospect.getsave().click();
+		Thread.sleep(2000);
 		}
 	}
 
@@ -313,6 +320,7 @@ public class ProspectTest extends base {
 		Prospect.getAddprospect().click();
 		Thread.sleep(2000);
 		Prospect.getsave().click();
+		Thread.sleep(2000);
 
 		SoftAssert softAssert = new SoftAssert();
 		WebElement Visitsite =driver.findElement(By.xpath("//span[normalize-space()='Visit Site/Project is required.']"));
@@ -401,12 +409,13 @@ public class ProspectTest extends base {
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
 		Prospect.getAddprospect().click();
-        Prospect.AddActiveAttendeeProspect(Attendename);
+        Prospect.AddActiveAttendeeProspect(Attendename);Thread.sleep(2000);
+        
 	}
 
 	//Verify Edit Inactive Attendee Prospect
 	@Test(dataProvider="EditInactiveAttendeeProspect",priority=14)
-	public void Verify_Edit_Inactive_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
+	public void Verify_Edit_Inactive_Attendee_Prospect(String Employeename,String Visitorname,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
@@ -416,16 +425,22 @@ public class ProspectTest extends base {
 		employee.Nextbtn().click();
 		Thread.sleep(2000);
 		employee.getUpdate().click();
-
+		Thread.sleep(2000);
+		
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
-		Prospect.getEdit();
+		Thread.sleep(2000);
+		Prospect.getSearch().sendKeys(Visitorname+Keys.ENTER);
+		Thread.sleep(2000);
+		Prospect.getEdit().click();
+		Thread.sleep(2000);
 		Prospect.EditInactiveAttendeeProspect(Attendename);
+		Thread.sleep(2000);
 	}
 
 	//Verify Edit Active Attendee Prospect
 	@Test(dataProvider="EditActiveAttendeeProspect",priority=15)
-	public void Verify_Edit_Active_Attendee_Prospect(String Employeename,String Attendename) throws InterruptedException {
+	public void Verify_Edit_Active_Attendee_Prospect(String Employeename,String Visitorname,String Attendename) throws InterruptedException {
 		EmployeePage employee = new EmployeePage(driver);
 		employee.getEmployee().click();
 		employee.getSearch().sendKeys(Employeename+Keys.ENTER);
@@ -435,11 +450,17 @@ public class ProspectTest extends base {
 		employee.Nextbtn().click();
 		Thread.sleep(2000);
 		employee.getUpdate().click();
-
+		Thread.sleep(2000);
+		
 		ProspectPage Prospect = new ProspectPage(driver);
 		Prospect.getprospect().click();
-		Prospect.getEdit();
-        Prospect.EditActiveAttendeeProspect(Attendename);
+		Thread.sleep(2000);
+		Prospect.getSearch().sendKeys(Visitorname+Keys.ENTER);
+		Thread.sleep(2000);
+		Prospect.getEdit().click();
+		Thread.sleep(2000);
+		Prospect.EditActiveAttendeeProspect(Attendename);
+        Thread.sleep(2000);
 	}
 
 	//Close the Driver  
@@ -521,12 +542,12 @@ public class ProspectTest extends base {
 	//DataProvider for Edit Inactive Attendee Prospect
 	@DataProvider
 	public Object[][] EditInactiveAttendeeProspect() {
-		return new Object[][] {{"AutomationEmpExport Test","AutomationEmpExport Test"}};
+		return new Object[][] {{"AutomationEmpExport Test","Mahi Patel","AutomationEmpExport Test"}};
 	}
 	
 	//DataProvider for Edit Active Attendee Prospect
 	@DataProvider
 	public Object[][] EditActiveAttendeeProspect() {
-		return new Object[][] {{"AutomationEmpExport Test","AutomationEmpExport Test"}};
+		return new Object[][] {{"AutomationEmpExport Test","Mahi Patel","AutomationEmpExport Test"}};
 	}
 }
