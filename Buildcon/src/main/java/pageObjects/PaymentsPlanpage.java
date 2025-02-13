@@ -34,8 +34,7 @@ public class PaymentsPlanpage {
 
 	//POM for Add Payment Plan name in testbox
 	By addpaymentplan = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-payment-plan-master/div/div[1]/div[2]/button[2]");
+			"//span[contains(text(),'Add Payment Plan')]");
 	public WebElement getaddpaymentplan() {
 		base.failedElementName = "PaymentPlan-Name";
 		return driver.findElement(addpaymentplan);
@@ -68,9 +67,7 @@ public class PaymentsPlanpage {
 
 	//POM for Edit the Payment Plan
 	By EditpaymentplanClick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-payment-plan-master/div/div"
-			+ "[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-payment-plan-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
 
 	public WebElement getEditpaymentplan() {
 		base.failedElementName = "PaymentPlan-EditClick";
@@ -95,9 +92,7 @@ public class PaymentsPlanpage {
 
 	//POM For Delete the Entry
 	By Deletepaymentplanclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-payment-plan-master/div/div"
-			+ "[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-payment-plan-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
 	public WebElement getDeletepaymentplanclick() {
 		base.failedElementName = "PaymentPlan-DeleteClick";
 		return driver.findElement(Deletepaymentplanclick);

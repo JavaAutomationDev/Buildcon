@@ -34,8 +34,7 @@ public class Inquirycommunicationmodepage {
 
 	//Page object model for add inquiry communication mode data
 	By Inquirycommunicationmodeadd  = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[1]/div[2]/button[2]");
+			"//span[contains(text(),'Add New Inquiry Communication Mode')]");
 	public WebElement getInquirycommunicationmodeadd() {
 		base.failedElementName = "InquiryCommunicationMode-ClickAdd";
 		return driver.findElement(Inquirycommunicationmodeadd);
@@ -59,8 +58,7 @@ public class Inquirycommunicationmodepage {
 
 	//Page object model for Edit inquiry communication row
 	By Editinquirycommunicationrow = By.xpath(
-			"//button[@mattooltip='Edit']");
-	
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr/td[3]/div/button[2]");
 	public WebElement getEditinquirycommunicationrow() {
 		base.failedElementName = "InquiryCommunicationMode-Editrow";
 		return driver.findElement(Editinquirycommunicationrow);
@@ -84,8 +82,7 @@ public class Inquirycommunicationmodepage {
 
 	//Page object model for change status inquiry communication
 	By changestatusinquirycommunication = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content"
-			+ "/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
 	public WebElement getchangestatusinquirycommunication() {
 		base.failedElementName = "InquiryCommunicationMode-ChangeStatus";
 		return driver.findElement(changestatusinquirycommunication);
@@ -102,7 +99,7 @@ public class Inquirycommunicationmodepage {
 	//Page object for delete click inquiry communication
 	By deleteclickinquirycommunication = By.xpath(
 			
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-communication-mode/div/div[2]/div/table/tbody/tr/td[3]/div/button[3]");
 	public WebElement getdeleteclickinquirycommunication() {
 		base.failedElementName = "InquiryCommunicationMode-ClickDelete";
 		return driver.findElement(deleteclickinquirycommunication);

@@ -38,7 +38,7 @@ public class PaymentsplanTest extends base {
 	}
 
 	//Add Payments Plan Types
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_Payment_Plan(String PaymentsPlanpage1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
@@ -48,7 +48,7 @@ public class PaymentsplanTest extends base {
 		
 		paymentplan.getaddpaymentplandataenter().sendKeys(PaymentsPlanpage1);
 		//Data Validation of Payment Plan
-		String valid_string = valid_alphanum(PaymentsPlanpage1,"paymentplan",10);
+		String valid_string = valid_alphanum(PaymentsPlanpage1,"paymentplan",20);
 		String valid_paymentplan = valid_string;
 		System.out.println(valid_paymentplan);
 		
@@ -56,16 +56,19 @@ public class PaymentsplanTest extends base {
 		paymentplan.getcheckediscommercial().click();
 		paymentplan.getpaymentplansave().click();
 		Thread.sleep(3000);
-		softAssert.assertEquals(valid_paymentplan, "paymentplan is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_paymentplan, "paymentplan is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
 	//Edit Payments Plan
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Payment_Plan(String PaymentsPlanpage1) throws InterruptedException {
+	@Test(dataProvider = "getEditdata",priority =2)
+	public void Edit_Payment_Plan(String PaymentsPlanpage1,String PaymentsPlanpage2) throws InterruptedException {
 		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
+		SoftAssert softAssert = new SoftAssert();
 		paymentplan.getconfiguration().click();
 		paymentplan.getpaymentplan().click();
+		paymentplan.getseaechingpaymentplan().sendKeys(PaymentsPlanpage2);
+		paymentplan.getsearchedclick().click();
 		paymentplan.getEditpaymentplan().click();
 		
 		paymentplan.getEditpaymentplandata().clear();
@@ -77,42 +80,52 @@ public class PaymentsplanTest extends base {
 		
 		Thread.sleep(2000);
 		paymentplan.getEditpaymentplansave().click();
+		Thread.sleep(3000);
+		softAssert.assertEquals(valid_paymentplan, "paymentplan is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertAll();
 	}
 
 	//Delete Payments Plan
-	@Test()
-	public void Delete_banks() throws InterruptedException {
-		PaymentsPlanpage unit = new PaymentsPlanpage(driver);
-		unit.getconfiguration().click();
-		unit.getpaymentplan().click();
-		unit.getDeletepaymentplanclick().click();
-		unit.getDeleteconfirmation().click();
+	@Test(dataProvider = "getdelete",priority =5)
+	public void Delete_banksString (String PaymentsPlanpage1) throws InterruptedException {
+		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
+		paymentplan.getconfiguration().click();
+		paymentplan.getpaymentplan().click();
+		paymentplan.getseaechingpaymentplan().sendKeys(PaymentsPlanpage1);
+		paymentplan.getsearchedclick().click();
+		paymentplan.getDeletepaymentplanclick().click();
 		Thread.sleep(2000);
+		paymentplan.getDeleteconfirmation().click();
+		Thread.sleep(3000);
+	}
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "Test payment 1" },{ "Test payment 2" },{ "Test payment 3" },{ "Test payment 4" } };
 	}
 
 	//Searched Payments Plan
-	@Test(dataProvider = "getsearched")
+	@Test(dataProvider = "getsearched",priority =4)
 	public void searched_banks(String PaymentsPlanpage1) throws InterruptedException {
-		PaymentsPlanpage unit = new PaymentsPlanpage(driver);
-		unit.getconfiguration().click();
-		unit.getpaymentplan().click();
-		unit.getseaechingpaymentplan().sendKeys(PaymentsPlanpage1);
-		unit.getsearchedclick().click();
+		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
+		paymentplan.getconfiguration().click();
+		paymentplan.getpaymentplan().click();
+		paymentplan.getseaechingpaymentplan().sendKeys(PaymentsPlanpage1);
+		paymentplan.getsearchedclick().click();
 		Thread.sleep(2000);
 	}
 	
-	@Test()
+	@Test(priority =3)
 	public void Excel_banks() throws InterruptedException {
-		PaymentsPlanpage unit = new PaymentsPlanpage(driver);
-		unit.getconfiguration().click();
-		unit.getpaymentplan().click();
-		unit.getexcelclickclick().click();
+		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
+		paymentplan.getconfiguration().click();
+		paymentplan.getpaymentplan().click();
+		paymentplan.getexcelclickclick().click();
 		Thread.sleep(2000);
 	}
 	
 
 	//Add Validation Payment Plan
-	@Test()
+	@Test(priority =6)
 	public void Add_Validation_Payment_Plan() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
@@ -122,6 +135,7 @@ public class PaymentsplanTest extends base {
 
 		paymentplan.getcheckediscommercial().click();
 		paymentplan.getpaymentplansave().click();
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-payment-plan-master-add/div"
 				+ "/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -130,36 +144,28 @@ public class PaymentsplanTest extends base {
 		System.out.println(messageElement.getText());
 
 		// Define the expected message
-		String expectedMessage = "1Payment Plan name is required";
+		String expectedMessage = "Payment Plan name is required";
 
 		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Payment Plan name is required", expectedMessage, actualMessage);
 		softAssert.assertAll();
-		softAssert.assertAll();
+		
 	}
 
-	@Test()
+	@Test(priority =7)
 	public void Edit_validationpaymentsplan() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		PaymentsPlanpage paymentplan = new PaymentsPlanpage(driver);
 		paymentplan.getconfiguration().click();
 		paymentplan.getpaymentplan().click();
 		paymentplan.getEditpaymentplan().click();
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String xpath = "/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-payment-plan-master-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input";
-		String nm1 = (String) js.executeScript("return document.evaluate('" + xpath + "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value;");
-		System.out.println(nm1);
-
-		WebElement name111 = driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-payment-plan-master-add/div/form/mat-dialog-content/div[1]/mat-form-field/div[1]/div[2]/div[2]/input"));
-		String nm = name111.getText();
-		System.out.println(nm);
-		//int ml = nm.length();
-		for (int i = 1; i < 12; i++) {
+		int nm  = paymentplan.getaddpaymentplandataenter().getAttribute("value").length();
+		for (int i = 0; i < nm ; i++) {
 			paymentplan.getaddpaymentplandataenter().sendKeys(Keys.BACK_SPACE);
 		}
-		paymentplan.getEditpaymentplansave().click();
 		
+		paymentplan.getEditpaymentplansave().click();
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-payment-plan-master-add/"
 				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -173,7 +179,7 @@ public class PaymentsplanTest extends base {
 
 	}
 
-	 //close the driver
+	//close the driver
 	@AfterMethod
 	public void teaddown() {
 		driver.close();
@@ -182,16 +188,16 @@ public class PaymentsplanTest extends base {
 	//DataProvider for Add Payments Plan
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "xomicpayment" } };
+		return new Object[][] { { "Test payment 1" },{ "Test payment 2" },{ "Test payment 3" },{ "Test payment 4" } };
 	}
 
 	//DataProvider for Apply Searched for Payments Plan
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "Googlepayplan12" } };
+		return new Object[][] { { "Test payment 2 update","Test payment 2" } };
 	}
 	@DataProvider
 	public Object[][] getsearched() {
-		return new Object[][] { { "Googlepayplan12" } };
+		return new Object[][] { { "Test payment 3" } };
 	}
 }

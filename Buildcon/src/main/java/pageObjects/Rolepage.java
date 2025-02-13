@@ -34,8 +34,7 @@ public class Rolepage {
 
 	//Page object model for add role data
 	By addnewrole = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-					+ "mat-sidenav-content/main/vex-roles/div/div[1]/div[2]/button");
+			"//span[contains(text(),'add Role')]");
 	public WebElement getaddnewrole() {
 		base.failedElementName = "Role-addNewRole";
 		return driver.findElement(addnewrole);
@@ -68,8 +67,7 @@ public class Rolepage {
 
 	//Page object model for edit the role page
 	By EditRolebuttonclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-					+ "vex-roles/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[2]/div/table/tbody/tr/td[3]/div/button[2]");
 	public WebElement getEditRolebuttonclick() {
 		base.failedElementName = "Role-Editclick";
 		return driver.findElement(EditRolebuttonclick);
@@ -100,8 +98,7 @@ public class Rolepage {
 
 	//Page object model for change status button click :
 	By Rolestatusclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-					+ "vex-roles/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
 	public WebElement getRolestatusclick() {
 		base.failedElementName = "Role-StatuClick";
 		return driver.findElement(Rolestatusclick);
@@ -117,8 +114,7 @@ public class Rolepage {
 
 	//Pom for delete click:
 	By deleteclickRole = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-					+ "vex-roles/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-roles/div/div[2]/div/table/tbody/tr/td[3]/div/button[3]");
 	public WebElement getdeleteclickRole() {
 		base.failedElementName = "Role-DeleteClick";
 		return driver.findElement(deleteclickRole);
@@ -167,6 +163,66 @@ public class Rolepage {
 		return driver.findElement(activeinactiveroles);
 	}
 
+	//Page object for select Employee All Radiobtn
+	By empallselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/"
+			+ "vex-roles-form/form/mat-dialog-content/div[2]/div/div[2]/mat-radio-group/mat-radio-button[1]");
+	
+	public WebElement EmpAllselectbtn() {
+		return driver.findElement(empallselectbtn);
+	}
+	
+	//Page object for select Project All Radiobtn
+	By projectallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[3]/div[1]/div[2]/mat-radio-group[1]/mat-radio-button[1]\r\n"
+			+ "");
+	public WebElement ProjectAllselectbtn() {
+		return driver.findElement(projectallselectbtn);
+	}
+
+	//Page object for select Receipt All Radio btn
+	By receiptallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[4]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[1]\r\n"
+			+ "");
+	public WebElement ReceiptAllselectbtn() {
+		return driver.findElement(receiptallselectbtn);
+	}
+	//Page object for select Collection All Radio btn
+	By collectionallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[5]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[1]\r\n"
+			+ "");
+	public WebElement ColectionAllselectbtn() {
+		return driver.findElement(collectionallselectbtn);
+	}
+
+	//Page object for select Customer All Radio btn
+	By customerallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[6]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[1]\r\n"
+			+ "");
+	public WebElement CustomerAllselectbtn() {
+		return driver.findElement(customerallselectbtn);
+	}
+
+	//Page object for select Inquiry All Radio btn
+	By inquiryallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[7]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[1]");
+	public WebElement InquiryAllselectbtn() {
+		return driver.findElement(inquiryallselectbtn);
+	}			
+	//Page object for select Prospect All Radio btn
+		By prospectallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[8]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[1]");
+		public WebElement ProspectAllselectbtn() {
+			return driver.findElement(prospectallselectbtn);
+		}			
+		
+		//Page object for select booking All Radio btn
+		By bookingallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[9]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[1]");
+		public WebElement BookingAllselectbtn() {
+			return driver.findElement(bookingallselectbtn);
+		}			
+		
+		//Page object for select Document All Radio btn
+		By documentallselectbtn= By.xpath("/html[1]/body[1]/div[4]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/vex-roles-add[1]/div[1]/vex-roles-form[1]/form[1]/mat-dialog-content[1]/div[10]/div[1]/div[2]/div[1]/mat-radio-group[1]/mat-radio-button[1]");
+		public WebElement documentAllselectbtn() {
+			return driver.findElement(documentallselectbtn);
+		}			
+	
+
+		
 	//Page object for Employee Select Btn
 	By empselectbtn= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/"
 			+ "vex-roles-form/form/mat-dialog-content/div[2]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]");

@@ -35,8 +35,7 @@ public class Bankspage {
 
 	//Page object for banks Add
 	By Banksadd = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-bank-master/div/div[1]/div[2]/button[2]");
+			"//span[contains(text(),'add Bank')]");
 	public WebElement getBanksadd() {
 		base.failedElementName = "Banks-Banksadd";
 		return driver.findElement(Banksadd);
@@ -61,8 +60,7 @@ public class Bankspage {
 	
     //Page Object model for banks edit click 
 	By bankseditclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-bank-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bank-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
 	public WebElement getbankseditclick() {
 		base.failedElementName = "Banks-bankseditclick";
 		return driver.findElement(bankseditclick);
@@ -86,8 +84,7 @@ public class Bankspage {
 	}
    
 	//Page object model for bank status
-	By banksstatus = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-bank-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
+	By banksstatus = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bank-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
 	public WebElement getbanksstatus() {
 		base.failedElementName = "Banks-Banksstatus";
 		return driver.findElement(banksstatus);
@@ -95,15 +92,14 @@ public class Bankspage {
 	
 	//Page object model for banks status confirmation
 	By banksstatusconfirmation = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/"
-			+ "vex-delete-pop-up/form/mat-dialog-actions/button[2]");
+			+ "vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getbanksstatusconfirmation() {
 		base.failedElementName = "Banks-Bankstatusconfirmation";
 		return driver.findElement(banksstatusconfirmation);
 	}
 	
 	//Page object model for Banks delete click
-	By Banksdeleteclick  = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-bank-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
+	By Banksdeleteclick  = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-bank-master/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
 	public WebElement getbanksdeleteclick() {
 		base.failedElementName = "Banks-Banksdeleteclick";
 		return driver.findElement(Banksdeleteclick);
@@ -111,7 +107,7 @@ public class Bankspage {
 	
 	//Page object model for Banks delete confirmation
 	By Banksdeleteconfirmation = By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/"
-			+ "vex-delete-pop-up/form/mat-dialog-actions/button[2]");
+			+ "vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getBanksdeleteconfirmation() {
 		base.failedElementName = "Banks-Banksdeleteconfirmation";
 		return driver.findElement(Banksdeleteconfirmation);

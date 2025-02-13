@@ -30,8 +30,7 @@ public class EmployeePage {
 		return driver.findElement(Addemployee);
 	}
 	//Page object for Profile Image
-	By profileimg= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-save"
-			+ "/div/form/mat-dialog-content/div[1]/label/input");
+	By profileimg= By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/app-employee-save/div/form/mat-dialog-content/div[1]/label/input");
 	public WebElement getProfileImg() {
 		base.failedElementName = "Employee-ProfileImg";
 		return driver.findElement(profileimg);
@@ -669,6 +668,13 @@ public class EmployeePage {
 		base.failedElementName = "Employee-EditEmployee";
 		return driver.findElement(editemployee);
 	}	
+	//Page object for Edit Employee
+	By editemployee1=By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-employees/div/div[2]/div/div/div[2]/ul/li[4]/a");
+	                          
+	public WebElement getEdit1() {
+		base.failedElementName = "Employee-EditEmployee1";
+		return driver.findElement(editemployee1);
+	}
 
 	//Page object for Active Employee
 	By activeemployee=By.xpath("//mat-checkbox[@formcontrolname='isActive']");
@@ -677,8 +683,8 @@ public class EmployeePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		base.failedElementName = "Employee-getActiveEmployee";
 		return element;
-	}
-
+	}		
+		
 	//Page object for Apply Filter
 	By filter = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
 			+ "mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[3]/button");
@@ -825,5 +831,14 @@ public class EmployeePage {
 				}	
 			}
 		}
+	}
+	
+	// Page object for Active and Inactive button
+	By activeInactivebtn = By.xpath(
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/app-employees/div/div[1]/div[2]/div[1]");
+
+	public WebElement getactiveInactivebtn() {
+		base.failedElementName = "Employee-Active Inactive button";
+		return driver.findElement(activeInactivebtn);
 	}
 }

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -36,7 +37,7 @@ public class SacCodeTest extends base {
 	}
 
 	//Add Sac Code
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_Saccode(String Saccode1, String DESCRIPTION1, String gst1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Saccodepage saccode = new Saccodepage(driver);
@@ -58,24 +59,26 @@ public class SacCodeTest extends base {
 		
 		saccode.getgst().sendKeys(gst1);
 		//GST Data Validation
-		String valid_string3 = valid_number(gst1,"gst");
+		String valid_string3 = valid_number(gst1,"gst"); 
 		String valid_gst = valid_string3;
 		System.out.println(valid_gst);
 		saccode.getsavebuttonsaccode().click();
 		Thread.sleep(2000);
-		softAssert.assertEquals(valid_saccode, "saccode is a valid Number");
-		softAssert.assertEquals(valid_sacdescription, "DESCRIPTION is a Valid Alpha-Numeric");
-		softAssert.assertEquals(valid_gst, "gst is a valid Number");
+		softAssert.assertEquals(valid_saccode, "saccode is a Valid Number");
+		softAssert.assertEquals(valid_sacdescription, "sacdescription is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertEquals(valid_gst, "gst is a Valid Number");
 		softAssert.assertAll();
 	}
 	
 	//Edit Sac Code
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Saccode(String Saccode1,String description1,String editgst1) throws InterruptedException {
+	@Test(dataProvider = "getEditdata",priority =2)
+	public void Edit_Saccode(String Saccode1,String description1,String editgst1,String searchedentertext) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
+		saccode.getsearchsaccode().sendKeys(searchedentertext);
+		saccode.getsearchsaccodeconfirmclick().click();
 		saccode.getEditclicksaccode().click();
 		
 		saccode.getEditsacs().clear();
@@ -102,54 +105,71 @@ public class SacCodeTest extends base {
 		System.out.println(valid_gst);
 		
 		saccode.getEditsavebutton().click();
+		Thread.sleep(2000);
 		
-		softAssert.assertEquals(valid_saccode, "saccode is a valid Number");
-		softAssert.assertEquals(valid_sacdescription, "DESCRIPTION is a Valid Alpha-Numeric");
-		softAssert.assertEquals(valid_gst, "gst is a valid Number");
+		softAssert.assertEquals(valid_saccode, "saccode is a Valid Number");
+		softAssert.assertEquals(valid_sacdescription, "sacdescription is a Valid Alpha-Numeric is a valid Maxlenght");
+		softAssert.assertEquals(valid_gst, "gst is a Valid Number");
 		softAssert.assertAll();
 	}
 
 	//Status Change Saccode
-	@Test
-	public void Status_Change_Saccode() throws InterruptedException {
+	@Test(dataProvider = "getstatuschanged",priority =3)
+	public void Status_Change_Saccode(String searchedentertext) throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
+		saccode.getsearchsaccode().sendKeys(searchedentertext);
+		saccode.getsearchsaccodeconfirmclick().click();
 		saccode.getchangestatus().click();
 		saccode.getchangestatusconfirm().click();
+		Thread.sleep(2000);
+	}
+	@DataProvider
+	public Object[][] getstatuschanged() {
+		return new Object[][] { { "SaccodeTest1"  } };
 	}
 
 	//Delete Saccode
-	@Test
-	public void Delete_Saccode() throws InterruptedException {
+	@Test(dataProvider = "getdelete",priority =6)
+	public void Delete_Saccode(String searchedentertext) throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
+		saccode.getsearchsaccode().sendKeys(searchedentertext);
+		saccode.getsearchsaccodeconfirmclick().click();
 		saccode.getdeletesaccode().click();
 		saccode.getdeletesaccodeconfirm().click();
+		Thread.sleep(2000);
+	}
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "SaccodeTest1"  },{ "SaccodeTest2"  },{ "SaccodeTest3"  },{ "SaccodeTest4"  }    };
 	}
 
 	//Search Saccode
-	@Test(dataProvider = "getsearch")
+	@Test(dataProvider = "getsearch",priority =5)
 	public void Searching_Project_Types(String searchedentertext) throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
 		saccode.getsearchsaccode().sendKeys(searchedentertext);
 		saccode.getsearchsaccodeconfirmclick().click();
+		Thread.sleep(2000);
 	}
 
 	//Export Excel Saccode
-	@Test
+	@Test(priority =4)
 	public void Export_Excel_Saccode() throws InterruptedException {
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
 		saccode.getexcelclicksaccode().click();
+		Thread.sleep(2000);
 	}
 
 	//Add Validation Saccode
-	@Test
+	@Test(priority =7)
 	public void Add_Validation_Saccode() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Saccodepage saccode = new Saccodepage(driver);
@@ -157,6 +177,7 @@ public class SacCodeTest extends base {
 		saccode.getsaccodeclick().click();
 		saccode.getaddsaccode().click();
 		saccode.getsavebuttonsaccode().click();
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
 				+ "div/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
@@ -194,23 +215,27 @@ public class SacCodeTest extends base {
 	}
 
 	//Edit Validation Saccode
-	@Test
+	@Test(priority =8)
 	public void Edit_Validation_Saccode() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Saccodepage saccode = new Saccodepage(driver);
 		saccode.getconfiguration().click();
 		saccode.getsaccodeclick().click();
 		saccode.getEditclicksaccode().click();
-		for (int i = 1; i <= 10; i++) {
+		int nm = saccode.getsaccodeenter().getAttribute("value").length();
+		for (int i = 0; i <= nm; i++) {
 			saccode.getsaccodeenter().sendKeys(Keys.BACK_SPACE);
 		}
-		for (int i = 1; i <= 10; i++) {
+		int nm1 = saccode.getdescription().getAttribute("value").length();
+		for (int i = 0; i <= nm1; i++) {
 			saccode.getdescription().sendKeys(Keys.BACK_SPACE);
 		}
-		for (int i = 1; i <= 10; i++) {
+		int nm2 = saccode.getgst().getAttribute("value").length();
+		for (int i = 0; i <= nm2; i++) {
 			saccode.getgst().sendKeys(Keys.BACK_SPACE);
 		}
 		saccode.getEditsavebutton().click();
+		Thread.sleep(2000);
 
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-sac-code-master-add/"
@@ -246,22 +271,27 @@ public class SacCodeTest extends base {
 		softAssert.assertEquals("GST is required", expectedMessage2, actualMessage2);
 		softAssert.assertAll();
 	}
-
+	
+	//Close the driver
+		@AfterMethod
+		public void teardown() {
+			 driver.close();
+		}
 	//DataProvider for Add
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "999777", "Anshul", "50" } };
+		return new Object[][] { { "111111", "SaccodeTest1", "10" },{ "222222", "SaccodeTest2", "11" },{ "333333", "SaccodeTest3", "12" },{ "444444", "SaccodeTest4", "13" } };
 	}
 
 	//DataProvider for Edit
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "747264","Akash123","44"  } };
+		return new Object[][] { { "555555", "SaccodeTest2 update", "15","222222" } };
 	}
 
 	//DataProvider for Search 
 	@DataProvider
 	public Object[][] getsearch() {
-		return new Object[][] { { "EditSacCode" } };
+		return new Object[][] { { "SaccodeTest1" } };
 	}
 }

@@ -34,8 +34,7 @@ public class Projecttypespage {
 
 	//Page object model for add project types
 	By addprojecttypes = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-project-type/div/div[1]/div[2]/button");
+			"(//span[contains(text(),'add Project Type')])");
 	public WebElement Clickaddprojecttypes() {
 		base.failedElementName = "ProjectType-AddClick";
 		return driver.findElement(addprojecttypes);
@@ -84,8 +83,7 @@ public class Projecttypespage {
 
 	//Page object model for change status
 	By changestatus = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-project-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
 	public WebElement getclickchangestatus() {
 		base.failedElementName = "ProjectType-ChangeStatus";
 		return driver.findElement(changestatus);

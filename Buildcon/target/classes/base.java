@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.validator.GenericValidator;
 import org.apache.commons.validator.routines.BigDecimalValidator;
 import org.apache.commons.validator.routines.CurrencyValidator;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeMethod;
+
+import pageObjects.LoginPage;
 
 public class base {
 
@@ -49,7 +53,7 @@ public class base {
 
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> prefs = new HashMap<String, Object>();
-			// Disable the save password prompt
+			//Disable the save password prompt
 			prefs.put("credentials_enable_service", false);
 			prefs.put("profile.password_manager_enabled", false);
 			options.setExperimentalOption("prefs", prefs);
@@ -63,6 +67,21 @@ public class base {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		return driver;
+	}
+	public static org.apache.logging.log4j.Logger log = LogManager.getLogger(base.class.getName());
+	@BeforeMethod
+	public void initialize11() throws IOException {
+		driver = initializeDriver();
+		log.info("Driver is Initialized");
+		driver.get(prop.getProperty("url"));
+		log.info("Navigated to Login Page");
+
+		LoginPage loginPage = new LoginPage(driver);
+		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));
+		loginPage.getUserName().sendKeys(prop.getProperty("USER"));
+		loginPage.getpass().sendKeys(prop.getProperty("PS"));
+		loginPage.getsignIn().click();
+		log.info("Login successful");
 	}
 
 	public String getscreenshot(String testname, WebDriver driver) throws IOException {
@@ -203,6 +222,7 @@ public class base {
 		return finmsg;
 	}
 
+
 	// Currency Validation
 	public static String valid_currency(String curr, Locale locale, String mlabel) {
 		BigDecimalValidator validator = CurrencyValidator.getInstance();
@@ -230,7 +250,7 @@ public class base {
 	public static String valid_alphanum(String alpha, String mlabel, Integer max) {
 		// alpha numeric Validation
 		 String finmsg = ""; 
-		boolean res = alpha.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$");
+		boolean res = alpha.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9 ]+$");
 		if (res) {
 			System.out.println(alpha + " is a Valid AlphaNumeric");
 			finmsg = mlabel + " is a Valid Alpha-Numeric";
@@ -241,14 +261,15 @@ public class base {
 		
 		boolean res3 = valid_maxlenghtStr(alpha, max);
 
-		if (res3) {
-			// System.out.println(text + " is a valid Maxlenght of: "+max);
-			finmsg = finmsg + " is a valid Maxlenght";
-		} else {
-			// System.out.println(text + " is not a valid Maxlenght String");
-			finmsg = finmsg + " is not a valid Maxlenght";
-		}
-		return finmsg;
+	    if (res3) {
+	        // System.out.println(text + " is a valid Maxlenght of: "+max);
+	        finmsg = finmsg + " is a valid Maxlenght";
+	    } else {
+	        // System.out.println(text + " is not a valid Maxlenght String");
+	        finmsg = finmsg + " is not a valid Maxlenght";
+	    }
+	    return finmsg;
 	}
+
 
 }

@@ -37,7 +37,7 @@ public class InquiryResponseTest extends base {
 	}
 
 	//Add Method
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_Inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
@@ -47,7 +47,7 @@ public class InquiryResponseTest extends base {
 		
 		Inquiryresponse.getAddInquiryResponsenewdata().sendKeys(InquiryResponsepage1);
 		//Inquiry Response type  Name Text Data Validation
-		String valid_string = valid_alphanum(InquiryResponsepage1, "inquiryresponse", 10);
+		String valid_string = valid_alphanum(InquiryResponsepage1, "inquiryresponse", 30);
 		String valid_inquiryresponse = valid_string;
 		System.out.println(valid_inquiryresponse);
 		
@@ -56,20 +56,23 @@ public class InquiryResponseTest extends base {
 		Thread.sleep(2000);
 		softAssert.assertEquals(valid_inquiryresponse, "inquiryresponse is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
+		
 	}
 
 	//Edit Method
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Inquiryresponse(String InquiryResponsepage2) throws InterruptedException {
+	@Test(dataProvider = "getEditdata",priority =2)
+	public void Edit_Inquiryresponse(String InquiryResponsepage2,String InquiryResponsepage1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
 		Inquiryresponse.getconfiguration().click();
 		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryresponsesearched().sendKeys(InquiryResponsepage1);
+		Inquiryresponse.getInquiryresponsesearchedclick().click();
 	    Inquiryresponse.getEditinquiryresponsetype().click();
 	 
 	    Inquiryresponse.getEditinquiryresponsetypeenter().clear();
 		Inquiryresponse.getEditinquiryresponsetypeenter().sendKeys(InquiryResponsepage2);
-		String valid_string = valid_alphanum(InquiryResponsepage2, "inquiryresponse", 10);
+		String valid_string = valid_alphanum(InquiryResponsepage2, "inquiryresponse", 25);
 		String valid_inquiryresponse = valid_string;
 		System.out.println(valid_inquiryresponse);
 		
@@ -81,31 +84,43 @@ public class InquiryResponseTest extends base {
 	}
 
 	//Status Inquiry Response
-	@Test
-	public void Status_Inquiryresponse() throws InterruptedException {
+	@Test(dataProvider = "getstatus",priority =3)
+	public void Status_Inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
 		Inquiryresponse.getconfiguration().click();
 		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryresponsesearched().sendKeys(InquiryResponsepage1);
+		Inquiryresponse.getInquiryresponsesearchedclick().click();
 		Inquiryresponse.getChangeInquiryrsponsestatus().click();
 		Thread.sleep(2000);
 		Inquiryresponse.getChangeInquiryresponseconfirm().click();
 		Thread.sleep(2000);
 	}
+	@DataProvider
+	public Object[][] getstatus() {
+		return new Object[][] { { "Inq ResponseTest1" } };
+	}
 
 	//Delete Method
-	@Test
-	public void Delete_Inquiryresponse() throws InterruptedException {
+	@Test(dataProvider = "getdelete",priority =6)
+	public void Delete_Inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
 		Inquiryresponse.getconfiguration().click();
 		Inquiryresponse.getInquiryResponsepageclick().click();
+		Inquiryresponse.getInquiryresponsesearched().sendKeys(InquiryResponsepage1);
+		Inquiryresponse.getInquiryresponsesearchedclick().click();
 		Inquiryresponse.getInquiryresponsedeleteclick().click();
 		Thread.sleep(2000);
 		Inquiryresponse.getInquiryresponsedeleteconfirmationk().click();
 		Thread.sleep(2000);
 	}
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "Inq ResponseTest1" },{ "Inq ResponseTest2" },{ "Inq ResponseTest3" },{ "Inq ResponseTest4" } };
+	}
 
 	//Search Method
-	@Test(dataProvider = "getsearched")
+	@Test(dataProvider = "getsearched",priority =5)
 	public void searched_inquiryresponse(String InquiryResponsepage1) throws InterruptedException {
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
 		Inquiryresponse.getconfiguration().click();
@@ -116,7 +131,7 @@ public class InquiryResponseTest extends base {
 	}
 
 	//Excel Inquiry Response
-	@Test
+	@Test(priority =4)
 	public void Excel_inquiryresponse() throws InterruptedException {
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
 		Inquiryresponse.getconfiguration().click();
@@ -126,7 +141,7 @@ public class InquiryResponseTest extends base {
 	}
 
 	//Add Validation Inquiry Response
-	@Test
+	@Test(priority =7)
 	public void Add_validation_Inquiryresponse() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
@@ -151,7 +166,7 @@ public class InquiryResponseTest extends base {
 	}
 
 	//Edit Validation Inquiryresponse
-	@Test
+	@Test(priority =8)
 	public void Edit_Validation_Inquiryresponse() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		InquiryResponsepage Inquiryresponse = new InquiryResponsepage(driver);
@@ -159,7 +174,9 @@ public class InquiryResponseTest extends base {
 		Inquiryresponse.getInquiryResponsepageclick().click();
 		Thread.sleep(2000);
 		Inquiryresponse.getEditinquiryresponsetype().click();
-		for (int i = 1; i <= 15; i++) {
+		Inquiryresponse.getEditinquiryresponsetypeenter().getText().length();
+		int nm = Inquiryresponse.getEditinquiryresponsetypeenter().getAttribute("value").length();
+		for (int i = 1; i <= nm; i++) {
 			Inquiryresponse.getEditinquiryresponsetypeenter().sendKeys(Keys.BACK_SPACE);
 		}
 		;
@@ -188,18 +205,18 @@ public class InquiryResponseTest extends base {
 	//DataProvider for Add
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "Nishant12" } };
+		return new Object[][] { { "Inq ResponseTest1" },{ "Inq ResponseTest2" },{ "Inq ResponseTest3" },{ "Inq ResponseTest4" } };
 	}
 
 	//DataProvider for Edit
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "Sitops123" } };
+		return new Object[][] { { "Inq ResponseTest2 update","Inq ResponseTest2" } };
 	}
 
 	//DataProvider for Apply Searched
 	@DataProvider
 	public Object[][] getsearched() {
-		return new Object[][] { {"paymentmetthod"} };
+		return new Object[][] { {"InqResponseTest1"} };
 	}
 }

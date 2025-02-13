@@ -37,7 +37,7 @@ public class RoleTest extends base {
 	}
 
 	//Add Role
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_Role(String Rolepage1 ) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
@@ -51,16 +51,51 @@ public class RoleTest extends base {
 		System.out.println(valid_Rolepage);
 
 		Role.getshowphonenumberchecked().click();
-
+		Thread.sleep(3000);
+       
+		Role.EmpAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.ProjectAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.ReceiptAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.ColectionAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.CustomerAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.InquiryAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.ProspectAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.BookingAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		Role.documentAllselectbtn().click();
+		Thread.sleep(1000);
+		
+		
+		
+		
+		
+		
 		Thread.sleep(3000);
 		Role.getclickcreate().click();
+		Thread.sleep(3000);
 
-		softAssert.assertEquals(valid_Rolepage, "Rolepage is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_Rolepage, "Rolepage is not a Valid Alpha-Numeric is not a valid Maxlenght");
 		softAssert.assertAll();
+		
 	}
 
 	//Add Role - Only View
-	@Test(dataProvider = "Onlyviewdata")
+	@Test(dataProvider = "Onlyviewdata",priority =2)
 	public void Add_Role_Only_View(String Rolepage1 ) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
@@ -98,10 +133,12 @@ public class RoleTest extends base {
 
 		Thread.sleep(3000);
 		Role.getclickcreate().click();
+		Thread.sleep(3000);
+		
 		softAssert.assertAll();
 	}
 	//Add Role - Only Entry
-	@Test(dataProvider = "OnlyEntrydata")
+	@Test(dataProvider = "OnlyEntrydata",priority =3)
 	public void Add_Role_Only_Entry(String Rolepage1 ) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
@@ -133,11 +170,13 @@ public class RoleTest extends base {
 
 		Thread.sleep(3000);
 		Role.getclickcreate().click();
+		Thread.sleep(3000);
+		
 		softAssert.assertAll();
 	}
 
 	//Add Role - Only Modify
-	@Test(dataProvider = "OnlyUpdatedata")
+	@Test(dataProvider = "OnlyUpdatedata",priority =4)
 	public void Add_Role_Only_Update(String Rolepage1 ) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
@@ -169,11 +208,13 @@ public class RoleTest extends base {
 
 		Thread.sleep(3000);
 		Role.getclickcreate().click();
+		Thread.sleep(3000);
+		
 		softAssert.assertAll();
 	}
 
 	//Add Role - Only Remove
-	@Test(dataProvider = "OnlyRemovedata")
+	@Test(dataProvider = "OnlyRemovedata",priority =5)
 	public void Add_Role_Only_Remove(String Rolepage1 ) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
@@ -205,11 +246,13 @@ public class RoleTest extends base {
 
 		Thread.sleep(3000);
 		Role.getclickcreate().click();
+		Thread.sleep(3000);
+		
 		softAssert.assertAll();
 	}
 
 	//Add Role - Only Export
-	@Test(dataProvider = "OnlyExportdata")
+	@Test(dataProvider = "OnlyExportdata",priority =6)
 	public void Add_Role_Only_Export(String Rolepage1 ) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
@@ -247,54 +290,71 @@ public class RoleTest extends base {
 
 		Thread.sleep(3000);
 		Role.getclickcreate().click();
+		Thread.sleep(3000);
+		
 		softAssert.assertAll();
 	}
 	//Edit Role
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Role(String EditRolepage1) throws InterruptedException {
+	@Test(dataProvider = "getEditdata",priority =7)
+	public void Edit_Role(String EditRolepage1,String searchedentertextRolepage1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
 		Role.getRoleclick().click();
+		Role.getsearchRole().sendKeys(searchedentertextRolepage1);
+		Role.getclicksearchrole().click();
 		Role.getEditRolebuttonclick().click();
 
 		Role.getupdateEditrole().clear();
 		Role.getupdateEditrole().sendKeys(EditRolepage1);
 		//Role Data Validation
-		String valid_string = valid_alphanum(EditRolepage1,"Rolepage",10);
+		String valid_string = valid_alphanum(EditRolepage1,"Rolepage",30);
 		String valid_Rolepage = valid_string;
 		System.out.println(valid_Rolepage);
 
 		Thread.sleep(3000);
 		Role.geteditsavebuttonrole().click();
 		Thread.sleep(3000);
-		softAssert.assertEquals(valid_Rolepage, "Rolepage is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_Rolepage, "Rolepage is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
 	//Status Role Method
-	@Test
-	public void Status_Role() throws InterruptedException {
+	@Test(dataProvider = "getstatuschange",priority =8)
+	public void Status_Role(String searchedentertextRolepage1) throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
 		Role.getRoleclick().click();
+		Role.getsearchRole().sendKeys(searchedentertextRolepage1);
+		Role.getclicksearchrole().click();
 		Role.getRolestatusclick().click();
 		Role.getRolestatusclickconfirm().click();
+		Thread.sleep(2000);
+	}
+	@DataProvider
+	public Object[][] getstatuschange() {
+		return new Object[][] { {"Test RoleAll"} };
 	}
 
 	//Delete Role Method
-	@Test
-	public void Delete_Role() throws InterruptedException {
+	@Test(dataProvider = "getdelete",priority =11)
+	public void Delete_Role(String searchedentertextRolepage1) throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
 		Role.getRoleclick().click();
+		Role.getsearchRole().sendKeys(searchedentertextRolepage1);
+		Role.getclicksearchrole().click();
 		Role.getdeleteclickRole().click();
 		Role.getdeleteclickconfirmationRole().click();
 		Thread.sleep(2000);
 	}
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "Test RoleAll" }, { "Test Role OnlyViw" }, {"Test Role OnlyAdd"}, {"Test Role OnlyUpdate"},{"Test Role OnlyRemove"},{"Test Role OnlyExport"}   };
+	}
 
 	//Search Role Method
-	@Test(dataProvider = "getsearch")
+	@Test(dataProvider = "getsearch",priority =9)
 	public void Search_Role(String searchedentertextRolepage1) throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
@@ -305,7 +365,7 @@ public class RoleTest extends base {
 	}
 
 	//Export To Excel Method
-	@Test
+	@Test(priority =10)
 	public void Export_Excel_Role() throws InterruptedException {
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
@@ -314,7 +374,7 @@ public class RoleTest extends base {
 	}
 
 	//Add Validation Role
-	@Test
+	@Test(priority =12)
 	public void Add_Validation_Role() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
@@ -325,6 +385,7 @@ public class RoleTest extends base {
 
 		Thread.sleep(2000);
 		Role.getclickcreate().click();
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div/"
 						+ "mat-dialog-content/form/div/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -333,7 +394,7 @@ public class RoleTest extends base {
 		System.out.println(messageElement.getText());
 
 		// Define the expected message
-		String expectedMessage = "1Role is required";
+		String expectedMessage = "Role is required";
 
 		// Assert the actual message matches the expected message
 		softAssert.assertEquals("Role is required", expectedMessage, actualMessage);
@@ -341,19 +402,21 @@ public class RoleTest extends base {
 	}
 
 	//Edit Validation Role
-	@Test
+	@Test(priority =12)
 	public void Edit_Validation_Role() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Rolepage Role = new Rolepage(driver);
 		Role.getconfiguration().click();
 		Role.getRoleclick().click();
 		Role.getEditRolebuttonclick().click();
-		for(int i =1;i<=30;i++) {
+		int roles = Role.getupdateEditrole().getAttribute("value").length();
+		for(int i =1;i<=roles;i++) {
 			Role.getupdateEditrole().sendKeys(Keys.BACK_SPACE);
 		}
 
 		Thread.sleep(3000);
 		Role.geteditsavebuttonroleptionsecond().click();
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-roles-add/div"
 						+ "/mat-dialog-content/form/div/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -375,48 +438,48 @@ public class RoleTest extends base {
 	//DataProvider for Add data
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "Role777" } };
+		return new Object[][] { { "Test RoleAll" } };
 	}
 
 	//DataProvider for Add with Only view data
 	@DataProvider
 	public Object[][] Onlyviewdata() {
-		return new Object[][] { { "Role777" } };
+		return new Object[][] { { "Test Role OnlyViw" } }; 
 	}
 
 	//DataProvider for Add with Only Entry data
 	@DataProvider
 	public Object[][] OnlyEntrydata() {
-		return new Object[][] { { "Role777" } };
+		return new Object[][] { { "Test Role OnlyAdd" } };
 	}
 
 	//DataProvider for Add with Only Update data
 	@DataProvider
 	public Object[][] OnlyUpdatedata() {
-		return new Object[][] { { "Role777" } };
+		return new Object[][] { { "Test Role OnlyUpdate" } };
 	}
 	
 	//DataProvider for Add with Only Remove data
 	@DataProvider
 	public Object[][] OnlyRemovedata() {
-		return new Object[][] { { "Role777" } };
+		return new Object[][] { { "Test Role OnlyRemove" } };
 	}
 	
 	//DataProvider for Add with Only Export data
 	@DataProvider
 	public Object[][] OnlyExportdata() {
-		return new Object[][] { { "Role777" } };
+		return new Object[][] { { "Test Role OnlyExport" } };
 	}
 
 	//DataProvider for Edit State
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { {"Adminnewside"} };
+		return new Object[][] { {"Test RoleAll Update","Test RoleAll"} };
 	}
 
 	//DataProvider for Search Data
 	@DataProvider
 	public Object[][] getsearch() {
-		return new Object[][] { {"Admin"} };
+		return new Object[][] { {"Test RoleAll"} };
 	}
 }

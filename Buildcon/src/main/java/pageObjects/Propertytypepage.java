@@ -35,8 +35,7 @@ public class Propertytypepage {
 
 	//Page object model for add property type
 	By addpropertytype = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-property-type/div/div[1]/div[2]/button[2]");
+			"//span[contains(text(),'Add Property Type')]");
 	public WebElement getaddpropertytype() {
 		base.failedElementName = "PropertyType-ClickAdd";
 		return driver.findElement(addpropertytype);
@@ -60,8 +59,7 @@ public class Propertytypepage {
 
 	//Page object for edit the property type
 	By editpropertytypeclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-property-type/div/div"
-					+ "[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-property-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[2]");
 	public WebElement geteditpropertytype() {
 		return driver.findElement(editpropertytypeclick);
 	}
@@ -101,8 +99,7 @@ public class Propertytypepage {
 
 	//Page object model for delete the property type
 	By deletepropertytypeclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-property-type/div/div"
-					+ "[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-property-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[3]");
 	public WebElement getdeletepropertytypeclick() {
 		return driver.findElement(deletepropertytypeclick);
 	}
@@ -125,8 +122,7 @@ public class Propertytypepage {
 	
 	//Page object model for property type status change
 	By propertytypestatuschange = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-property-type/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-property-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
 	public WebElement getpropertytypestatuschange() {
 		base.failedElementName = "PropertyType-StatusChange";
 		return driver.findElement(propertytypestatuschange);

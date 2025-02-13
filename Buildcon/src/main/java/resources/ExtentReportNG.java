@@ -18,4 +18,3 @@ public class ExtentReportNG {
 		return extent;		
 	}
 }
-

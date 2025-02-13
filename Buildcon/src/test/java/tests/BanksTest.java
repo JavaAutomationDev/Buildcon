@@ -37,7 +37,7 @@ public class BanksTest extends base {
 	}
 
 	//Add Banks
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_Banks(String Banks1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Bankspage Bank = new Bankspage(driver);
@@ -53,17 +53,20 @@ public class BanksTest extends base {
 		
 		Thread.sleep(3000);
 		Bank.getbankssave().click();
-		softAssert.assertEquals(valid_Banks, "Banks is a Valid Alpha-Numeric");
+		Thread.sleep(2000);
+		softAssert.assertEquals(valid_Banks, "banks is a Valid Alpha-Numeric is a valid Maxlenght");
 	    softAssert.assertAll(); 	
 	}
 	
 	//Edit Bank
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Banks(String Banks1) throws InterruptedException {
+	@Test(dataProvider = "getEditdata",priority =2)
+	public void Edit_Banks(String Banks1,String bankssearched1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Bankspage Bank = new Bankspage(driver);
 		Bank.getconfiguration().click();
 		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(bankssearched1);
+		Bank.getbankssearchedclick().click();
 		Bank.getbankseditclick().click();
 		Bank.getbankseditadddata().clear();
 		
@@ -77,56 +80,70 @@ public class BanksTest extends base {
 		Bank.getbankseditsave().click();
 		
 		Thread.sleep(3000);
-		softAssert.assertEquals(valid_Banks, "Banks is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_Banks, "banks is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
 	//Delete Bank
-	@Test
-	public void Delete_banks() throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getbanksdeleteclick().click();
+	@Test(dataProvider = "getdelete",priority =6)
+	public void Delete_banks(String bankssearched1) throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(bankssearched1);
+		Bank.getbankssearchedclick().click();
+		Bank.getbanksdeleteclick().click();
 		Thread.sleep(3000);
-		unit.getBanksdeleteconfirmation().click();
+		Bank.getBanksdeleteconfirmation().click();
 		Thread.sleep(3000);
+	}
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "Test Bank 1"},{"Test Bank 2"},{"Test Bank 3"},{"Test Bank 4" }  };
 	}
 
 	//Status Bank
-	@Test
-	public void status_banks() throws InterruptedException {
-		Bankspage unit = new Bankspage(driver);
-		unit.getconfiguration().click();
-		unit.getBanksclick().click();
-		unit.getbanksstatus().click();
+	@Test(dataProvider = "getSTATUSSEARC",priority =4)
+	public void status_banks(String bankssearched1) throws InterruptedException {
+		Bankspage Bank = new Bankspage(driver);
+		Bank.getconfiguration().click();
+		Bank.getBanksclick().click();
+		Bank.getBankssearched().sendKeys(bankssearched1);
+		Bank.getbankssearchedclick().click();
+		Bank.getbanksstatus().click();
 		Thread.sleep(2000);
-		unit.getbanksstatusconfirmation().click();
+		Bank.getbanksstatusconfirmation().click();
 		Thread.sleep(2000);
+	}
+	@DataProvider
+	public Object[][] getSTATUSSEARC() {
+		return new Object[][] { { "Test Bank 3" } };
 	}
 
 	//Searched Bank
-	@Test(dataProvider = "getsearched")
+	@Test(dataProvider = "getsearched",priority =5)
 	public void Searched_Banks(String bankssearched1) throws InterruptedException {
 		Bankspage Bank = new Bankspage(driver);
 		Bank.getconfiguration().click();
 		Bank.getBanksclick().click();
 		Bank.getBankssearched().sendKeys(bankssearched1);
 		Bank.getbankssearchedclick().click();
+		Thread.sleep(2000);
 	}
 
 	//Excel Export Bank
-	@Test
+	@Test(priority =3)
 	public void Excel_Export_Banks() throws InterruptedException {
 		Bankspage Bank = new Bankspage(driver);
 		Bank.getconfiguration().click();
 		Bank.getBanksclick().click();
 		Bank.getbanksExcelclick().click();
 		Bank.getbankssearchedclick().click();
+		Thread.sleep(2000);
 	}
 
 	//Add Validation Banks
-	@Test
+	@Test(priority =7)
 	public void Add_Validation_Banks() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Bankspage Bank = new Bankspage(driver);
@@ -134,6 +151,7 @@ public class BanksTest extends base {
 		Bank.getBanksclick().click();
 		Bank.getBanksadd().click();
 		Bank.getbankssave().click();
+		Thread.sleep(2000);
 
 		WebElement messagelement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-bank-master-add/div/form/"
@@ -149,20 +167,21 @@ public class BanksTest extends base {
 	}
 
 	//Edit Validation Banks
-	@Test
+	@Test(priority =8)
 	public void Edit_Validation_Banks() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Bankspage Bank = new Bankspage(driver);
 		Bank.getconfiguration().click();
 		Bank.getBanksclick().click();
 		Bank.getbankseditclick().click();
-		//unit.getbankseditadddata().click();
-		for (int i = 1; i <= 13; i++) {
+		int banks = Bank.getbankseditadddata().getAttribute("value").length();
+		for (int i = 1; i <= banks; i++) {
 			Bank.getbankseditadddata().sendKeys(Keys.BACK_SPACE);
 		}
 
 		Thread.sleep(3000);
 		Bank.getbankseditsave().click();
+		Thread.sleep(2000);
 		WebElement messagelement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-bank-master-add/div/form/"
 				+ "mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -184,18 +203,18 @@ public class BanksTest extends base {
 	//DataProvider for Add Bank
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "centralbank" } };
+		return new Object[][] { { "Test Bank 1"},{"Test Bank 2"},{"Test Bank 3"},{"Test Bank 4" } };
 	}
 
 	//DataProvider for Edit Bank
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "BOI123" } };
+		return new Object[][] { { "Test Bank 1 update","Test Bank 1" } };
 	}
 
 	//DataProvider for Searched Bank
 	@DataProvider
 	public Object[][] getsearched() {
-		return new Object[][] { { "HDFC" } };
+		return new Object[][] { { "Test Bank 4"} };
 	}
 }

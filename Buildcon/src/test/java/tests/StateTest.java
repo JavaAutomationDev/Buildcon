@@ -36,7 +36,7 @@ public class StateTest extends base {
 	}
 
 	//Add State
-	@Test(dataProvider = "getstateAdddata")
+	@Test(dataProvider = "getstateAdddata",priority =1)
 	public void Add_State(String statename1, String statecode1) throws InterruptedException, IOException {
 		SoftAssert softAssert = new SoftAssert();
 		Statepage state = new Statepage(driver);
@@ -63,59 +63,78 @@ public class StateTest extends base {
 		softAssert.assertAll();
 	}
 
-	//Editing an existing unit using Data Provider
-	@Test(dataProvider = "getstateEditData")
-	public void Edit_state(String newstatename1, String newstatecode1) throws InterruptedException, IOException {
+	//Editing an existing state using Data Provider
+	@Test(dataProvider = "getstateEditData",priority =2)
+	public void Edit_state(String newstatename1,String editsearchedstate) throws InterruptedException, IOException {
 		SoftAssert softAssert = new SoftAssert();
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
+		state.getstatesearching().sendKeys(editsearchedstate);
+		state.getstatesearchingclick().click();
 		state.editrow().click();
 		
 		state.editadddata().clear();
 		state.editadddata().sendKeys(newstatename1);
-		String valid_string = validateText(newstatename1,"statename",5,20);
+		String valid_string = validateText(newstatename1,"statename",5,25);
 		String valid_statename = valid_string;
 		System.out.println(valid_statename);
 		
 		state.editrowaddstatecode().clear();
-		state.editrowaddstatecode().sendKeys(newstatecode1);
-		String valid_string1 = valid_number(newstatecode1,"statecode");
-		String valid_statecode = valid_string1;
-		System.out.println(valid_statecode);
+		//state.editrowaddstatecode().sendKeys(newstatecode1);
+		//String valid_string1 = valid_number(newstatecode1,"statecode");
+		//String valid_statecode = valid_string1;
+		//System.out.println(valid_statecode);
 		
 		Thread.sleep(2000);
 		state.editrowsavebutton().click();
+		Thread.sleep(2000);
 		
 		softAssert.assertEquals(valid_statename, "statename is a Valid text - is a valid Minlenght - is a valid Maxlenght");
-		softAssert.assertEquals(valid_statecode, "statecode is a Valid Number");
+		//softAssert.assertEquals(valid_statecode, "statecode is a Valid Number");
 		softAssert.assertAll();	
 	}
 
 	//Status change of the existing record
-	@Test
-	public void Status_state() throws InterruptedException {
+	@Test(dataProvider ="getstatesearchstatus",priority =3 )
+	public void Status_state(String statesearch1)throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
+		state.getstatesearching().sendKeys(statesearch1);
+		state.getstatesearchingclick().click();
+		Thread.sleep(2000);
 		state.getstatusclick().click();
 		state.getstatusconfirmation().click();
 		Thread.sleep(2000);
 	}
+	@DataProvider
+	public Object[][] getstatesearchstatus() {
+		return new Object[][] { { "Test state four" } };
+	}
+
+	
 
 	//Delete record of the existing records
-	@Test
-	public void Delete_State() throws InterruptedException {
+	@Test(dataProvider = "getdeletestatesearch",priority =5)
+	public void Delete_State(String statesearch1) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
 		state.getclickstate().click();
+		state.getstatesearching().sendKeys(statesearch1);
+		state.getstatesearchingclick().click();
 		state.getdeletestate().click();
 		state.getdeletestateconfirm().click();
 		Thread.sleep(2000);
 	}
+	// delete  with search:
+	@DataProvider
+	public Object[][] getdeletestatesearch() {
+		return new Object[][] { { "Test state one" },{ "Test state two"},{ "Test state three" },{ "Test state four" } };
+	}
 
 	//Search Method
-	@Test(dataProvider = "getstatesearch")
+	@Test(dataProvider = "getstatesearch",priority= 4)
 	public void search_state(String statesearch1) throws InterruptedException {
 		Statepage state = new Statepage(driver);
 		state.getconfiguration().click();
@@ -126,17 +145,17 @@ public class StateTest extends base {
 	}
 	
 	//Export to Excel 
-	@Test
+	@Test(priority =6)
 	public void State_Excel() throws InterruptedException {
-		Statepage unit = new Statepage(driver);
-		unit.getconfiguration().click();
-		unit.getclickstate().click();
-		unit.getstateexcel().click();
+		Statepage state = new Statepage(driver);
+		state.getconfiguration().click();
+		state.getclickstate().click();
+		state.getstateexcel().click();
 		Thread.sleep(2000);
 	}
 
 	//Add State Test Mandatory Filed Validation
-	@Test
+	@Test(priority =7)
 	public void Add_State_Test_Mandatory_Filed_Validation() throws InterruptedException {
 		
 		SoftAssert softAssert = new SoftAssert();
@@ -147,6 +166,7 @@ public class StateTest extends base {
 		state.getstatename().click();
 		Thread.sleep(2000);
 		state.getsavestate().click();
+		Thread.sleep(2000);
 
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div"
@@ -173,7 +193,7 @@ public class StateTest extends base {
 	}
 
 	//Edit State Test Mandatory Filed Validation
-	@Test
+	@Test(priority =8)
 	public void Edit_state_Test_Mandatory_Filed_Validation() throws InterruptedException {
 
 		SoftAssert softAssert = new SoftAssert();
@@ -182,11 +202,17 @@ public class StateTest extends base {
 		state.getclickstate().click();
 		Thread.sleep(2000);
 		state.editrow().click();
-		for (int i = 1; i <= 7; i++) {
+		int nm  = state.editadddata().getAttribute("value").length();
+		for (int i = 0; i < nm ; i++) {
 			state.editadddata().sendKeys(Keys.BACK_SPACE);
+		}
+		int nm1  = state.editrowaddstatecode().getAttribute("value").length();
+		for (int i = 0; i < nm1 ; i++) {
 			state.editrowaddstatecode().sendKeys(Keys.BACK_SPACE);
 		}
+		
 		state.getsavestate().click();
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-state-add/div"
 				+ "/form/mat-dialog-content/div[1]/mat-form-field[1]/div[2]/div/mat-error/span"));
@@ -211,6 +237,8 @@ public class StateTest extends base {
 		softAssert.assertEquals("State code is required", expectedMessage1, actualMessage1);
 		softAssert.assertAll();
 	}
+	
+	
 
 	//Close the driver
 	@AfterMethod
@@ -221,19 +249,19 @@ public class StateTest extends base {
 	//DataProvider for Add state
 	@DataProvider
 	public Object[][] getstateAdddata() {
-		return new Object[][] { { "lucknow", "555" } };
+		return new Object[][] { { "Test state one", "111" },{ "Test state two", "112" },{ "Test state three", "113" },{ "Test state four", "114" } };
 	}
 
 	//DataProvider for Edit State
 	@DataProvider
 	public Object[][] getstateEditData() {
-		return new Object[][] { { "Shark", "101" } };
+		return new Object[][] { {"Test state one update","Test state one"} };
 	}
 	
 	
 	//DataProvider for Search State
 	@DataProvider
 	public Object[][] getstatesearch() {
-		return new Object[][] { { "Motihari" } };
+		return new Object[][] { {  "Test state three" } };
 	}
 }

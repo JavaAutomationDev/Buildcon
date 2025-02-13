@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -36,36 +37,39 @@ public class ReceiptlogoTest extends base {
 	// Add terms and condition types
 	@Test
 	public void Add_formstatus() throws InterruptedException {
-		ReceiptLogo unit = new ReceiptLogo(driver);
-		unit.getconfiguration().click();
-		unit.getReceiptlogo().click();
+		ReceiptLogo ReceiptLogo = new ReceiptLogo(driver);
+		ReceiptLogo.getconfiguration().click();
+		ReceiptLogo.getReceiptlogo().click();
 		Thread.sleep(2000);
-		unit.getReceiptlogosave().click();
+		ReceiptLogo.getReceiptlogosave().click();
+		Thread.sleep(2000);
 		
 	}
 	
 	@Test
 	public void Edit_formstatus() throws InterruptedException {
-		ReceiptLogo unit = new ReceiptLogo(driver);
-		unit.getconfiguration().click();
-		unit.getReceiptlogo().click();
-		unit.getReceiptlogoclickremove().click();
+		ReceiptLogo ReceiptLogo = new ReceiptLogo(driver);
+		ReceiptLogo.getconfiguration().click();
+		ReceiptLogo.getReceiptlogo().click();
+		ReceiptLogo.getReceiptlogoclickremove().click();
 		Thread.sleep(2000);
-		unit.attachProfilePhoto();
-		unit.getReceiptlogosave().click();
+		ReceiptLogo.attachProfilePhoto();
+		ReceiptLogo.getReceiptlogosave().click();
+		Thread.sleep(2000);
 		
 	}
 	
 	@Test
 	public void Add_validation_formstatus() throws InterruptedException {
-		ReceiptLogo unit = new ReceiptLogo(driver);
+		ReceiptLogo ReceiptLogo = new ReceiptLogo(driver);
 		//SoftAssert softAssert = new SoftAssert();
-		unit.getconfiguration().click();
-		unit.getReceiptlogo().click();
-		unit.getReceiptlogoclickremove().click();
+		ReceiptLogo.getconfiguration().click();
+		ReceiptLogo.getReceiptlogo().click();
+		ReceiptLogo.getReceiptlogoclickremove().click();
 		Thread.sleep(2000);
-		//unit.attachProfilePhoto();
-		unit.getReceiptlogosave().click();
+		//ReceiptLogo.attachProfilePhoto();
+		ReceiptLogo.getReceiptlogosave().click();
+		Thread.sleep(2000);
 		List<WebElement> messages = driver.findElements(By.xpath("/html/body/div[1]/div"));
 		for (WebElement message : messages) {
 		    System.out.println(message.getText()); 
@@ -75,17 +79,22 @@ public class ReceiptlogoTest extends base {
 	
 	@Test
 	public void Edit_validation_formstatus() throws InterruptedException {
-		ReceiptLogo unit = new ReceiptLogo(driver);
-		unit.getconfiguration().click();
-		unit.getReceiptlogo().click();
-		unit.getReceiptlogoclickremove().click();
+		ReceiptLogo ReceiptLogo = new ReceiptLogo(driver);
+		ReceiptLogo.getconfiguration().click();
+		ReceiptLogo.getReceiptlogo().click();
+		ReceiptLogo.getReceiptlogoclickremove().click();
 		Thread.sleep(2000);
-		unit.getReceiptlogosave().click();
+		ReceiptLogo.getReceiptlogosave().click();
 		Thread.sleep(2000);
 		List<WebElement> messages = driver.findElements(By.xpath("/html/body/div[1]/div"));
 		for (WebElement message : messages) {
 		    System.out.println(message.getText()); 
 		}
 	}
+	// close the driver
+		@AfterMethod
+		public void teaddown() {
+			driver.close();
+		}
 	
 }

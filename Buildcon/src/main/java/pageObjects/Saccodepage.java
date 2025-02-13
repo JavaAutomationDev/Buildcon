@@ -34,9 +34,8 @@ public class Saccodepage {
 	}
 
 	//Page object model for add sac code click for add data
-	By addsaccode = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-sac-code-master/div/div[1]/div[2]/button[2]");
+	By addsaccode = By.xpath("//span[contains(text(),'Add SAC Code')]");
+		
 	public WebElement getaddsaccode() {
 		base.failedElementName = "SacCode-AddClick";
 		return driver.findElement(addsaccode);
@@ -76,8 +75,7 @@ public class Saccodepage {
 
 	//Page object model for Edit sac code
 	By Editclicksaccode = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/"
-			+ "vex-sac-code-master/div/div[2]/div/table/tbody/tr[1]/td[5]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-sac-code-master/div/div[2]/div/table/tbody/tr[1]/td[5]/div/button[2]");
 	public WebElement getEditclicksaccode() {
 		base.failedElementName = "SacCode-EditClick";
 		return driver.findElement(Editclicksaccode);
@@ -116,8 +114,7 @@ public class Saccodepage {
 	}
 
 	//Page object model for change status
-	By changestatus = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-sac-code-master/div/div[2]/div/table/tbody/tr[1]/td[5]/div/button[1]");
+	By changestatus = By.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-sac-code-master/div/div[2]/div/table/tbody/tr[1]/td[5]/div/button[1]");
 	public WebElement getchangestatus() {
 		base.failedElementName = "SacCode-ChangeStatus";
 		return driver.findElement(changestatus);
@@ -133,8 +130,7 @@ public class Saccodepage {
 	
 	//Page object model for delete sac code
 	By deletesaccode = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-			+ "mat-sidenav-content/main/vex-sac-code-master/div/div[2]/div/table/tbody/tr[1]/td[5]/div/button[3]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-sac-code-master/div/div[2]/div/table/tbody/tr[1]/td[5]/div/button[3]");
 	public WebElement getdeletesaccode() {
 		base.failedElementName = "SacCode-DeleteSaccode";
 		return driver.findElement(deletesaccode);

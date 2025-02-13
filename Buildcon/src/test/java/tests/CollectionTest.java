@@ -77,7 +77,7 @@ public class CollectionTest extends base {
 		CollectionPage collection = new CollectionPage(driver);
 		collection.getcollection().click();
 		collection.getapplyfilter().click();
-		collection.getProjcetdropdown(projectname.trim());
+		collection.getProjcetdropdown(projectname);
 		collection.getresetfilter().click();	
 	}
 	
@@ -117,7 +117,7 @@ public class CollectionTest extends base {
 	//Close the driver
 	@AfterMethod
 	public void teaddown() {
-		//driver.close();
+		driver.close();
 	}
 
 	//DataProvider for Search Data

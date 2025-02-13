@@ -46,6 +46,7 @@ public class ReceiptTest extends base {
 		SoftAssert softAssert=new SoftAssert();
 		ReceiptPage receipt = new ReceiptPage(driver);
 		receipt.getReceipt().click();
+		Thread.sleep(1000);
 		receipt.getAddReceipt().click();
 
 		receipt.getProject(Project);//Required Field
@@ -89,6 +90,7 @@ public class ReceiptTest extends base {
 		System.out.println(valid_RegularAmount);
 
 		receipt.getRegularBankCancelled().click();
+		Thread.sleep(1000);
 		receipt.getGSTNO().click();
 		Thread.sleep(2000);
 		receipt.getNextBtn1().click();
@@ -143,7 +145,7 @@ public class ReceiptTest extends base {
 
 		Thread.sleep(2000);
 		receipt.getNextBtn3().click();
-		receipt.getChequeFiles().sendKeys(ChequeFiles);
+//		receipt.getChequeFiles().sendKeys(ChequeFiles);
 
 		Thread.sleep(2000);
 		receipt.getSavebtn().click();
@@ -525,7 +527,7 @@ public class ReceiptTest extends base {
 	//Close the driver
 	@AfterMethod
 	public void teardown() {
-		//driver.close();
+		driver.close();
 	}	
 
 	//DataProvider for Add Receipt Data

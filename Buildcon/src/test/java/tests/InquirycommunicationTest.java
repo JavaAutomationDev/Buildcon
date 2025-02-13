@@ -27,7 +27,7 @@ public class InquirycommunicationTest extends base {
 		driver.get(prop.getProperty("url"));
 		log.info("Navigated to Login Page");
 
-		//Login process
+		// Login process
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getAccountName().sendKeys(prop.getProperty("AC"));
 		loginPage.getUserName().sendKeys(prop.getProperty("USER"));
@@ -36,95 +36,117 @@ public class InquirycommunicationTest extends base {
 		log.info("Login successful");
 	}
 
-	//Add Inquiry Communication Mode
-	@Test(dataProvider = "getAdddata")
+	// Add Inquiry Communication Mode
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_Inquiry_Communication_Mode(String Inquirycommunication1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
-		Communication.getconfiguration().click();
-		Communication.getInquirycommunicationmodepageclick().click();
-		Communication.getInquirycommunicationmodeadd().click();
-		
-		Communication.getAddNewInquiryCommunicationMode().sendKeys(Inquirycommunication1);
-		//Inquiry Communication Name Text Data Validation
-		String valid_string = valid_alphanum(Inquirycommunication1, "inquirycommunicationmode", 10);
+		Inquirycommunicationmodepage inquirycommunication = new Inquirycommunicationmodepage(driver);
+		inquirycommunication.getconfiguration().click();
+		inquirycommunication.getInquirycommunicationmodepageclick().click();
+		inquirycommunication.getInquirycommunicationmodeadd().click();
+
+		inquirycommunication.getAddNewInquiryCommunicationMode().sendKeys(Inquirycommunication1);
+		// Inquiry Communication Name Text Data Validation
+		String valid_string = valid_alphanum(Inquirycommunication1, "inquirycommunicationmode", 30);
 		String valid_inquirycommunicationmode = valid_string;
 		System.out.println(valid_inquirycommunicationmode);
-		
+
 		Thread.sleep(1000);
-		Communication.getsavebuttoninquirycommunication().click();
-		
-		softAssert.assertEquals(valid_inquirycommunicationmode, "inquirycommunication is a Valid Alpha-Numeric");
+		inquirycommunication.getsavebuttoninquirycommunication().click();
+		Thread.sleep(2000);
+		softAssert.assertEquals(valid_inquirycommunicationmode,
+				"inquirycommunicationmode is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
-	//Edit Inquiry Communication Mode
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Inquiry_Communication_Mode(String EditInquirycommunication1) throws InterruptedException {
+	// Edit Inquiry Communication Mode
+	@Test(dataProvider = "getEditdata",priority =2)
+	public void Edit_Inquiry_Communication_Mode(String EditInquirycommunication1, String searchedentertextinquiry1)
+			throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
-		Communication.getconfiguration().click();
-		Communication.getInquirycommunicationmodepageclick().click();
-		Communication.getEditinquirycommunicationrow().click();
-		
-		Communication.getEditInquiryCommunicationMode().clear();
-		Communication.getEditInquiryCommunicationMode().sendKeys(EditInquirycommunication1);
-		//Inquiry communication Name Text Data Validation
-		String valid_string = valid_alphanum(EditInquirycommunication1, "inquirycommunicationmode", 10);
+		Inquirycommunicationmodepage inquirycommunication = new Inquirycommunicationmodepage(driver);
+		inquirycommunication.getconfiguration().click();
+		inquirycommunication.getInquirycommunicationmodepageclick().click();
+		inquirycommunication.getsearchinquirycommunication().sendKeys(searchedentertextinquiry1);
+		inquirycommunication.getclicksearchedbuttoninquirycommunication().click();
+		inquirycommunication.getEditinquirycommunicationrow().click();
+
+		inquirycommunication.getEditInquiryCommunicationMode().clear();
+		inquirycommunication.getEditInquiryCommunicationMode().sendKeys(EditInquirycommunication1);
+		// Inquiry communication Name Text Data Validation
+		String valid_string = valid_alphanum(EditInquirycommunication1, "inquirycommunicationmode", 50);
 		String valid_inquirycommunicationmode = valid_string;
 		System.out.println(valid_inquirycommunicationmode);
-		
+
 		Thread.sleep(3000);
-		Communication.geteditsavebuttoninquirycommunication().click();
-		
-		softAssert.assertEquals(valid_inquirycommunicationmode, "inquirycommunication is a Valid Alpha-Numeric");
+		inquirycommunication.geteditsavebuttoninquirycommunication().click();
+		Thread.sleep(3000);
+		softAssert.assertEquals(valid_inquirycommunicationmode,
+				"inquirycommunicationmode is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
-	//Status Change Inquiry Communication Mode
-	@Test
-	public void Status_Change_Inquiry_Communication() throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getchangestatusinquirycommunication().click();
+	// Status Change Inquiry Communication Mode
+	@Test(dataProvider = "getstatuschange",priority =3)
+	public void Status_Change_Inquiry_Communication(String searchedentertextinquiry1) throws InterruptedException {
+		Inquirycommunicationmodepage inquirycommunication = new Inquirycommunicationmodepage(driver);
+		inquirycommunication.getconfiguration().click();
+		inquirycommunication.getInquirycommunicationmodepageclick().click();
+		inquirycommunication.getsearchinquirycommunication().sendKeys(searchedentertextinquiry1);
+		inquirycommunication.getclicksearchedbuttoninquirycommunication().click();
+		inquirycommunication.getchangestatusinquirycommunication().click();
 		Thread.sleep(2000);
-		unit.getchangestatusconfirmationinquirycommunication().click();
+		inquirycommunication.getchangestatusconfirmationinquirycommunication().click();
 		Thread.sleep(2000);
 	}
+
+	@DataProvider
+	public Object[][] getstatuschange() {
+		return new Object[][] { { "Test Inq communication2" } };
+	}
+
 	// delete inquiry communication:
-	@Test
-	public void Delete_Inquiry_Communication() throws InterruptedException {
-		Inquirycommunicationmodepage unit = new Inquirycommunicationmodepage(driver);
-		unit.getconfiguration().click();
-		unit.getInquirycommunicationmodepageclick().click();
-		unit.getdeleteclickinquirycommunication().click();
+	@Test(dataProvider = "getdelete",priority =6)
+	public void Delete_Inquiry_Communication(String searchedentertextinquiry1) throws InterruptedException {
+		Inquirycommunicationmodepage inquirycommunication = new Inquirycommunicationmodepage(driver);
+		inquirycommunication.getconfiguration().click();
+		inquirycommunication.getInquirycommunicationmodepageclick().click();
+		inquirycommunication.getsearchinquirycommunication().sendKeys(searchedentertextinquiry1);
+		inquirycommunication.getclicksearchedbuttoninquirycommunication().click();
+		inquirycommunication.getdeleteclickinquirycommunication().click();
 		Thread.sleep(2000);
-		unit.getdeleteclickconfirmationinquirycommunication().click();
+		inquirycommunication.getdeleteclickconfirmationinquirycommunication().click();
 		Thread.sleep(2000);
 	}
 
-	//Search Method
-	@Test(dataProvider = "getsearcheds")
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "Test Inq communication4" } };
+	}
+
+	// Search Method
+	@Test(dataProvider = "getsearcheds",priority =5)
 	public void Searching_Inquiry_Communication_Mode(String searchedentertextinquiry1) throws InterruptedException {
-		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
-		Communication.getconfiguration().click();
-		Communication.getInquirycommunicationmodepageclick().click();
-		Communication.getsearchinquirycommunication().sendKeys(searchedentertextinquiry1);
-		Communication.getclicksearchedbuttoninquirycommunication().click();
+		Inquirycommunicationmodepage inquirycommunication = new Inquirycommunicationmodepage(driver);
+		inquirycommunication.getconfiguration().click();
+		inquirycommunication.getInquirycommunicationmodepageclick().click();
+		inquirycommunication.getsearchinquirycommunication().sendKeys(searchedentertextinquiry1);
+		inquirycommunication.getclicksearchedbuttoninquirycommunication().click();
+		Thread.sleep(2000);
 	}
 
-	//Export Excel Inquiry Communication Mode
-	@Test
+	// Export Excel Inquiry Communication Mode
+	@Test(priority =4)
 	public void Export_Excel_Inquiry_Communication_Mode() throws InterruptedException {
-		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
-		Communication.getconfiguration().click();
-		Communication.getInquirycommunicationmodepageclick().click();
-		Communication.getclickexportasexcelinquirycommunication().click();
+		Inquirycommunicationmodepage inquirycommunication = new Inquirycommunicationmodepage(driver);
+		inquirycommunication.getconfiguration().click();
+		inquirycommunication.getInquirycommunicationmodepageclick().click();
+		inquirycommunication.getclickexportasexcelinquirycommunication().click();
+		Thread.sleep(2000);
 	}
-	
-	//Add Validation Inquiry Communication Mode
-	@Test
+
+	// Add Validation Inquiry Communication Mode
+	@Test(priority =7)
 	public void Add_Validation_Inquiry_Communication_Mode() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
@@ -133,68 +155,70 @@ public class InquirycommunicationTest extends base {
 		Communication.getInquirycommunicationmodeadd().click();
 
 		Communication.getsavebuttoninquirycommunication().click();
-		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-communication-mode-add/"
-				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+		Thread.sleep(2000);
+		WebElement messageElement = driver.findElement(
+				By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-communication-mode-add/"
+						+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		//Define the expected message
+		// Define the expected message
 		String expectedMessage = "Inquiry Communication Mode name is required";
 		softAssert.assertEquals("Inquiry Communication Mode name is required", expectedMessage, actualMessage);
 		softAssert.assertAll();
 	}
 
-	//Edit Validation Inquiry Communication Mode
-	@Test
+	// Edit Validation Inquiry Communication Mode
+	@Test(priority =8)
 	public void Edit_Validation_Inquiry_Communication_Mode() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
-		Inquirycommunicationmodepage Communication = new Inquirycommunicationmodepage(driver);
-		Communication.getconfiguration().click();
-		Communication.getInquirycommunicationmodepageclick().click();
-		Communication.getEditinquirycommunicationrow().click();
-		for (int i = 1; i <= 30; i++) {
-			Communication.getEditInquiryCommunicationMode().sendKeys(Keys.BACK_SPACE);
+		Inquirycommunicationmodepage inquirycommunication = new Inquirycommunicationmodepage(driver);
+		inquirycommunication.getconfiguration().click();
+		inquirycommunication.getInquirycommunicationmodepageclick().click();
+		inquirycommunication.getEditinquirycommunicationrow().click();
+		int nm = inquirycommunication.getEditInquiryCommunicationMode().getAttribute("value").length();
+		for (int i = 1; i <= nm; i++) {
+			inquirycommunication.getEditInquiryCommunicationMode().sendKeys(Keys.BACK_SPACE);
 		}
 
 		Thread.sleep(3000);
-		Communication.geteditsavebuttoninquirycommunication().click();
-
-		WebElement messageElement = driver.findElement(By.xpath(
-				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-communication-mode-add/"
-				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
+		inquirycommunication.geteditsavebuttoninquirycommunication().click();
+		Thread.sleep(2000);
+		WebElement messageElement = driver.findElement(
+				By.xpath("/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-communication-mode-add/"
+						+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
 
 		String actualMessage = messageElement.getText();
 		System.out.println(messageElement.getText());
 
-		//Define the expected message
+		// Define the expected message
 		String expectedMessage = "Inquiry Communication Mode name is required";
 		softAssert.assertEquals("Inquiry Communication Mode name is required", expectedMessage, actualMessage);
 		softAssert.assertAll();
 	}
 
-	//Close the driver
+	// Close the driver
 	@AfterMethod
 	public void teardown() {
 		driver.close();
 	}
 
-	//DataProvider for Add 
+	// DataProvider for Add
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "Inquiry125555555555" } };
+		return new Object[][] { { "Test Inq communication1" }, { "Test Inq communication2" }, { "Test Inq communication3" }, { "Test Inq communication4" } };
 	}
 
-	//DataProvider for Edit
+	// DataProvider for Edit
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "New123" } };
+		return new Object[][] { { "Test Inq communication1 update", "Test Inq communication1" } };
 	}
 
-	//DataProvider for Search
+	// DataProvider for Search
 	@DataProvider
 	public Object[][] getsearcheds() {
-		return new Object[][] { { "communication" } };
+		return new Object[][] { { "Test Inq communication4" } };
 	}
 }

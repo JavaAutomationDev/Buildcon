@@ -34,8 +34,7 @@ public class Termsandconditionpage {
 
 	//Page object model for add inquiry communication mode data
 	By addnewTermsandcondition = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-					+ "mat-sidenav-content/main/vex-terms-condition/div/div[1]/div[2]/button[2]");
+			"//span[contains(text(),'add new T&C')]");
 	public WebElement getaddnewTermsandcondition() {
 		base.failedElementName = "TermsCondition-Addclick";
 		return driver.findElement(addnewTermsandcondition);
@@ -60,8 +59,7 @@ public class Termsandconditionpage {
 
 	//Page object model for edit the inquiry communication mode page
 	By EditTermsandConditions = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-					+ "mat-sidenav-content/main/vex-terms-condition/div/div[2]/div/table/tbody/tr/td[2]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[2]/div/table/tbody/tr/td[2]/div/button[1]");
 	public WebElement getEditTermsandConditions() {
 		base.failedElementName = "TermsCondition-EditBtn";
 		return driver.findElement(EditTermsandConditions);
@@ -87,8 +85,7 @@ public class Termsandconditionpage {
 
 	//POM for delete click
 	By deleteclickTermsandcondition = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/"
-					+ "mat-sidenav-content/main/vex-terms-condition/div/div[2]/div/table/tbody/tr/td[2]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-terms-condition/div/div[2]/div/table/tbody/tr/td[2]/div/button[2]");
 	public WebElement getdeleteclickinquirycommunication() {
 		base.failedElementName = "TermsCondition-Delete";
 		return driver.findElement(deleteclickTermsandcondition);
@@ -96,7 +93,7 @@ public class Termsandconditionpage {
 
 	//POM for delete click confirmation
 	By deleteclickconfirmationTermsandcondition = By.xpath(
-			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[2]");
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 	public WebElement getdeleteclickconfirmationTermsandcondition() {
 		base.failedElementName = "TermsCondition-DeleteConfirm";
 		return driver.findElement(deleteclickconfirmationTermsandcondition);

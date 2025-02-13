@@ -36,8 +36,7 @@ public class Projectstatuspage {
 
 	// Page object for project status click:
 	By addprojectStatusclick = By
-			.xpath("/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/"
-					+ "main/vex-project-status/div/div[1]/div[2]/button[2]");
+			.xpath("//span[contains(text(),'add Project Status')]");
 
 	public WebElement getaddprojectstatusclick() {
 		base.failedElementName = "ProjectStatus-AddClick";
@@ -84,7 +83,7 @@ public class Projectstatuspage {
 
 	// Page object for project status click:
 	By projectStatuscheckedclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
 
 	public WebElement getprojectStatuschecked() {
 		//base.failedElementName = "ProjectStatus-StatusCheckedClick";
@@ -93,7 +92,7 @@ public class Projectstatuspage {
 
 	// Page object for project status click:
 	By projectStatuscheckedconfirmation = By.xpath(
-			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[2]");
+			"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-delete-pop-up/form/mat-dialog-actions/button[1]");
 
 	public WebElement getprojectStatuscheckedconfirmation() {
 		base.failedElementName = "ProjectStatus-StatusCheckedConfirm";
@@ -131,8 +130,7 @@ public class Projectstatuspage {
 
 	//Page object for project status delete click
 	By projectstatusdeleteclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr[2]/td[3]/div/button[3]");
-
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-project-status/div/div[2]/div/table/tbody/tr/td[3]/div/button[3]");
 	public WebElement getprojectstatusdeleteclick() {
 		base.failedElementName = "ProjectStatus-DeleteClick";
 		return driver.findElement(projectstatusdeleteclick);

@@ -215,7 +215,7 @@ public class ReceiptPage {
 
 	//TDS Bank Details
 	//Page object for TDS Challan Number 
-	By TDSchallannumber=By.xpath("//input[@formcontrolname='tChequeNo']");
+	By TDSchallannumber = By.xpath("//input[@formcontrolname='tChequeNo']");
 	public WebElement getTDSChallanNumber() {
 		base.failedElementName = "Receipt-TDSChallanNo";
 		return driver.findElement(TDSchallannumber);
@@ -293,6 +293,7 @@ public class ReceiptPage {
 		WebElement option = driver.findElement(By.xpath(optionXpath));
 		option.click();
 	}
+
 
 	//Page object for GST Bank Branch
 	By GSTbankbranch=By.xpath("//input[@formcontrolname='gBranchName']");

@@ -31,7 +31,7 @@ public class InquiryResponsepage {
 	}
 
 	By AddInquiryResponsepageclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[1]/div[2]/button[2]");
+			"//span[contains(text(),'Add New Response Type')]");
 	public WebElement getAddInquiryResponsepageclick() {
 		base.failedElementName = "InquiryResponse-Add";
 		return driver.findElement(AddInquiryResponsepageclick);
@@ -53,7 +53,7 @@ public class InquiryResponsepage {
 
 	//Pom for edit inquirystatus:
 	By Editinquiryresponsetype = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[2]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[2]");
 	public WebElement getEditinquiryresponsetype() {
 		base.failedElementName = "InquiryResponse-Editinquiryresponsetype";
 		return driver.findElement(Editinquiryresponsetype);
@@ -76,7 +76,7 @@ public class InquiryResponsepage {
 
 	//Pom for status changed click:
 	By ChangeInquiryrsponsestatus = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[1]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[1]");
 
 	public WebElement getChangeInquiryrsponsestatus() {
 		base.failedElementName = "InquiryResponse-ChangeInquiryrsponsestatus";
@@ -107,7 +107,7 @@ public class InquiryResponsepage {
 
 	// pom for delete click:
 	By Inquiryresponsedeleteclick = By.xpath(
-			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[2]/div/table/tbody/tr[1]/td[3]/div/button[3]");
+			"/html/body/vex-root/vex-custom-layout/vex-layout/div/mat-sidenav-container/mat-sidenav-content/main/vex-inquiry-response-type/div/div[2]/div/table/tbody/tr/td[3]/div/button[3]");
 
 	public WebElement getInquiryresponsedeleteclick() {
 		base.failedElementName = "InquiryResponse-Delte";

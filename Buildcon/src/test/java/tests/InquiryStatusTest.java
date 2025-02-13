@@ -71,7 +71,7 @@ public class InquiryStatusTest extends base {
 		Inquirystatus.getEditInquirystatusnew().click();
 		Inquirystatus.getEditInquirystatusnew().clear();
 		Inquirystatus.getEditInquirystatusnew().sendKeys(Inquirystatuspage1);
-		String valid_string = valid_alphanum(Inquirystatuspage1, "inquirystatuspage", 10);
+		String valid_string = valid_alphanum(Inquirystatuspage1, "inquirystatuspage", 60);
 		String valid_inquirystatuspage = valid_string;
 		System.out.println(valid_inquirystatuspage);
 		Thread.sleep(3000);
@@ -95,7 +95,7 @@ public class InquiryStatusTest extends base {
 		Thread.sleep(2000);
 	}
 	
-	@Test(dataProvider = "getdelete")
+	@Test(dataProvider = "getdelete",priority =8)
 	public void delete_inquirystatus(String inqsearched) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -110,7 +110,7 @@ public class InquiryStatusTest extends base {
 	}
 	
 	// Search Inquiry Status
-	@Test(dataProvider = "getsearched")
+	@Test(dataProvider = "getsearched",priority =4)
 	public void searched_inquirystatus(String Inquirystatuspage1) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -122,7 +122,7 @@ public class InquiryStatusTest extends base {
 	}
 
 	//Excel Inquiry
-	@Test()
+	@Test(priority =5)
 	public void Excel_inquirystatus() throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		Inquirystatus.getconfiguration().click();
@@ -131,7 +131,7 @@ public class InquiryStatusTest extends base {
 		Thread.sleep(2000);
 	}
 
-	@Test()
+	@Test(priority =6)
 	public void Add_Validation_Inquiry_Status() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
@@ -155,19 +155,18 @@ public class InquiryStatusTest extends base {
 		softAssert.assertAll();
 	}
 
-	@Test(dataProvider = "geteditmandatory")
-	public void Edit_validation_inquirystatus(String inqsearched) throws InterruptedException {
+	@Test(dataProvider = "getsearched",priority =7)
+	public void Edit_validation_inquirystatus(String Inquirystatuspage1) throws InterruptedException {
 		Inquirystatuspage Inquirystatus = new Inquirystatuspage(driver);
 		SoftAssert softAssert = new SoftAssert();
 		Inquirystatus.getconfiguration().click();
 		Inquirystatus.getInquirystatusclick().click();
-		Inquirystatus.getInquirystatussearched().sendKeys(inqsearched);
+		Inquirystatus.getInquirystatussearched().sendKeys(Inquirystatuspage1);
 		Thread.sleep(2000);
 		Inquirystatus.getInquirystatussearchedclick().click();
+		Thread.sleep(2000);
 		Inquirystatus.getEditInquirystatus().click();
 		Inquirystatus.getEditInquirystatusnew().click();
-		Thread.sleep(2000);
-		Inquirystatus.getEditInquirystatusnew().clear();
 		Thread.sleep(1000);
 		// Inquirystatus.getEditInquirystatusclick().click();
 		int editinquirystatus  = Inquirystatus.getEditInquirystatusnew().getAttribute("value").length();
@@ -177,6 +176,7 @@ public class InquiryStatusTest extends base {
 
 		Thread.sleep(2000);
 		Inquirystatus.getEditInquirystatussave().click();
+		Thread.sleep(2000);
 		WebElement messageElement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-inquiry-status-add/"
 				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -199,36 +199,36 @@ public class InquiryStatusTest extends base {
 	//DataProvider for Add Data
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "approvedatatus123", } };
+		return new Object[][] { { "Testinquiry1"},{ "Testinquiry2"},{ "Testinquiry3"},{ "Testinquiry4"} };
 	}
 	
 	//DataProvider for Edit Data
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "approvedatatus123", "inqsta123" } };
+		return new Object[][] { { "Testinquiry1", "Testinquiry1 update" } };
 	}
 	
 	//DataProvider for Delete Data
 	@DataProvider
 	public Object[][] getdelete() {
-		return new Object[][] { { "tips123" } };
+		return new Object[][] { { "Testinquiry1"},{ "Testinquiry2"},{ "Testinquiry3"},{ "Testinquiry4"}  };
 	}
 
 	//DataProvider for Apply Searched
 	@DataProvider
 	public Object[][] getsearched() {
-		return new Object[][] { { "Nishant" } };
+		return new Object[][] { { "Testinquiry2" } };
 	}
 	
 	//Data Provider for Status Changed
 	@DataProvider
 	public Object[][] getstatuschanged() {
-		return new Object[][] { { "inqsta123", } };
+		return new Object[][] { { "Testinquiry3", } };
 	}
 	
 	//DataProvider for Edit Mandatory Field
 	@DataProvider
 	public Object[][] geteditmandatory() {
-		return new Object[][] { { "inqsta123", } };
+		return new Object[][] { { "Testinquiry4", } };
 	}
 }

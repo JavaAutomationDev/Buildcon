@@ -37,7 +37,7 @@ public class ProjecttypesTest extends base {
 	}
 
 	//Add Project
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_Project_Types(String projecttypes1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -47,72 +47,91 @@ public class ProjecttypesTest extends base {
 		
 		projecttype.getaddprojecttypesdata().sendKeys(projecttypes1);
 		//Prject type Data validation
-		String valid_string = valid_alphanum(projecttypes1, "projecttype", 10);
+		String valid_string = valid_alphanum(projecttypes1, "projecttype", 30);
 		String valid_projecttype = valid_string;
 		System.out.println(valid_projecttype);
 		
 		Thread.sleep(3000);
 		projecttype.getsavebuttonprojecttypes().click();
-		softAssert.assertEquals(valid_projecttype, "projecttypes is a Valid Alpha-Numeric");
+		Thread.sleep(2000);
+		softAssert.assertEquals(valid_projecttype, "projecttype is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
 	//Edit Project types
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Project_Types(String Editprojecttypes1) throws InterruptedException {
+	@Test(dataProvider = "getEditdata",priority =2)
+	public void Edit_Project_Types(String Editprojecttypes1,String searchedentertext) throws InterruptedException {
 		
 		SoftAssert softAssert = new SoftAssert();
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
 		projecttype.projecttypesclick().click();
-		projecttype.geteditprojecttypes().click();
 		
+		projecttype.getsearchprojecttypes().sendKeys(searchedentertext);
+		projecttype.getclicksearchedbutton().click();
+		projecttype.geteditprojecttypes().click();
 		projecttype.geteditexistingdata().clear();
 		projecttype.geteditexistingdata().sendKeys(Editprojecttypes1);
 		//Prject type Data validation
-		String valid_string = valid_alphanum(Editprojecttypes1, "projecttype", 10);
+		String valid_string = valid_alphanum(Editprojecttypes1, "projecttype", 30);
 		String valid_projecttype = valid_string;
 		System.out.println(valid_projecttype);
 		
 		Thread.sleep(3000);
 		projecttype.geteditsave().click();
-		
-		softAssert.assertEquals(valid_projecttype, "projecttypes is a Valid Alpha-Numeric");
+		Thread.sleep(3000);
+		softAssert.assertEquals(valid_projecttype, "projecttype is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
+	
 
 	//Status Change Project Type
-	@Test()
-	public void Status_Change_Project_Types() throws InterruptedException {
+	@Test(dataProvider = "getstatus",priority =3)
+	public void Status_Change_Project_Types(String searchedentertext) throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
 		projecttype.projecttypesclick().click();
+		projecttype.getsearchprojecttypes().sendKeys(searchedentertext);
+		projecttype.getclicksearchedbutton().click();
 		projecttype.getclickchangestatus().click();
 		projecttype.getconfirmationchangestatus().click();
+		Thread.sleep(2000);
 	}
-
+	
+	@DataProvider
+	public Object[][] getstatus() {
+		return new Object[][] { { "Test project type 1" } };
+	}
 	//Delete Project Type
-	@Test()
-	public void Delete_Project_Type() throws InterruptedException {
+	@Test(dataProvider = "getsearcheddelete",priority =5)
+	public void Delete_Project_Type(String searcheddelete) throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
 		projecttype.projecttypesclick().click();
+		projecttype.getsearchprojecttypes().sendKeys(searcheddelete);
+		projecttype.getclicksearchedbutton().click();
 		projecttype.getdeleteclick().click();
 		projecttype.getdeleteclickconfirmation().click();
+		Thread.sleep(2000);
+	}
+	@DataProvider
+	public Object[][] getsearcheddelete() {
+		return new Object[][] { { "Test project type 1" },{ "Test project type 2" },{ "Test project type 3" },{ "Test project type 4" } };
 	}
 
 	//Search Project Type
-	@Test(dataProvider = "getsearched")
+	@Test(dataProvider = "getsearched",priority =4)
 	public void Searching_Project_Types(String searchedentertext) throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
 		projecttype.projecttypesclick().click();
 		projecttype.getsearchprojecttypes().sendKeys(searchedentertext);
 		projecttype.getclicksearchedbutton().click();
+		Thread.sleep(2000);
 	}
 
 	//Add Validation Project Types
-	@Test()
+	@Test(priority =6)
 	public void Add_Validation_Project_Types() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Projecttypespage projecttype = new Projecttypespage(driver);
@@ -120,7 +139,7 @@ public class ProjecttypesTest extends base {
 		projecttype.projecttypesclick().click();
 		projecttype.Clickaddprojecttypes().click();
 		projecttype.getsavebuttonprojecttypes().click();
-
+       Thread.sleep(2000);
 		WebElement messagelement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-type-add/div/form/mat-dialog-content/div"
 						+ "[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -134,21 +153,21 @@ public class ProjecttypesTest extends base {
 	}
 
 	//Edit Validation Project Types(
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Validation_Project_Types(String Editprojecttypes1) throws InterruptedException {
+	@Test(priority =7)
+	public void Edit_Validation_Project_Types() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
 		projecttype.projecttypesclick().click();
 		projecttype.geteditprojecttypes().click();
-
-		for (int i = 1; i <= 7; i++) {
+          int nm = projecttype.geteditexistingdata().getAttribute("value").length();
+		for (int i = 0; i < nm; i++) {
 			projecttype.geteditexistingdata().sendKeys(Keys.BACK_SPACE);
 		}
 
 		Thread.sleep(2000);
 		projecttype.geteditsave().click();
-
+		   Thread.sleep(2000);
 		WebElement messagelement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-project-type-add/"
 				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -162,12 +181,13 @@ public class ProjecttypesTest extends base {
 	}
 
 	//Excel Project Types
-	@Test()
+	@Test(priority =8)
 	public void Excel_Project_Types() throws InterruptedException {
 		Projecttypespage projecttype = new Projecttypespage(driver);
 		projecttype.getconfiguration().click();
 		projecttype.projecttypesclick().click();
 		projecttype.getclickexcelbuttonproject().click();
+		Thread.sleep(2000);
 	}
 
 	//Close the driver
@@ -179,18 +199,18 @@ public class ProjecttypesTest extends base {
 	//DataProvider for Add Data
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "physics123333333333" } };
+		return new Object[][] { { "Test project type 1" },{ "Test project type 2" },{ "Test project type 3" },{ "Test project type 4" } };
 	}
 
 	//DataProvider for Edit Data
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "chemisry11" } };
+		return new Object[][] { { "Test project type 4 updated","Test project type 4" } };
 	}
 
 	//DataProvider for Serach Data
 	@DataProvider
 	public Object[][] getsearched() {
-		return new Object[][] { { "CCR" } };
+		return new Object[][] { { "Test project type 2" } };
 	}
 }

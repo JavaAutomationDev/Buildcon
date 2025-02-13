@@ -37,7 +37,7 @@ public class PropertytypeTest extends base {
 	}
 
 	//Add Property Types
-	@Test(dataProvider = "getAdddata")
+	@Test(dataProvider = "getAdddata",priority =1)
 	public void Add_propertytypes(String propertytype1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Propertytypepage propertytype = new Propertytypepage(driver);
@@ -53,59 +53,70 @@ public class PropertytypeTest extends base {
 		Thread.sleep(3000);
 		propertytype.getsavebuttonaddpropertytype().click();
 		Thread.sleep(3000);
-		softAssert.assertEquals(valid_propertytype, "propertytype is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_propertytype, "propertytype is a Valid Alpha-Numeric is a valid Maxlenght");
 	    softAssert.assertAll();
 	}
 	
 	//Edit Project Types
-	@Test(dataProvider = "getEditdata")
-	public void Edit_Property_Types(String Editpropertyttypes1) throws InterruptedException {
+	@Test(dataProvider = "getEditdata",priority =2)
+	public void Edit_Property_Types(String Editpropertyttypes1,String searchpropertyttypes1) throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Propertytypepage propertytype = new Propertytypepage(driver);
 		propertytype.getconfiguration().click();
 		propertytype.getpropertytype().click();
+		propertytype.getpropertytypesearch().sendKeys(searchpropertyttypes1);
+		propertytype.getpropertytypesearchclick().click();
 		propertytype.geteditpropertytype().click();
 		
 		propertytype.geteditpropertytypeenterdata().clear();
 		propertytype.geteditpropertytypeenterdata().sendKeys(Editpropertyttypes1);
 		//Property Type Data Validation
-		String valid_string = valid_alphanum(Editpropertyttypes1,"projectstatus",30);
+		String valid_string = valid_alphanum(Editpropertyttypes1,"propertytype",30);
 		String valid_propertytype = valid_string;
 		System.out.println(valid_propertytype);
 		Thread.sleep(3000);
 		propertytype.getsavebuttoneditpropertytype().click();
 		Thread.sleep(3000);
-		softAssert.assertEquals(valid_propertytype, "propertytype is a Valid Alpha-Numeric");
+		softAssert.assertEquals(valid_propertytype, "propertytype is a Valid Alpha-Numeric is a valid Maxlenght");
 		softAssert.assertAll();
 	}
 
 	//Delete Property type
-	@Test
-	public void Delete_Property_Type() throws InterruptedException {
+	@Test(dataProvider = "getdelete",priority =6)
+	public void Delete_Property_Type(String searchpropertyttypes1) throws InterruptedException {
 		Propertytypepage property = new Propertytypepage(driver);
 		property.getconfiguration().click();
 		property.getpropertytype().click();
+		property.getpropertytypesearch().sendKeys(searchpropertyttypes1);
+		property.getpropertytypesearchclick().click();
 		property.getdeletepropertytypeclick().click();
 		Thread.sleep(2000);
 		property.getdeletepropertytypeconfirmation().click();
 		Thread.sleep(2000);
-
 	}
-
+	@DataProvider
+	public Object[][] getdelete() {
+		return new Object[][] { { "Test property type1" },{ "Test property type2" },{ "Test property type3" },{ "Test property type4" }};
+	}
 	//Status Change Property Type
-	@Test
-	public void Statuschang_propertytype() throws InterruptedException {
+	@Test(dataProvider = "getstatuschanged",priority =4)
+	public void Statuschang_propertytype(String searchpropertyttypes1) throws InterruptedException {
 		Propertytypepage propertytype = new Propertytypepage(driver);
 		propertytype.getconfiguration().click();
 		propertytype.getpropertytype().click();
+		propertytype.getpropertytypesearch().sendKeys(searchpropertyttypes1);
+		propertytype.getpropertytypesearchclick().click();
 		propertytype.getpropertytypestatuschange().click();
 		Thread.sleep(3000);
 		propertytype.getpropertytypestatuschangeclick().click();
 		Thread.sleep(3000);
 	}
-
+	@DataProvider
+	public Object[][] getstatuschanged() {
+		return new Object[][] { { "Test property type2" } };
+	}
 	//Excel Property Type
-	@Test
+	@Test(priority =5)
 	public void Excel_propertytype() throws InterruptedException {
 		Propertytypepage propertytype = new Propertytypepage(driver);
 		propertytype.getconfiguration().click();
@@ -116,7 +127,7 @@ public class PropertytypeTest extends base {
 	}
 
 	//Search Property Types
-	@Test(dataProvider = "getsearchdata")
+	@Test(dataProvider = "getsearchdata",priority =3)
 	public void Search_Property_Types(String searchpropertyttypes1) throws InterruptedException {
 		Propertytypepage property = new Propertytypepage(driver);
 		property.getconfiguration().click();
@@ -127,7 +138,7 @@ public class PropertytypeTest extends base {
 	}
 
 	//Add Validation Property Types
-	@Test
+	@Test(priority =7)
 	public void Add_validation_Property_Types() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Propertytypepage propertytype = new Propertytypepage(driver);
@@ -135,7 +146,7 @@ public class PropertytypeTest extends base {
 		propertytype.getpropertytype().click();
 		propertytype.getaddpropertytype().click();
 		propertytype.getsavebuttonaddpropertytype().click();
-
+          Thread.sleep(2000);
 		WebElement messagelement = driver.findElement(By.xpath(
 				"/html/body/div[4]/div[2]/div/mat-dialog-container/div/div/vex-property-type-add/"
 				+ "div/form/mat-dialog-content/div[1]/mat-form-field/div[2]/div/mat-error/span"));
@@ -149,14 +160,15 @@ public class PropertytypeTest extends base {
 	}
 
 	//Edit Validation Property Types
-	@Test
+	@Test(priority =8)
 	public void Edit_Validation_Property_Types() throws InterruptedException {
 		SoftAssert softAssert = new SoftAssert();
 		Propertytypepage propertytype = new Propertytypepage(driver);
 		propertytype.getconfiguration().click();
 		propertytype.getpropertytype().click();
 		propertytype.geteditpropertytype().click();
-		for (int i = 1; i <= 13; i++) {
+		int nm = propertytype.geteditpropertytypeenterdata().getAttribute("value").length();
+		for (int i = 1; i <= nm; i++) {
 			propertytype.geteditpropertytypeenterdata().sendKeys(Keys.BACK_SPACE);
 		}
 
@@ -184,17 +196,17 @@ public class PropertytypeTest extends base {
 	//DataProvider for Add Data
 	@DataProvider
 	public Object[][] getAdddata() {
-		return new Object[][] { { "ooops" } };
+		return new Object[][] { { "Test property type1" },{ "Test property type2" },{ "Test property type3" },{ "Test property type4" } };
 	}
 
 	//DataProvider for Edit
 	@DataProvider
 	public Object[][] getEditdata() {
-		return new Object[][] { { "nnn@@123" } };
+		return new Object[][] { { "Test property type1 Update","Test property type1" } };
 	}
 	//DataProvider for Search
 	@DataProvider
 	public Object[][] getsearchdata() {
-		return new Object[][] { { "nnn@@123" } };
+		return new Object[][] { { "Test property type3"} };
 	}
 }
